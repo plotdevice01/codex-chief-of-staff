@@ -185,8 +185,8 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "files": hashes,
     }
     validation_path = stage / "release-validation.json"
-    validation_path.write_text(
-        json.dumps(validation, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    validation_path.write_bytes(
+        (json.dumps(validation, indent=2, sort_keys=True) + "\n").encode("utf-8")
     )
 
     archive = output / f"{RELEASE_NAME}.zip"
