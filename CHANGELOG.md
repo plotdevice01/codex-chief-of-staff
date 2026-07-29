@@ -2,6 +2,15 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.4.2] - 2026-07-29
+
+### Fixed
+
+- ZIP origin metadata is now explicit, removing the final Windows/Linux digest
+  difference.
+
+No behavior, persona, safety or scope rule changed.
+
 ## [0.4.1] - 2026-07-29
 
 ### Fixed
@@ -46,6 +55,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.4.2]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.2
 [0.4.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.1
 [0.4.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.0
 [0.3.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.3.1

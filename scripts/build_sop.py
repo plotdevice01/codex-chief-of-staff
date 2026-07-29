@@ -363,8 +363,9 @@ def scrub_and_canonicalize(path: Path) -> None:
     with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_STORED) as output:
         for name in sorted(parts):
             info = zipfile.ZipInfo(name, ZIP_TIME)
+            info.create_system = 3
             info.compress_type = zipfile.ZIP_STORED
-            info.external_attr = 0o644 << 16
+            info.external_attr = 0o100644 << 16
             output.writestr(info, parts[name])
     os.replace(temporary, path)
 

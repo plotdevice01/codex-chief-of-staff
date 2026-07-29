@@ -137,8 +137,11 @@ def write_zip(stage: Path, archive: Path) -> None:
                 continue
             relative = source.relative_to(stage).as_posix()
             info = zipfile.ZipInfo(f"{RELEASE_NAME}/{relative}", ZIP_TIME)
+            info.create_system = 3
             info.compress_type = zipfile.ZIP_STORED
-            info.external_attr = (0o755 if source.suffix == ".sh" else 0o644) << 16
+            info.external_attr = (
+                0o100755 if source.suffix == ".sh" else 0o100644
+            ) << 16
             output.writestr(info, source.read_bytes())
 
 

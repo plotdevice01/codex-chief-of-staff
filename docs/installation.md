@@ -27,7 +27,7 @@ The installed entry should report:
 
 - plugin: `chief-of-staff`;
 - marketplace: `codex-chief-of-staff`;
-- version: `0.4.1`;
+- version: `0.4.2`;
 - active state: `enabled: true`.
 
 ## Configure
@@ -119,16 +119,16 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v0.4.1.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v0.4.2.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v0.4.1.zip
+sha256sum ./codex-chief-of-staff-v0.4.2.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v0.4.1.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v0.4.2.zip.sha256`.
 
 ## Recovery
 
