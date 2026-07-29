@@ -10,6 +10,7 @@ from pathlib import Path
 from docx import Document
 from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
@@ -283,6 +284,27 @@ def add_code(doc: Document, text: str) -> None:
     set_font(paragraph.add_run(text), "Consolas", 8.5, color=INK)
 
 
+def add_link(doc: Document, label: str, url: str) -> None:
+    paragraph = doc.add_paragraph()
+    paragraph.paragraph_format.space_after = Pt(5)
+    set_font(paragraph.add_run(f"{label}: "), "Calibri", 10.5, bold=True, color=INK)
+    relation_id = paragraph.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), relation_id)
+    run = OxmlElement("w:r")
+    properties = OxmlElement("w:rPr")
+    color = OxmlElement("w:color")
+    color.set(qn("w:val"), TEAL)
+    underline = OxmlElement("w:u")
+    underline.set(qn("w:val"), "single")
+    properties.extend((color, underline))
+    text = OxmlElement("w:t")
+    text.text = url
+    run.extend((properties, text))
+    hyperlink.append(run)
+    paragraph._p.append(hyperlink)
+
+
 def add_callout(doc: Document, label: str, text: str, *, alert=False) -> None:
     paragraph = doc.add_paragraph()
     paragraph.paragraph_format.left_indent = Inches(0.08)
@@ -419,39 +441,53 @@ def build(output: Path) -> Path:
         ),
     )
 
-    section_page(doc, "1. Install in 30 seconds")
-    doc.add_heading("Codex marketplace install", level=2)
+    section_page(doc, "1. Install the complete stack")
+    doc.add_heading("Requirements", level=2)
+    add_bullets(
+        doc,
+        (
+            "Codex with plugin support.",
+            "Git for GitHub marketplace installation.",
+            "Node.js 18 or later for Ponytail and Chief of Staff hooks.",
+            "Python 3.11 or later for AI Sloppy Copy, configuration, and validation.",
+        ),
+    )
+    doc.add_heading("Step 1 of 3: Ponytail", level=2)
+    add_link(doc, "Repository", "https://github.com/DietrichGebert/ponytail")
+    add_code(doc, "codex plugin marketplace add DietrichGebert/ponytail")
+    add_code(doc, "codex plugin add ponytail@ponytail")
+    doc.add_heading("Step 2 of 3: AI Sloppy Copy", level=2)
+    add_link(doc, "Repository", "https://github.com/plotdevice01/ai-sloppy-copy")
+    add_code(doc, "codex plugin marketplace add plotdevice01/ai-sloppy-copy")
+    add_code(doc, "codex plugin add ai-sloppy-copy@ai-sloppy-copy")
+    doc.add_heading("Step 3 of 3: Chief of Staff", level=2)
+    add_link(doc, "Repository", "https://github.com/plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace add plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
+    doc.add_heading("Restart, trust and verify", level=2)
     add_numbered(
         doc,
         (
             "Restart Codex.",
-            "Open /hooks. Review and trust the Chief of Staff SessionStart and SubagentStart hooks.",
+            "Open /hooks. Review and trust the hooks offered by Ponytail, AI Sloppy Copy and Chief of Staff.",
             "Start a fresh task. Existing tasks do not retroactively gain startup context.",
-            "Run codex plugin list --json and confirm chief-of-staff is active.",
+            "Run codex plugin list --json.",
+            "Confirm ponytail@ponytail, ai-sloppy-copy@ai-sloppy-copy and "
+            "chief-of-staff@codex-chief-of-staff are installed and active.",
         ),
     )
     add_callout(
         doc,
         "Hook trust: ",
-        "The hooks run a bundled Node script that reads AGENTS.md, the retained persona text, and an optional "
-        "local configuration. It uses Node standard library only and sends no telemetry.",
+        "Ponytail loads its mode and tracks changes. AI Sloppy Copy checks authored prose locally. Chief of Staff "
+        "loads AGENTS.md, the retained persona and optional local configuration. Review every command before trust.",
         alert=True,
     )
-    doc.add_heading("Release ZIP or source checkout", level=2)
-    add_bullets(
+    doc.add_heading("Configure from the fresh task", level=2)
+    add_code(
         doc,
-        (
-            "Windows: run .\\install.ps1 from the extracted release or checkout.",
-            "macOS/Linux: run ./install.sh from the extracted release or checkout.",
-            "Use -DryRun or --dry-run to print commands without changing the install.",
-        ),
-    )
-    doc.add_heading("No configuration yet?", level=2)
-    doc.add_paragraph(
-        "Generic response behavior still loads. Connector and registered-project work remains blocked until a "
-        "local configuration exists. A missing authority file is not implied consent; humanity has tried that model."
+        "Use $chief-of-staff to initialize my local configuration, then validate the install with strict "
+        "dependency checks. Report any missing plugin or hook.",
     )
 
     section_page(doc, "2. Configure private authority")
@@ -482,7 +518,7 @@ def build(output: Path) -> Path:
             "Never commit chief-of-staff.json. The included .gitignore excludes it.",
         ),
     )
-    add_code(doc, "python validate_install.py")
+    add_code(doc, "python validate_install.py --strict-dependencies")
     add_callout(
         doc,
         "Required result: ",
@@ -588,6 +624,8 @@ def build(output: Path) -> Path:
         alert=True,
     )
     doc.add_heading("Companion integrations", level=2)
+    add_link(doc, "Ponytail repository", "https://github.com/DietrichGebert/ponytail")
+    add_link(doc, "AI Sloppy Copy repository", "https://github.com/plotdevice01/ai-sloppy-copy")
     add_bullets(
         doc,
         (
@@ -599,7 +637,7 @@ def build(output: Path) -> Path:
 
     section_page(doc, "6. Validate behavior and release integrity")
     add_code(doc, "python Test-Persona.py")
-    add_code(doc, "python validate_install.py --example")
+    add_code(doc, "python validate_install.py --example --strict-dependencies")
     add_code(doc, "python scripts/validate_repository.py")
     add_code(doc, "node tests/test_hooks.js")
     add_table(

@@ -26,7 +26,7 @@ try {
     ["subagent", "SubagentStart"],
   ]) {
     const output = run(event, temp);
-    assert.strictEqual(output.systemMessage, "CHIEF OF STAFF:0.4.4");
+    assert.strictEqual(output.systemMessage, "CHIEF OF STAFF:0.4.5");
     assert.strictEqual(output.hookSpecificOutput.hookEventName, expected);
     const context = output.hookSpecificOutput.additionalContext;
     assert.match(context, /85% compression/);
@@ -36,7 +36,7 @@ try {
   }
 
   const config = path.join(temp, "chief-of-staff.json");
-  fs.writeFileSync(config, '{"release_version":"0.4.4"}\n', "utf8");
+  fs.writeFileSync(config, '{"release_version":"0.4.5"}\n', "utf8");
   const configured = run("session", temp);
   assert.match(configured.hookSpecificOutput.additionalContext, /Read it before connector/);
   assert.match(configured.hookSpecificOutput.additionalContext, /chief-of-staff\.json/);

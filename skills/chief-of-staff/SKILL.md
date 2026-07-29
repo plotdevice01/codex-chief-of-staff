@@ -79,7 +79,7 @@ and source-of-truth references.
 Run:
 
 ```powershell
-py -3 .\validate_install.py
+py -3 .\validate_install.py --strict-dependencies
 py -3 .\Test-Persona.py
 ```
 

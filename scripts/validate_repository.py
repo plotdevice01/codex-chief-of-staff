@@ -83,6 +83,19 @@ PRIVATE_PATTERNS = {
     ),
 }
 PLACEHOLDER = re.compile(r"\b(TODO|TBD|REPLACE_WITH_[A-Z0-9_]+|YOUR_[A-Z0-9_]+)\b")
+REPOSITORIES = (
+    "https://github.com/DietrichGebert/ponytail",
+    "https://github.com/plotdevice01/ai-sloppy-copy",
+    "https://github.com/plotdevice01/codex-chief-of-staff",
+)
+INSTALL_COMMANDS = (
+    "codex plugin marketplace add DietrichGebert/ponytail",
+    "codex plugin add ponytail@ponytail",
+    "codex plugin marketplace add plotdevice01/ai-sloppy-copy",
+    "codex plugin add ai-sloppy-copy@ai-sloppy-copy",
+    "codex plugin marketplace add plotdevice01/codex-chief-of-staff",
+    "codex plugin add chief-of-staff@codex-chief-of-staff",
+)
 
 
 def read_json(relative: str) -> dict:
@@ -106,6 +119,36 @@ def public_text(path: Path) -> str:
     if path.suffix.lower() == ".docx":
         return docx_text(path)
     return path.read_text(encoding="utf-8-sig")
+
+
+def validate_install_guidance() -> list[str]:
+    errors: list[str] = []
+    for relative in ("README.md", "docs/installation.md", "docs/dependencies.md"):
+        text = (ROOT / relative).read_text(encoding="utf-8-sig")
+        for value in (*REPOSITORIES, *INSTALL_COMMANDS):
+            if value not in text:
+                errors.append(f"{relative} is missing install value: {value}")
+        positions = [text.find(command) for command in INSTALL_COMMANDS]
+        if positions != sorted(positions):
+            errors.append(f"{relative} does not present the install commands in required order.")
+
+    sop = ROOT / "docs/Codex Chief of Staff - Installation and SOP.docx"
+    text = docx_text(sop)
+    for command in INSTALL_COMMANDS:
+        if command not in text:
+            errors.append(f"SOP is missing install command: {command}")
+    try:
+        with zipfile.ZipFile(sop) as archive:
+            relationships = archive.read("word/_rels/document.xml.rels").decode(
+                "utf-8", errors="replace"
+            )
+    except (OSError, KeyError, zipfile.BadZipFile) as exc:
+        errors.append(f"Could not read SOP hyperlinks: {exc}")
+        relationships = ""
+    for repository in REPOSITORIES:
+        if repository not in relationships:
+            errors.append(f"SOP is missing clickable repository link: {repository}")
+    return errors
 
 
 def validate_versions() -> list[str]:
@@ -200,6 +243,7 @@ def validate_repository(archive: Path | None = None) -> tuple[list[str], dict]:
     ]
     errors.extend(validate_versions())
     errors.extend(validate_manifest_paths())
+    errors.extend(validate_install_guidance())
     errors.extend(validate_public_text())
     persona_errors, metrics = validate_persona()
     errors.extend(f"Persona validation: {error}" for error in persona_errors)

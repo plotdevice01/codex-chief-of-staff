@@ -2,6 +2,20 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.4.5] - 2026-07-29
+
+### Changed
+
+- The recommended installation is now one numbered flow: Ponytail, AI Sloppy
+  Copy, Chief of Staff, hook trust, verification, configuration, and
+  full-parity validation.
+- README, installation guide, dependency guide, and SOP now include direct
+  repository links and exact commands for every required plugin.
+- Repository validation now fails if ordered install steps or dependency links
+  drift. It also checks commands and SOP hyperlinks.
+
+No persona, safety, authority, privacy, or project-preservation rule changed.
+
 ## [0.4.4] - 2026-07-29
 
 ### Fixed
@@ -47,7 +61,8 @@ No behavior, persona, safety or scope rule changed.
 - Session and subagent hooks that load the full behavior contract and retained
   persona.
 - Safe, machine-independent configuration initialization and path resolution.
-- PowerShell and POSIX installers with dry-run, upgrade, and uninstall modes.
+- PowerShell and POSIX installers. Both support dry runs, upgrades and
+  uninstall.
 - Canonical source layout and automated validation with tag-driven releases.
 - MIT license, security policy, privacy policy, contribution guide, issue
   templates, examples, architecture documentation, and brand assets.
@@ -73,6 +88,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.4.5]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.5
 [0.4.4]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.4
 [0.4.3]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.3
 [0.4.2]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.2

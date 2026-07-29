@@ -2,60 +2,102 @@
 
 ## Requirements
 
-- Codex with plugin support;
-- Git for GitHub-backed marketplace installation;
-- Node.js 18 or later for lifecycle hooks;
-- Python 3.11 or later for configuration and validation.
+Install these first:
 
-## Recommended installation
+- [Codex](https://developers.openai.com/codex/) with plugin support;
+- [Git](https://git-scm.com/downloads) for GitHub marketplace installation;
+- [Node.js 18 or later](https://nodejs.org/en/download) for Ponytail and Chief
+  of Staff lifecycle hooks;
+- [Python 3.11 or later](https://www.python.org/downloads/) for AI Sloppy Copy,
+  configuration, and validation.
 
-```bash
+After installing a requirement, close and reopen the terminal so its command is
+available. Then install the plugins below in order.
+
+## Recommended complete installation
+
+### 1. Install Ponytail
+
+Open [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) if
+you want to review the source.
+
+```powershell
+codex plugin marketplace add DietrichGebert/ponytail
+codex plugin add ponytail@ponytail
+```
+
+### 2. Install AI Sloppy Copy
+
+Open [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
+if you want to review the source.
+
+```powershell
+codex plugin marketplace add plotdevice01/ai-sloppy-copy
+codex plugin add ai-sloppy-copy@ai-sloppy-copy
+```
+
+### 3. Install Chief of Staff
+
+Repository:
+[plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
+
+```powershell
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-Restart Codex. Open `/hooks`, review the `SessionStart` and `SubagentStart`
-definitions, and trust them. Start a new task.
+### 4. Restart and trust hooks
 
-Verify:
+1. Restart the Codex desktop app, or start a new `codex` session.
+2. Open `/hooks`.
+3. Review and trust:
+   - Ponytail: `SessionStart`, `SubagentStart`, and `UserPromptSubmit`;
+   - AI Sloppy Copy: `UserPromptSubmit` and `Stop`;
+   - Chief of Staff: `SessionStart` and `SubagentStart`.
+4. Start a new Codex task. Existing tasks do not receive startup context
+   retroactively.
 
-```bash
+### 5. Verify all three plugins
+
+```powershell
 codex plugin list --json
 ```
 
-The installed entry should report:
+Confirm:
 
-- plugin: `chief-of-staff`;
-- marketplace: `codex-chief-of-staff`;
-- version: `0.4.4`;
-- active state: `enabled: true`.
+| Plugin | Marketplace | Minimum version | State |
+|---|---|---:|---|
+| `ponytail` | `ponytail` | `4.8.4` | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.1.0` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `0.4.5` | active |
 
-## Configure
+If any entry is absent, repeat only that plugin's two install commands, restart
+Codex, and check again.
 
-Ask Codex:
+### 6. Configure and validate
+
+In the new task, ask:
 
 ```text
-Use $chief-of-staff to initialize my local configuration.
+Use $chief-of-staff to initialize my local configuration, then validate the
+install with strict dependency checks. Report any missing plugin or hook.
 ```
 
-Or run from a checkout:
-
-```bash
-python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"
-python validate_install.py
-```
-
-The initializer will not overwrite an existing file unless `--force` is
-provided.
+The initializer does not overwrite an existing configuration without explicit
+approval. Installation grants no connector access or external-write authority.
+It does not authorize any project.
 
 ## Install from a checkout
 
-```bash
+Use this route when you need to inspect the source or install offline. It also
+exposes local validation scripts.
+
+```powershell
 git clone https://github.com/plotdevice01/codex-chief-of-staff.git
 cd codex-chief-of-staff
 ```
 
-PowerShell:
+Windows:
 
 ```powershell
 .\install.ps1
@@ -78,16 +120,29 @@ Preview without writing:
 ./install.sh --dry-run
 ```
 
-## Upgrade
+Configure and validate:
 
-```bash
+```powershell
+python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"
+python validate_install.py --strict-dependencies
+python Test-Persona.py
+```
+
+Windows users can use `py -3` instead of `python`.
+
+## Upgrade the complete stack
+
+```powershell
+codex plugin marketplace upgrade ponytail
+codex plugin marketplace upgrade ai-sloppy-copy
 codex plugin marketplace upgrade codex-chief-of-staff
+codex plugin add ponytail@ponytail
+codex plugin add ai-sloppy-copy@ai-sloppy-copy
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-Restart Codex, review changed hooks, and start a new task. Existing local
-configuration is not overwritten. If the configuration version changed, copy
-your values into the new example structure and validate it.
+Restart Codex and review changed hooks. Start a new task, then rerun strict
+validation. Existing local configuration is not overwritten.
 
 Checkout installers also support:
 
@@ -101,39 +156,41 @@ Checkout installers also support:
 
 ## Uninstall
 
-```bash
-codex plugin remove chief-of-staff@codex-chief-of-staff
+```powershell
+codex plugin remove chief-of-staff
 codex plugin marketplace remove codex-chief-of-staff
 ```
 
-The local configuration is intentionally retained. Delete it only when the
-user explicitly wants their identities, paths and policies removed.
+The local `chief-of-staff.json` is retained. Delete it only when you intend to
+discard the entire configuration.
 
 Checkout installers support `-Uninstall` or `--uninstall`.
 
 ## Optional release verification
 
 GitHub publishes a SHA-256 digest for every release asset. A separate
-`.sha256` file is also attached for offline or scripted verification.
+`.sha256` file is also attached.
 
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v0.4.4.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v0.4.5.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v0.4.4.zip
+sha256sum ./codex-chief-of-staff-v0.4.5.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v0.4.4.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v0.4.5.zip.sha256`.
 
 ## Recovery
 
-1. Remove and reinstall the plugin.
+1. Repeat the six install commands in the recommended order.
 2. Restart Codex and re-trust the current hooks.
-3. Run `validate_install.py`.
-4. Start a new task and run the eight persona scenarios.
-5. Keep the prior release available until the new release passes.
+3. Run `codex plugin list --json`.
+4. Run `validate_install.py --strict-dependencies` from a checkout, or ask the
+   Chief of Staff skill to perform strict validation.
+5. Start a new task and run the eight persona scenarios.
+6. Keep the prior release available until the new release passes.
