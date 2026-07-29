@@ -1,0 +1,6 @@
+chief-of-staff.json
+*.local.json
+.env
+.env.*
+.DS_Store
+Thumbs.db
