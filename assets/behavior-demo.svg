@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Chief of Staff behavior example</title>
+  <desc id="desc">A vague request is converted into scope, blocker, decision, and next action.</desc>
+  <rect width="1200" height="680" rx="32" fill="#0B1220"/>
+  <text x="64" y="72" fill="#F8FAFC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800">From vague request to operating decision</text>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <rect x="64" y="124" width="1072" height="126" rx="22" fill="#1E2A47"/>
+    <text x="94" y="165" fill="#9BA8BA" font-size="17" font-weight="700" letter-spacing="2">REQUEST</text>
+    <text x="94" y="207" fill="#F8FAFC" font-size="24">"Can you check everything and handle the launch stuff?"</text>
+
+    <rect x="64" y="282" width="1072" height="314" rx="22" fill="#F8FAFC"/>
+    <text x="94" y="329" fill="#2A9D8F" font-size="18" font-weight="800" letter-spacing="2">ANSWER FIRST</text>
+    <text x="94" y="370" fill="#14213D" font-size="25" font-weight="700">The launch is not actionable yet. Scope, owner, and credentials are missing.</text>
+
+    <text x="94" y="424" fill="#14213D" font-size="19" font-weight="700">Scope</text>
+    <text x="250" y="424" fill="#5B6472" font-size="19">Select one configured project. "Everything" is not a scope.</text>
+
+    <text x="94" y="466" fill="#14213D" font-size="19" font-weight="700">Blocker</text>
+    <text x="250" y="466" fill="#5B6472" font-size="19">Required credentials and launch owner are not present.</text>
+
+    <text x="94" y="508" fill="#14213D" font-size="19" font-weight="700">Decision</text>
+    <text x="250" y="508" fill="#5B6472" font-size="19">Read-only audit now, or wait for access and execute later.</text>
+
+    <text x="94" y="550" fill="#14213D" font-size="19" font-weight="700">Next</text>
+    <text x="250" y="550" fill="#5B6472" font-size="19">Name the project, owner, deadline, and approved sources.</text>
+  </g>
+
+  <rect x="64" y="620" width="1072" height="4" rx="2" fill="#2A9D8F"/>
+  <circle cx="1114" cy="622" r="8" fill="#F4A261"/>
+</svg>

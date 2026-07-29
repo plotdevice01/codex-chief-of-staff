@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "codex-chief-of-staff",
+  "description": "Installable Chief of Staff operating layer for Codex and compatible agent hosts.",
+  "owner": {
+    "name": "plotdevice01",
+    "url": "https://github.com/plotdevice01"
+  },
+  "plugins": [
+    {
+      "name": "chief-of-staff",
+      "description": "Scoped execution, account gates, project routing, and a retained technical persona.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

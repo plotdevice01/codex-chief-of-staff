@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/plotdevice01/codex-chief-of-staff/security/advisories/new
+    about: Report vulnerabilities privately.

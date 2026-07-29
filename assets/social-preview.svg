@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Codex Chief of Staff</title>
+  <desc id="desc">Social preview for the scoped Codex operating layer.</desc>
+  <rect width="1280" height="640" fill="#0B1220"/>
+  <circle cx="1140" cy="80" r="240" fill="#14213D"/>
+  <circle cx="1180" cy="600" r="300" fill="#102C32"/>
+  <g transform="translate(78 96)">
+    <rect width="156" height="156" rx="36" fill="#1E2A47" stroke="#2A9D8F" stroke-width="4"/>
+    <path d="M49 38H36v80h13M107 38h13v80h-13" fill="none" stroke="#F8FAFC" stroke-width="9" stroke-linecap="round"/>
+    <path d="M62 57h35M62 78h22M62 99h35" fill="none" stroke="#2A9D8F" stroke-width="8" stroke-linecap="round"/>
+    <path d="m86 77 9 9 19-23" fill="none" stroke="#F4A261" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="78" y="332" fill="#F8FAFC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="64" font-weight="800">CODEX CHIEF OF STAFF</text>
+  <text x="82" y="394" fill="#B9C2CF" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30">Scoped execution. Account gates. Retained judgment.</text>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">
+    <rect x="82" y="464" width="232" height="52" rx="26" fill="#2A9D8F"/>
+    <text x="105" y="498" fill="#071B1A">NATIVE CODEX PLUGIN</text>
+    <rect x="330" y="464" width="196" height="52" rx="26" fill="#F4A261"/>
+    <text x="350" y="498" fill="#3B2312">97 REQUIREMENTS</text>
+    <rect x="542" y="464" width="196" height="52" rx="26" fill="#1E2A47" stroke="#52617A" stroke-width="2"/>
+    <text x="565" y="498" fill="#F8FAFC">NO TELEMETRY</text>
+  </g>
+</svg>

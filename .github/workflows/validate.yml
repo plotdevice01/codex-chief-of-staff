@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: python -m pip install python-docx PyYAML
+      - run: python Test-Persona.py
+      - run: python validate_install.py --example
+      - run: node tests/test_hooks.js
+      - run: python tests/test_sync.py
+      - run: python scripts/build_sop.py
+      - run: python scripts/validate_repository.py
+      - run: python scripts/build_release.py --output dist

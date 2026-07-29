@@ -4,3 +4,12 @@ chief-of-staff.json
 .env.*
 .DS_Store
 Thumbs.db
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+dist/
+qa/
+tmp/
+*.first-pass.docx
+*.final-pass.docx

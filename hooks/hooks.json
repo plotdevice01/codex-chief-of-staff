@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${PLUGIN_ROOT}/hooks/chief-of-staff-hook.js\" session",
+            "commandWindows": "if (Get-Command node -ErrorAction SilentlyContinue) { node \"$env:PLUGIN_ROOT\\hooks\\chief-of-staff-hook.js\" session }",
+            "timeout": 5,
+            "statusMessage": "Loading Chief of Staff contract..."
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${PLUGIN_ROOT}/hooks/chief-of-staff-hook.js\" subagent",
+            "commandWindows": "if (Get-Command node -ErrorAction SilentlyContinue) { node \"$env:PLUGIN_ROOT\\hooks\\chief-of-staff-hook.js\" subagent }",
+            "timeout": 5,
+            "statusMessage": "Loading Chief of Staff contract..."
+          }
+        ]
+      }
+    ]
+  }
+}

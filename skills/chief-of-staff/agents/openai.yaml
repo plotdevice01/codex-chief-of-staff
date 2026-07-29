@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chief of Staff"
+  short_description: "Run scoped work with disciplined judgment"
+  default_prompt: "Use $chief-of-staff to configure and run this workspace."

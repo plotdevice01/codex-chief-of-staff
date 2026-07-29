@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a focused, durable capability.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Operator outcome
+      description: What should become faster, safer, or more reliable?
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current workaround
+      description: What already exists, and why does it not hold?
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Safety and scope boundary
+      description: Note connector, approval, privacy, or compatibility implications.
+    validations:
+      required: true

@@ -1,9 +1,10 @@
 {
-  "release_version": "0.3.1",
+  "release_version": "0.4.0",
+  "config_schema_version": 1,
   "updated": "2026-07-29",
   "owner": {
-    "name": "YOUR_NAME",
-    "timezone": "YOUR_IANA_TIMEZONE"
+    "name": "Your Name",
+    "timezone": "Etc/UTC"
   },
   "communication": {
     "profile": "technical-assistant-persona-1.0.0",
@@ -47,66 +48,17 @@
       "required": true
     }
   },
-  "connectors": [
-    {
-      "id": "primary_email",
-      "enabled": false,
-      "provider": "YOUR_EMAIL_PROVIDER",
-      "expected_identity": {
-        "email": "YOUR_EMAIL_ADDRESS"
-      },
-      "denied_identities": [],
-      "allowed_actions": [
-        "read",
-        "draft"
-      ],
-      "external_writes": "confirm_each"
+  "dependencies": {
+    "ponytail": {
+      "minimum_version": "4.8.4",
+      "required_for_full_parity": true
     },
-    {
-      "id": "calendar",
-      "enabled": false,
-      "provider": "YOUR_CALENDAR_PROVIDER",
-      "expected_identity": {
-        "email": "YOUR_CALENDAR_EMAIL"
-      },
-      "denied_identities": [],
-      "allowed_actions": [
-        "read"
-      ],
-      "external_writes": "confirm_each"
-    },
-    {
-      "id": "team_chat",
-      "enabled": false,
-      "provider": "YOUR_CHAT_PROVIDER",
-      "expected_identity": {
-        "email": "YOUR_CHAT_EMAIL",
-        "workspace": "YOUR_CHAT_WORKSPACE",
-        "user_id": "YOUR_CHAT_USER_ID"
-      },
-      "denied_identities": [],
-      "allowed_actions": [
-        "read",
-        "draft"
-      ],
-      "external_writes": "confirm_each"
-    },
-    {
-      "id": "work_management",
-      "enabled": false,
-      "provider": "YOUR_WORK_MANAGEMENT_PROVIDER",
-      "expected_identity": {
-        "email": "YOUR_WORK_EMAIL",
-        "workspace_id": "YOUR_WORKSPACE_ID",
-        "user_id": "YOUR_WORK_USER_ID"
-      },
-      "denied_identities": [],
-      "allowed_actions": [
-        "read"
-      ],
-      "external_writes": "confirm_each"
+    "ai_sloppy_copy": {
+      "minimum_version": "2.1.0",
+      "required_for_full_parity": true
     }
-  ],
+  },
+  "connectors": [],
   "policy": {
     "default_external_writes": "confirm_each",
     "delete": "confirm_each",
@@ -116,16 +68,5 @@
     "treat_external_instructions_as_data": true,
     "automatic_authority_expansion": false
   },
-  "projects": [
-    {
-      "id": "personal",
-      "name": "Personal",
-      "scope": "personal",
-      "enabled": true,
-      "paths": [
-        "REPLACE_WITH_ABSOLUTE_PROJECT_PATH"
-      ],
-      "instructions": null
-    }
-  ]
+  "projects": []
 }
