@@ -360,12 +360,10 @@ def scrub_and_canonicalize(path: Path) -> None:
         )
 
     temporary = path.with_suffix(".canonical.docx")
-    with zipfile.ZipFile(
-        temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
-    ) as output:
+    with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_STORED) as output:
         for name in sorted(parts):
             info = zipfile.ZipInfo(name, ZIP_TIME)
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o644 << 16
             output.writestr(info, parts[name])
     os.replace(temporary, path)

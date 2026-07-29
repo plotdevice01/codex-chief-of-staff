@@ -2,6 +2,16 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.4.1] - 2026-07-29
+
+### Fixed
+
+- Canonical DOCX and release ZIP entries now use deterministic storage across
+  Windows and Linux.
+- Local and GitHub release archives now produce the same SHA-256 digest.
+
+No behavior, persona, safety or scope rule changed.
+
 ## [0.4.0] - 2026-07-29
 
 ### Added
@@ -36,5 +46,6 @@ All notable changes are recorded here. Releases use semantic versioning.
 - First public portable release with persona validation and project
   propagation.
 
+[0.4.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.1
 [0.4.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.0
 [0.3.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.3.1

@@ -131,13 +131,13 @@ def run_hook_tests(node: str) -> None:
 
 
 def write_zip(stage: Path, archive: Path) -> None:
-    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as output:
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_STORED) as output:
         for source in sorted(stage.rglob("*"), key=lambda path: path.relative_to(stage).as_posix()):
             if not source.is_file():
                 continue
             relative = source.relative_to(stage).as_posix()
             info = zipfile.ZipInfo(f"{RELEASE_NAME}/{relative}", ZIP_TIME)
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = (0o755 if source.suffix == ".sh" else 0o644) << 16
             output.writestr(info, source.read_bytes())
 
