@@ -151,7 +151,7 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         build_sop(ROOT / "docs" / "Codex Chief of Staff - Installation and SOP.docx")
 
     persona_errors, metrics = validate_persona()
-    install_errors, install_warnings = validate_config(
+    install_errors, _ = validate_config(
         ROOT / "chief-of-staff.example.json"
     )
     repository_errors, _ = validate_repository()
@@ -178,7 +178,10 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "project_sync_tests": "pass",
         "configuration_validation": "pass",
         "repository_privacy_scan": "pass",
-        "dependency_warnings": install_warnings,
+        "companion_requirements": {
+            "ponytail": ">=4.8.4",
+            "ai_sloppy_copy": ">=2.1.0",
+        },
         "files": hashes,
     }
     validation_path = stage / "release-validation.json"
