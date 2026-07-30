@@ -10,7 +10,8 @@
 7. Create and push a signed or annotated `vX.Y.Z` tag.
 8. The release workflow rebuilds, validates, attests, and publishes the ZIP and
    checksum.
-9. Verify the public release asset, digest, README links, and installation in a
-   fresh Codex task.
+9. Run `claude plugin validate .`.
+10. Verify the public release asset, digest, README links, and installation in
+    fresh Codex and Claude Code sessions.
 
 Historical tags and release assets are immutable. Fixes ship as a new version.

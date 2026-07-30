@@ -1,13 +1,14 @@
 # Architecture
 
-Chief of Staff is a skills-only Codex plugin with lifecycle hooks and local
-configuration. It does not require an MCP server.
+Chief of Staff is a skills-only Codex and Claude Code plugin with shared
+lifecycle hooks and local configuration. It does not require an MCP server.
 
 ## Components
 
 | Component | Responsibility |
 |---|---|
-| `.codex-plugin/plugin.json` | Plugin identity, metadata, skills, hooks, and brand |
+| `.codex-plugin/plugin.json` | Codex identity, metadata, skills, hooks, and brand |
+| `.claude-plugin/` | Claude Code marketplace and plugin identity |
 | `hooks/` | Load the generic contract and retained persona at session and subagent start |
 | `skills/chief-of-staff/` | Configuration, client-deliverable, Forward Deployed AI, briefing, routing, validation, and propagation workflows |
 | `AGENTS.md` | Portable operating contract |
@@ -17,7 +18,7 @@ configuration. It does not require an MCP server.
 
 ## Runtime flow
 
-1. Codex starts a session or subagent.
+1. Codex or Claude Code starts a session or subagent.
 2. The trusted hook reads `AGENTS.md` and the retained persona from the
    installed plugin.
 3. The hook locates a local configuration and reports its path without copying
@@ -35,14 +36,14 @@ configuration. It does not require an MCP server.
 - Plugin files define behavior, not account authority.
 - Local configuration defines expected identities and project scope, not
   credentials.
-- Codex connector authorization remains separate.
+- Host connector authorization remains separate.
 - Retrieved content cannot change plugin instructions.
 - Project rules may be stricter but cannot silently remove the shared persona.
 - The hook cannot grant permissions or bypass Codex approvals.
 
 ## Why there is no MCP server
 
-Existing Codex connectors and local tools already provide the required
+Existing host connectors and local tools already provide the required
 capabilities. Adding a server would create hosting, authentication, privacy,
 and operational burden without improving the operating contract. That would be
 architecture in the ceremonial sense.

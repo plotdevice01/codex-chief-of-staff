@@ -1,7 +1,7 @@
 {
   "name": "chief-of-staff",
-  "version": "0.5.0",
-  "description": "A scoped operating layer for Codex with account gates, project routing, concise execution, and a retained technical persona.",
+  "version": "0.5.1",
+  "description": "A scoped operating layer for Codex and Claude Code with account gates, project routing, concise execution, and a retained technical persona.",
   "author": {
     "name": "plotdevice01",
     "url": "https://github.com/plotdevice01"
@@ -12,6 +12,7 @@
   "keywords": [
     "chief-of-staff",
     "codex",
+    "claude-code",
     "operations",
     "persona",
     "productivity",

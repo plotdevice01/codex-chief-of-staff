@@ -1,5 +1,5 @@
 {
-  "release_version": "0.5.0",
+  "release_version": "0.5.1",
   "executed_at": "2026-07-30T02:20:00Z",
   "runner": "codex exec --ephemeral --dangerously-bypass-hook-trust --sandbox read-only",
   "reasoning_effort": "xhigh",

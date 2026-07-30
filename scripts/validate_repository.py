@@ -40,9 +40,13 @@ REQUIRED = (
     "assets/social-preview.png",
     "assets/social-preview.svg",
     "chief-of-staff.example.json",
+    "docs/claude-code.md",
     "docs/Codex Chief of Staff - Installation and SOP.docx",
+    "examples/claude-project-settings.json",
     "hooks/chief-of-staff-hook.js",
     "hooks/hooks.json",
+    "install-claude.ps1",
+    "install-claude.sh",
     "install.ps1",
     "install.sh",
     "persona/Technical Assistant Persona - source.pdf",
@@ -97,6 +101,14 @@ INSTALL_COMMANDS = (
     "codex plugin marketplace add plotdevice01/codex-chief-of-staff",
     "codex plugin add chief-of-staff@codex-chief-of-staff",
 )
+CLAUDE_INSTALL_COMMANDS = (
+    "claude plugin marketplace add DietrichGebert/ponytail",
+    "claude plugin install ponytail@ponytail --scope user",
+    "claude plugin marketplace add plotdevice01/ai-sloppy-copy",
+    "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user",
+    "claude plugin marketplace add plotdevice01/codex-chief-of-staff",
+    "claude plugin install chief-of-staff@codex-chief-of-staff --scope user",
+)
 
 
 def read_json(relative: str) -> dict:
@@ -126,16 +138,33 @@ def validate_install_guidance() -> list[str]:
     errors: list[str] = []
     for relative in ("README.md", "docs/installation.md", "docs/dependencies.md"):
         text = (ROOT / relative).read_text(encoding="utf-8-sig")
-        for value in (*REPOSITORIES, *INSTALL_COMMANDS):
+        for value in (*REPOSITORIES, *INSTALL_COMMANDS, *CLAUDE_INSTALL_COMMANDS):
             if value not in text:
                 errors.append(f"{relative} is missing install value: {value}")
-        positions = [text.find(command) for command in INSTALL_COMMANDS]
-        if positions != sorted(positions):
-            errors.append(f"{relative} does not present the install commands in required order.")
+        for commands, host in (
+            (INSTALL_COMMANDS, "Codex"),
+            (CLAUDE_INSTALL_COMMANDS, "Claude Code"),
+        ):
+            positions = [text.find(command) for command in commands]
+            if positions != sorted(positions):
+                errors.append(
+                    f"{relative} does not present the {host} install commands in required order."
+                )
+
+    relative = "docs/claude-code.md"
+    text = (ROOT / relative).read_text(encoding="utf-8-sig")
+    for value in (*REPOSITORIES, *CLAUDE_INSTALL_COMMANDS):
+        if value not in text:
+            errors.append(f"{relative} is missing install value: {value}")
+    positions = [text.find(command) for command in CLAUDE_INSTALL_COMMANDS]
+    if positions != sorted(positions):
+        errors.append(
+            f"{relative} does not present the Claude Code install commands in required order."
+        )
 
     sop = ROOT / "docs/Codex Chief of Staff - Installation and SOP.docx"
     text = docx_text(sop)
-    for command in INSTALL_COMMANDS:
+    for command in (*INSTALL_COMMANDS, *CLAUDE_INSTALL_COMMANDS):
         if command not in text:
             errors.append(f"SOP is missing install command: {command}")
     try:
@@ -213,6 +242,21 @@ def validate_manifest_paths() -> list[str]:
     plugins = marketplace.get("plugins", [])
     if not plugins or plugins[0].get("source") != "./":
         errors.append("Marketplace manifest must install the repository root.")
+    claude_manifest = read_json(".claude-plugin/plugin.json")
+    if claude_manifest.get("hooks") != "./hooks/hooks.json":
+        errors.append("Claude plugin manifest must load the shared hooks file.")
+    hooks = read_json("hooks/hooks.json")
+    commands = [
+        hook["command"]
+        for event in hooks.get("hooks", {}).values()
+        for group in event
+        for hook in group.get("hooks", [])
+    ]
+    if not commands or any(
+        "CLAUDE_PLUGIN_ROOT" not in command or "PLUGIN_ROOT" not in command
+        for command in commands
+    ):
+        errors.append("Every shared hook command must support Codex and Claude plugin roots.")
     return errors
 
 

@@ -4,7 +4,8 @@
 
 Install these first:
 
-- [Codex](https://developers.openai.com/codex/) with plugin support;
+- [Codex](https://developers.openai.com/codex/) with plugin support or
+  [Claude Code](https://code.claude.com/docs/en/setup);
 - [Git](https://git-scm.com/downloads) for GitHub marketplace installation;
 - [Node.js 18 or later](https://nodejs.org/en/download) for Ponytail and Chief
   of Staff lifecycle hooks;
@@ -14,7 +15,7 @@ Install these first:
 After installing a requirement, close and reopen the terminal so its command is
 available. Then install the plugins below in order.
 
-## Recommended complete installation
+## Codex installation
 
 ### 1. Install Ponytail
 
@@ -68,8 +69,8 @@ Confirm:
 | Plugin | Marketplace | Minimum version | State |
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
-| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.2.3` | active |
-| `chief-of-staff` | `codex-chief-of-staff` | `0.5.0` | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.2.4` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `0.5.1` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
 Codex, and check again.
@@ -86,6 +87,36 @@ install with strict dependency checks. Report any missing plugin or hook.
 The initializer does not overwrite an existing configuration without explicit
 approval. Installation grants no connector access or external-write authority.
 It does not authorize any project.
+
+## Claude Code installation
+
+The repositories are
+[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail),
+[plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy),
+and
+[plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff).
+
+Run all six commands in order:
+
+```powershell
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail --scope user
+claude plugin marketplace add plotdevice01/ai-sloppy-copy
+claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/codex-chief-of-staff
+claude plugin install chief-of-staff@codex-chief-of-staff --scope user
+```
+
+Start Claude Code, run `/reload-plugins`, review `/hooks`, and start a fresh
+session. Confirm all three plugin IDs with:
+
+```powershell
+claude plugin list --json
+```
+
+The repository includes `install-claude.ps1`, `install-claude.sh`, and
+`examples/claude-project-settings.json` for one-command and team deployment.
+See the [complete Claude Code guide](claude-code.md).
 
 ## Install from a checkout
 
@@ -174,16 +205,16 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v0.5.0.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v0.5.1.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v0.5.0.zip
+sha256sum ./codex-chief-of-staff-v0.5.1.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v0.5.0.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v0.5.1.zip.sha256`.
 
 ## Recovery
 

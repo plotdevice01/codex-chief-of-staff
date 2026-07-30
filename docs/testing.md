@@ -24,12 +24,13 @@ These checks cover:
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` in a fresh Codex task after
-installation on both GPT-5.6 Sol and GPT-5.6 Terra. Record:
+installation on both GPT-5.6 Sol and GPT-5.6 Terra. Repeat the scenarios in a
+fresh Claude Code session when certifying that host. Record:
 
 - prompt and response;
 - pass criteria met or missed;
 - plugin version;
-- Codex surface and version;
+- host surface and version;
 - hook trust status;
 - Ponytail and AI Sloppy Copy versions.
 

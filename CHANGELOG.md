@@ -2,6 +2,28 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.5.1] - 2026-07-29
+
+### Added
+
+- First-class Claude Code marketplace, installation, update, removal, and team
+  deployment guidance.
+- Cross-platform Claude Code installers and a shareable project settings
+  example for the complete three-plugin stack.
+- Dual-host hook tests for Codex and Claude Code session and subagent startup.
+
+### Changed
+
+- Shared lifecycle hooks now resolve both `PLUGIN_ROOT` and
+  `CLAUDE_PLUGIN_ROOT`.
+- The public landing page now documents the v0.5 optimization, the preserved
+  persona and controls, and the Codex/Claude Code capability matrix.
+- The complete stack now requires AI Sloppy Copy 2.2.4 or later for matching
+  Claude Code marketplace support.
+
+No persona requirement, response mode, safety control or authority boundary was
+removed. No Ponytail capability or AI Sloppy Copy rule was removed.
+
 ## [0.5.0] - 2026-07-29
 
 ### Changed
@@ -19,8 +41,9 @@ All notable changes are recorded here. Releases use semantic versioning.
 
 - The complete persona source and all 97 requirements.
 - Full Ponytail v4.8.4 behavior, modes, skills, and lifecycle hooks.
-- AI Sloppy Copy global enforcement, rule counts, evidence and voice gates,
-  protected text, and two-pass repair behavior.
+- AI Sloppy Copy global enforcement and rule counts.
+- Evidence and voice gates remain. Protected text and two-pass repair behavior
+  remain too.
 - Account, scope, privacy, sensitive-data, and external-write controls.
 - Project-specific rules, hooks, commands, skills, and source references.
 
@@ -120,6 +143,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.5.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.1
 [0.5.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.0
 [0.4.5]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.5
 [0.4.4]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.4

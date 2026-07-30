@@ -1,0 +1,27 @@
+{
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "ai-sloppy-copy": {
+      "source": {
+        "source": "github",
+        "repo": "plotdevice01/ai-sloppy-copy"
+      }
+    },
+    "codex-chief-of-staff": {
+      "source": {
+        "source": "github",
+        "repo": "plotdevice01/codex-chief-of-staff"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "ai-sloppy-copy@ai-sloppy-copy": true,
+    "chief-of-staff@codex-chief-of-staff": true
+  }
+}

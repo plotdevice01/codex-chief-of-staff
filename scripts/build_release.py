@@ -41,6 +41,8 @@ FILES = (
     "Test-Persona.py",
     "VERSION",
     "chief-of-staff.example.json",
+    "install-claude.ps1",
+    "install-claude.sh",
     "install.ps1",
     "install.sh",
     "validate_install.py",
@@ -183,7 +185,7 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "repository_privacy_scan": "pass",
         "companion_requirements": {
             "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": ">=2.2.3",
+            "ai_sloppy_copy": ">=2.2.4",
         },
         "files": hashes,
     }

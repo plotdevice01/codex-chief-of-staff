@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Turn Codex into a scoped operating partner, not an enthusiastic tab-completion machine.</strong>
+  <strong>Turn Codex or Claude Code into a scoped operating partner, not an enthusiastic tab-completion machine.</strong>
 </p>
 
 <p align="center">
@@ -11,9 +11,10 @@
   <a href="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml"><img src="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml/badge.svg" alt="Validation"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2A9D8F" alt="MIT License"></a>
   <img src="https://img.shields.io/badge/Codex-plugin-14213D" alt="Codex plugin">
+  <img src="https://img.shields.io/badge/Claude_Code-plugin-D97757" alt="Claude Code plugin">
 </p>
 
-Chief of Staff adds durable operating judgment to Codex:
+Chief of Staff adds durable operating judgment to Codex and Claude Code:
 
 - explicit project scope and source order;
 - account identity checks before connector access;
@@ -23,63 +24,85 @@ Chief of Staff adds durable operating judgment to Codex:
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
+## What changed in v0.5.1
+
+- Claude Code is now a first-class host with a validated marketplace manifest,
+  shared lifecycle hooks, team settings, and one-command installers.
+- The v0.5 operating contract remains intact: duplicated prompt weight was
+  removed, complete workflows moved into the existing Chief skill, and full
+  Ponytail behavior replaced the old partial copy.
+- The retained persona is unchanged: all 97 traceable requirements, 85%
+  compression, caveman mode, direct-reply humor, tone boundaries, account
+  gates, approval controls, and project-rule preservation remain present.
+- AI Sloppy Copy 2.2.4 adds the matching Claude marketplace and cross-host
+  hooks. The checker and evidence gates remain local and unchanged. Protected
+  text and repair rules remain unchanged too.
+
+| Capability | Codex | Claude Code |
+|---|:---:|:---:|
+| Marketplace installation | Yes | Yes |
+| Session and subagent contract loading | Yes | Yes |
+| Complete retained persona | Yes | Yes |
+| Ponytail and AI Sloppy Copy stack | Yes | Yes |
+| Local private configuration | Yes | Yes |
+| Project-level team setup | `AGENTS.md` sync | `.claude/settings.json` |
+
 ## Install the complete stack
 
 Use this order. Each plugin remains separate so it can update independently,
 but all three are required for exact reference-install behavior.
 
-Before starting, install
-[Git](https://git-scm.com/downloads),
+Before starting, install [Git](https://git-scm.com/downloads),
 [Node.js 18 or later](https://nodejs.org/en/download), and
-[Python 3.11 or later](https://www.python.org/downloads/). You also need
-[Codex](https://developers.openai.com/codex/) with plugin support.
+[Python 3.11 or later](https://www.python.org/downloads/). Choose
+[Codex](https://developers.openai.com/codex/) or
+[Claude Code](https://code.claude.com/docs/en/setup).
 
-### 1. Install Ponytail
+### Codex
 
-Repository: [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
+Run all six commands in order:
 
 ```powershell
 codex plugin marketplace add DietrichGebert/ponytail
 codex plugin add ponytail@ponytail
-```
-
-### 2. Install AI Sloppy Copy
-
-Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
-
-```powershell
 codex plugin marketplace add plotdevice01/ai-sloppy-copy
 codex plugin add ai-sloppy-copy@ai-sloppy-copy
-```
-
-### 3. Install Chief of Staff
-
-Repository: [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
-
-```powershell
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-### 4. Restart, trust, and verify
+Then restart Codex, open `/hooks`, review all three plugins, and start a fresh
+task. Run `codex plugin list --json` and confirm:
+`ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`, and
+`chief-of-staff@codex-chief-of-staff`.
 
-1. Restart Codex.
-2. Open `/hooks`.
-3. Review and trust the hooks offered by Ponytail, AI Sloppy Copy, and Chief of
-   Staff.
-4. Start a new task.
-5. Run `codex plugin list --json`.
-6. Confirm these entries are installed and active:
-   `ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`, and
-   `chief-of-staff@codex-chief-of-staff`.
+### Claude Code
 
-### 5. Configure and validate
+Run all six commands in order:
 
-In the new task, ask:
+```powershell
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail --scope user
+claude plugin marketplace add plotdevice01/ai-sloppy-copy
+claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/codex-chief-of-staff
+claude plugin install chief-of-staff@codex-chief-of-staff --scope user
+```
+
+Then start Claude Code, run `/reload-plugins`, review `/hooks`, and start a
+fresh session. Run `claude plugin list --json` and confirm the same three
+plugin IDs.
+
+See the [Claude Code deployment guide](docs/claude-code.md) for the one-command
+installer, project and team scopes, shared settings plus update and removal.
+
+### Configure and validate
+
+In the fresh task or session, ask:
 
 ```text
-Use $chief-of-staff to initialize my local configuration, then validate the
-install with strict dependency checks. Report any missing plugin or hook.
+Use the Chief of Staff skill to initialize my local configuration, then
+validate the install. Report any missing plugin or hook.
 ```
 
 Installation activates no connector or project access. Those remain off until
@@ -87,10 +110,10 @@ the local configuration explicitly turns them on.
 
 ## Configure
 
-Start a task and ask:
+Start a fresh task or session and ask:
 
 ```text
-Use $chief-of-staff to initialize my local configuration.
+Use the Chief of Staff skill to initialize my local configuration.
 ```
 
 The initializer creates a private `chief-of-staff.json` in the platform
@@ -128,7 +151,8 @@ uninstall, and recovery procedures.
 </p>
 
 The plugin is skills-only. It does not run a server or add connector access.
-Lifecycle hooks load the generic operating contract and retained persona.
+Shared Codex and Claude Code lifecycle hooks load the generic operating
+contract and retained persona.
 Private identities, scopes, paths, and approvals live in a local ignored
 configuration.
 
@@ -162,14 +186,14 @@ Static tests verify:
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
 - public-file privacy scanning;
-- hook output for sessions and subagents;
+- Codex and Claude Code hook output for sessions and subagents;
 - deterministic release contents;
 - complete Ponytail and AI Sloppy Copy companion capabilities under strict
   dependency validation.
 
-The eight prompts in `persona/persona-contract.json` still require a fresh
-Codex task. Static tests cannot grade live model behavior without becoming
-test theater.
+The eight prompts in `persona/persona-contract.json` still require a fresh host
+session. Static tests cannot grade live model behavior without becoming test
+theater.
 
 ## Why three plugins
 
@@ -187,7 +211,7 @@ required for the complete reference stack.
 
 ## Manual and offline installation
 
-Download the latest release ZIP or clone the repository, then run:
+Download the latest release ZIP or clone the repository. For Codex, run:
 
 PowerShell:
 
@@ -201,6 +225,16 @@ macOS or Linux:
 ./install.sh
 ```
 
+For Claude Code, run:
+
+```powershell
+.\install-claude.ps1
+```
+
+```bash
+./install-claude.sh
+```
+
 Checksum verification is optional and documented under
 [release verification](docs/installation.md#optional-release-verification).
 The checksum remains available for users and environments that require it.
@@ -208,6 +242,7 @@ The checksum remains available for users and environments that require it.
 ## Documentation
 
 - [Installation and upgrades](docs/installation.md)
+- [Claude Code deployment](docs/claude-code.md)
 - [Configuration](docs/configuration.md)
 - [Architecture](docs/architecture.md)
 - [Testing](docs/testing.md)

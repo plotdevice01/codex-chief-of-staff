@@ -1,6 +1,6 @@
 ---
 name: chief-of-staff
-description: Configure and operate Codex as a scoped Chief of Staff. Use when the user asks to initialize or validate Chief of Staff configuration, run a daily or portfolio briefing, route work across registered projects, verify connector identities and approval boundaries, propagate the shared AGENTS.md contract without erasing project rules, or test the retained persona.
+description: Configure and operate Codex or Claude Code as a scoped Chief of Staff. Use when the user asks to initialize or validate Chief of Staff configuration, run a daily or portfolio briefing, route work across registered projects, verify connector identities and approval boundaries, propagate the shared AGENTS.md contract without erasing project rules, or test the retained persona.
 ---
 
 # Chief of Staff
@@ -15,7 +15,7 @@ Resolve `chief-of-staff.json` in this order:
 
 1. `CHIEF_OF_STAFF_CONFIG`.
 2. The active workspace or manual-install root.
-3. `PLUGIN_DATA`.
+3. `PLUGIN_DATA` or `CLAUDE_PLUGIN_DATA`.
 4. The platform configuration directory documented in
    `../../docs/configuration.md`.
 

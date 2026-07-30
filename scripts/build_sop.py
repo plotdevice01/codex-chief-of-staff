@@ -99,7 +99,7 @@ def configure(doc: Document) -> None:
         style.paragraph_format.line_spacing = 1.2
 
     header = section.header.paragraphs[0]
-    header.text = "CODEX CHIEF OF STAFF  /  INSTALLATION AND OPERATING SOP"
+    header.text = "CHIEF OF STAFF  /  CODEX + CLAUDE CODE  /  INSTALLATION AND OPERATING SOP"
     header.alignment = WD_ALIGN_PARAGRAPH.LEFT
     for run in header.runs:
         set_font(run, "Calibri", 8, bold=True, color=GRAY)
@@ -420,13 +420,13 @@ def build(output: Path) -> Path:
     add_table(
         doc,
         ("Release", "Audience", "Distribution", "Authority"),
-        ((VERSION, "Any Codex user", "Public GitHub", "Local configuration only"),),
+        ((VERSION, "Any Codex or Claude Code user", "Public GitHub", "Local configuration only"),),
         (1500, 2160, 2460, 3240),
     )
     add_callout(
         doc,
         "What this installs: ",
-        "A skills-only Codex plugin that loads the complete generic operating contract and retained persona. "
+        "A skills-only Codex and Claude Code plugin that loads the complete generic operating contract and retained persona. "
         "It grants no connector access, project authority, or external-write permission.",
     )
     doc.add_heading("Operating result", level=1)
@@ -446,7 +446,7 @@ def build(output: Path) -> Path:
     add_bullets(
         doc,
         (
-            "Codex with plugin support.",
+            "Codex with plugin support or Claude Code.",
             "Git for GitHub marketplace installation.",
             "Node.js 18 or later for Ponytail and Chief of Staff hooks.",
             "Python 3.11 or later for AI Sloppy Copy, configuration, and validation.",
@@ -489,12 +489,44 @@ def build(output: Path) -> Path:
         "Use $chief-of-staff to initialize my local configuration, then validate the install with strict "
         "dependency checks. Report any missing plugin or hook.",
     )
+    doc.add_heading("Claude Code alternative", level=2)
+    add_code(doc, "claude plugin marketplace add DietrichGebert/ponytail")
+    add_code(doc, "claude plugin install ponytail@ponytail --scope user")
+    add_code(doc, "claude plugin marketplace add plotdevice01/ai-sloppy-copy")
+    add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
+    add_code(doc, "claude plugin marketplace add plotdevice01/codex-chief-of-staff")
+    add_code(doc, "claude plugin install chief-of-staff@codex-chief-of-staff --scope user")
+    add_numbered(
+        doc,
+        (
+            "Start Claude Code and run /reload-plugins.",
+            "Open /hooks and review the hooks from all three plugins.",
+            "Run claude plugin list --json and confirm all three plugin IDs are enabled.",
+            "Start a fresh session so SessionStart loads the contract and retained persona.",
+        ),
+    )
+    doc.add_heading("One-command and team deployment", level=2)
+    add_code(doc, r".\install-claude.ps1")
+    add_code(doc, "./install-claude.sh")
+    doc.add_paragraph(
+        "The scripts install or update all three plugins. The default scope is user. Use project scope only when "
+        "the repository should carry shared enablement."
+    )
+    add_code(doc, r"Copy examples\claude-project-settings.json to .claude\settings.json")
+    add_callout(
+        doc,
+        "Keep authority local: ",
+        "Shared Claude settings may name marketplaces and enabled plugins. Private identities, paths, scopes, "
+        "and approval rules stay in ignored chief-of-staff.json.",
+        alert=True,
+    )
 
     section_page(doc, "2. Configure private authority")
     doc.add_heading("Initialize", level=2)
     add_code(doc, 'python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"')
     doc.add_paragraph(
-        "Or start a fresh Codex task and say: Use $chief-of-staff to initialize my local configuration."
+        "Or start a fresh Codex task or Claude Code session and ask the Chief of Staff skill to initialize the "
+        "local configuration."
     )
     add_table(
         doc,
@@ -525,7 +557,7 @@ def build(output: Path) -> Path:
     add_callout(
         doc,
         "Required result: ",
-        "Do not use a connector until validation passes and Codex reads back the intended scope and identity gate "
+        "Do not use a connector until validation passes and the host reads back the intended scope and identity gate "
         "with the approval policy.",
         alert=True,
     )
@@ -633,7 +665,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy plugin 2.2.3 or later with Standard 2.1.1 or later for exact authored-copy governance.",
+            "AI Sloppy Copy plugin 2.2.4 or later with Standard 2.1.1 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -657,8 +689,8 @@ def build(output: Path) -> Path:
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
         "Run the eight prompts in persona/persona-contract.json in separate fresh Codex tasks with both "
-        "GPT-5.6 Sol and GPT-5.6 Terra. Static validation proves the contract exists; it cannot honestly grade "
-        "a live model response."
+        "GPT-5.6 Sol and GPT-5.6 Terra. Repeat them in a fresh Claude Code session when certifying that host. "
+        "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(
         doc,
@@ -671,18 +703,22 @@ def build(output: Path) -> Path:
     doc.add_heading("Upgrade", level=2)
     add_code(doc, "codex plugin marketplace upgrade codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
+    add_code(doc, "claude plugin marketplace update codex-chief-of-staff")
+    add_code(doc, "claude plugin update chief-of-staff@codex-chief-of-staff")
     add_bullets(
         doc,
         (
             "Read CHANGELOG.md.",
             "Run validation again.",
-            "Restart Codex and repeat the fresh-task acceptance prompts.",
+            "Restart Codex or run Claude Code /reload-plugins, then repeat the fresh-session acceptance prompts.",
             "Keep the prior tagged release available until acceptance passes.",
         ),
     )
     doc.add_heading("Uninstall", level=2)
     add_code(doc, "codex plugin remove chief-of-staff@codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace remove codex-chief-of-staff")
+    add_code(doc, "claude plugin uninstall chief-of-staff@codex-chief-of-staff")
+    add_code(doc, "claude plugin marketplace remove codex-chief-of-staff")
     doc.add_paragraph(
         "Uninstalling does not delete chief-of-staff.json. Remove that private file separately only when the user "
         "intends to discard the configuration."
@@ -692,7 +728,7 @@ def build(output: Path) -> Path:
         doc,
         ("Symptom", "Response"),
         (
-            ("Hooks do not load", "Restart Codex, open /hooks, review trust, then start a fresh task."),
+            ("Hooks do not load", "Restart Codex or run Claude Code /reload-plugins, review /hooks, then start fresh."),
             ("No configuration", "Run the initializer; generic behavior remains active, connector authority remains blocked."),
             ("Wrong account", "Stop and reconnect the approved identity. Then repeat the live check."),
             ("Persona test fails", "Restore AGENTS.md, persona files and contract. Restore configuration from the same version."),
@@ -700,20 +736,14 @@ def build(output: Path) -> Path:
         ),
         (2880, 6480),
     )
-    doc.add_heading("Optional release verification", level=2)
-    doc.add_paragraph(
-        "Each release publishes a SHA-256 file and GitHub build-provenance attestation. Use them when the download "
-        "path or environment requires independent artifact verification."
-    )
-
     properties = doc.core_properties
-    properties.title = "Codex Chief of Staff - Installation and Operating SOP"
-    properties.subject = "Public plugin installation, configuration, operation, validation, and recovery"
+    properties.title = "Chief of Staff - Codex and Claude Code Installation and Operating SOP"
+    properties.subject = "Public dual-host plugin installation, configuration, operation, validation, and recovery"
     properties.author = "Codex Chief of Staff contributors"
     properties.last_modified_by = "Codex Chief of Staff contributors"
     properties.created = datetime(2026, 7, 29, tzinfo=timezone.utc)
     properties.modified = datetime(2026, 7, 29, tzinfo=timezone.utc)
-    properties.keywords = "Codex, chief of staff, plugin, operations, SOP"
+    properties.keywords = "Codex, Claude Code, chief of staff, plugin, operations, SOP"
 
     temporary = output.with_suffix(".tmp.docx")
     doc.save(temporary)
