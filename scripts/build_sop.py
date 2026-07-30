@@ -665,7 +665,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy plugin 2.2.4 or later with Standard 2.1.1 or later for exact authored-copy governance.",
+            "AI Sloppy Copy plugin 2.2.5 or later with Standard 2.1.1 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )

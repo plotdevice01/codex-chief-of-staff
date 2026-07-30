@@ -20,7 +20,7 @@ claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 ```
 
-## 2. AI Sloppy Copy plugin 2.2.4 or later
+## 2. AI Sloppy Copy plugin 2.2.5 or later
 
 - Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
 - Latest release: [AI Sloppy Copy releases](https://github.com/plotdevice01/ai-sloppy-copy/releases/latest)

@@ -34,9 +34,10 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - The retained persona is unchanged: all 97 traceable requirements, 85%
   compression, caveman mode, direct-reply humor, tone boundaries, account
   gates, approval controls, and project-rule preservation remain present.
-- AI Sloppy Copy 2.2.4 adds the matching Claude marketplace and cross-host
-  hooks. The checker and evidence gates remain local and unchanged. Protected
-  text and repair rules remain unchanged too.
+- AI Sloppy Copy 2.2.5 includes the matching Claude marketplace and cross-host
+  hooks plus Python 3.10 and 3.11 input parsing. The checker and evidence gates
+  remain local and unchanged. Protected text and repair rules remain unchanged
+  too.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|

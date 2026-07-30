@@ -57,7 +57,7 @@
       "required_for_full_parity": true
     },
     "ai_sloppy_copy": {
-      "minimum_version": "2.2.4",
+      "minimum_version": "2.2.5",
       "required_for_full_parity": true
     }
   },

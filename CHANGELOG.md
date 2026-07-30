@@ -18,8 +18,8 @@ All notable changes are recorded here. Releases use semantic versioning.
   `CLAUDE_PLUGIN_ROOT`.
 - The public landing page now documents the v0.5 optimization, the preserved
   persona and controls, and the Codex/Claude Code capability matrix.
-- The complete stack now requires AI Sloppy Copy 2.2.4 or later for matching
-  Claude Code marketplace support.
+- The complete stack now requires AI Sloppy Copy 2.2.5 or later for matching
+  Claude Code marketplace support and Python 3.10 or 3.11 input parsing.
 
 No persona requirement, response mode, safety control or authority boundary was
 removed. No Ponytail capability or AI Sloppy Copy rule was removed.

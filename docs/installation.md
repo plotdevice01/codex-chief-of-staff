@@ -69,7 +69,7 @@ Confirm:
 | Plugin | Marketplace | Minimum version | State |
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
-| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.2.4` | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.2.5` | active |
 | `chief-of-staff` | `codex-chief-of-staff` | `0.5.1` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
