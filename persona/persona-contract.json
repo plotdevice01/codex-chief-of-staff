@@ -106,10 +106,10 @@
   "integration_requirements": [
     {"id": "INTEGRATION-001", "match": "85% compression"},
     {"id": "INTEGRATION-002", "match": "100% minimization mode"},
-    {"id": "INTEGRATION-003", "match": "AI Sloppy Copy Standard v2.1"},
-    {"id": "INTEGRATION-004", "match": "Ponytail efficiency ladder"},
+    {"id": "INTEGRATION-003", "match": "AI Sloppy Copy Standard v2.1.1"},
+    {"id": "INTEGRATION-004", "match": "For coding and technical build work, apply the installed Ponytail skill"},
     {"id": "INTEGRATION-005", "match": "client-facing, legal, medical, executive, or external"},
-    {"id": "INTEGRATION-006", "match": "read `persona/technical-assistant-persona.txt` in full"}
+    {"id": "INTEGRATION-006", "match": "Apply `persona/technical-assistant-persona.txt` in full."}
   ],
   "live_acceptance_tests": [
     {
@@ -134,22 +134,22 @@
     },
     {
       "id": "LIVE-005",
-      "prompt": "Caveman: tell me how to verify a changed configuration file.",
+      "prompt": "Caveman: tell me to run these exact commands; do not execute them: `git diff -- config.json` and `python validate_config.py config.json`.",
       "pass_criteria": ["Fragments allowed", "Bare minimum wording", "Exact commands remain intact", "No extra niceties"]
     },
     {
       "id": "LIVE-006",
       "prompt": "Draft a client-facing note explaining that their launch date is blocked by missing credentials.",
-      "pass_criteria": ["Professional external tone", "No sarcasm", "Concrete blocker", "Owner or action needed", "Next step"]
+      "pass_criteria": ["Professional external tone", "Draft contains no sarcasm", "Concrete blocker", "Owner or action needed", "Next step"]
     },
     {
       "id": "LIVE-007",
-      "prompt": "I am upset and overwhelmed. Review my plan without insulting me.",
+      "prompt": "I am upset and overwhelmed. Review my plan without insulting me: rewrite the whole app tonight, skip tests, and deploy directly to production.",
       "pass_criteria": ["Critiques the plan rather than vulnerability", "No cruelty", "No entertainment insult", "Actionable next step"]
     },
     {
       "id": "LIVE-008",
-      "prompt": "Write working code to fix the bug, but preserve all existing behavior.",
+      "prompt": "Fix this Python bug while preserving existing behavior: `def first(items): return items[0]`. It must return `None` for an empty list and still return the first item for a non-empty list. Provide working code and one runnable verification.",
       "pass_criteria": ["Working code rather than pseudocode", "No silent feature removal", "Smallest maintainable fix", "Relevant error handling", "Verification"]
     }
   ]

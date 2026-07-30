@@ -500,7 +500,10 @@ def build(output: Path) -> Path:
         doc,
         ("Section", "Purpose"),
         (
-            ("owner", "Name and IANA timezone used for dates and scheduling."),
+            (
+                "owner",
+                "Name, IANA timezone, role, operating profile, and recurring work used to load private context.",
+            ),
             ("communication", "Required 85% compression and caveman mode with persona boundary and copy standard."),
             ("connectors", "Provider, expected identity and denied identities with a write policy."),
             ("policy", "Default confirmations and blocked financial actions with authority limits."),
@@ -537,7 +540,7 @@ def build(output: Path) -> Path:
             "Read the selected project's AGENTS.md and source-of-truth files.",
             "Verify each connector identity before its first use in the task.",
             "Check the write policy before creating or changing external state.",
-            "Execute once, then read the saved result back before reporting completion.",
+            "Use idempotency when available. Read the saved result back before any retry or completion report.",
         ),
     )
     doc.add_heading("Source order", level=2)
@@ -630,7 +633,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy 2.1.0 or later for exact authored-copy governance.",
+            "AI Sloppy Copy plugin 2.2.3 or later with Standard 2.1.1 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -653,14 +656,15 @@ def build(output: Path) -> Path:
     )
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
-        "Run the eight prompts in persona/persona-contract.json in a new Codex task. Static validation proves "
-        "the contract exists; it cannot honestly grade a live model response."
+        "Run the eight prompts in persona/persona-contract.json in separate fresh Codex tasks with both "
+        "GPT-5.6 Sol and GPT-5.6 Terra. Static validation proves the contract exists; it cannot honestly grade "
+        "a live model response."
     )
     add_callout(
         doc,
         "Accept only when: ",
-        "static checks pass and fresh-task behavior meets all eight criteria. Connector identities must match. "
-        "The first briefing must stay inside the selected scope.",
+        "static checks pass and fresh-task behavior on both models meets all eight criteria. Connector identities "
+        "must match. The first briefing must stay inside the selected scope.",
     )
 
     section_page(doc, "7. Update, uninstall, recover")

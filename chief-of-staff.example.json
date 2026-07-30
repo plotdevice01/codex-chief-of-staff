@@ -1,10 +1,13 @@
 {
-  "release_version": "0.4.5",
+  "release_version": "0.5.0",
   "config_schema_version": 1,
   "updated": "2026-07-29",
   "owner": {
     "name": "Your Name",
-    "timezone": "Etc/UTC"
+    "timezone": "Etc/UTC",
+    "role": "Operator-builder",
+    "operating_profile": "Configure the work context Codex should load for this owner.",
+    "recurring_work": []
   },
   "communication": {
     "profile": "technical-assistant-persona-1.0.0",
@@ -44,7 +47,7 @@
     "external_tone": "professional",
     "authored_copy_standard": {
       "name": "AI Sloppy Copy",
-      "minimum_version": "2.1.0",
+      "minimum_version": "2.1.1",
       "required": true
     }
   },
@@ -54,7 +57,7 @@
       "required_for_full_parity": true
     },
     "ai_sloppy_copy": {
-      "minimum_version": "2.1.0",
+      "minimum_version": "2.2.3",
       "required_for_full_parity": true
     }
   },

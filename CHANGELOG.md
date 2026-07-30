@@ -2,6 +2,38 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.5.0] - 2026-07-29
+
+### Changed
+
+- Consolidated duplicated base instructions while preserving their meaning.
+- Moved the complete client-deliverable, Forward Deployed AI, daily-briefing,
+  and project-propagation workflows into the existing Chief skill.
+- Replaced the partial Ponytail copy with a router to the complete installed
+  Ponytail plugin while retaining a safety-first fallback.
+- Replaced `Execute once` with idempotent external-write and read-back rules.
+- Moved owner-specific role and recurring-work context into local
+  configuration.
+
+### Preserved
+
+- The complete persona source and all 97 requirements.
+- Full Ponytail v4.8.4 behavior, modes, skills, and lifecycle hooks.
+- AI Sloppy Copy global enforcement, rule counts, evidence and voice gates,
+  protected text, and two-pass repair behavior.
+- Account, scope, privacy, sensitive-data, and external-write controls.
+- Project-specific rules, hooks, commands, skills, and source references.
+
+### Fixed
+
+- Strict dependency validation now checks companion capabilities, not only
+  version numbers.
+- AI Sloppy Copy plugin 2.2.3 with Standard 2.1.1 masks HTML and XML tag
+  structure while still detecting blocked terms in visible prose.
+- Each previously under-specified acceptance prompt now supplies its test
+  input. Caveman supplies commands. The vulnerable-user case supplies a plan.
+  The code case supplies a bug.
+
 ## [0.4.5] - 2026-07-29
 
 ### Changed
@@ -9,8 +41,8 @@ All notable changes are recorded here. Releases use semantic versioning.
 - The recommended installation is now one numbered flow: Ponytail, AI Sloppy
   Copy, Chief of Staff, hook trust, verification, configuration, and
   full-parity validation.
-- README, installation guide, dependency guide, and SOP now include direct
-  repository links and exact commands for every required plugin.
+- README and the installation guide now include direct repository links.
+  The dependency guide and SOP include the same exact plugin commands.
 - Repository validation now fails if ordered install steps or dependency links
   drift. It also checks commands and SOP hyperlinks.
 
@@ -88,6 +120,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.5.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.0
 [0.4.5]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.5
 [0.4.4]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.4
 [0.4.3]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.3

@@ -67,7 +67,7 @@ def validate_behavior(config: dict) -> list[str]:
         "communication.witty_advice.after_requested_work": True,
         "communication.external_tone": "professional",
         "communication.authored_copy_standard.name": "AI Sloppy Copy",
-        "communication.authored_copy_standard.minimum_version": "2.1.0",
+        "communication.authored_copy_standard.minimum_version": "2.1.1",
         "communication.authored_copy_standard.required": True,
         "dependencies.ponytail.required_for_full_parity": True,
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
@@ -91,8 +91,8 @@ def parse_version(value: str) -> tuple[int, int, int] | None:
     return tuple(map(int, match.groups())) if match else None
 
 
-def installed_plugins() -> dict[str, str]:
-    found: dict[str, str] = {}
+def installed_plugin_records() -> dict[str, tuple[str, Path]]:
+    found: dict[str, tuple[str, Path]] = {}
     cache = Path.home() / ".codex" / "plugins" / "cache"
     if not cache.is_dir():
         return found
@@ -106,15 +106,95 @@ def installed_plugins() -> dict[str, str]:
         if isinstance(name, str) and isinstance(version, str):
             current = found.get(name)
             if current is None or (parse_version(version) or (0, 0, 0)) > (
-                parse_version(current) or (0, 0, 0)
+                parse_version(current[0]) or (0, 0, 0)
             ):
-                found[name] = version
+                found[name] = (version, manifest_path.parent.parent)
     return found
+
+
+def validate_ponytail(root: Path) -> list[str]:
+    warnings: list[str] = []
+    skill_names = (
+        "ponytail",
+        "ponytail-review",
+        "ponytail-audit",
+        "ponytail-debt",
+        "ponytail-gain",
+        "ponytail-help",
+    )
+    for name in skill_names:
+        if not (root / "skills" / name / "SKILL.md").is_file():
+            warnings.append(f"Ponytail capability is missing: {name}.")
+    hooks_path = root / "hooks" / "claude-codex-hooks.json"
+    try:
+        hooks = json.loads(hooks_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        warnings.append("Ponytail Codex hooks could not be read.")
+    else:
+        events = hooks.get("hooks", {})
+        for event in ("SessionStart", "SubagentStart"):
+            if event not in events:
+                warnings.append(f"Ponytail hook is missing: {event}.")
+    skill_path = root / "skills" / "ponytail" / "SKILL.md"
+    try:
+        skill = skill_path.read_text(encoding="utf-8-sig")
+    except OSError:
+        return warnings
+    for required in (
+        "User insists on the full version",
+        "Hardware is never the ideal on paper",
+        "Lazy code without its check is unfinished",
+    ):
+        if required not in skill:
+            warnings.append(f"Ponytail full-mode rule is missing: {required}.")
+    return warnings
+
+
+def validate_sloppy_copy(root: Path) -> list[str]:
+    warnings: list[str] = []
+    hooks_path = root / "hooks" / "hooks.json"
+    rules_path = root / "scripts" / "AI-Sloppy-Copy-Rules.json"
+    skill_path = root / "skills" / "ai-sloppy-copy" / "SKILL.md"
+    try:
+        hooks = json.loads(hooks_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        warnings.append("AI Sloppy Copy hooks could not be read.")
+    else:
+        events = hooks.get("hooks", {})
+        for event in ("UserPromptSubmit", "Stop"):
+            if event not in events:
+                warnings.append(f"AI Sloppy Copy hook is missing: {event}.")
+    try:
+        rules = json.loads(rules_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        warnings.append("AI Sloppy Copy rules could not be read.")
+    else:
+        counts = {
+            "term": len(rules.get("banned_terms", [])),
+            "expression": len(rules.get("prohibited_patterns", [])),
+            "style": len(rules.get("style_rules", [])),
+        }
+        expected = {"term": 288, "expression": 21, "style": 34}
+        if counts != expected:
+            warnings.append(
+                f"AI Sloppy Copy rule counts changed: expected {expected}, found {counts}."
+            )
+        if rules.get("standard", {}).get("version") != "2.1.1":
+            warnings.append("AI Sloppy Copy standard 2.1.1 is required.")
+    try:
+        skill = skill_path.read_text(encoding="utf-8-sig")
+    except OSError:
+        warnings.append("AI Sloppy Copy skill could not be read.")
+    else:
+        for required in ("Evidence and voice gate", "Stop after two repair passes"):
+            if required not in skill:
+                warnings.append(f"AI Sloppy Copy behavior is missing: {required}.")
+    return warnings
 
 
 def dependency_warnings(config: dict) -> list[str]:
     warnings: list[str] = []
-    installed = installed_plugins()
+    installed = installed_plugin_records()
     dependencies = config.get("dependencies", {})
     mapping = {
         "ponytail": "ponytail",
@@ -125,19 +205,26 @@ def dependency_warnings(config: dict) -> list[str]:
         if not requirement.get("required_for_full_parity"):
             continue
         minimum = str(requirement.get("minimum_version", "0.0.0"))
-        actual = installed.get(plugin_name)
-        if not actual:
+        record = installed.get(plugin_name)
+        if not record:
             warnings.append(
                 f"Full parity requires {plugin_name} {minimum} or later; "
                 "it was not found in the local Codex plugin cache."
             )
-        elif (parse_version(actual) or (0, 0, 0)) < (
+            continue
+        actual, root = record
+        if (parse_version(actual) or (0, 0, 0)) < (
             parse_version(minimum) or (0, 0, 0)
         ):
             warnings.append(
                 f"Full parity requires {plugin_name} {minimum} or later; "
                 f"found {actual}."
             )
+            continue
+        if plugin_name == "ponytail":
+            warnings.extend(validate_ponytail(root))
+        elif plugin_name == "ai-sloppy-copy":
+            warnings.extend(validate_sloppy_copy(root))
     return warnings
 
 
@@ -162,10 +249,14 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
         )
 
     owner = config.get("owner")
-    if not isinstance(owner, dict) or not owner.get("name") or not owner.get(
-        "timezone"
-    ):
-        errors.append("owner.name and owner.timezone are required.")
+    if not isinstance(owner, dict):
+        errors.append("owner must be an object.")
+    else:
+        for key in ("name", "timezone", "role", "operating_profile"):
+            if not isinstance(owner.get(key), str) or not owner[key].strip():
+                errors.append(f"owner.{key} is required.")
+        if not isinstance(owner.get("recurring_work"), list):
+            errors.append("owner.recurring_work must be a list.")
 
     errors.extend(validate_behavior(config))
 

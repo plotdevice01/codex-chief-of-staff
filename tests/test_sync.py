@@ -27,7 +27,7 @@ def main() -> int:
         current = (
             f"{managed_v1}\n\n{PROJECT_START}\n{local_rules}\n{PROJECT_END}\n"
         )
-        managed_v2 = f"{MANAGED_START} version=0.4.5 -->\nnew\n{MANAGED_END}"
+        managed_v2 = f"{MANAGED_START} version=0.5.0 -->\nnew\n{MANAGED_END}"
         updated = render_target(managed_v2, current, target)
         assert managed_v2 in updated
         assert local_rules in updated

@@ -58,6 +58,7 @@ REQUIRED = (
     "skills/chief-of-staff/SKILL.md",
     "skills/chief-of-staff/agents/openai.yaml",
     "tests/test_hooks.js",
+    "tests/model-acceptance.json",
     "tests/test_sync.py",
 )
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
@@ -175,6 +176,27 @@ def validate_versions() -> list[str]:
     return errors
 
 
+def validate_model_acceptance() -> list[str]:
+    errors: list[str] = []
+    evidence = read_json("tests/model-acceptance.json")
+    contract = read_json("persona/persona-contract.json")
+    expected_tests = {
+        item["id"] for item in contract.get("live_acceptance_tests", [])
+    }
+    if evidence.get("release_version") != VERSION:
+        errors.append("Model acceptance evidence does not match the release version.")
+    models = evidence.get("models", {})
+    if set(models) != {"gpt-5.6-sol", "gpt-5.6-terra"}:
+        errors.append("Model acceptance must cover GPT-5.6 Sol and GPT-5.6 Terra.")
+        return errors
+    for name, result in models.items():
+        if result.get("status") != "pass":
+            errors.append(f"{name} model acceptance did not pass.")
+        if set(result.get("tests", [])) != expected_tests:
+            errors.append(f"{name} model acceptance does not cover every live test.")
+    return errors
+
+
 def validate_manifest_paths() -> list[str]:
     errors: list[str] = []
     manifest = read_json(".codex-plugin/plugin.json")
@@ -242,6 +264,7 @@ def validate_repository(archive: Path | None = None) -> tuple[list[str], dict]:
         f"Missing required file: {name}" for name in REQUIRED if not (ROOT / name).is_file()
     ]
     errors.extend(validate_versions())
+    errors.extend(validate_model_acceptance())
     errors.extend(validate_manifest_paths())
     errors.extend(validate_install_guidance())
     errors.extend(validate_public_text())

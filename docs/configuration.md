@@ -19,7 +19,13 @@ Chief of Staff keeps behavior in the plugin and private authority in
 Set:
 
 - `owner.name`;
-- `owner.timezone` using an IANA timezone such as `America/Chicago`.
+- `owner.timezone` using an IANA timezone such as `America/Chicago`;
+- `owner.role`;
+- `owner.operating_profile`;
+- `owner.recurring_work` as a list.
+
+The public template uses a generic operator-builder profile. Keep private
+owner-specific work context in the ignored local configuration.
 
 ## Connectors
 

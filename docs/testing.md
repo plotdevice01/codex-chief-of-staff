@@ -24,7 +24,7 @@ These checks cover:
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` in a fresh Codex task after
-installation. Record:
+installation on both GPT-5.6 Sol and GPT-5.6 Terra. Record:
 
 - prompt and response;
 - pass criteria met or missed;
@@ -32,6 +32,10 @@ installation. Record:
 - Codex surface and version;
 - hook trust status;
 - Ponytail and AI Sloppy Copy versions.
+
+Both models must pass the same persona, client-deliverable, Forward Deployed
+AI, Ponytail, safety, and Sloppy Copy scenarios. The weaker passing model sets
+the minimum runtime contract. A miss blocks release.
 
 Static files cannot prove tone, judgment, or host behavior. A green JSON file
 does not become sentient because we named it validation.
@@ -46,4 +50,8 @@ A release fails when:
 - hooks fail on Windows or POSIX command paths;
 - generated archive files differ from the staged release;
 - version values disagree;
-- the DOCX SOP does not render cleanly.
+- the DOCX SOP does not render cleanly;
+- either Sol or Terra misses a required live scenario;
+- Ponytail loses a bundled skill or session/subagent hook;
+- AI Sloppy Copy rule counts, global hooks, protected text, evidence and voice
+  gates, or two-pass enforcement drift.

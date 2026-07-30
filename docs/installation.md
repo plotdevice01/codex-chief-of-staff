@@ -68,8 +68,8 @@ Confirm:
 | Plugin | Marketplace | Minimum version | State |
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
-| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.1.0` | active |
-| `chief-of-staff` | `codex-chief-of-staff` | `0.4.5` | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `2.2.3` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `0.5.0` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
 Codex, and check again.
@@ -174,16 +174,16 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v0.4.5.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v0.5.0.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v0.4.5.zip
+sha256sum ./codex-chief-of-staff-v0.5.0.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v0.4.5.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v0.5.0.zip.sha256`.
 
 ## Recovery
 

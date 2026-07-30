@@ -176,11 +176,14 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "persona_text_sha256": metrics["persona_text_sha256"],
         "hook_tests": "pass",
         "project_sync_tests": "pass",
+        "model_acceptance": json.loads(
+            (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
+        ),
         "configuration_validation": "pass",
         "repository_privacy_scan": "pass",
         "companion_requirements": {
             "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": ">=2.1.0",
+            "ai_sloppy_copy": ">=2.2.3",
         },
         "files": hashes,
     }

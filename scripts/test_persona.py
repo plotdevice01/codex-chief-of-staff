@@ -116,7 +116,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "communication.witty_advice.after_requested_work": True,
         "communication.external_tone": "professional",
         "communication.authored_copy_standard.name": "AI Sloppy Copy",
-        "communication.authored_copy_standard.minimum_version": "2.1.0",
+        "communication.authored_copy_standard.minimum_version": "2.1.1",
         "communication.authored_copy_standard.required": True,
         "dependencies.ponytail.required_for_full_parity": True,
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
@@ -169,6 +169,36 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     for value in forbidden_regressions:
         if value in combined:
             errors.append(f"Behavior regression found: {value}")
+
+    skill_text = SKILL.read_text(encoding="utf-8")
+    required_skill_blocks = (
+        "For client-facing outputs, make them meeting-ready and operator-level.",
+        "Define the workflow, data sources, tool or API access",
+        "Verify each connector before first use.",
+        "Use `Sync-ProjectAgents.py` to apply this complete Chief of Staff contract",
+        "Use idempotency when available.",
+    )
+    for value in required_skill_blocks:
+        if value not in skill_text:
+            errors.append(f"Contextual Chief workflow is missing: {value}")
+    required_agents_rules = (
+        "Apply `persona/technical-assistant-persona.txt` in full.",
+        "For coding and technical build work, apply the installed Ponytail skill",
+        "For client-facing work, use the Chief skill's client-deliverable workflow.",
+        "Use idempotency when available.",
+    )
+    for value in required_agents_rules:
+        if value not in agents_text:
+            errors.append(f"Core Chief router is missing: {value}")
+    if agents_text.count("Default communication mode is 85% compression.") != 1:
+        errors.append("85% compression must have one canonical core definition.")
+    for removed in (
+        "## Ponytail efficiency ladder",
+        "6. Execute once.",
+        "Use 85% compression. Lead with the answer.",
+    ):
+        if removed in agents_text:
+            errors.append(f"Retired duplicate instruction remains: {removed}")
 
     metrics = {
         "persona_requirements": len(requirements),

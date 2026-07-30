@@ -44,7 +44,7 @@
 
     <rect x="820" y="468" width="320" height="142" rx="20" fill="#FFFFFF" stroke="#D5DAE2" stroke-width="2"/>
     <text x="848" y="508" fill="#14213D" font-size="21" font-weight="700">Verified result</text>
-    <text x="848" y="541" fill="#5B6472" font-size="17">Execute once</text>
+    <text x="848" y="541" fill="#5B6472" font-size="17">Idempotent write</text>
     <text x="848" y="571" fill="#2A9D8F" font-size="17" font-weight="700">Read saved state back</text>
 
     <path d="M1014 330V420H220V468" fill="none" stroke="#5B6472" stroke-width="3" marker-end="url(#arrow)"/>

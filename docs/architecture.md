@@ -9,7 +9,7 @@ configuration. It does not require an MCP server.
 |---|---|
 | `.codex-plugin/plugin.json` | Plugin identity, metadata, skills, hooks, and brand |
 | `hooks/` | Load the generic contract and retained persona at session and subagent start |
-| `skills/chief-of-staff/` | Configuration, briefing, routing, validation, and propagation workflow |
+| `skills/chief-of-staff/` | Configuration, client-deliverable, Forward Deployed AI, briefing, routing, validation, and propagation workflows |
 | `AGENTS.md` | Portable operating contract |
 | `persona/` | Source PDF, retained text, requirement contract, and live scenarios |
 | `chief-of-staff.json` | Private identities, scopes, paths, and approval rules |
@@ -23,10 +23,12 @@ configuration. It does not require an MCP server.
 3. The hook locates a local configuration and reports its path without copying
    private values into the hook payload.
 4. Generic response and execution behavior remains active everywhere.
-5. Connector or registered-project work requires a valid local configuration.
-6. The selected project's own instructions and sources are read before cloud
+5. Owner-specific role and recurring-work context load from local configuration.
+6. Connector or registered-project work requires a valid local configuration.
+7. The selected project's own instructions and sources are read before cloud
    systems or memory.
-7. External writes follow the configured approval policy.
+8. External writes follow the configured approval policy and use read-back
+   before any retry.
 
 ## Trust boundaries
 

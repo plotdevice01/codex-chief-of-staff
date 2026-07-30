@@ -163,7 +163,9 @@ Static tests verify:
 - plugin, hook, skill, configuration, and release version parity;
 - public-file privacy scanning;
 - hook output for sessions and subagents;
-- deterministic release contents.
+- deterministic release contents;
+- complete Ponytail and AI Sloppy Copy companion capabilities under strict
+  dependency validation.
 
 The eight prompts in `persona/persona-contract.json` still require a fresh
 Codex task. Static tests cannot grade live model behavior without becoming
@@ -172,10 +174,11 @@ test theater.
 ## Why three plugins
 
 Chief of Staff contains the complete retained persona and response modes. It
-also carries account gates and project routing. The core Ponytail ladder
-remains included.
+also carries account gates and project routing. A compact fallback protects
+minimum implementation discipline when Ponytail is unavailable.
 [Ponytail](https://github.com/DietrichGebert/ponytail) adds persistent
-efficiency modes and lifecycle hooks. It also adds review skills.
+efficiency modes and the complete implementation ladder. It also supplies
+lifecycle hooks plus all six bundled skills.
 [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy) adds authored
 copy hooks and the deterministic local checker.
 
