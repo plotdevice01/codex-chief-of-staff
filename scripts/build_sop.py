@@ -436,7 +436,7 @@ def build(output: Path) -> Path:
             "One named scope before work begins.",
             "Account identity gates before connector use.",
             "Explicit policy before drafts, sends, edits, posts, or permission changes.",
-            "Shared behavior propagated without deleting project-specific rules.",
+            "One canonical behavior contract with fail-safe project loaders that preserve every project-specific rule.",
             "85% compression, caveman mode, Ponytail discipline, and all 97 retained persona requirements.",
         ),
     )
@@ -480,7 +480,8 @@ def build(output: Path) -> Path:
         doc,
         "Hook trust: ",
         "Ponytail loads its mode and tracks changes. AI Sloppy Copy checks authored prose locally. Chief of Staff "
-        "loads AGENTS.md, the retained persona and optional local configuration. Review every command before trust.",
+        "loads the retained persona and injects AGENTS.md only when Codex has not already loaded the canonical contract. "
+        "Claude Code receives the full contract through the hook. Review every command before trust.",
         alert=True,
     )
     doc.add_heading("Configure from the fresh task", level=2)
@@ -501,7 +502,7 @@ def build(output: Path) -> Path:
         (
             "Start Claude Code and run /reload-plugins.",
             "Open /hooks and review the hooks from all three plugins.",
-            "Run claude plugin list --json and confirm all three plugin IDs are enabled.",
+            "Run claude plugin list --json and confirm all three plugin IDs are active.",
             "Start a fresh session so SessionStart loads the contract and retained persona.",
         ),
     )
@@ -510,13 +511,13 @@ def build(output: Path) -> Path:
     add_code(doc, "./install-claude.sh")
     doc.add_paragraph(
         "The scripts install or update all three plugins. The default scope is user. Use project scope only when "
-        "the repository should carry shared enablement."
+        "the repository should carry shared plugin activation."
     )
     add_code(doc, r"Copy examples\claude-project-settings.json to .claude\settings.json")
     add_callout(
         doc,
         "Keep authority local: ",
-        "Shared Claude settings may name marketplaces and enabled plugins. Private identities, paths, scopes, "
+        "Shared Claude settings may name marketplaces and active plugins. Private identities, paths, scopes, "
         "and approval rules stay in ignored chief-of-staff.json.",
         alert=True,
     )
@@ -537,6 +538,7 @@ def build(output: Path) -> Path:
                 "Name, IANA timezone, role, operating profile, and recurring work used to load private context.",
             ),
             ("communication", "Required 85% compression and caveman mode with persona boundary and copy standard."),
+            ("execution", "Standard Sol Medium work and Expert/high-risk Sol High or Extra High work. No quick tier."),
             ("connectors", "Provider, expected identity and denied identities with a write policy."),
             ("policy", "Default confirmations and blocked financial actions with authority limits."),
             ("projects", "Stable scope IDs and local paths, plus optional project AGENTS.md files."),
@@ -573,6 +575,16 @@ def build(output: Path) -> Path:
             "Verify each connector identity before its first use in the task.",
             "Check the write policy before creating or changing external state.",
             "Use idempotency when available. Read the saved result back before any retry or completion report.",
+        ),
+    )
+    doc.add_heading("Execution tiers", level=2)
+    add_bullets(
+        doc,
+        (
+            "Standard is the default: Sol Medium, relevant workspace inspection, and focused validators proportional to the change.",
+            "Expert/high-risk covers releases; security; legal; medical; financial; production; permissions; public writes; destructive actions; cross-project work; and multi-system changes.",
+            "Expert/high-risk uses Sol High or Extra High when available and runs the full relevant validation. It checks failure paths and parity, then reads the saved result back.",
+            "There is no quick tier.",
         ),
     )
     doc.add_heading("Source order", level=2)
@@ -645,8 +657,8 @@ def build(output: Path) -> Path:
     doc.add_heading("Preview every change", level=2)
     add_code(doc, "python Sync-ProjectAgents.py --check --diff")
     doc.add_paragraph(
-        "The sync tool compares the shared Chief of Staff block with every registered target. Project-specific "
-        "content outside the managed block remains untouched."
+        "The sync tool compares the versioned fail-safe loader with every registered target. Project-specific "
+        "content outside the managed loader remains untouched."
     )
     doc.add_heading("Apply after approval", level=2)
     add_code(doc, "python Sync-ProjectAgents.py --apply")
@@ -665,7 +677,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy plugin 2.2.5 or later with Standard 2.1.1 or later for exact authored-copy governance.",
+            "AI Sloppy Copy plugin 2.2.6 or later with Standard 2.1.1 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -679,7 +691,7 @@ def build(output: Path) -> Path:
         doc,
         ("Gate", "What it proves"),
         (
-            ("Persona", "97 requirements, six integration rules and source hashes remain present. Eight scenarios remain too."),
+            ("Persona", "97 requirements, eight integration rules and source hashes remain present. Eight scenarios remain too."),
             ("Install", "Configuration, runtime files, safe policies, paths, IDs, and dependencies are structurally valid."),
             ("Repository", "Versions match; manifest paths exist; public files are sanitized; release contents are complete."),
             ("Hooks", "Session and subagent startup output contains the behavior contract, persona, version, and config status."),
@@ -688,14 +700,16 @@ def build(output: Path) -> Path:
     )
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
-        "Run the eight prompts in persona/persona-contract.json in separate fresh Codex tasks with both "
-        "GPT-5.6 Sol and GPT-5.6 Terra. Repeat them in a fresh Claude Code session when certifying that host. "
+        "Run the eight prompts in persona/persona-contract.json in separate fresh Codex tasks with "
+        "GPT-5.6 Sol Medium. Repeat them in a fresh Claude Code session when certifying that host. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(
         doc,
         "Accept only when: ",
-        "static checks pass and fresh-task behavior on both models meets all eight criteria. Connector identities "
+        "static checks pass and fresh-task Sol Medium behavior meets all eight criteria. Terra compatibility "
+        "evidence may be carried forward only when every model-facing input is unchanged and the tested delivery "
+        "path passes. Connector identities "
         "must match. The first briefing must stay inside the selected scope.",
     )
 
@@ -731,7 +745,7 @@ def build(output: Path) -> Path:
             ("Hooks do not load", "Restart Codex or run Claude Code /reload-plugins, review /hooks, then start fresh."),
             ("No configuration", "Run the initializer; generic behavior remains active, connector authority remains blocked."),
             ("Wrong account", "Stop and reconnect the approved identity. Then repeat the live check."),
-            ("Persona test fails", "Restore AGENTS.md, persona files and contract. Restore configuration from the same version."),
+            ("Persona test fails", "Restore the canonical repository AGENTS.md, persona files and contract. Restore configuration from the same version."),
             ("Project drift", "Run sync with --check --diff, review, apply, then recheck."),
         ),
         (2880, 6480),
@@ -741,8 +755,8 @@ def build(output: Path) -> Path:
     properties.subject = "Public dual-host plugin installation, configuration, operation, validation, and recovery"
     properties.author = "Codex Chief of Staff contributors"
     properties.last_modified_by = "Codex Chief of Staff contributors"
-    properties.created = datetime(2026, 7, 29, tzinfo=timezone.utc)
-    properties.modified = datetime(2026, 7, 29, tzinfo=timezone.utc)
+    properties.created = datetime(2026, 7, 30, tzinfo=timezone.utc)
+    properties.modified = datetime(2026, 7, 30, tzinfo=timezone.utc)
     properties.keywords = "Codex, Claude Code, chief of staff, plugin, operations, SOP"
 
     temporary = output.with_suffix(".tmp.docx")

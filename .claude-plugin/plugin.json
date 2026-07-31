@@ -1,6 +1,6 @@
 {
   "name": "chief-of-staff",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A scoped operating layer with account gates, project routing, concise execution, and a retained technical persona.",
   "author": {
     "name": "plotdevice01",

@@ -17,15 +17,15 @@ These checks cover:
 - shared behavior and configuration defaults;
 - manifest, skill, hook, and version consistency;
 - session and subagent hook output;
-- project-rule preservation during shared-contract updates;
+- project-rule preservation during fail-safe loader updates;
 - private-value scanning;
 - release contents and archive integrity.
 
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` in a fresh Codex task after
-installation on both GPT-5.6 Sol and GPT-5.6 Terra. Repeat the scenarios in a
-fresh Claude Code session when certifying that host. Record:
+installation on GPT-5.6 Sol Medium. Repeat the scenarios in a fresh Claude Code
+session when certifying that host. Record:
 
 - prompt and response;
 - pass criteria met or missed;
@@ -34,11 +34,14 @@ fresh Claude Code session when certifying that host. Record:
 - hook trust status;
 - Ponytail and AI Sloppy Copy versions.
 
-Both models must pass the same persona, client-deliverable, Forward Deployed
-AI, Ponytail, safety, and Sloppy Copy scenarios. The weaker passing model sets
-the minimum runtime contract. A miss blocks release.
+The active Standard route is Sol Medium; there is no quick or lower-model
+route. Terra compatibility evidence may be carried forward only when every
+model-facing persona requirement, integration rule and live prompt is
+unchanged, the reason is recorded, and the changed delivery path passes its
+static hook and propagation tests. Otherwise rerun Terra. A miss blocks
+release.
 
-Static files cannot prove tone, judgment, or host behavior. A green JSON file
+Static files cannot prove live tone or judgment. A green JSON file
 does not become sentient because we named it validation.
 
 ## Release gate
@@ -52,7 +55,7 @@ A release fails when:
 - generated archive files differ from the staged release;
 - version values disagree;
 - the DOCX SOP does not render cleanly;
-- either Sol or Terra misses a required live scenario;
+- either required model profile misses a live scenario;
 - Ponytail loses a bundled skill or session/subagent hook;
 - AI Sloppy Copy rule counts, global hooks, protected text, evidence and voice
   gates, or two-pass enforcement drift.

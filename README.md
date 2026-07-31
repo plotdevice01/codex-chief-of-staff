@@ -19,25 +19,26 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - explicit project scope and source order;
 - account identity checks before connector access;
 - approval gates for drafts and external writes;
-- project-wide `AGENTS.md` propagation without erasing local rules;
+- fail-safe `AGENTS.md` loaders without erasing local rules;
 - 85% compression and `caveman` mode;
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
-## What changed in v0.5.1
+## What changed in v0.5.2
 
-- Claude Code is now a first-class host with a validated marketplace manifest,
-  shared lifecycle hooks, team settings, and one-command installers.
-- The v0.5 operating contract remains intact: duplicated prompt weight was
-  removed, complete workflows moved into the existing Chief skill, and full
-  Ponytail behavior replaced the old partial copy.
+- Sol Medium is the default for Standard work. Expert/high-risk work uses Sol
+  High or Extra High when available. There is no low-assurance quick tier.
+- Global and project `AGENTS.md` files now carry a small fail-safe loader plus
+  their unique rules. The lifecycle hook supplies the complete contract and
+  persona once, avoiding repeated copies in every task.
+- The Codex hook detects a canonical contract already loaded by the host and
+  omits the duplicate while Claude Code keeps full hook injection.
 - The retained persona is unchanged: all 97 traceable requirements, 85%
   compression, caveman mode, direct-reply humor, tone boundaries, account
   gates, approval controls, and project-rule preservation remain present.
-- AI Sloppy Copy 2.2.5 includes the matching Claude marketplace and cross-host
-  hooks plus Python 3.10 and 3.11 input parsing. The checker and evidence gates
-  remain local and unchanged. Protected text and repair rules remain unchanged
-  too.
+- AI Sloppy Copy 2.2.6 reads Codex transcripts from the end and stops at the
+  newest assistant message. The checker, evidence gates, protected text, and
+  repair rules remain unchanged.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|
@@ -153,7 +154,10 @@ uninstall, and recovery procedures.
 
 The plugin is skills-only. It does not run a server or add connector access.
 Shared Codex and Claude Code lifecycle hooks load the generic operating
-contract and retained persona.
+contract and retained persona once. Codex omits duplicate contract injection
+when its instruction chain already contains the canonical block. Project
+loaders retain local rules and provide an explicit fallback if the hook is
+absent.
 Private identities, scopes, paths, and approvals live in a local ignored
 configuration.
 

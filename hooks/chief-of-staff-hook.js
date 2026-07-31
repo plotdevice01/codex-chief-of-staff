@@ -4,9 +4,10 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const VERSION = "0.5.1";
+const VERSION = "0.5.2";
 const event = process.argv[2] === "subagent" ? "SubagentStart" : "SessionStart";
 const pluginRoot = process.env.PLUGIN_ROOT || process.env.CLAUDE_PLUGIN_ROOT || path.resolve(__dirname, "..");
+const SHARED_CONTRACT = "<!-- SHARED-BEHAVIOR-CONTRACT:START -->";
 
 function platformConfigPath() {
   if (process.env.XDG_CONFIG_HOME) {
@@ -35,17 +36,59 @@ function readRequired(relativePath) {
   return fs.readFileSync(path.join(pluginRoot, relativePath), "utf8").replace(/^\uFEFF/, "").trim();
 }
 
+function instructionFile(directory) {
+  for (const name of ["AGENTS.override.md", "AGENTS.md"]) {
+    const candidate = path.join(directory, name);
+    if (fs.existsSync(candidate) && fs.readFileSync(candidate, "utf8").trim()) {
+      return candidate;
+    }
+  }
+  return null;
+}
+
+function projectInstructionFiles() {
+  const current = process.cwd();
+  let root = current;
+  for (let directory = current; ; directory = path.dirname(directory)) {
+    if (fs.existsSync(path.join(directory, ".git"))) {
+      root = directory;
+      break;
+    }
+    const parent = path.dirname(directory);
+    if (parent === directory) {
+      break;
+    }
+  }
+  const directories = [];
+  for (let directory = current; ; directory = path.dirname(directory)) {
+    directories.push(directory);
+    if (directory === root) {
+      break;
+    }
+  }
+  return directories.reverse().map(instructionFile).filter(Boolean);
+}
+
+function codexAlreadyLoadedContract() {
+  const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), ".codex");
+  const files = [instructionFile(codexHome), ...projectInstructionFiles()].filter(Boolean);
+  return files.some((file) => fs.readFileSync(file, "utf8").includes(SHARED_CONTRACT));
+}
+
 function emit() {
   const configPath = resolveConfigPath();
   const configStatus = configPath
     ? `Local configuration: ${configPath}. Read it before connector or registered-project work.`
     : "Local configuration: not found. Keep generic behavior active; do not access connectors or assume project authority.";
-  const context = [
-    `CODEX CHIEF OF STAFF ACTIVE - v${VERSION}`,
-    readRequired("AGENTS.md"),
+  const contextParts = [`CODEX CHIEF OF STAFF ACTIVE - v${VERSION}`];
+  if (!process.env.PLUGIN_DATA || !codexAlreadyLoadedContract()) {
+    contextParts.push(readRequired("AGENTS.md"));
+  }
+  contextParts.push(
     readRequired(path.join("persona", "technical-assistant-persona.txt")),
     configStatus,
-  ].join("\n\n");
+  );
+  const context = contextParts.join("\n\n");
 
   if (process.env.PLUGIN_DATA) {
     process.stdout.write(JSON.stringify({

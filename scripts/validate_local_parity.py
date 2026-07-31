@@ -8,9 +8,21 @@ from pathlib import Path
 
 try:
     from .config_paths import ROOT
+    from .sync_project_agents import (
+        LOADER_MARKER,
+        MANAGED_END,
+        MANAGED_START,
+        build_managed_block,
+    )
     from .validate_install import validate_config
 except ImportError:
     from config_paths import ROOT
+    from sync_project_agents import (
+        LOADER_MARKER,
+        MANAGED_END,
+        MANAGED_START,
+        build_managed_block,
+    )
     from validate_install import validate_config
 
 
@@ -32,6 +44,15 @@ def shared_block(path: Path) -> str:
     return text[start : end + len(END)]
 
 
+def managed_block(path: Path) -> str:
+    text = normalized_text(path)
+    start = text.find(MANAGED_START)
+    end = text.find(MANAGED_END, start)
+    if start < 0 or end < start:
+        raise ValueError(f"Managed loader markers are missing in {path}.")
+    return text[start : end + len(MANAGED_END)]
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -51,8 +72,16 @@ def validate(local_root: Path) -> list[str]:
     if errors:
         return errors
 
+    config = local_root / "chief-of-staff.json"
+    data = json.loads(config.read_text(encoding="utf-8-sig"))
+    local_agents = local_root / "AGENTS.md"
+    local_text = normalized_text(local_agents)
     try:
-        if shared_block(local_root / "AGENTS.md") != shared_block(ROOT / "AGENTS.md"):
+        if LOADER_MARKER in local_text:
+            expected = build_managed_block(data, config.resolve())
+            if managed_block(local_agents) != expected:
+                errors.append("The local AGENTS.md fail-safe loader differs.")
+        elif shared_block(local_agents) != shared_block(ROOT / "AGENTS.md"):
             errors.append("The shared AGENTS.md behavior contract differs.")
     except ValueError as exc:
         errors.append(str(exc))
@@ -69,10 +98,8 @@ def validate(local_root: Path) -> list[str]:
     if local_contract != public_contract:
         errors.append("The persona contract differs.")
 
-    config = local_root / "chief-of-staff.json"
     config_errors, _ = validate_config(config)
     errors.extend(f"Local configuration: {error}" for error in config_errors)
-    data = json.loads(config.read_text(encoding="utf-8-sig"))
     if data.get("version") != VERSION:
         errors.append(f"Local version must be {VERSION}.")
     return errors

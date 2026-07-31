@@ -9,7 +9,7 @@ lifecycle hooks and local configuration. It does not require an MCP server.
 |---|---|
 | `.codex-plugin/plugin.json` | Codex identity, metadata, skills, hooks, and brand |
 | `.claude-plugin/` | Claude Code marketplace and plugin identity |
-| `hooks/` | Load the generic contract and retained persona at session and subagent start |
+| `hooks/` | Load the generic contract once and the retained persona at session and subagent start |
 | `skills/chief-of-staff/` | Configuration, client-deliverable, Forward Deployed AI, briefing, routing, validation, and propagation workflows |
 | `AGENTS.md` | Portable operating contract |
 | `persona/` | Source PDF, retained text, requirement contract, and live scenarios |
@@ -19,16 +19,20 @@ lifecycle hooks and local configuration. It does not require an MCP server.
 ## Runtime flow
 
 1. Codex or Claude Code starts a session or subagent.
-2. The trusted hook reads `AGENTS.md` and the retained persona from the
-   installed plugin.
+2. The trusted hook reads the retained persona from the installed plugin.
+   Codex receives the complete contract only when its instruction chain does
+   not already contain it. Claude Code receives the complete contract through
+   the hook.
 3. The hook locates a local configuration and reports its path without copying
    private values into the hook payload.
 4. Generic response and execution behavior remains active everywhere.
 5. Owner-specific role and recurring-work context load from local configuration.
 6. Connector or registered-project work requires a valid local configuration.
-7. The selected project's own instructions and sources are read before cloud
+7. A small fail-safe loader preserves each selected project's unique rules and
+   points to the canonical contract if hook context is absent.
+8. The selected project's own instructions and sources are read before cloud
    systems or memory.
-8. External writes follow the configured approval policy and use read-back
+9. External writes follow the configured approval policy and use read-back
    before any retry.
 
 ## Trust boundaries

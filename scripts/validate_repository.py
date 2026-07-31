@@ -223,6 +223,18 @@ def validate_model_acceptance() -> list[str]:
             errors.append(f"{name} model acceptance did not pass.")
         if set(result.get("tests", [])) != expected_tests:
             errors.append(f"{name} model acceptance does not cover every live test.")
+    sol = models["gpt-5.6-sol"]
+    if (
+        sol.get("reasoning_effort") != "medium"
+        or sol.get("evidence") != "fresh_v0.5.2"
+    ):
+        errors.append("GPT-5.6 Sol Medium requires fresh v0.5.2 acceptance.")
+    terra = models["gpt-5.6-terra"]
+    if terra.get("evidence") == "carried_forward_from_v0.5.1" and (
+        terra.get("model_facing_inputs_unchanged") is not True
+        or not terra.get("carried_forward_reason")
+    ):
+        errors.append("Carried-forward Terra evidence requires an unchanged-input declaration and reason.")
     return errors
 
 

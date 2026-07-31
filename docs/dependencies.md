@@ -20,7 +20,7 @@ claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 ```
 
-## 2. AI Sloppy Copy plugin 2.2.5 or later
+## 2. AI Sloppy Copy plugin 2.2.6 or later
 
 - Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
 - Latest release: [AI Sloppy Copy releases](https://github.com/plotdevice01/ai-sloppy-copy/releases/latest)
@@ -38,7 +38,7 @@ claude plugin marketplace add plotdevice01/ai-sloppy-copy
 claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
 ```
 
-## 3. Chief of Staff 0.5.1
+## 3. Chief of Staff 0.5.2
 
 - Repository: [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
 - Latest release: [Chief of Staff releases](https://github.com/plotdevice01/codex-chief-of-staff/releases/latest)

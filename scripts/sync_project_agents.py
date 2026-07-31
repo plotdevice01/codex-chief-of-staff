@@ -20,6 +20,7 @@ MANAGED_START = "<!-- CHIEF-OF-STAFF-MANAGED:START"
 MANAGED_END = "<!-- CHIEF-OF-STAFF-MANAGED:END -->"
 PROJECT_START = "<!-- PROJECT-SPECIFIC-RULES:START -->"
 PROJECT_END = "<!-- PROJECT-SPECIFIC-RULES:END -->"
+LOADER_MARKER = "CHIEF-OF-STAFF-LOADER"
 IGNORED_DIRS = {
     ".git",
     ".venv",
@@ -62,7 +63,7 @@ def find_nested_agents(root: Path) -> list[Path]:
 def collect_targets(config: dict, include_global: bool) -> list[Target]:
     targets: dict[Path, Target] = {}
     for project in config.get("projects", []):
-        if project.get("enabled", True) is False or project.get("id") == "chief-of-staff":
+        if project.get("enabled", True) is False:
             continue
         project_id = str(project["id"])
         scope = str(project["scope"])
@@ -87,15 +88,23 @@ def collect_targets(config: dict, include_global: bool) -> list[Target]:
 
 def build_managed_block(config: dict, config_path: Path) -> str:
     version = config["release_version"]
-    source = SOURCE_AGENTS.read_text(encoding="utf-8").strip()
-    persona = ROOT / "persona" / "technical-assistant-persona.txt"
-    source = source.replace(
-        "`persona/technical-assistant-persona.txt`", f"`{persona}`"
+    source = SOURCE_AGENTS.resolve()
+    persona = (ROOT / "persona" / "technical-assistant-persona.txt").resolve()
+    return (
+        f"{MANAGED_START} version={version} mode=hook-loader -->\n"
+        f"# {LOADER_MARKER}\n\n"
+        "The enabled Chief of Staff lifecycle hook supplies the complete "
+        "canonical behavior contract and retained persona once per session.\n\n"
+        f"If session context already contains `CODEX CHIEF OF STAFF ACTIVE - "
+        f"v{version}`, do not reload them. If that header is absent, read these "
+        "files in full before substantive work:\n\n"
+        f"- `{source}`\n"
+        f"- `{persona}`\n\n"
+        f"Read `{config_path}` before connector or registered-project work. "
+        "Then apply the project-specific rules below. Never summarize, weaken, "
+        "or omit the canonical contract or persona.\n"
+        f"{MANAGED_END}"
     )
-    source = source.replace(
-        "the resolved Chief of Staff configuration", f"`{config_path}`"
-    )
-    return f"{MANAGED_START} version={version} -->\n{source}\n{MANAGED_END}"
 
 
 def default_project_rules(target: Target) -> str:
@@ -111,19 +120,24 @@ def default_project_rules(target: Target) -> str:
 
 
 def extract_project_rules(current: str, target: Target) -> str:
+    if PROJECT_START in current and PROJECT_END in current:
+        start = current.index(PROJECT_START) + len(PROJECT_START)
+        end = current.index(PROJECT_END, start)
+        return current[start:end].strip()
+    if (
+        target.project_id == "chief-of-staff"
+        and "<!-- SHARED-BEHAVIOR-CONTRACT:START -->" in current
+    ):
+        return default_project_rules(target)
+    if MANAGED_START in current and MANAGED_END in current:
+        end = current.index(MANAGED_END) + len(MANAGED_END)
+        return current[end:].strip() or default_project_rules(target)
     if target.replace_legacy:
         return (
             "# Account-specific rules\n\n"
             "Load the selected project's project-specific rules after this "
             "account-wide Chief of Staff contract."
         )
-    if PROJECT_START in current and PROJECT_END in current:
-        start = current.index(PROJECT_START) + len(PROJECT_START)
-        end = current.index(PROJECT_END, start)
-        return current[start:end].strip()
-    if MANAGED_START in current and MANAGED_END in current:
-        end = current.index(MANAGED_END) + len(MANAGED_END)
-        return current[end:].strip() or default_project_rules(target)
     return current.strip() or default_project_rules(target)
 
 
@@ -153,7 +167,7 @@ def write_atomic(path: Path, text: str) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Propagate the Chief contract without replacing project rules."
+        description="Propagate the Chief loader without replacing project rules."
     )
     parser.add_argument("--config")
     mode = parser.add_mutually_exclusive_group()
@@ -202,8 +216,8 @@ def main() -> int:
         return 1
 
     print(
-        f"PASS: {len(targets)} target(s) match Chief of Staff "
-        f"v{config['release_version']}."
+        f"PASS: {len(targets)} target(s) match the Chief of Staff "
+        f"v{config['release_version']} loader."
     )
     return 0
 

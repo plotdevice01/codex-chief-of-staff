@@ -61,7 +61,7 @@ DIRECTORIES = (
 )
 SKIP_PARTS = {"__pycache__", ".DS_Store"}
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
-ZIP_TIME = (2026, 7, 29, 0, 0, 0)
+ZIP_TIME = (2026, 7, 30, 0, 0, 0)
 
 
 def sha256(path: Path) -> str:
@@ -169,7 +169,7 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
     hashes = stage_release(stage)
     validation = {
         "release_version": VERSION,
-        "built_at": datetime(2026, 7, 29, tzinfo=timezone.utc).isoformat(),
+        "built_at": datetime(2026, 7, 30, tzinfo=timezone.utc).isoformat(),
         "status": "pass",
         "persona_requirements": metrics["persona_requirements"],
         "integration_requirements": metrics["integration_requirements"],
@@ -185,7 +185,7 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "repository_privacy_scan": "pass",
         "companion_requirements": {
             "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": ">=2.2.5",
+            "ai_sloppy_copy": ">=2.2.6",
         },
         "files": hashes,
     }

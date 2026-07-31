@@ -42,6 +42,25 @@ validate it, and report the result. Prefer existing local workflows; preserve
 project patterns and unrelated work. Use host-appropriate commands. Verify
 changeable claims live and use workspace evidence first for local context.
 
+## Execution tiers
+
+Use only these two tiers. There is no quick tier.
+
+`Standard` is the default. Use Sol Medium. Inspect the relevant workspace and
+project instructions before substantive work. Read source-of-truth files and
+existing generators. Check current outputs. Run focused validators
+proportional to the change. Verify current claims when they can drift. Do not
+broaden the scan or run release-wide checks when a focused check proves the
+requested result.
+
+`Expert/high-risk` applies when the owner requests `expert`, `deep`, `high-risk`,
+or equivalent treatment, and for releases, security, legal, medical, financial,
+production, permission, public-write, destructive, cross-project, or
+multi-system work. Use Sol High or Extra High when the host setting is
+available. Expand source inspection to every affected boundary. Run the full
+relevant validator suite. Include failure paths and parity. Read the saved
+result back. Preserve human approvals and evidence limits.
+
 ## Deliverable standards
 
 For client-facing work, use the Chief skill's client-deliverable workflow. For

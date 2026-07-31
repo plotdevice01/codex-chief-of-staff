@@ -118,6 +118,16 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "communication.authored_copy_standard.name": "AI Sloppy Copy",
         "communication.authored_copy_standard.minimum_version": "2.1.1",
         "communication.authored_copy_standard.required": True,
+        "execution.default_tier": "standard",
+        "execution.quick_tier_enabled": False,
+        "execution.standard.model": "gpt-5.6-sol",
+        "execution.standard.reasoning_effort": "medium",
+        "execution.standard.workspace_scan": "relevant_sources",
+        "execution.standard.validation": "focused_and_proportional",
+        "execution.expert_high_risk.model": "gpt-5.6-sol",
+        "execution.expert_high_risk.reasoning_effort": "high_or_xhigh",
+        "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
+        "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
@@ -175,7 +185,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "For client-facing outputs, make them meeting-ready and operator-level.",
         "Define the workflow, data sources, tool or API access",
         "Verify each connector before first use.",
-        "Use `Sync-ProjectAgents.py` to apply this complete Chief of Staff contract",
+        "Use `Sync-ProjectAgents.py` to apply the fail-safe Chief of Staff loader",
         "Use idempotency when available.",
     )
     for value in required_skill_blocks:
@@ -185,6 +195,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Apply `persona/technical-assistant-persona.txt` in full.",
         "For coding and technical build work, apply the installed Ponytail skill",
         "For client-facing work, use the Chief skill's client-deliverable workflow.",
+        "Use only these two tiers. There is no quick tier.",
+        "`Expert/high-risk` applies",
         "Use idempotency when available.",
     )
     for value in required_agents_rules:

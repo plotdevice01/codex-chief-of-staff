@@ -1,5 +1,5 @@
 {
-  "release_version": "0.5.1",
+  "release_version": "0.5.2",
   "config_schema_version": 1,
   "updated": "2026-07-29",
   "owner": {
@@ -51,13 +51,43 @@
       "required": true
     }
   },
+  "execution": {
+    "default_tier": "standard",
+    "quick_tier_enabled": false,
+    "standard": {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "workspace_scan": "relevant_sources",
+      "validation": "focused_and_proportional"
+    },
+    "expert_high_risk": {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high_or_xhigh",
+      "workspace_scan": "all_affected_boundaries",
+      "validation": "full_relevant_suite",
+      "triggers": [
+        "owner_requests_expert_or_deep",
+        "release",
+        "security",
+        "legal",
+        "medical",
+        "financial",
+        "production",
+        "permission_change",
+        "public_write",
+        "destructive_action",
+        "cross_project",
+        "multi_system"
+      ]
+    }
+  },
   "dependencies": {
     "ponytail": {
       "minimum_version": "4.8.4",
       "required_for_full_parity": true
     },
     "ai_sloppy_copy": {
-      "minimum_version": "2.2.5",
+      "minimum_version": "2.2.6",
       "required_for_full_parity": true
     }
   },

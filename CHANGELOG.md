@@ -2,6 +2,26 @@
 
 All notable changes are recorded here. Releases use semantic versioning.
 
+## [0.5.2] - 2026-07-30
+
+### Changed
+
+- Standard work now defaults to GPT-5.6 Sol Medium. Expert/high-risk work uses
+  Sol High or Extra High when available. No quick tier exists.
+- Project propagation now installs a small fail-safe loader instead of copying
+  the complete operating contract into every global and project `AGENTS.md`.
+- The Codex session hook omits contract injection when Codex already loaded the
+  canonical block. Claude Code still receives the complete contract and
+  persona through the hook.
+- The complete stack now requires AI Sloppy Copy 2.2.6 or later.
+
+### Preserved
+
+- The complete persona source and all 97 requirements.
+- Every project-specific rule, verified before and after migration.
+- Full Ponytail behavior, AI Sloppy Copy rules, account gates, approval
+  controls, evidence boundaries, and local-portable parity.
+
 ## [0.5.1] - 2026-07-29
 
 ### Added
@@ -143,6 +163,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.5.2]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.2
 [0.5.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.1
 [0.5.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.0
 [0.4.5]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.4.5

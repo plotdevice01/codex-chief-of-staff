@@ -65,8 +65,29 @@ file.
 ```
 
 Use absolute paths. The `instructions` field is optional. Project-specific
-privacy, compliance and source rules remain separate from the shared managed
-contract.
+privacy, compliance, source, hook and skill rules remain in each project's
+marked section. Propagation replaces only the Chief-managed fail-safe loader;
+it does not replace that project section.
+
+The lifecycle hook supplies the complete canonical Chief contract and persona
+once per session. The loader reads those same canonical sources only if the
+hook header is absent. This removes repeated copies without creating two
+different behavior contracts.
+
+## Execution tiers
+
+Only two tiers are supported:
+
+- `standard`: GPT-5.6 Sol Medium, relevant workspace and source inspection,
+  plus focused, proportional validators;
+- `expert_high_risk`: GPT-5.6 Sol High or Extra High when available, inspection
+  of all affected boundaries, the full relevant validator suite, failure-path
+  checks, parity checks and read-back.
+
+There is no quick tier. Keep `execution.quick_tier_enabled` set to `false`.
+Expert/high-risk applies to explicit expert or deep requests and to release,
+security, legal, medical, financial, production, permission, public-write,
+destructive, cross-project and multi-system work.
 
 ## Policy
 
