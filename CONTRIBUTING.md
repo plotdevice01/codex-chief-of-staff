@@ -37,7 +37,8 @@ On Windows, `py -3` can replace `python`.
 - Explain the user-visible result and risk.
 - Include the smallest test that proves non-trivial logic.
 - Update `CHANGELOG.md` for behavior or packaging changes.
-- Keep the plugin manifest, `VERSION`, hooks, configuration example, and
-  release builder on the same semantic version.
+- Keep `VERSION`, hooks, the configuration example, and the release builder on
+  the same public release number. Keep both host manifests on its corresponding
+  strict semantic version.
 - Do not weaken persona requirements or replace deterministic checks with
   prose assurances. Computers are already talented enough at pretending.

@@ -1,5 +1,5 @@
 {
-  "release_version": "0.5.2",
+  "release_version": "0.6",
   "executed_at": "2026-07-31T00:36:00Z",
   "runner": "codex exec --ephemeral --dangerously-bypass-hook-trust --sandbox read-only",
   "default_routing": {
@@ -8,12 +8,12 @@
     "fast_mode": false
   },
   "installed_runtime_smoke": {
-    "executed_at": "2026-07-31T00:47:00Z",
+    "executed_at": "2026-07-31T01:20:22Z",
     "host": "OpenAI Codex v0.146.0-alpha.3.1",
-    "session_id": "019fb5a3-84a9-74a1-9204-8ed98e2b9f9e",
+    "session_id": "019fb5c2-0e13-7380-9c57-059035b69130",
     "status": "pass",
     "assertions": [
-      "Chief of Staff v0.5.2 loaded",
+      "Chief of Staff v0.6 loaded",
       "Standard uses GPT-5.6 Sol Medium",
       "Quick tier is absent",
       "Expert/high-risk uses Sol High or Extra High"
@@ -23,7 +23,9 @@
     "gpt-5.6-sol": {
       "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "fresh_v0.5.2",
+      "evidence": "carried_forward_from_v0.5.2",
+      "model_facing_inputs_unchanged": true,
+      "carried_forward_reason": "Version 0.6 changes release numbering, host manifests, compatibility checks, and documentation only. The retained persona, integration contract, routing rules, and eight live prompts are unchanged from the fresh v0.5.2 acceptance.",
       "tests": [
         "LIVE-001",
         "LIVE-002",
@@ -40,7 +42,7 @@
       "reasoning_effort": "xhigh",
       "evidence": "carried_forward_from_v0.5.1",
       "model_facing_inputs_unchanged": true,
-      "carried_forward_reason": "The retained persona, integration contract, and eight live prompts are unchanged. v0.5.2 changes Sol routing plus tested contract delivery and project propagation; Terra is not selected by the current execution tiers.",
+      "carried_forward_reason": "The retained persona, integration contract, and eight live prompts remain unchanged through v0.6. Terra is not selected by the current execution tiers.",
       "tests": [
         "LIVE-001",
         "LIVE-002",

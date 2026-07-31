@@ -24,8 +24,13 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
-## What changed in v0.5.2
+## What changed in v0.6
 
+- Public release numbering now uses one-decimal pre-1.0 milestones. `0.6`
+  succeeds and fully contains `0.5.2`; it is not a rollback.
+- Codex and Claude Code manifests report `0.6.0` because both hosts require
+  strict three-part semantic versions. The public tag, docs, and ZIP use
+  `0.6`.
 - Sol Medium is the default for Standard work. Expert/high-risk work uses Sol
   High or Extra High when available. There is no low-assurance quick tier.
 - Global and project `AGENTS.md` files now carry a small fail-safe loader plus
@@ -36,9 +41,9 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - The retained persona is unchanged: all 97 traceable requirements, 85%
   compression, caveman mode, direct-reply humor, tone boundaries, account
   gates, approval controls, and project-rule preservation remain present.
-- AI Sloppy Copy 2.2.6 reads Codex transcripts from the end and stops at the
-  newest assistant message. The checker, evidence gates, protected text, and
-  repair rules remain unchanged.
+- AI Sloppy Copy 0.3 reads Codex transcripts from the end and stops at the
+  newest assistant message. The checker and evidence gates remain unchanged.
+  Protected-text controls and repair rules remain unchanged too.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|

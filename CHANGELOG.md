@@ -1,6 +1,29 @@
 # Changelog
 
-All notable changes are recorded here. Releases use semantic versioning.
+All notable changes are recorded here. Public releases use one-decimal pre-1.0
+milestones. Host manifests use strict three-part semantic versions.
+
+## [0.6] - 2026-07-30
+
+### Changed
+
+- Reset public release numbering from `0.5.2` to `0.6`. One-decimal
+  milestones now state the project's pre-1.0 status without pretending every
+  internal iteration deserves another dot.
+- `0.6` is the successor to, and fully contains, `0.5.2`; the shorter number
+  is a numbering reset, not a capability or behavior rollback.
+- Codex and Claude Code manifests use `0.6.0` because their plugin formats
+  require strict three-part semantic versions. The public release, Git tag,
+  documentation, and ZIP use `0.6`.
+- The complete stack now requires AI Sloppy Copy release `0.3`. Its host
+  manifest reports `0.3.0` for the same compatibility reason.
+
+### Preserved
+
+- The complete persona source and all 97 traceable requirements.
+- Sol Medium and expert/high-risk routing, 85% compression, caveman mode,
+  direct-reply humor, project-rule preservation, account gates, approval
+  controls, Ponytail behavior, and every AI Sloppy Copy rule.
 
 ## [0.5.2] - 2026-07-30
 
@@ -19,8 +42,9 @@ All notable changes are recorded here. Releases use semantic versioning.
 
 - The complete persona source and all 97 requirements.
 - Every project-specific rule, verified before and after migration.
-- Full Ponytail behavior, AI Sloppy Copy rules, account gates, approval
-  controls, evidence boundaries, and local-portable parity.
+- Full Ponytail behavior, AI Sloppy Copy rules, account gates and approval
+  controls.
+- Evidence boundaries and local-portable parity.
 
 ## [0.5.1] - 2026-07-29
 
@@ -49,8 +73,9 @@ removed. No Ponytail capability or AI Sloppy Copy rule was removed.
 ### Changed
 
 - Consolidated duplicated base instructions while preserving their meaning.
-- Moved the complete client-deliverable, Forward Deployed AI, daily-briefing,
-  and project-propagation workflows into the existing Chief skill.
+- Moved the complete client-deliverable and Forward Deployed AI workflows into
+  the existing Chief skill.
+- Moved daily-briefing and project-propagation workflows into the same skill.
 - Replaced the partial Ponytail copy with a router to the complete installed
   Ponytail plugin while retaining a safety-first fallback.
 - Replaced `Execute once` with idempotent external-write and read-back rules.
@@ -163,6 +188,7 @@ No behavior, persona, safety or scope rule changed.
 - First public portable release with persona validation and project
   propagation.
 
+[0.6]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.6
 [0.5.2]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.2
 [0.5.1]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.1
 [0.5.0]: https://github.com/plotdevice01/codex-chief-of-staff/releases/tag/v0.5.0

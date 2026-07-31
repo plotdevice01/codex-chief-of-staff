@@ -677,7 +677,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy plugin 2.2.6 or later with Standard 2.1.1 or later for exact authored-copy governance.",
+            "AI Sloppy Copy release 0.3 with Standard 2.1.1 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -715,6 +715,19 @@ def build(output: Path) -> Path:
 
     section_page(doc, "7. Update, uninstall, recover")
     doc.add_heading("Upgrade", level=2)
+    add_callout(
+        doc,
+        "AI Sloppy Copy 0.3 reset: ",
+        "Remove an existing 2.2.6 installation once before reinstalling. "
+        "Its required host manifest version is 0.3.0, which semantic-version updaters sort below 2.2.6.",
+        alert=True,
+    )
+    add_code(doc, "codex plugin remove ai-sloppy-copy@ai-sloppy-copy")
+    add_code(doc, "codex plugin marketplace upgrade ai-sloppy-copy")
+    add_code(doc, "codex plugin add ai-sloppy-copy@ai-sloppy-copy")
+    add_code(doc, "claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy")
+    add_code(doc, "claude plugin marketplace update ai-sloppy-copy")
+    add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
     add_code(doc, "codex plugin marketplace upgrade codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
     add_code(doc, "claude plugin marketplace update codex-chief-of-staff")
@@ -736,6 +749,21 @@ def build(output: Path) -> Path:
     doc.add_paragraph(
         "Uninstalling does not delete chief-of-staff.json. Remove that private file separately only when the user "
         "intends to discard the configuration."
+    )
+    doc.add_page_break()
+    doc.add_heading("Version labels", level=2)
+    add_table(
+        doc,
+        ("Product", "Public release", "Host manifest"),
+        (
+            ("Chief of Staff", "0.6", "0.6.0"),
+            ("AI Sloppy Copy", "0.3", "0.3.0"),
+        ),
+        (3600, 2880, 2880),
+    )
+    doc.add_paragraph(
+        "Public tags, documentation and ZIP names use one-decimal pre-1.0 milestones. "
+        "Codex and Claude Code manifests retain the final zero because both hosts require strict semantic versions."
     )
     doc.add_heading("Troubleshooting", level=2)
     add_table(

@@ -30,12 +30,12 @@ def main() -> int:
             f"{managed_v1}\n\n{PROJECT_START}\n{local_rules}\n{PROJECT_END}\n"
         )
         config = Path(folder) / "chief-of-staff.json"
-        config.write_text('{"release_version":"0.5.2"}\n', encoding="utf-8")
-        managed_v2 = build_managed_block({"release_version": "0.5.2"}, config)
+        config.write_text('{"release_version":"0.6"}\n', encoding="utf-8")
+        managed_v2 = build_managed_block({"release_version": "0.6"}, config)
         updated = render_target(managed_v2, current, target)
         assert managed_v2 in updated
         assert LOADER_MARKER in updated
-        assert "CODEX CHIEF OF STAFF ACTIVE - v0.5.2" in updated
+        assert "CODEX CHIEF OF STAFF ACTIVE - v0.6" in updated
         assert str(config.resolve()) in updated
         assert local_rules in updated
         assert "old" not in updated
@@ -48,7 +48,20 @@ def main() -> int:
         migrated = render_target(managed_v2, legacy, chief_target)
         assert migrated.count("<!-- SHARED-BEHAVIOR-CONTRACT:START -->") == 0
         assert "- Project ID: `chief-of-staff`" in migrated
-    print("PASS: project sync installs one fail-safe loader and preserves project rules.")
+
+    powershell = (ROOT / "install-claude.ps1").read_text(encoding="utf-8")
+    shell = (ROOT / "install-claude.sh").read_text(encoding="utf-8")
+    assert 'ResetFrom = "2.2.6"' in powershell
+    assert powershell.index("plugin uninstall") < powershell.index(
+        "plugin marketplace update"
+    )
+    assert '"2\\.2\\.6"' in shell
+    assert shell.index("plugin uninstall") < shell.index("plugin marketplace update")
+
+    print(
+        "PASS: project sync preserves rules and Claude installers handle the "
+        "AI Sloppy Copy 0.3 reset."
+    )
     return 0
 
 

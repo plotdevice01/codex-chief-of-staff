@@ -1,5 +1,5 @@
 {
-  "release_version": "0.5.2",
+  "release_version": "0.6",
   "config_schema_version": 1,
   "updated": "2026-07-29",
   "owner": {
@@ -87,7 +87,8 @@
       "required_for_full_parity": true
     },
     "ai_sloppy_copy": {
-      "minimum_version": "2.2.6",
+      "minimum_version": "0.3.0",
+      "release_line": "0.3",
       "required_for_full_parity": true
     }
   },

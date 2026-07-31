@@ -1,6 +1,6 @@
 # Claude Code deployment
 
-Chief of Staff v0.5.2 supports Claude Code with the same portable operating
+Chief of Staff v0.6 supports Claude Code with the same portable operating
 contract, retained persona, response modes, project-rule preservation, and
 companion stack used by the Codex release. Only host-specific manifests, hook
 environment variables, and installation commands differ.
@@ -109,7 +109,11 @@ contract and persona files.
 
 ## Update
 
+If AI Sloppy Copy `2.2.6` is installed, uninstall it once before moving to
+release `0.3`. Its required host manifest version is `0.3.0`.
+
 ```powershell
+claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy
 claude plugin marketplace update ponytail
 claude plugin marketplace update ai-sloppy-copy
 claude plugin marketplace update codex-chief-of-staff

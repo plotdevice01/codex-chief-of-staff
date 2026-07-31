@@ -15,7 +15,7 @@ except ImportError:
 
 
 PLACEHOLDER = re.compile(r"(YOUR_|REPLACE_WITH_|<[^>]+>)", re.IGNORECASE)
-SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
+RELEASE_VERSION = re.compile(r"^\d+\.\d+$")
 SAFE_WRITE_POLICIES = {"blocked", "confirm_each"}
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 REQUIRED_FILES = (
@@ -80,6 +80,7 @@ def validate_behavior(config: dict) -> list[str]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
+        "dependencies.ai_sloppy_copy.release_line": "0.3",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, required in expected.items():
@@ -101,8 +102,8 @@ def parse_version(value: str) -> tuple[int, int, int] | None:
     return tuple(map(int, match.groups())) if match else None
 
 
-def installed_plugin_records() -> dict[str, tuple[str, Path]]:
-    found: dict[str, tuple[str, Path]] = {}
+def installed_plugin_records() -> dict[str, list[tuple[str, Path]]]:
+    found: dict[str, list[tuple[str, Path]]] = {}
     cache = Path.home() / ".codex" / "plugins" / "cache"
     if not cache.is_dir():
         return found
@@ -114,11 +115,9 @@ def installed_plugin_records() -> dict[str, tuple[str, Path]]:
         name = manifest.get("name")
         version = manifest.get("version")
         if isinstance(name, str) and isinstance(version, str):
-            current = found.get(name)
-            if current is None or (parse_version(version) or (0, 0, 0)) > (
-                parse_version(current[0]) or (0, 0, 0)
-            ):
-                found[name] = (version, manifest_path.parent.parent)
+            found.setdefault(name, []).append(
+                (version, manifest_path.parent.parent)
+            )
     return found
 
 
@@ -215,13 +214,33 @@ def dependency_warnings(config: dict) -> list[str]:
         if not requirement.get("required_for_full_parity"):
             continue
         minimum = str(requirement.get("minimum_version", "0.0.0"))
-        record = installed.get(plugin_name)
-        if not record:
+        records = installed.get(plugin_name, [])
+        release_line = requirement.get("release_line")
+        if release_line:
+            matching = [
+                record
+                for record in records
+                if record[0].startswith(f"{release_line}.")
+            ]
+            if not matching:
+                found_versions = ", ".join(sorted({item[0] for item in records}))
+                detail = f"; found {found_versions}" if found_versions else ""
+                warnings.append(
+                    f"Full parity requires {plugin_name} release {release_line} "
+                    f"(host version {minimum}){detail}."
+                )
+                continue
+            records = matching
+        if not records:
             warnings.append(
                 f"Full parity requires {plugin_name} {minimum} or later; "
                 "it was not found in the local Codex plugin cache."
             )
             continue
+        record = max(
+            records,
+            key=lambda item: parse_version(item[0]) or (0, 0, 0),
+        )
         actual, root = record
         if (parse_version(actual) or (0, 0, 0)) < (
             parse_version(minimum) or (0, 0, 0)
@@ -251,8 +270,8 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
         errors.append("Template placeholders remain at: " + ", ".join(placeholders))
 
     version = config.get("release_version", "")
-    if not isinstance(version, str) or not SEMVER.fullmatch(version):
-        errors.append("release_version must use semantic versioning.")
+    if not isinstance(version, str) or not RELEASE_VERSION.fullmatch(version):
+        errors.append("release_version must use one-decimal numbering.")
     elif version != VERSION:
         errors.append(
             f"Configuration release_version is {version}; installed version is {VERSION}."

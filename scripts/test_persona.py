@@ -21,6 +21,7 @@ MANIFEST = ROOT / ".codex-plugin" / "plugin.json"
 HOOKS = ROOT / "hooks" / "hooks.json"
 SKILL = ROOT / "skills" / "chief-of-staff" / "SKILL.md"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+MANIFEST_VERSION = f"{VERSION}.0"
 
 
 def sha256(path: Path) -> str:
@@ -129,6 +130,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
+        "dependencies.ai_sloppy_copy.release_line": "0.3",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, expected in expected_config.items():
@@ -160,8 +162,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
 
     if manifest.get("name") != "chief-of-staff":
         errors.append("Plugin manifest name must be chief-of-staff.")
-    if manifest.get("version") != VERSION:
-        errors.append("Plugin manifest version does not match VERSION.")
+    if manifest.get("version") != MANIFEST_VERSION:
+        errors.append("Plugin manifest version does not match the host version.")
     if "SessionStart" not in hooks.get("hooks", {}):
         errors.append("SessionStart hook is missing.")
     if "SubagentStart" not in hooks.get("hooks", {}):

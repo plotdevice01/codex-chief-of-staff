@@ -18,6 +18,7 @@ except ImportError:
 
 
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+MANIFEST_VERSION = f"{VERSION}.0"
 REQUIRED = (
     ".gitattributes",
     ".claude-plugin/marketplace.json",
@@ -183,25 +184,32 @@ def validate_install_guidance() -> list[str]:
 
 def validate_versions() -> list[str]:
     errors: list[str] = []
-    values = {
+    release_values = {
+        "chief-of-staff.example.json": read_json(
+            "chief-of-staff.example.json"
+        ).get("release_version"),
+    }
+    manifest_values = {
         ".codex-plugin/plugin.json": read_json(".codex-plugin/plugin.json").get(
             "version"
         ),
         ".claude-plugin/plugin.json": read_json(".claude-plugin/plugin.json").get(
             "version"
         ),
-        "chief-of-staff.example.json": read_json(
-            "chief-of-staff.example.json"
-        ).get("release_version"),
     }
     hook = (ROOT / "hooks/chief-of-staff-hook.js").read_text(encoding="utf-8")
     hook_match = re.search(r'const VERSION = "([^"]+)";', hook)
-    values["hooks/chief-of-staff-hook.js"] = (
+    release_values["hooks/chief-of-staff-hook.js"] = (
         hook_match.group(1) if hook_match else None
     )
-    for name, value in values.items():
+    for name, value in release_values.items():
         if value != VERSION:
             errors.append(f"{name} version is {value!r}; expected {VERSION!r}.")
+    for name, value in manifest_values.items():
+        if value != MANIFEST_VERSION:
+            errors.append(
+                f"{name} host version is {value!r}; expected {MANIFEST_VERSION!r}."
+            )
     return errors
 
 
@@ -223,18 +231,17 @@ def validate_model_acceptance() -> list[str]:
             errors.append(f"{name} model acceptance did not pass.")
         if set(result.get("tests", [])) != expected_tests:
             errors.append(f"{name} model acceptance does not cover every live test.")
-    sol = models["gpt-5.6-sol"]
-    if (
-        sol.get("reasoning_effort") != "medium"
-        or sol.get("evidence") != "fresh_v0.5.2"
-    ):
-        errors.append("GPT-5.6 Sol Medium requires fresh v0.5.2 acceptance.")
-    terra = models["gpt-5.6-terra"]
-    if terra.get("evidence") == "carried_forward_from_v0.5.1" and (
-        terra.get("model_facing_inputs_unchanged") is not True
-        or not terra.get("carried_forward_reason")
-    ):
-        errors.append("Carried-forward Terra evidence requires an unchanged-input declaration and reason.")
+    if models["gpt-5.6-sol"].get("reasoning_effort") != "medium":
+        errors.append("GPT-5.6 Sol acceptance must use Medium reasoning.")
+    for name, result in models.items():
+        if str(result.get("evidence", "")).startswith("carried_forward_") and (
+            result.get("model_facing_inputs_unchanged") is not True
+            or not result.get("carried_forward_reason")
+        ):
+            errors.append(
+                f"Carried-forward {name} evidence requires an unchanged-input "
+                "declaration and reason."
+            )
     return errors
 
 

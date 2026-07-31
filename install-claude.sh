@@ -24,6 +24,14 @@ do
   rest="${entry#*|}"
   repository="${rest%%|*}"
   plugin="${rest#*|}"
+  force_install=false
+
+  if [ "$plugin" = "ai-sloppy-copy@ai-sloppy-copy" ] &&
+     printf '%s' "$installed" | grep -Fq "$plugin" &&
+     printf '%s' "$installed" | grep -Eq '"version"[[:space:]]*:[[:space:]]*"2\.2\.6"'; then
+    claude plugin uninstall "$plugin"
+    force_install=true
+  fi
 
   if printf '%s' "$marketplaces" | grep -Fq "\"$marketplace\""; then
     claude plugin marketplace update "$marketplace"
@@ -31,7 +39,7 @@ do
     claude plugin marketplace add "$repository"
   fi
 
-  if printf '%s' "$installed" | grep -Fq "$plugin"; then
+  if [ "$force_install" = false ] && printf '%s' "$installed" | grep -Fq "$plugin"; then
     claude plugin update "$plugin"
   else
     claude plugin install "$plugin" --scope "$scope"

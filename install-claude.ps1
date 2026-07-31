@@ -12,7 +12,7 @@ if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
 
 $stack = @(
     @{ Marketplace = "ponytail"; Repository = "DietrichGebert/ponytail"; Plugin = "ponytail@ponytail" },
-    @{ Marketplace = "ai-sloppy-copy"; Repository = "plotdevice01/ai-sloppy-copy"; Plugin = "ai-sloppy-copy@ai-sloppy-copy" },
+    @{ Marketplace = "ai-sloppy-copy"; Repository = "plotdevice01/ai-sloppy-copy"; Plugin = "ai-sloppy-copy@ai-sloppy-copy"; ResetFrom = "2.2.6" },
     @{ Marketplace = "codex-chief-of-staff"; Repository = "plotdevice01/codex-chief-of-staff"; Plugin = "chief-of-staff@codex-chief-of-staff" }
 )
 
@@ -20,6 +20,19 @@ $marketplaces = (& claude plugin marketplace list --json 2>$null) -join "`n"
 $installed = (& claude plugin list --json 2>$null) -join "`n"
 
 foreach ($item in $stack) {
+    $forceInstall = $false
+    if (
+        $item.ResetFrom -and
+        $installed -match [regex]::Escape($item.Plugin) -and
+        $installed -match ('"version"\s*:\s*"' + [regex]::Escape($item.ResetFrom) + '"')
+    ) {
+        & claude plugin uninstall $item.Plugin
+        if ($LASTEXITCODE -ne 0) {
+            throw "Claude Code could not remove $($item.Plugin) for its numbering reset."
+        }
+        $forceInstall = $true
+    }
+
     if ($marketplaces -match [regex]::Escape('"' + $item.Marketplace + '"')) {
         & claude plugin marketplace update $item.Marketplace
     } else {
@@ -29,7 +42,7 @@ foreach ($item in $stack) {
         throw "Claude Code could not configure marketplace $($item.Marketplace)."
     }
 
-    if ($installed -match [regex]::Escape($item.Plugin)) {
+    if (-not $forceInstall -and $installed -match [regex]::Escape($item.Plugin)) {
         & claude plugin update $item.Plugin
     } else {
         & claude plugin install $item.Plugin --scope $Scope
