@@ -106,7 +106,7 @@
   "integration_requirements": [
     {"id": "INTEGRATION-001", "match": "85% compression"},
     {"id": "INTEGRATION-002", "match": "100% minimization mode"},
-    {"id": "INTEGRATION-003", "match": "AI Sloppy Copy Standard v2.1.1"},
+    {"id": "INTEGRATION-003", "match": "AI Sloppy Copy Standard v2.2.0"},
     {"id": "INTEGRATION-004", "match": "For coding and technical build work, apply the installed Ponytail skill"},
     {"id": "INTEGRATION-005", "match": "client-facing, legal, medical, executive, or external"},
     {"id": "INTEGRATION-006", "match": "Apply `persona/technical-assistant-persona.txt` in full."},

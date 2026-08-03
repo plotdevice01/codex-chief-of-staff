@@ -20,17 +20,17 @@ claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 ```
 
-## 2. AI Sloppy Copy release 0.3
+## 2. AI Sloppy Copy release 0.4
 
 - Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
 - Latest release: [AI Sloppy Copy releases](https://github.com/plotdevice01/ai-sloppy-copy/releases/latest)
 - Purpose: authored-copy rules, evidence and voice gates, lifecycle hooks, and
   deterministic local checking.
-- Includes AI Sloppy Copy Standard 2.1.1 or later.
-- The host manifest reports `0.3.0` because Codex and Claude Code require
+- Includes AI Sloppy Copy Standard 2.2.0 or later.
+- The host manifest reports `0.4.0` because Codex and Claude Code require
   strict three-part semantic versions.
 - Existing `2.2.6` installations require one remove/reinstall cycle because
-  semantic-version updaters sort `0.3.0` below `2.2.6`.
+  semantic-version updaters sort `0.4.0` below `2.2.6`.
 
 ```powershell
 codex plugin marketplace add plotdevice01/ai-sloppy-copy

@@ -41,7 +41,7 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - The retained persona is unchanged: all 97 traceable requirements, 85%
   compression, caveman mode, direct-reply humor, tone boundaries, account
   gates, approval controls, and project-rule preservation remain present.
-- AI Sloppy Copy 0.3 reads Codex transcripts from the end and stops at the
+- AI Sloppy Copy 0.4 reads Codex transcripts from the end and stops at the
   newest assistant message. The checker and evidence gates remain unchanged.
   Protected-text controls and repair rules remain unchanged too.
 

@@ -64,6 +64,8 @@ def set_style(style, name: str, size: float, *, bold=False, color="000000") -> N
 
 def configure(doc: Document) -> None:
     section = doc.sections[0]
+    doc.settings.odd_and_even_pages_header_footer = True
+    section.different_first_page_header_footer = False
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
     section.top_margin = Inches(1)
@@ -98,19 +100,21 @@ def configure(doc: Document) -> None:
         style.paragraph_format.space_after = Pt(3)
         style.paragraph_format.line_spacing = 1.2
 
-    header = section.header.paragraphs[0]
-    header.text = "CHIEF OF STAFF  /  CODEX + CLAUDE CODE  /  INSTALLATION AND OPERATING SOP"
-    header.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    for run in header.runs:
-        set_font(run, "Calibri", 8, bold=True, color=GRAY)
+    for header in (section.header, section.even_page_header):
+        paragraph = header.paragraphs[0]
+        paragraph.text = "CHIEF OF STAFF  /  CODEX + CLAUDE CODE  /  INSTALLATION AND OPERATING SOP"
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        for run in paragraph.runs:
+            set_font(run, "Calibri", 8, bold=True, color=GRAY)
 
-    footer = section.footer.paragraphs[0]
-    footer.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    label = footer.add_run(f"v{VERSION}   /   ")
-    set_font(label, "Calibri", 8, color=GRAY)
-    field = OxmlElement("w:fldSimple")
-    field.set(qn("w:instr"), "PAGE")
-    footer._p.append(field)
+    for footer in (section.footer, section.even_page_footer):
+        paragraph = footer.paragraphs[0]
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        label = paragraph.add_run(f"v{VERSION}   /   ")
+        set_font(label, "Calibri", 8, color=GRAY)
+        field = OxmlElement("w:fldSimple")
+        field.set(qn("w:instr"), "PAGE")
+        paragraph._p.append(field)
 
 
 def set_cell_margins(cell, top=100, start=120, bottom=100, end=120) -> None:
@@ -620,14 +624,16 @@ def build(output: Path) -> Path:
 
     section_page(doc, "4. Enforce account and action gates")
     doc.add_heading("Identity mismatch", level=2)
-    add_numbered(
+    add_table(
         doc,
+        ("Step", "Required action"),
         (
-            "Stop before searching, reading, drafting, or changing connector data.",
-            "Report the expected identity and the actual identity shown.",
-            "Reconnect the approved account outside the task.",
-            "Repeat the identity check and resume only after every configured field matches.",
+            ("1", "Stop before searching, reading, drafting, or changing connector data."),
+            ("2", "Report the expected identity and the actual identity shown."),
+            ("3", "Reconnect the approved account outside the task."),
+            ("4", "Repeat the identity check and resume only after every configured field matches."),
         ),
+        (900, 8460),
     )
     add_table(
         doc,
@@ -647,10 +653,11 @@ def build(output: Path) -> Path:
             "Mark missing evidence; do not improvise facts with the confidence of a quarterly forecast.",
         ),
     )
-    doc.add_heading("Tone boundary", level=2)
-    doc.add_paragraph(
+    add_callout(
+        doc,
+        "Tone boundary: ",
         "Direct replies may use useful dry sarcasm and cynical humor. Client-facing, legal, medical, executive, "
-        "and external communication stays professional unless the user explicitly requests another tone."
+        "and external communication stays professional unless the user explicitly requests another tone.",
     )
 
     section_page(doc, "5. Preserve project rules")
@@ -677,7 +684,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy release 0.3 with Standard 2.1.1 or later for exact authored-copy governance.",
+            "AI Sloppy Copy release 0.4 with Standard 2.2.0 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -717,9 +724,9 @@ def build(output: Path) -> Path:
     doc.add_heading("Upgrade", level=2)
     add_callout(
         doc,
-        "AI Sloppy Copy 0.3 reset: ",
+        "AI Sloppy Copy legacy-version reset: ",
         "Remove an existing 2.2.6 installation once before reinstalling. "
-        "Its required host manifest version is 0.3.0, which semantic-version updaters sort below 2.2.6.",
+        "Its required host manifest version is 0.4.0, which semantic-version updaters sort below 2.2.6.",
         alert=True,
     )
     add_code(doc, "codex plugin remove ai-sloppy-copy@ai-sloppy-copy")
@@ -757,7 +764,7 @@ def build(output: Path) -> Path:
         ("Product", "Public release", "Host manifest"),
         (
             ("Chief of Staff", "0.6", "0.6.0"),
-            ("AI Sloppy Copy", "0.3", "0.3.0"),
+            ("AI Sloppy Copy", "0.4", "0.4.0"),
         ),
         (3600, 2880, 2880),
     )

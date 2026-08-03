@@ -69,7 +69,7 @@ Confirm:
 | Plugin | Marketplace | Minimum version | State |
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
-| `ai-sloppy-copy` | `ai-sloppy-copy` | `0.3` (`0.3.0` host manifest) | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `0.4` (`0.4.0` host manifest) | active |
 | `chief-of-staff` | `codex-chief-of-staff` | `0.6` (`0.6.0` host manifest) | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
@@ -163,9 +163,9 @@ Windows users can use `py -3` instead of `python`.
 
 ## Upgrade the complete stack
 
-If AI Sloppy Copy `2.2.6` is installed, remove it once before the reset to
-release `0.3`. Semantic-version updaters sort its required host manifest
-version, `0.3.0`, below `2.2.6`.
+If AI Sloppy Copy `2.2.6` is installed, remove it once before moving to
+release `0.4`. Semantic-version updaters sort its required host manifest
+version, `0.4.0`, below `2.2.6`.
 
 ```powershell
 codex plugin remove ai-sloppy-copy

@@ -67,7 +67,7 @@ def validate_behavior(config: dict) -> list[str]:
         "communication.witty_advice.after_requested_work": True,
         "communication.external_tone": "professional",
         "communication.authored_copy_standard.name": "AI Sloppy Copy",
-        "communication.authored_copy_standard.minimum_version": "2.1.1",
+        "communication.authored_copy_standard.minimum_version": "2.2.0",
         "communication.authored_copy_standard.required": True,
         "execution.default_tier": "standard",
         "execution.quick_tier_enabled": False,
@@ -80,7 +80,8 @@ def validate_behavior(config: dict) -> list[str]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.release_line": "0.3",
+        "dependencies.ai_sloppy_copy.minimum_version": "0.4.0",
+        "dependencies.ai_sloppy_copy.release_line": "0.4",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, required in expected.items():
@@ -183,13 +184,13 @@ def validate_sloppy_copy(root: Path) -> list[str]:
             "expression": len(rules.get("prohibited_patterns", [])),
             "style": len(rules.get("style_rules", [])),
         }
-        expected = {"term": 288, "expression": 21, "style": 34}
+        expected = {"term": 288, "expression": 21, "style": 41}
         if counts != expected:
             warnings.append(
                 f"AI Sloppy Copy rule counts changed: expected {expected}, found {counts}."
             )
-        if rules.get("standard", {}).get("version") != "2.1.1":
-            warnings.append("AI Sloppy Copy standard 2.1.1 is required.")
+        if rules.get("standard", {}).get("version") != "2.2.0":
+            warnings.append("AI Sloppy Copy standard 2.2.0 is required.")
     try:
         skill = skill_path.read_text(encoding="utf-8-sig")
     except OSError:

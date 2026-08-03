@@ -117,7 +117,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "communication.witty_advice.after_requested_work": True,
         "communication.external_tone": "professional",
         "communication.authored_copy_standard.name": "AI Sloppy Copy",
-        "communication.authored_copy_standard.minimum_version": "2.1.1",
+        "communication.authored_copy_standard.minimum_version": "2.2.0",
         "communication.authored_copy_standard.required": True,
         "execution.default_tier": "standard",
         "execution.quick_tier_enabled": False,
@@ -130,7 +130,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.release_line": "0.3",
+        "dependencies.ai_sloppy_copy.minimum_version": "0.4.0",
+        "dependencies.ai_sloppy_copy.release_line": "0.4",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, expected in expected_config.items():

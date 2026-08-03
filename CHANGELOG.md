@@ -3,6 +3,15 @@
 All notable changes are recorded here. Public releases use one-decimal pre-1.0
 milestones. Host manifests use strict three-part semantic versions.
 
+## Unreleased
+
+### Changed
+
+- Updated the complete-stack dependency to AI Sloppy Copy release `0.4`, host
+  manifest `0.4.0`, and Standard `2.2.0` or later.
+- Updated strict validation, installation guidance, release evidence, and the
+  generated SOP to require the same dependency line.
+
 ## [0.6] - 2026-07-30
 
 ### Changed

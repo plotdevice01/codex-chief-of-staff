@@ -60,7 +60,7 @@ def main() -> int:
 
     print(
         "PASS: project sync preserves rules and Claude installers handle the "
-        "AI Sloppy Copy 0.3 reset."
+        "AI Sloppy Copy 0.4 legacy-version reset."
     )
     return 0
 

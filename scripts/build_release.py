@@ -185,7 +185,7 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "repository_privacy_scan": "pass",
         "companion_requirements": {
             "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": "release 0.3 (host manifest 0.3.0)",
+            "ai_sloppy_copy": "release 0.4 (host manifest 0.4.0)",
         },
         "files": hashes,
     }

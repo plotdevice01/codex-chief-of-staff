@@ -110,7 +110,7 @@ contract and persona files.
 ## Update
 
 If AI Sloppy Copy `2.2.6` is installed, uninstall it once before moving to
-release `0.3`. Its required host manifest version is `0.3.0`.
+release `0.4`. Its required host manifest version is `0.4.0`.
 
 ```powershell
 claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy
