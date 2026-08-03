@@ -20,17 +20,18 @@ claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 ```
 
-## 2. AI Sloppy Copy release 0.4
+## 2. AI Sloppy Copy 0.5.0
 
 - Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
 - Latest release: [AI Sloppy Copy releases](https://github.com/plotdevice01/ai-sloppy-copy/releases/latest)
 - Purpose: authored-copy rules, evidence and voice gates, lifecycle hooks, and
   deterministic local checking.
 - Includes AI Sloppy Copy Standard 2.2.0 or later.
-- The host manifest reports `0.4.0` because Codex and Claude Code require
-  strict three-part semantic versions.
+- The GitHub release, tag, ZIP, and both host manifests use `0.5.0`.
+- Standard `2.2.0` is the separate writing-rules contract carried by the
+  product package.
 - Existing `2.2.6` installations require one remove/reinstall cycle because
-  semantic-version updaters sort `0.4.0` below `2.2.6`.
+  semantic-version updaters sort `0.5.0` below `2.2.6`.
 
 ```powershell
 codex plugin marketplace add plotdevice01/ai-sloppy-copy
@@ -42,7 +43,7 @@ claude plugin marketplace add plotdevice01/ai-sloppy-copy
 claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
 ```
 
-## 3. Chief of Staff 0.6
+## 3. Chief of Staff 1.0.0
 
 - Repository: [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
 - Latest release: [Chief of Staff releases](https://github.com/plotdevice01/codex-chief-of-staff/releases/latest)

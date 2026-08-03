@@ -69,8 +69,8 @@ Confirm:
 | Plugin | Marketplace | Minimum version | State |
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
-| `ai-sloppy-copy` | `ai-sloppy-copy` | `0.4` (`0.4.0` host manifest) | active |
-| `chief-of-staff` | `codex-chief-of-staff` | `0.6` (`0.6.0` host manifest) | active |
+| `ai-sloppy-copy` | `ai-sloppy-copy` | `0.5.0` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `1.0.0` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
 Codex, and check again.
@@ -164,8 +164,7 @@ Windows users can use `py -3` instead of `python`.
 ## Upgrade the complete stack
 
 If AI Sloppy Copy `2.2.6` is installed, remove it once before moving to
-release `0.4`. Semantic-version updaters sort its required host manifest
-version, `0.4.0`, below `2.2.6`.
+`0.5.0`. Semantic-version updaters sort `0.5.0` below `2.2.6`.
 
 ```powershell
 codex plugin remove ai-sloppy-copy
@@ -210,16 +209,16 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v0.6.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v1.0.0.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v0.6.zip
+sha256sum ./codex-chief-of-staff-v1.0.0.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v0.6.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v1.0.0.zip.sha256`.
 
 ## Recovery
 
@@ -228,5 +227,5 @@ Compare the result with `codex-chief-of-staff-v0.6.zip.sha256`.
 3. Run `codex plugin list --json`.
 4. Run `validate_install.py --strict-dependencies` from a checkout, or ask the
    Chief of Staff skill to perform strict validation.
-5. Start a new task and run the eight persona scenarios.
+5. Start a new task and run the twelve persona scenarios.
 6. Keep the prior release available until the new release passes.

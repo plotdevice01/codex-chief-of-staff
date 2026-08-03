@@ -12,13 +12,15 @@ from docx import Document
 try:
     from .config_paths import ROOT
     from .test_persona import validate as validate_persona
+    from .validate_icm import validate_icm
 except ImportError:
     from config_paths import ROOT
     from test_persona import validate as validate_persona
+    from validate_icm import validate_icm
 
 
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-MANIFEST_VERSION = f"{VERSION}.0"
+MANIFEST_VERSION = VERSION
 REQUIRED = (
     ".gitattributes",
     ".claude-plugin/marketplace.json",
@@ -26,6 +28,7 @@ REQUIRED = (
     ".codex-plugin/plugin.json",
     "AGENTS.md",
     "CHANGELOG.md",
+    "CONTEXT.md",
     "CONTRIBUTING.md",
     "LICENSE",
     "PRIVACY.md",
@@ -43,8 +46,10 @@ REQUIRED = (
     "chief-of-staff.example.json",
     "docs/claude-code.md",
     "docs/Codex Chief of Staff - Installation and SOP.docx",
+    "docs/icm-conformance.md",
     "examples/claude-project-settings.json",
     "hooks/chief-of-staff-hook.js",
+    "hooks/icm-enforcement-hook.js",
     "hooks/hooks.json",
     "install-claude.ps1",
     "install-claude.sh",
@@ -58,13 +63,25 @@ REQUIRED = (
     "scripts/configure.py",
     "scripts/sync_project_agents.py",
     "scripts/test_persona.py",
+    "scripts/validate_icm.py",
     "scripts/validate_install.py",
     "scripts/validate_local_parity.py",
     "skills/chief-of-staff/SKILL.md",
     "skills/chief-of-staff/agents/openai.yaml",
+    "skills/icm-architect/SKILL.md",
+    "skills/icm-architect/LICENSE",
+    "skills/icm-architect/UPSTREAM.json",
+    "skills/icm-architect/agents/openai.yaml",
     "tests/test_hooks.js",
+    "tests/test_icm.py",
+    "tests/test_release.py",
     "tests/model-acceptance.json",
     "tests/test_sync.py",
+    "workflows/release/CONTEXT.md",
+    "workflows/release/01_prepare/CONTEXT.md",
+    "workflows/release/02_build/CONTEXT.md",
+    "workflows/release/03_validate/CONTEXT.md",
+    "workflows/release/04_publish/CONTEXT.md",
 )
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
 PRIVATE_PATTERNS = {
@@ -213,7 +230,7 @@ def validate_versions() -> list[str]:
     return errors
 
 
-def validate_model_acceptance() -> list[str]:
+def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     errors: list[str] = []
     evidence = read_json("tests/model-acceptance.json")
     contract = read_json("persona/persona-contract.json")
@@ -222,12 +239,19 @@ def validate_model_acceptance() -> list[str]:
     }
     if evidence.get("release_version") != VERSION:
         errors.append("Model acceptance evidence does not match the release version.")
+    waived_models, waiver_errors = validate_release_waiver(evidence)
+    errors.extend(waiver_errors)
     models = evidence.get("models", {})
     if set(models) != {"gpt-5.6-sol", "gpt-5.6-terra"}:
         errors.append("Model acceptance must cover GPT-5.6 Sol and GPT-5.6 Terra.")
         return errors
     for name, result in models.items():
-        if result.get("status") != "pass":
+        status = result.get("status")
+        if status not in {"pass", "pending", "fail"}:
+            errors.append(f"{name} model acceptance has invalid status {status!r}.")
+        if status == "fail" and not result.get("evidence"):
+            errors.append(f"{name} failed model acceptance needs evidence.")
+        if require_pass and status != "pass" and name not in waived_models:
             errors.append(f"{name} model acceptance did not pass.")
         if set(result.get("tests", [])) != expected_tests:
             errors.append(f"{name} model acceptance does not cover every live test.")
@@ -242,7 +266,84 @@ def validate_model_acceptance() -> list[str]:
                 f"Carried-forward {name} evidence requires an unchanged-input "
                 "declaration and reason."
             )
+    hosts = evidence.get("hosts", {})
+    if set(hosts) != {"codex", "claude-code"}:
+        errors.append("Model acceptance must cover Codex and Claude Code hosts.")
+    else:
+        for name, result in hosts.items():
+            status = result.get("status")
+            if status not in {"pass", "pending", "fail"}:
+                errors.append(f"{name} host acceptance has invalid status {status!r}.")
+            if status == "fail" and not result.get("evidence"):
+                errors.append(f"{name} failed host acceptance needs evidence.")
+            if require_pass and status != "pass":
+                errors.append(f"{name} host acceptance did not pass.")
+    smoke_status = evidence.get("installed_runtime_smoke", {}).get("status")
+    if smoke_status not in {"pass", "pending", "fail"}:
+        errors.append("Installed runtime smoke has an invalid status.")
+    if require_pass and smoke_status != "pass":
+        errors.append("Installed runtime smoke did not pass.")
     return errors
+
+
+def validate_release_waiver(evidence: dict) -> tuple[set[str], list[str]]:
+    waiver = evidence.get("release_waiver")
+    if waiver is None:
+        return set(), []
+
+    errors: list[str] = []
+    if waiver.get("status") != "approved":
+        errors.append("Release waiver status must be approved.")
+    if waiver.get("release_version") != VERSION:
+        errors.append("Release waiver does not match the release version.")
+    for field in ("approved_at", "approved_by", "reason"):
+        if not isinstance(waiver.get(field), str) or not waiver[field].strip():
+            errors.append(f"Release waiver requires {field}.")
+
+    waived_checks = waiver.get("waived_checks")
+    if not isinstance(waived_checks, list) or not waived_checks:
+        errors.append("Release waiver requires at least one waived check.")
+        return set(), errors
+    if len(waived_checks) != len(set(waived_checks)):
+        errors.append("Release waiver contains duplicate checks.")
+
+    allowed = {"gpt-5.6-sol", "gpt-5.6-terra"}
+    waived_models = {
+        check.removeprefix("models.")
+        for check in waived_checks
+        if isinstance(check, str) and check.startswith("models.")
+    }
+    invalid = set(waived_checks) - {f"models.{name}" for name in allowed}
+    if invalid:
+        errors.append(
+            "Release waiver may cover only pending Sol or Terra model checks."
+        )
+    models = evidence.get("models", {})
+    for name in waived_models:
+        if models.get(name, {}).get("status") != "pending":
+            errors.append(f"Release waiver may cover only pending {name} evidence.")
+    return waived_models & allowed, errors
+
+
+def model_acceptance_release_status(evidence: dict) -> str:
+    waived_models, waiver_errors = validate_release_waiver(evidence)
+    if waiver_errors:
+        return "candidate"
+    if evidence.get("installed_runtime_smoke", {}).get("status") != "pass":
+        return "candidate"
+    if not all(
+        result.get("status") == "pass"
+        for result in evidence.get("hosts", {}).values()
+    ):
+        return "candidate"
+    models = evidence.get("models", {})
+    if not all(
+        result.get("status") == "pass"
+        or (result.get("status") == "pending" and name in waived_models)
+        for name, result in models.items()
+    ):
+        return "candidate"
+    return "pass_with_waiver" if waived_models else "pass"
 
 
 def validate_manifest_paths() -> list[str]:
@@ -262,8 +363,10 @@ def validate_manifest_paths() -> list[str]:
     if not plugins or plugins[0].get("source") != "./":
         errors.append("Marketplace manifest must install the repository root.")
     claude_manifest = read_json(".claude-plugin/plugin.json")
-    if claude_manifest.get("hooks") != "./hooks/hooks.json":
-        errors.append("Claude plugin manifest must load the shared hooks file.")
+    if "hooks" in claude_manifest:
+        errors.append(
+            "Claude plugin manifest must not redeclare the automatically loaded hooks/hooks.json."
+        )
     hooks = read_json("hooks/hooks.json")
     commands = [
         hook["command"]
@@ -276,6 +379,12 @@ def validate_manifest_paths() -> list[str]:
         for command in commands
     ):
         errors.append("Every shared hook command must support Codex and Claude plugin roots.")
+    event_names = set(hooks.get("hooks", {}))
+    for event_name in ("UserPromptSubmit", "PreToolUse", "Stop"):
+        if event_name not in event_names:
+            errors.append(f"Shared hooks are missing the {event_name} ICM enforcement event.")
+    if not any("icm-enforcement-hook.js" in command for command in commands):
+        errors.append("Shared hooks do not load the ICM enforcement hook.")
     return errors
 
 
@@ -322,15 +431,19 @@ def validate_archive(path: Path) -> list[str]:
     return errors
 
 
-def validate_repository(archive: Path | None = None) -> tuple[list[str], dict]:
+def validate_repository(
+    archive: Path | None = None, *, require_model_acceptance: bool = False
+) -> tuple[list[str], dict]:
     errors = [
         f"Missing required file: {name}" for name in REQUIRED if not (ROOT / name).is_file()
     ]
     errors.extend(validate_versions())
-    errors.extend(validate_model_acceptance())
+    errors.extend(validate_model_acceptance(require_pass=require_model_acceptance))
     errors.extend(validate_manifest_paths())
     errors.extend(validate_install_guidance())
     errors.extend(validate_public_text())
+    icm_errors, _ = validate_icm()
+    errors.extend(f"ICM validation: {error}" for error in icm_errors)
     persona_errors, metrics = validate_persona()
     errors.extend(f"Persona validation: {error}" for error in persona_errors)
     if archive:
@@ -343,8 +456,11 @@ def main() -> int:
         description="Validate the public Chief of Staff source and release archive."
     )
     parser.add_argument("--archive", type=Path)
+    parser.add_argument("--require-model-acceptance", action="store_true")
     args = parser.parse_args()
-    errors, metrics = validate_repository(args.archive)
+    errors, metrics = validate_repository(
+        args.archive, require_model_acceptance=args.require_model_acceptance
+    )
     if errors:
         for error in errors:
             print(f"FAIL: {error}")

@@ -24,9 +24,12 @@ jobs:
       - run: python Test-Persona.py
       - run: python validate_install.py --example
       - run: node tests/test_hooks.js
+      - run: python tests/test_icm.py
+      - run: python tests/test_release.py
       - run: python tests/test_sync.py
       - run: test "${GITHUB_REF_NAME#v}" = "$(cat VERSION)"
-      - run: python scripts/build_release.py --output dist
+      - run: python scripts/validate_repository.py --require-model-acceptance
+      - run: python scripts/build_release.py --output dist --require-model-acceptance
       - uses: actions/attest-build-provenance@v2
         with:
           subject-path: "dist/*.zip"

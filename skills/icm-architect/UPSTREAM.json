@@ -1,0 +1,9 @@
+{
+  "name": "RinDig/icm-architect",
+  "repository": "https://github.com/RinDig/icm-architect",
+  "commit": "8f9cdf95e5051f126babc455b7a0558426db43d4",
+  "license": "MIT",
+  "copyright": "Copyright 2026 Jake Van Clief",
+  "paper": "https://arxiv.org/abs/2603.16021",
+  "adaptation": "Codex AGENTS.md routing, Chief safety controls, provenance, and validation"
+}

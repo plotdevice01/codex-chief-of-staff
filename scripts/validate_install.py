@@ -15,7 +15,7 @@ except ImportError:
 
 
 PLACEHOLDER = re.compile(r"(YOUR_|REPLACE_WITH_|<[^>]+>)", re.IGNORECASE)
-RELEASE_VERSION = re.compile(r"^\d+\.\d+$")
+RELEASE_VERSION = re.compile(r"^\d+\.\d+\.\d+$")
 SAFE_WRITE_POLICIES = {"blocked", "confirm_each"}
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 REQUIRED_FILES = (
@@ -33,6 +33,9 @@ REQUIRED_FILES = (
     "persona/technical-assistant-persona.txt",
     "persona/persona-contract.json",
     "skills/chief-of-staff/SKILL.md",
+    "skills/icm-architect/SKILL.md",
+    "skills/icm-architect/LICENSE",
+    "skills/icm-architect/UPSTREAM.json",
 )
 
 
@@ -80,8 +83,7 @@ def validate_behavior(config: dict) -> list[str]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.minimum_version": "0.4.0",
-        "dependencies.ai_sloppy_copy.release_line": "0.4",
+        "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, required in expected.items():
@@ -216,22 +218,6 @@ def dependency_warnings(config: dict) -> list[str]:
             continue
         minimum = str(requirement.get("minimum_version", "0.0.0"))
         records = installed.get(plugin_name, [])
-        release_line = requirement.get("release_line")
-        if release_line:
-            matching = [
-                record
-                for record in records
-                if record[0].startswith(f"{release_line}.")
-            ]
-            if not matching:
-                found_versions = ", ".join(sorted({item[0] for item in records}))
-                detail = f"; found {found_versions}" if found_versions else ""
-                warnings.append(
-                    f"Full parity requires {plugin_name} release {release_line} "
-                    f"(host version {minimum}){detail}."
-                )
-                continue
-            records = matching
         if not records:
             warnings.append(
                 f"Full parity requires {plugin_name} {minimum} or later; "
@@ -272,7 +258,7 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
 
     version = config.get("release_version", "")
     if not isinstance(version, str) or not RELEASE_VERSION.fullmatch(version):
-        errors.append("release_version must use one-decimal numbering.")
+        errors.append("release_version must use a three-part semantic version.")
     elif version != VERSION:
         errors.append(
             f"Configuration release_version is {version}; installed version is {VERSION}."

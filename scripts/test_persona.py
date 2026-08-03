@@ -21,7 +21,7 @@ MANIFEST = ROOT / ".codex-plugin" / "plugin.json"
 HOOKS = ROOT / "hooks" / "hooks.json"
 SKILL = ROOT / "skills" / "chief-of-staff" / "SKILL.md"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-MANIFEST_VERSION = f"{VERSION}.0"
+MANIFEST_VERSION = VERSION
 
 
 def sha256(path: Path) -> str:
@@ -130,8 +130,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
         "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.minimum_version": "0.4.0",
-        "dependencies.ai_sloppy_copy.release_line": "0.4",
+        "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
     }
     for path, expected in expected_config.items():
@@ -150,8 +149,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     live_ids = [item.get("id") for item in live_tests if isinstance(item, dict)]
     if len(live_ids) != len(set(live_ids)):
         errors.append("Live acceptance test IDs must be unique.")
-    if len(live_tests) < 8:
-        errors.append("At least eight live acceptance tests are required.")
+    if len(live_tests) != 12:
+        errors.append("Exactly twelve live acceptance tests are required.")
     for item in live_tests:
         if (
             not isinstance(item, dict)
@@ -190,6 +189,14 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Verify each connector before first use.",
         "Use `Sync-ProjectAgents.py` to apply the fail-safe Chief of Staff loader",
         "Use idempotency when available.",
+        "## Apply ICM by default",
+        "ICM is the default operating architecture.",
+        "Invoke the bundled `icm-architect` skill automatically",
+        "Do not import client names or project facts from private",
+        "Before proposing files, name ICM and state the repeating unit.",
+        "Do not replace the canonical form name with a new label.",
+        "Do not propose files first. Mark missing inputs as unknown",
+        "Run the twelve",
     )
     for value in required_skill_blocks:
         if value not in skill_text:
@@ -201,6 +208,14 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Use only these two tiers. There is no quick tier.",
         "`Expert/high-risk` applies",
         "Use idempotency when available.",
+        "Apply the compact ICM task contract to every non-trivial task",
+        "ICM is the default operating architecture for non-trivial work.",
+        "invoke the bundled ICM",
+        "If the user has not named a registered project, keep the task generic",
+        "Do not invent data sources or connector names.",
+        "Before proposing files, name ICM and state the repeating",
+        "Use one canonical form name from ICM Architect",
+        "Do not propose files before those fields. Mark missing inputs as",
     )
     for value in required_agents_rules:
         if value not in agents_text:

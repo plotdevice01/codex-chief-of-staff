@@ -1,31 +1,74 @@
 {
-  "release_version": "0.6",
-  "executed_at": "2026-07-31T00:36:00Z",
-  "runner": "codex exec --ephemeral --dangerously-bypass-hook-trust --sandbox read-only",
+  "release_version": "1.0.0",
+  "executed_at": "2026-08-03T13:32:49-05:00",
+  "runner": "fresh v1.0.0 exact-candidate host audit",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
     "fast_mode": false
   },
+  "release_waiver": {
+    "status": "approved",
+    "release_version": "1.0.0",
+    "approved_at": "2026-08-03T13:44:08-05:00",
+    "approved_by": "repository_owner",
+    "waived_checks": [
+      "models.gpt-5.6-terra"
+    ],
+    "reason": "The owner directed publication now without waiting for the remaining fresh Terra scenario run. Terra remains pending and is not reported as a pass."
+  },
   "installed_runtime_smoke": {
-    "executed_at": "2026-07-31T01:20:22Z",
-    "host": "OpenAI Codex v0.146.0-alpha.3.1",
-    "session_id": "019fb5c2-0e13-7380-9c57-059035b69130",
+    "executed_at": "2026-08-03T13:44:22-05:00",
+    "host": "Codex Desktop 26.727.6591.0 fresh task",
+    "session_id": "019fc8ea-bc87-7c72-9614-90d9402ff1e5",
     "status": "pass",
     "assertions": [
-      "Chief of Staff v0.6 loaded",
-      "Standard uses GPT-5.6 Sol Medium",
-      "Quick tier is absent",
-      "Expert/high-risk uses Sol High or Extra High"
+      "Fresh task loaded Chief of Staff 1.0.0 and its lifecycle contract",
+      "Fresh task loaded AI Sloppy Copy 0.5.0 from the installed Codex cache",
+      "All twelve persona scenarios passed on gpt-5.6-sol at medium effort"
     ]
+  },
+  "hosts": {
+    "codex": {
+      "status": "pass",
+      "executed_at": "2026-08-03T13:44:22-05:00",
+      "host_version": "26.727.6591.0",
+      "evidence": "Fresh Codex task 019fc8ea-bc87-7c72-9614-90d9402ff1e5 loaded Chief of Staff 1.0.0 and AI Sloppy Copy 0.5.0. All twelve scenarios passed on gpt-5.6-sol at medium effort."
+    },
+    "claude-code": {
+      "status": "pass",
+      "executed_at": "2026-08-03T13:32:49-05:00",
+      "host_version": "2.1.140",
+      "model": "claude-sonnet-4-6",
+      "effort": "medium",
+      "mode": "exact source candidate plus AI Sloppy Copy 0.5.0 and Ponytail 4.8.4 via --plugin-dir",
+      "evidence": "All twelve scenarios passed on the exact model-facing candidate. Chief correction state remained capped at two cycles. Tool calls, bundled skill loading, and AI Sloppy Copy repairs are included in the reported turn counts.",
+      "tests": {
+        "LIVE-001": {"session_id": "f6613a7f-b3e4-402b-bb2e-c0761c9be00e", "turns": 2, "duration_ms": 8479, "status": "pass"},
+        "LIVE-002": {"session_id": "08ee0e42-add0-4cac-9384-91a4eb270bf3", "turns": 2, "duration_ms": 11060, "status": "pass"},
+        "LIVE-003": {"session_id": "e6735b21-72ed-4d22-95b0-728042c2acbb", "turns": 4, "duration_ms": 25624, "status": "pass"},
+        "LIVE-004": {"session_id": "070814e2-c42d-4a6e-96ce-b7d145ef22e8", "turns": 3, "duration_ms": 31742, "status": "pass"},
+        "LIVE-005": {"session_id": "3c00924f-be3b-4590-99e3-52f3f3f1b3cf", "turns": 1, "duration_ms": 2702, "status": "pass"},
+        "LIVE-006": {"session_id": "f38f7d58-57f9-4c5b-a92e-fa363c755ece", "turns": 3, "duration_ms": 19029, "status": "pass"},
+        "LIVE-007": {"session_id": "36d9c4b1-59ce-4444-8017-b876bbe01f98", "turns": 4, "duration_ms": 14483, "status": "pass"},
+        "LIVE-008": {"session_id": "9710c4f9-ac8b-4ea8-9cd0-08011614153a", "turns": 1, "duration_ms": 3241, "status": "pass"},
+        "LIVE-009": {"session_id": "364c78a5-ca5b-4997-9534-de9e1b619a32", "turns": 2, "duration_ms": 35321, "status": "pass"},
+        "LIVE-010": {"session_id": "410eca68-d3a8-4faf-b972-39f1e7425b8e", "turns": 4, "duration_ms": 18668, "status": "pass"},
+        "LIVE-011": {"session_id": "12513bf6-5659-42c2-b16c-4a140adfac96", "turns": 14, "duration_ms": 191877, "status": "pass"},
+        "LIVE-012": {"session_id": "98f27d64-8264-4c73-ad1f-be05f9c53b80", "turns": 4, "duration_ms": 74933, "status": "pass"}
+      },
+      "latency_warnings": {
+        "LIVE-011": "191877 ms with repository inventory and proof checks.",
+        "LIVE-012": "74933 ms with bundled ICM skill loading."
+      }
+    }
   },
   "models": {
     "gpt-5.6-sol": {
       "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "carried_forward_from_v0.5.2",
-      "model_facing_inputs_unchanged": true,
-      "carried_forward_reason": "Version 0.6 changes release numbering, host manifests, compatibility checks, and documentation only. The retained persona, integration contract, routing rules, and eight live prompts are unchanged from the fresh v0.5.2 acceptance.",
+      "evidence": "All twelve scenarios passed in fresh Codex task 019fc8ea-bc87-7c72-9614-90d9402ff1e5 with Chief of Staff 1.0.0 and AI Sloppy Copy 0.5.0 loaded.",
+      "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
         "LIVE-002",
@@ -34,15 +77,18 @@
         "LIVE-005",
         "LIVE-006",
         "LIVE-007",
-        "LIVE-008"
+        "LIVE-008",
+        "LIVE-009",
+        "LIVE-010",
+        "LIVE-011",
+        "LIVE-012"
       ]
     },
     "gpt-5.6-terra": {
-      "status": "pass",
+      "status": "pending",
       "reasoning_effort": "xhigh",
-      "evidence": "carried_forward_from_v0.5.1",
-      "model_facing_inputs_unchanged": true,
-      "carried_forward_reason": "The retained persona, integration contract, and eight live prompts remain unchanged through v0.6. Terra is not selected by the current execution tiers.",
+      "evidence": "fresh_v1.0.0_run_required",
+      "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
         "LIVE-002",
@@ -51,7 +97,11 @@
         "LIVE-005",
         "LIVE-006",
         "LIVE-007",
-        "LIVE-008"
+        "LIVE-008",
+        "LIVE-009",
+        "LIVE-010",
+        "LIVE-011",
+        "LIVE-012"
       ]
     }
   }

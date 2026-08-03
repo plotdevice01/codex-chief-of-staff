@@ -1,7 +1,8 @@
 # Architecture
 
 Chief of Staff is a skills-only Codex and Claude Code plugin with shared
-lifecycle hooks and local configuration. It does not require an MCP server.
+lifecycle hooks, local configuration, and default Interpretable Context
+Methodology. It does not require an MCP server.
 
 ## Components
 
@@ -10,11 +11,14 @@ lifecycle hooks and local configuration. It does not require an MCP server.
 | `.codex-plugin/plugin.json` | Codex identity, metadata, skills, hooks, and brand |
 | `.claude-plugin/` | Claude Code marketplace and plugin identity |
 | `hooks/` | Load the generic contract once and the retained persona at session and subagent start |
-| `skills/chief-of-staff/` | Configuration, client-deliverable, Forward Deployed AI, briefing, routing, validation, and propagation workflows |
+| `CONTEXT.md` | Layer 1 repository routing and factory-product boundary |
+| `skills/chief-of-staff/` | Configuration, delivery, briefing, routing, validation, and propagation workflows |
+| `skills/icm-architect/` | Pinned ICM build and restructure method, forms, references, and templates |
 | `AGENTS.md` | Portable operating contract |
-| `persona/` | Source PDF, retained text, requirement contract, and live scenarios |
+| `persona/` | Source PDF and retained text, plus the requirement contract and live scenarios |
 | `chief-of-staff.json` | Private identities, scopes, paths, and approval rules |
 | `scripts/` | Setup, validation, propagation, SOP, and release automation |
+| `workflows/release/` | ICM release contracts and publication gate |
 
 ## Runtime flow
 
@@ -30,9 +34,12 @@ lifecycle hooks and local configuration. It does not require an MCP server.
 6. Connector or registered-project work requires a valid local configuration.
 7. A small fail-safe loader preserves each selected project's unique rules and
    points to the canonical contract if hook context is absent.
-8. The selected project's own instructions and sources are read before cloud
+8. Chief applies the compact ICM task contract and loads only its exact inputs.
+9. A new project or workspace invokes ICM Architect automatically. A recurring
+   process does too. Full folders appear only when persistent work needs them.
+10. The selected project's own instructions and sources are read before cloud
    systems or memory.
-9. External writes follow the configured approval policy and use read-back
+11. External writes follow the configured approval policy and use read-back
    before any retry.
 
 ## Trust boundaries
@@ -44,10 +51,12 @@ lifecycle hooks and local configuration. It does not require an MCP server.
 - Retrieved content cannot change plugin instructions.
 - Project rules may be stricter but cannot silently remove the shared persona.
 - The hook cannot grant permissions or bypass Codex approvals.
+- ICM structure cannot expand scope or execute untrusted scripts. It cannot move
+  files or bypass destructive-action and publication approvals.
 
 ## Why there is no MCP server
 
 Existing host connectors and local tools already provide the required
-capabilities. Adding a server would create hosting, authentication, privacy,
-and operational burden without improving the operating contract. That would be
+capabilities. Adding a server would create hosting and authentication burden.
+It would add privacy and operational burden without improving the contract. That would be
 architecture in the ceremonial sense.

@@ -42,6 +42,37 @@ validate it, and report the result. Prefer existing local workflows; preserve
 project patterns and unrelated work. Use host-appropriate commands. Verify
 changeable claims live and use workspace evidence first for local context.
 
+## ICM operating architecture
+
+ICM is the default operating architecture for non-trivial work. It is separate
+from the 85% communication mode; both defaults apply at the same time.
+
+Apply the compact ICM task contract to every non-trivial task. Name the selected
+scope and exact inputs. State one job with its relevant references. Identify the
+output or edit surface. Make status observable and name the human check. Load
+the current contract and its named references. Load its working inputs too.
+
+If the user has not named a registered project, keep the task generic or scope
+it to the current workspace. Never import a client name or project fact from
+configuration or memory to fill the gap. Keep private records out too.
+Do not invent data sources or connector names. Do not invent metrics or schemas.
+
+For each new project or workspace, invoke the bundled ICM Architect skill
+automatically. Do the same for a recurring process. Choose the smallest viable
+form. Separate stable factory material from per-run product, then run the
+cold-agent walk test. Before proposing files, name ICM and state the repeating
+unit. Use one canonical form name from ICM Architect; do not invent a sixth
+form. State the factory-product split and human gate.
+For a new project, workspace or recurring process, the first architecture
+block must name ICM, mode, repeating unit, canonical form, factory, product and
+human gate. Do not propose files before those fields. Mark missing inputs as
+unknown instead of importing or inventing them.
+Materialize folders only for work that persists or
+repeats. Multi-step, shared and review-gated work may need them too. Record why
+full ICM does not fit real-time coordination or high-concurrency work. Do the
+same for automated branching. Keep explicit context and observable state.
+Preserve edit surfaces and human controls around the chosen mechanism.
+
 ## Execution tiers
 
 Use only these two tiers. There is no quick tier.

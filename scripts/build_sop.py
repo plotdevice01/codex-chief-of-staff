@@ -99,6 +99,9 @@ def configure(doc: Document) -> None:
         style.paragraph_format.first_line_indent = Inches(-0.18)
         style.paragraph_format.space_after = Pt(3)
         style.paragraph_format.line_spacing = 1.2
+        contextual_spacing = style._element.get_or_add_pPr().find(qn("w:contextualSpacing"))
+        if contextual_spacing is not None:
+            contextual_spacing.getparent().remove(contextual_spacing)
 
     for header in (section.header, section.even_page_header):
         paragraph = header.paragraphs[0]
@@ -264,6 +267,9 @@ def add_numbered(doc: Document, items: tuple[str, ...]) -> None:
     num_id = new_number_id(doc)
     for item in items:
         paragraph = doc.add_paragraph(style="List Number")
+        paragraph.paragraph_format.space_after = Pt(3)
+        paragraph.paragraph_format.line_spacing = 1.2
+        paragraph.paragraph_format.keep_with_next = False
         properties = paragraph._p.get_or_add_pPr()
         num_properties = OxmlElement("w:numPr")
         level = OxmlElement("w:ilvl")
@@ -271,7 +277,9 @@ def add_numbered(doc: Document, items: tuple[str, ...]) -> None:
         number = OxmlElement("w:numId")
         number.set(qn("w:val"), str(num_id))
         num_properties.extend((level, number))
-        properties.insert(0, num_properties)
+        style_property = properties.find(qn("w:pStyle"))
+        insert_at = properties.index(style_property) + 1 if style_property is not None else 0
+        properties.insert(insert_at, num_properties)
         paragraph.add_run(item)
 
 
@@ -331,8 +339,9 @@ def add_callout(doc: Document, label: str, text: str, *, alert=False) -> None:
     set_font(paragraph.add_run(text), "Calibri", 10.5, color=ALERT if alert else INK)
 
 
-def section_page(doc: Document, title: str) -> None:
-    doc.add_page_break()
+def section_page(doc: Document, title: str, *, new_page: bool = True) -> None:
+    if new_page:
+        doc.add_page_break()
     doc.add_heading(title, level=1)
 
 
@@ -416,7 +425,7 @@ def build(output: Path) -> Path:
     subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
     subtitle.paragraph_format.space_after = Pt(24)
     set_font(
-        subtitle.add_run("Native plugin release / scoped execution / retained judgment"),
+        subtitle.add_run("Native plugin / scoped execution / default ICM architecture"),
         "Calibri",
         13,
         color=GRAY,
@@ -440,6 +449,7 @@ def build(output: Path) -> Path:
             "One named scope before work begins.",
             "Account identity gates before connector use.",
             "Explicit policy before drafts, sends, edits, posts, or permission changes.",
+            "A compact ICM task contract for every non-trivial task and automatic architecture for new projects.",
             "One canonical behavior contract with fail-safe project loaders that preserve every project-specific rule.",
             "85% compression, caveman mode, Ponytail discipline, and all 97 retained persona requirements.",
         ),
@@ -576,10 +586,38 @@ def build(output: Path) -> Path:
             "Name one configured scope.",
             "Read the resolved Chief of Staff configuration.",
             "Read the selected project's AGENTS.md and source-of-truth files.",
+            "Define exact inputs, one job, relevant references, output, observable status and the human check.",
+            "Load only the files named by that task contract.",
             "Verify each connector identity before its first use in the task.",
             "Check the write policy before creating or changing external state.",
             "Use idempotency when available. Read the saved result back before any retry or completion report.",
         ),
+    )
+    doc.add_heading("ICM project and workspace architecture", level=2)
+    add_bullets(
+        doc,
+        (
+            "ICM is the default operating architecture. The 85% communication mode remains a separate default.",
+            "Invoke ICM Architect automatically for every new project, workspace or recurring process.",
+            "If the prompt does not name a registered project, stay generic. Do not import a client or project fact from configuration or memory.",
+            "Do not invent data sources, connector names, metrics or schemas.",
+            "Before proposing files, name ICM and the repeating unit. Use one canonical form name from ICM Architect. State the factory-product split and human gate.",
+            "Choose the smallest fitting form: pipeline, umbrella, record library, knowledge bundle or context map.",
+            "Separate stable factory material from per-run product and validate with the cold-agent walk test.",
+            "Create folders only for persistent, repeated, multi-step, shared or review-gated work.",
+            "Inventory first. Present a target tree and migration map before any restructure move.",
+            "Keep real-time coordination, high concurrency and automated branching in suitable code while preserving explicit context and human controls.",
+        ),
+    )
+    add_code(doc, "Use $icm-architect to build the smallest ICM workspace for this project.")
+    add_callout(
+        doc,
+        "Claude Code enforcement: ",
+        "Architecture prompts activate a seven-line ICM response contract. The stop hook returns an invalid "
+        "answer for correction up to two times. A third invalid answer stops with recovery instructions. "
+        "A pre-tool check blocks private configured context absent from the prompt. Set "
+        "CHIEF_ICM_ENFORCEMENT=off only for recovery. Set it to on after repair.",
+        alert=True,
     )
     doc.add_heading("Execution tiers", level=2)
     add_bullets(
@@ -596,7 +634,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Current project sources and project AGENTS.md.",
-            "Registered work systems for assignments, owners, due dates, and status.",
+            "Registered work systems remain authoritative for assignments, owners, due dates, and current status.",
             "Calendar and approved communications for current context.",
             "Memory for prior decisions, followed by live verification when facts can drift.",
         ),
@@ -622,7 +660,7 @@ def build(output: Path) -> Path:
         "risks, decisions, and proposed drafts. Do not create or send anything.",
     )
 
-    section_page(doc, "4. Enforce account and action gates")
+    section_page(doc, "4. Enforce account and action gates", new_page=False)
     doc.add_heading("Identity mismatch", level=2)
     add_table(
         doc,
@@ -660,7 +698,7 @@ def build(output: Path) -> Path:
         "and external communication stays professional unless the user explicitly requests another tone.",
     )
 
-    section_page(doc, "5. Preserve project rules")
+    section_page(doc, "5. Preserve project rules", new_page=False)
     doc.add_heading("Preview every change", level=2)
     add_code(doc, "python Sync-ProjectAgents.py --check --diff")
     doc.add_paragraph(
@@ -684,7 +722,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy release 0.4 with Standard 2.2.0 or later for exact authored-copy governance.",
+            "AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later for exact authored-copy governance.",
             "No other repository or service is required for the core plugin. No connector is required either.",
         ),
     )
@@ -694,30 +732,33 @@ def build(output: Path) -> Path:
     add_code(doc, "python validate_install.py --example --strict-dependencies")
     add_code(doc, "python scripts/validate_repository.py")
     add_code(doc, "node tests/test_hooks.js")
+    add_code(doc, "python tests/test_icm.py")
+    add_code(doc, "python tests/test_release.py")
     add_table(
         doc,
         ("Gate", "What it proves"),
         (
-            ("Persona", "97 requirements, eight integration rules and source hashes remain present. Eight scenarios remain too."),
+            ("Persona", "97 requirements, nine integration rules and source hashes remain present. Twelve scenarios remain too."),
+            ("ICM", "Five forms, ten invariants, task routing, cold-walk failure behavior and release contracts pass."),
             ("Install", "Configuration, runtime files, safe policies, paths, IDs, and dependencies are structurally valid."),
             ("Repository", "Versions match; manifest paths exist; public files are sanitized; release contents are complete."),
-            ("Hooks", "Session and subagent startup output contains the behavior contract, persona, version, and config status."),
+            ("Hooks", "Lifecycle output contains the contract and persona. ICM enforcement also passes activation, correction, recovery and privacy checks."),
         ),
         (2160, 7200),
     )
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
-        "Run the eight prompts in persona/persona-contract.json in separate fresh Codex tasks with "
-        "GPT-5.6 Sol Medium. Repeat them in a fresh Claude Code session when certifying that host. "
+        "Run the twelve prompts in persona/persona-contract.json in fresh Codex tasks with "
+        "GPT-5.6 Sol Medium and GPT-5.6 Terra XHigh. Repeat them in a fresh Claude Code session. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(
         doc,
         "Accept only when: ",
-        "static checks pass and fresh-task Sol Medium behavior meets all eight criteria. Terra compatibility "
-        "evidence may be carried forward only when every model-facing input is unchanged and the tested delivery "
-        "path passes. Connector identities "
-        "must match. The first briefing must stay inside the selected scope.",
+        "static checks plus host and installed-runtime checks pass. A required model must pass unless the owner "
+        "records a version-bound waiver for a pending Sol or Terra check. Failed checks cannot be waived. Pending "
+        "evidence stays pending. v0.6 evidence cannot be carried forward because v1.0.0 changes model-facing inputs. "
+        "Connector identities must match. The first briefing must stay inside the selected scope.",
     )
 
     section_page(doc, "7. Update, uninstall, recover")
@@ -726,7 +767,7 @@ def build(output: Path) -> Path:
         doc,
         "AI Sloppy Copy legacy-version reset: ",
         "Remove an existing 2.2.6 installation once before reinstalling. "
-        "Its required host manifest version is 0.4.0, which semantic-version updaters sort below 2.2.6.",
+        "Version 0.5.0 sorts below 2.2.6 in semantic-version updaters.",
         alert=True,
     )
     add_code(doc, "codex plugin remove ai-sloppy-copy@ai-sloppy-copy")
@@ -761,16 +802,17 @@ def build(output: Path) -> Path:
     doc.add_heading("Version labels", level=2)
     add_table(
         doc,
-        ("Product", "Public release", "Host manifest"),
+        ("Product", "Product version", "Separate rules contract"),
         (
-            ("Chief of Staff", "0.6", "0.6.0"),
-            ("AI Sloppy Copy", "0.4", "0.4.0"),
+            ("Chief of Staff", VERSION, "None"),
+            ("AI Sloppy Copy", "0.5.0", "Standard 2.2.0 or later"),
         ),
-        (3600, 2880, 2880),
+        (3200, 2500, 3660),
     )
     doc.add_paragraph(
-        "Public tags, documentation and ZIP names use one-decimal pre-1.0 milestones. "
-        "Codex and Claude Code manifests retain the final zero because both hosts require strict semantic versions."
+        "Each product uses one three-part version for its GitHub release and tag. "
+        "The ZIP and both host manifests use that same number. AI Sloppy Copy "
+        "also carries a separately versioned writing-rules contract."
     )
     doc.add_heading("Troubleshooting", level=2)
     add_table(
@@ -778,6 +820,7 @@ def build(output: Path) -> Path:
         ("Symptom", "Response"),
         (
             ("Hooks do not load", "Restart Codex or run Claude Code /reload-plugins, review /hooks, then start fresh."),
+            ("ICM response stops", "Start a new prompt. For repair only, set CHIEF_ICM_ENFORCEMENT=off, reload plugins and fix the installation. Set enforcement to on afterward."),
             ("No configuration", "Run the initializer; generic behavior remains active, connector authority remains blocked."),
             ("Wrong account", "Stop and reconnect the approved identity. Then repeat the live check."),
             ("Persona test fails", "Restore the canonical repository AGENTS.md, persona files and contract. Restore configuration from the same version."),
@@ -790,9 +833,9 @@ def build(output: Path) -> Path:
     properties.subject = "Public dual-host plugin installation, configuration, operation, validation, and recovery"
     properties.author = "Codex Chief of Staff contributors"
     properties.last_modified_by = "Codex Chief of Staff contributors"
-    properties.created = datetime(2026, 7, 30, tzinfo=timezone.utc)
-    properties.modified = datetime(2026, 7, 30, tzinfo=timezone.utc)
-    properties.keywords = "Codex, Claude Code, chief of staff, plugin, operations, SOP"
+    properties.created = datetime(2026, 8, 3, tzinfo=timezone.utc)
+    properties.modified = datetime(2026, 8, 3, tzinfo=timezone.utc)
+    properties.keywords = "Codex, Claude Code, chief of staff, ICM, context engineering, plugin, SOP"
 
     temporary = output.with_suffix(".tmp.docx")
     doc.save(temporary)

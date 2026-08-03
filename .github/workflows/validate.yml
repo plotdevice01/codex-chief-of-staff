@@ -24,6 +24,8 @@ jobs:
       - run: python Test-Persona.py
       - run: python validate_install.py --example
       - run: node tests/test_hooks.js
+      - run: python tests/test_icm.py
+      - run: python tests/test_release.py
       - run: python tests/test_sync.py
       - run: python scripts/build_sop.py
       - run: python scripts/validate_repository.py

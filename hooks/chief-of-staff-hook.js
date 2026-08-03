@@ -4,7 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const VERSION = "0.6";
+const VERSION = "1.0.0";
 const event = process.argv[2] === "subagent" ? "SubagentStart" : "SessionStart";
 const pluginRoot = process.env.PLUGIN_ROOT || process.env.CLAUDE_PLUGIN_ROOT || path.resolve(__dirname, "..");
 const SHARED_CONTRACT = "<!-- SHARED-BEHAVIOR-CONTRACT:START -->";
@@ -80,6 +80,13 @@ function emit() {
   const configStatus = configPath
     ? `Local configuration: ${configPath}. Read it before connector or registered-project work.`
     : "Local configuration: not found. Keep generic behavior active; do not access connectors or assume project authority.";
+  const icmGates = [
+    "ICM DEFAULT: operating architecture for non-trivial work. The communication default remains separate.",
+    "ICM NEW-WORKSPACE GATE: before proposing files, say ICM and state the repeating unit. State the selected form and factory-product split. Name the human gate.",
+    "ICM FORM GATE: use one canonical form name from the bundled ICM Architect skill. Do not invent a sixth form label.",
+    "ICM RESPONSE GATE: for every new project, workspace, or recurring process, the first architecture block must name ICM, mode, repeating unit, one canonical form, factory, product, and human gate. Do not propose files before those fields. Use only prompt facts; mark missing inputs unknown.",
+    "GENERIC SCOPE GATE: when no registered project is named, do not load or use client facts from configuration or memory. Do not suggest those facts or connector details. Stay generic.",
+  ];
   const contextParts = [`CODEX CHIEF OF STAFF ACTIVE - v${VERSION}`];
   if (!process.env.PLUGIN_DATA || !codexAlreadyLoadedContract()) {
     contextParts.push(readRequired("AGENTS.md"));
@@ -87,6 +94,7 @@ function emit() {
   contextParts.push(
     readRequired(path.join("persona", "technical-assistant-persona.txt")),
     configStatus,
+    ...icmGates,
   );
   const context = contextParts.join("\n\n");
 

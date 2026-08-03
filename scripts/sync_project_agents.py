@@ -34,6 +34,7 @@ IGNORED_DIRS = {
     "repository",
     "tmp",
     "venv",
+    "work",
 }
 
 

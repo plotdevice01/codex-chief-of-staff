@@ -14,14 +14,24 @@ try:
     from .build_sop import build as build_sop
     from .config_paths import ROOT
     from .test_persona import validate as validate_persona
+    from .validate_icm import validate_icm
     from .validate_install import validate_config
-    from .validate_repository import validate_archive, validate_repository
+    from .validate_repository import (
+        model_acceptance_release_status,
+        validate_archive,
+        validate_repository,
+    )
 except ImportError:
     from build_sop import build as build_sop
     from config_paths import ROOT
     from test_persona import validate as validate_persona
+    from validate_icm import validate_icm
     from validate_install import validate_config
-    from validate_repository import validate_archive, validate_repository
+    from validate_repository import (
+        model_acceptance_release_status,
+        validate_archive,
+        validate_repository,
+    )
 
 
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
@@ -31,6 +41,7 @@ FILES = (
     ".gitignore",
     "AGENTS.md",
     "CHANGELOG.md",
+    "CONTEXT.md",
     "CONTRIBUTING.md",
     "LICENSE",
     "PRIVACY.md",
@@ -58,10 +69,11 @@ DIRECTORIES = (
     "scripts",
     "skills",
     "tests",
+    "workflows",
 )
 SKIP_PARTS = {"__pycache__", ".DS_Store"}
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
-ZIP_TIME = (2026, 7, 30, 0, 0, 0)
+ZIP_TIME = (2026, 8, 3, 0, 0, 0)
 
 
 def sha256(path: Path) -> str:
@@ -130,6 +142,22 @@ def run_hook_tests(node: str) -> None:
     )
     if sync.returncode:
         raise RuntimeError(sync.stderr or sync.stdout)
+    icm = subprocess.run(
+        [sys.executable, str(ROOT / "tests" / "test_icm.py")],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    if icm.returncode:
+        raise RuntimeError(icm.stderr or icm.stdout)
+    release = subprocess.run(
+        [sys.executable, str(ROOT / "tests" / "test_release.py")],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    if release.returncode:
+        raise RuntimeError(release.stderr or release.stdout)
 
 
 def write_zip(stage: Path, archive: Path) -> None:
@@ -147,7 +175,13 @@ def write_zip(stage: Path, archive: Path) -> None:
             output.writestr(info, source.read_bytes())
 
 
-def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path, Path]:
+def build(
+    output: Path,
+    node: str,
+    *,
+    build_document: bool = True,
+    require_model_acceptance: bool = False,
+) -> tuple[Path, Path]:
     output.mkdir(parents=True, exist_ok=True)
     if build_document:
         build_sop(ROOT / "docs" / "Codex Chief of Staff - Installation and SOP.docx")
@@ -156,7 +190,10 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
     install_errors, _ = validate_config(
         ROOT / "chief-of-staff.example.json"
     )
-    repository_errors, _ = validate_repository()
+    repository_errors, _ = validate_repository(
+        require_model_acceptance=require_model_acceptance
+    )
+    icm_errors, icm_metrics = validate_icm()
     run_hook_tests(node)
     errors = persona_errors + install_errors + repository_errors
     if errors:
@@ -167,10 +204,14 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         shutil.rmtree(stage)
     stage.mkdir(parents=True)
     hashes = stage_release(stage)
+    model_acceptance = json.loads(
+        (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
+    )
+    acceptance_status = model_acceptance_release_status(model_acceptance)
     validation = {
         "release_version": VERSION,
-        "built_at": datetime(2026, 7, 30, tzinfo=timezone.utc).isoformat(),
-        "status": "pass",
+        "built_at": datetime(2026, 8, 3, tzinfo=timezone.utc).isoformat(),
+        "status": acceptance_status,
         "persona_requirements": metrics["persona_requirements"],
         "integration_requirements": metrics["integration_requirements"],
         "live_acceptance_tests": metrics["live_acceptance_tests"],
@@ -178,14 +219,13 @@ def build(output: Path, node: str, *, build_document: bool = True) -> tuple[Path
         "persona_text_sha256": metrics["persona_text_sha256"],
         "hook_tests": "pass",
         "project_sync_tests": "pass",
-        "model_acceptance": json.loads(
-            (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
-        ),
+        "model_acceptance": model_acceptance,
+        "icm_conformance": {"status": "pass", **icm_metrics},
         "configuration_validation": "pass",
         "repository_privacy_scan": "pass",
         "companion_requirements": {
             "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": "release 0.4 (host manifest 0.4.0)",
+            "ai_sloppy_copy": ">=0.5.0 with Standard 2.2.0 or later",
         },
         "files": hashes,
     }
@@ -217,9 +257,17 @@ def main() -> int:
         action="store_true",
         help="Package the existing visually approved SOP instead of rebuilding it.",
     )
+    parser.add_argument(
+        "--require-model-acceptance",
+        action="store_true",
+        help="Block the build unless fresh required model and host evidence passed.",
+    )
     args = parser.parse_args()
     archive, checksum = build(
-        args.output.resolve(), args.node, build_document=not args.skip_sop
+        args.output.resolve(),
+        args.node,
+        build_document=not args.skip_sop,
+        require_model_acceptance=args.require_model_acceptance,
     )
     print(f"PASS: {archive}")
     print(f"PASS: {checksum}")
