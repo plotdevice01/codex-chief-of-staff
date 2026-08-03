@@ -1,16 +1,59 @@
 # Changelog
 
-All notable changes are recorded here. Public releases use one-decimal pre-1.0
-milestones. Host manifests use strict three-part semantic versions.
+All notable changes are recorded here. Public releases and host manifests use
+the same three-part semantic product version.
 
-## Unreleased
+## [1.0.0] - 2026-08-03
+
+### Added
+
+- Added a default ICM task kernel to the shared Chief behavior contract.
+- Bundled ICM Architect from `RinDig/icm-architect` commit `8f9cdf9` with its
+  MIT license. It includes five forms and ten invariants. Both operating modes,
+  Codex routing and the cold walk remain intact under Chief safety controls.
+- Added repository and release `CONTEXT.md` contracts. Added a conformance
+  matrix with deterministic ICM validation. Added a cold-walk failure fixture
+  and four ICM live acceptance scenarios.
+- Added Claude Code prompt and stop-hook enforcement for analysis, debugging,
+  contained changes, and ICM architecture responses. It includes a
+  two-correction ceiling and a recovery bypass.
+- Added a pre-tool privacy decision so private configured context is blocked
+  before a tool request can expose it.
+- Added bounded read-only inventory for repository restructuring. Mutation is
+  blocked until approval. Reference checks and content proof are required
+  before any deletion proposal.
 
 ### Changed
 
-- Updated the complete-stack dependency to AI Sloppy Copy release `0.4`, host
-  manifest `0.4.0`, and Standard `2.2.0` or later.
-- Updated strict validation, installation guidance, release evidence, and the
-  generated SOP to require the same dependency line.
+- Each new project or workspace invokes ICM Architect automatically. Recurring
+  processes do too. Contained tasks use the compact contract without ceremonial
+  folders.
+- Updated the complete-stack dependency to AI Sloppy Copy `0.5.0`. Standard
+  `2.2.0` or later is required.
+- Adopted one product version for the GitHub release, tag, ZIP, and both host
+  manifests.
+- Updated strict validation and installation guidance. Release evidence and the
+  generated SOP now require the same dependency line.
+- Local candidate builds preserve pending or failed model evidence when its
+  status is accurate. A public build may use a version-bound owner waiver for a
+  pending Sol or Terra check. Failed checks cannot be waived. Host acceptance
+  and installed-runtime smoke must pass.
+- Sol, Codex, Claude Code, and installed-runtime checks passed for v1.0.0. The
+  Terra run remains pending under the recorded owner waiver.
+
+### Fixed
+
+- Removed an exact debug heading that conflicted with AI Sloppy Copy
+  `TERM-078`. The replacement still requires the smallest root-cause fix.
+- Constrained real-time and restructure responses so required Chief fields do
+  not force excess list patterns. Repository inventory is collected once, then
+  only evidence checks may use follow-up reads.
+
+### Preserved
+
+- All 97 retained persona requirements and account gates remain. Privacy
+  boundaries and project-rule preservation remain. Action approvals and
+  external-write controls remain too.
 
 ## [0.6] - 2026-07-30
 

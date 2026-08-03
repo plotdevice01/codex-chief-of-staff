@@ -20,36 +20,65 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - account identity checks before connector access;
 - approval gates for drafts and external writes;
 - fail-safe `AGENTS.md` loaders without erasing local rules;
+- default ICM task contracts and automatic project architecture;
 - 85% compression and `caveman` mode;
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
-## What changed in v0.6
+## What changed in v1.0.0
 
-- Public release numbering now uses one-decimal pre-1.0 milestones. `0.6`
-  succeeds and fully contains `0.5.2`; it is not a rollback.
-- Codex and Claude Code manifests report `0.6.0` because both hosts require
-  strict three-part semantic versions. The public tag, docs, and ZIP use
-  `0.6`.
-- Sol Medium is the default for Standard work. Expert/high-risk work uses Sol
-  High or Extra High when available. There is no low-assurance quick tier.
-- Global and project `AGENTS.md` files now carry a small fail-safe loader plus
-  their unique rules. The lifecycle hook supplies the complete contract and
-  persona once, avoiding repeated copies in every task.
-- The Codex hook detects a canonical contract already loaded by the host and
-  omits the duplicate while Claude Code keeps full hook injection.
-- The retained persona is unchanged: all 97 traceable requirements, 85%
-  compression, caveman mode, direct-reply humor, tone boundaries, account
-  gates, approval controls, and project-rule preservation remain present.
-- AI Sloppy Copy 0.4 reads Codex transcripts from the end and stops at the
-  newest assistant message. The checker and evidence gates remain unchanged.
-  Protected-text controls and repair rules remain unchanged too.
+- Every non-trivial task uses a compact ICM contract for scope, exact inputs,
+  one job, relevant references, output, observable status, and human review.
+- Every new project, workspace, or recurring process automatically invokes the
+  bundled ICM Architect skill. Full folders appear only when persistent work
+  needs them.
+- Claude Code now enforces response contracts for analysis, debugging,
+  contained changes, and ICM architecture. It allows two correction cycles,
+  then stops with a documented recovery bypass.
+- A pre-tool privacy check blocks configured project or connector values when
+  the current prompt did not supply them.
+- Restructure mode limits inventory reads and blocks mutation until approval.
+  It requires reference checks plus content proof before a deletion proposal.
+- The bundled Architect is pinned to `RinDig/icm-architect` commit `8f9cdf9`.
+  It includes five workspace forms, ten invariants, both operating modes,
+  Codex `AGENTS.md` routing, the cold walk, and Chief safety controls.
+- The repository now carries Layer 1 routing, an ICM release pipeline, a
+  conformance matrix, deterministic validation, and failure fixtures.
+- AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later is required for full
+  reference behavior.
+- The retained persona stays unchanged at 97 requirements. v1.0.0 expands the
+  integration contract to nine rules and the live acceptance set to twelve.
+- The GitHub release, tag, ZIP, and both host manifests use `1.0.0`.
+
+## Version numbers
+
+These numbers describe different products or contracts. They are not competing
+versions of the same file.
+
+| Number | What it contains | What users install or cite |
+|---|---|---|
+| Chief of Staff `1.0.0` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `1.0.0` |
+| AI Sloppy Copy `0.5.0` | The separate companion plugin used for authored prose checks | Install `0.5.0` or later |
+| AI Sloppy Copy Standard `2.2.0` | The writing-rules contract bundled inside AI Sloppy Copy | Cite the Standard when discussing rule behavior |
+
+Chief and AI Sloppy Copy now use the same three-part product version on their
+GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
+release. It is not another product.
+
+## v1.0.0 release evidence
+
+The deterministic suite passed. Fresh Sol, Codex, Claude Code, and installed
+runtime checks passed too. The fresh Terra scenario run remains pending. The
+repository owner approved publication under a version-bound waiver, and Terra
+is not reported as a pass.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|
 | Marketplace installation | Yes | Yes |
-| Session and subagent contract loading | Yes | Yes |
+| Lifecycle contract loading | Yes | Yes |
+| Chief response-contract enforcement | Host contract | Prompt and stop hooks |
 | Complete retained persona | Yes | Yes |
+| Default ICM task and project architecture | Yes | Yes |
 | Ponytail and AI Sloppy Copy stack | Yes | Yes |
 | Local private configuration | Yes | Yes |
 | Project-level team setup | `AGENTS.md` sync | `.claude/settings.json` |
@@ -147,9 +176,10 @@ uninstall, and recovery procedures.
 | Work starts before scope is named | One scope is selected first |
 | A connected account is assumed correct | Live identity must match configuration |
 | Project instructions can overwrite each other | Shared and project rules remain separate |
+| Context and state are improvised per task | ICM names inputs, output, state and review |
 | External writes inherit vague approval | Every write follows an explicit policy |
 | Long answers bury the decision | The result leads; risks and the next action follow |
-| Persona claims are prose | 97 requirements and eight scenarios are traceable |
+| Persona claims are prose | 97 requirements and twelve scenarios are traceable |
 
 ## How it works
 
@@ -160,11 +190,16 @@ uninstall, and recovery procedures.
 The plugin is skills-only. It does not run a server or add connector access.
 Shared Codex and Claude Code lifecycle hooks load the generic operating
 contract and retained persona once. Codex omits duplicate contract injection
-when its instruction chain already contains the canonical block. Project
-loaders retain local rules and provide an explicit fallback if the hook is
-absent.
+when its instruction chain already contains the canonical block. Claude Code
+also uses prompt and stop hooks to reject architecture responses that omit the
+required ICM header. Project loaders retain local rules and provide an explicit
+fallback if a hook is absent.
 Private identities, scopes, paths, and approvals live in a local ignored
 configuration.
+
+The shared contract applies the compact ICM task kernel by default. The bundled
+ICM Architect skill handles project and workspace design through five forms.
+It loads only the form reference and files needed for the current job.
 
 Read the [architecture](docs/architecture.md) for configuration resolution and
 hook behavior. It also covers trust boundaries and project propagation.
@@ -186,6 +221,8 @@ python Test-Persona.py
 python validate_install.py --example
 python scripts/validate_repository.py
 node tests/test_hooks.js
+python tests/test_icm.py
+python tests/test_release.py
 python tests/test_sync.py
 python scripts/build_release.py --output dist
 ```
@@ -193,15 +230,19 @@ python scripts/build_release.py --output dist
 Static tests verify:
 
 - 97 persona requirements and source hashes;
+- nine integration rules and twelve live acceptance definitions;
+- five ICM forms and ten invariants, plus cold-walk failure behavior and token budgets;
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
 - public-file privacy scanning;
-- Codex and Claude Code hook output for sessions and subagents;
+- Codex and Claude Code lifecycle hook output;
+- ICM prompt classification and correction limits;
+- recovery plus pre-tool and final-response privacy checks;
 - deterministic release contents;
 - complete Ponytail and AI Sloppy Copy companion capabilities under strict
   dependency validation.
 
-The eight prompts in `persona/persona-contract.json` still require a fresh host
+The twelve prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 
@@ -255,6 +296,7 @@ The checksum remains available for users and environments that require it.
 - [Claude Code deployment](docs/claude-code.md)
 - [Configuration](docs/configuration.md)
 - [Architecture](docs/architecture.md)
+- [ICM conformance](docs/icm-conformance.md)
 - [Testing](docs/testing.md)
 - [Release process](docs/release-process.md)
 - [Examples](examples/example-interactions.md)

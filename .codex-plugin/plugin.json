@@ -1,7 +1,7 @@
 {
   "name": "chief-of-staff",
-  "version": "0.6.0",
-  "description": "A scoped operating layer for Codex and Claude Code with account gates, project routing, concise execution, and a retained technical persona.",
+  "version": "1.0.0",
+  "description": "A scoped Chief of Staff for Codex and Claude Code with default ICM architecture, account gates, project routing, and retained judgment.",
   "author": {
     "name": "plotdevice01",
     "url": "https://github.com/plotdevice01"
@@ -11,9 +11,11 @@
   "license": "MIT",
   "keywords": [
     "chief-of-staff",
+    "context-engineering",
     "codex",
     "claude-code",
     "operations",
+    "icm",
     "persona",
     "productivity",
     "workflow"
@@ -22,14 +24,15 @@
   "interface": {
     "displayName": "Codex Chief of Staff",
     "shortDescription": "Scoped execution with disciplined judgment",
-    "longDescription": "Run Codex as an operating chief of staff with explicit scope, source order, account identity gates, approval boundaries, project rule preservation, and a retained technical persona.",
+    "longDescription": "Run Codex as an operating chief of staff with default Interpretable Context Methodology. It enforces explicit scope and account identity gates. It preserves approval boundaries and project rules, plus a retained technical persona.",
     "developerName": "plotdevice01",
     "category": "Productivity",
     "capabilities": [
       "Instructions",
       "Lifecycle hooks",
       "Local configuration",
-      "Project propagation"
+      "Project propagation",
+      "ICM workspace architecture"
     ],
     "websiteURL": "https://github.com/plotdevice01/codex-chief-of-staff",
     "privacyPolicyURL": "https://github.com/plotdevice01/codex-chief-of-staff/blob/main/PRIVACY.md",
@@ -37,7 +40,7 @@
     "defaultPrompt": [
       "Set up my Chief of Staff configuration.",
       "Run a scoped read-only daily briefing.",
-      "Check project instruction parity."
+      "Build the smallest ICM workspace for this project."
     ],
     "brandColor": "#14213D",
     "composerIcon": "./assets/icon.png",

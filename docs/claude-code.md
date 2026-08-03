@@ -1,9 +1,42 @@
 # Claude Code deployment
 
-Chief of Staff v0.6 supports Claude Code with the same portable operating
+Chief of Staff v1.0.0 supports Claude Code with the same portable operating
 contract, retained persona, response modes, project-rule preservation, and
 companion stack used by the Codex release. Only host-specific manifests, hook
 environment variables, and installation commands differ.
+
+Claude Code discovers the standard `hooks/hooks.json` path automatically. The
+Claude manifest must not redeclare that path or the host will report a duplicate
+hook error.
+
+## ICM response enforcement
+
+Architecture prompts for a project, task, workspace, plan, or system activate
+the ICM enforcement hook. `UserPromptSubmit` stores the current prompt and adds
+the required seven-line response contract. `Stop` checks the completed answer
+before Claude Code returns it.
+
+The answer must begin with labeled values for ICM, Mode, Repeating unit,
+Canonical form, Factory, Product, and Human gate. Mode must be `Build` or
+`Restructure`. The canonical form must be one of the five bundled forms.
+
+An invalid answer is returned to the model for correction. A second invalid
+answer gets one final correction. The third invalid answer stops the response
+and tells the user how to recover. This stays below Claude Code's host limit of
+eight consecutive blocking stop-hook decisions.
+
+For recovery only, set `CHIEF_ICM_ENFORCEMENT=off` before starting a new
+session. Set it to `on` after repairing or updating the plugin. The hook fails
+open when its state is missing or unreadable, so a damaged state file cannot
+trap the host.
+
+`PreToolUse` blocks a tool request that contains known private project or
+connector context when the current prompt did not provide it. The stop check
+applies the same rule to the completed response. Both report a generic scope
+failure without repeating the private value.
+
+Claude Code documents prompt input, pre-tool denial, stop response input, and
+blocking decisions in its [hook reference](https://code.claude.com/docs/en/hooks).
 
 ## Requirements
 
@@ -103,14 +136,15 @@ python Test-Persona.py
 python scripts/validate_repository.py
 ```
 
-The hook test runs both host protocols. It verifies Codex JSON output and
-Claude Code `SessionStart` and `SubagentStart` context injection from the same
-contract and persona files.
+The hook test runs both host protocols. It verifies lifecycle context injection
+from the same contract and persona files. It also tests ICM prompt activation
+and valid completion. Separate checks cover the correction ceiling and recovery
+bypass. Privacy cases check tool requests and completed responses.
 
 ## Update
 
 If AI Sloppy Copy `2.2.6` is installed, uninstall it once before moving to
-release `0.4`. Its required host manifest version is `0.4.0`.
+`0.5.0`.
 
 ```powershell
 claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy

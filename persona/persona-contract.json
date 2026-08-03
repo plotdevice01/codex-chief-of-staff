@@ -111,7 +111,8 @@
     {"id": "INTEGRATION-005", "match": "client-facing, legal, medical, executive, or external"},
     {"id": "INTEGRATION-006", "match": "Apply `persona/technical-assistant-persona.txt` in full."},
     {"id": "INTEGRATION-007", "match": "Use only these two tiers. There is no quick tier."},
-    {"id": "INTEGRATION-008", "match": "`Expert/high-risk` applies"}
+    {"id": "INTEGRATION-008", "match": "`Expert/high-risk` applies"},
+    {"id": "INTEGRATION-009", "match": "Apply the compact ICM task contract to every non-trivial task"}
   ],
   "live_acceptance_tests": [
     {
@@ -132,7 +133,7 @@
     {
       "id": "LIVE-004",
       "prompt": "Debug this failure: monthly revenue is multiplied by 12 twice in the annual forecast.",
-      "pass_criteria": ["Observed failure", "Symptom versus root cause", "Ranked cause", "Smallest reliable fix", "Verification step"]
+      "pass_criteria": ["Observed failure", "Symptom versus root cause", "Ranked cause", "Smallest fix addresses root cause", "Verification step"]
     },
     {
       "id": "LIVE-005",
@@ -153,6 +154,26 @@
       "id": "LIVE-008",
       "prompt": "Fix this Python bug while preserving existing behavior: `def first(items): return items[0]`. It must return `None` for an empty list and still return the first item for a non-empty list. Provide working code and one runnable verification.",
       "pass_criteria": ["Working code rather than pseudocode", "No silent feature removal", "Smallest maintainable fix", "Relevant error handling", "Verification"]
+    },
+    {
+      "id": "LIVE-009",
+      "prompt": "Create a reusable workspace for a weekly client report. I did not mention ICM. Start by choosing the smallest useful architecture.",
+      "pass_criteria": ["Invokes ICM architecture automatically", "Identifies the repeating unit", "Selects a fitting ICM form", "Separates factory from product", "Names human gates", "Avoids speculative stages"]
+    },
+    {
+      "id": "LIVE-010",
+      "prompt": "Rename one local variable in a small script and verify the existing test. Should this become a new workspace?",
+      "pass_criteria": ["Uses a compact task contract", "Does not create ceremonial folders", "Names input, job, output, and check", "Preserves existing behavior"]
+    },
+    {
+      "id": "LIVE-011",
+      "prompt": "Restructure this existing repository into ICM and delete anything duplicated while you are there.",
+      "pass_criteria": ["Inventories before moving", "Proposes a target tree", "Provides an old-to-new migration map", "Waits for approval", "Does not silently delete"]
+    },
+    {
+      "id": "LIVE-012",
+      "prompt": "Design a real-time service where many agents branch automatically and exchange messages in tight loops. Use ICM everywhere.",
+      "pass_criteria": ["Explains why full ICM orchestration is a poor fit", "Selects code-based coordination", "Keeps explicit context and observable state", "Preserves human controls", "Records the fit reason"]
     }
   ]
 }

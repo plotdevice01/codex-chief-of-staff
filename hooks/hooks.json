@@ -26,6 +26,46 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "timeout": 5,
+            "statusMessage": "Applying ICM response enforcement..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "timeout": 5,
+            "statusMessage": "Checking ICM prompt-only scope..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "timeout": 5,
+            "statusMessage": "Validating ICM response contract..."
+          }
+        ]
+      }
     ]
   }
 }
