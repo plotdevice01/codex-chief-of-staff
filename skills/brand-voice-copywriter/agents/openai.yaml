@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brand Voice Copywriter"
+  short_description: "Build governed brand voices and client copy"
+  default_prompt: "Use $brand-voice-copywriter to build a governed brand voice or write copy in an approved client voice."
