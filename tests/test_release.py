@@ -52,11 +52,12 @@ def main() -> int:
     evidence = json.loads(
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
-    assert validate_model_acceptance(require_pass=True)
-    assert model_acceptance_release_status(evidence) == "candidate"
+    assert not validate_model_acceptance(require_pass=True)
+    assert model_acceptance_release_status(evidence) == "pass"
 
     waived = copy.deepcopy(evidence)
     waived["models"]["gpt-5.6-sol"]["status"] = "pass"
+    waived["models"]["gpt-5.6-terra"]["status"] = "pending"
     waived["hosts"]["codex"]["status"] = "pass"
     waived["hosts"]["claude-code"]["status"] = "pass"
     waived["installed_runtime_smoke"]["status"] = "pass"

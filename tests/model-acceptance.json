@@ -1,31 +1,31 @@
 {
   "release_version": "2.0.0",
-  "executed_at": "pending",
-  "runner": "fresh v2.0.0 exact-candidate host audit required",
+  "executed_at": "2026-08-05T18:41:33-05:00",
+  "runner": "Fresh installed-runtime audits in Codex desktop and Claude Code",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
     "fast_mode": false
   },
   "installed_runtime_smoke": {
-    "status": "pending",
-    "evidence": "fresh_v2.0.0_installed_runtime_required"
+    "status": "pass",
+    "evidence": "Codex task 019fd44a-0dbc-79c0-b78e-2ed012a268d5 passed strict doctor, local parity, and persona checks with Chief 2.0.0, Ponytail 4.8.4, Sloppy Copy 0.5.0, Brand Voice 0.2.1, and Crafty 0.6.1."
   },
   "hosts": {
     "codex": {
-      "status": "pending",
-      "evidence": "fresh_v2.0.0_codex_run_required"
+      "status": "pass",
+      "evidence": "Fresh Sol task 019fd44a-0dbc-79c0-b78e-2ed012a268d5 passed runtime checks; Terra turn 019fd44c-0690-77d1-926f-b6ba2bfc24af passed strict doctor and 54/54 assertions."
     },
     "claude-code": {
-      "status": "pending",
-      "evidence": "fresh_v2.0.0_claude_code_run_required"
+      "status": "pass",
+      "evidence": "Claude Code 2.1.140 installed all five active plugins, session 22f49db5-9a3b-4c41-9aaa-a0a92d1b4d09 returned a conforming ICM contract, and session 450ea5a2-3e98-4d55-bfe1-5beed79a5848 passed 54/54 assertions."
     }
   },
   "models": {
     "gpt-5.6-sol": {
-      "status": "pending",
+      "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "fresh_v2.0.0_run_required",
+      "evidence": "Fresh Codex task 019fd44a-ad94-7dc1-9f62-fc6ce88aa224 initial Sol/Medium turn passed strict doctor and 54/54 assertions on the installed 2.0.0 stack.",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
@@ -43,9 +43,9 @@
       ]
     },
     "gpt-5.6-terra": {
-      "status": "pending",
+      "status": "pass",
       "reasoning_effort": "xhigh",
-      "evidence": "fresh_v2.0.0_run_required",
+      "evidence": "Fresh Codex turn 019fd44c-0690-77d1-926f-b6ba2bfc24af explicitly routed to Terra/XHigh passed strict doctor and 54/54 assertions on the installed 2.0.0 stack.",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
