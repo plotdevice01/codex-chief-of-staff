@@ -1,5 +1,5 @@
 {
-  "release_version": "1.0.0",
+  "release_version": "2.0.0",
   "config_schema_version": 1,
   "updated": "2026-08-03",
   "owner": {
@@ -88,6 +88,14 @@
     },
     "ai_sloppy_copy": {
       "minimum_version": "0.5.0",
+      "required_for_full_parity": true
+    },
+    "brand_voice_factory": {
+      "minimum_version": "0.2.0",
+      "required_for_full_parity": true
+    },
+    "crafty_carousels": {
+      "minimum_version": "0.6.0",
       "required_for_full_parity": true
     }
   },

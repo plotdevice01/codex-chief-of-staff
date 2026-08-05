@@ -1,6 +1,6 @@
 # Chief of Staff repository context
 
-Form: umbrella. The repository contains one operating contract, two bundled
+Form: umbrella. The repository contains one operating contract, three bundled
 skills, lifecycle hooks, configuration tooling, validation, and a release
 pipeline.
 
@@ -11,6 +11,8 @@ pipeline.
 | Change global behavior | `AGENTS.md` | Shared contract plus persona tests |
 | Change Chief workflows | `skills/chief-of-staff/SKILL.md` | Scoped operating workflow |
 | Design or restructure work | `skills/icm-architect/SKILL.md` | ICM workspace or migration plan |
+| Coordinate governed brand voice work | Installed `brand-voice-factory` plugin | Approved Brand Voice package |
+| Build a social carousel | `skills/viral-carousel-factory/SKILL.md` | Governed carousel workspace or run package |
 | Change hooks | `hooks/chief-of-staff-hook.js` | Session and subagent payload |
 | Change configuration | `docs/configuration.md`, then `scripts/configure.py` | Local ignored configuration |
 | Validate source | `docs/testing.md` | Test evidence |

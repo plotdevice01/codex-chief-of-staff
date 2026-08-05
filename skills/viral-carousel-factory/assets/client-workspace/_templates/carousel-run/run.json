@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "run_id": "{{RUN_ID}}",
+  "client": "{{CLIENT_NAME}}",
+  "created": "{{CREATED_DATE}}",
+  "status": "intake",
+  "goal": "UNKNOWN",
+  "audience": "UNKNOWN",
+  "idea": "UNKNOWN",
+  "platform": {
+    "route": "{{PLATFORM_ROUTE}}",
+    "width": {{WIDTH}},
+    "height": {{HEIGHT}},
+    "verified_max": "UNKNOWN",
+    "verified_on": "UNKNOWN"
+  },
+  "slide_count": {{SLIDE_COUNT}},
+  "client_profile_versions": {
+    "brand": "UNKNOWN",
+    "voice": "UNKNOWN",
+    "people_likeness": "UNKNOWN",
+    "asset_register": "UNKNOWN",
+    "claim_register": "UNKNOWN"
+  },
+  "approvals": {
+    "intake": false,
+    "strategy_copy": false,
+    "anchor": false,
+    "release": false
+  },
+  "slides": {{SLIDES_JSON}}
+}

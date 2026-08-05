@@ -340,9 +340,9 @@ def add_callout(doc: Document, label: str, text: str, *, alert=False) -> None:
 
 
 def section_page(doc: Document, title: str, *, new_page: bool = True) -> None:
+    heading = doc.add_heading(title, level=1)
     if new_page:
-        doc.add_page_break()
-    doc.add_heading(title, level=1)
+        heading.paragraph_format.page_break_before = True
 
 
 def scrub_and_canonicalize(path: Path) -> None:
@@ -466,15 +466,23 @@ def build(output: Path) -> Path:
             "Python 3.11 or later for AI Sloppy Copy, configuration, and validation.",
         ),
     )
-    doc.add_heading("Step 1 of 3: Ponytail", level=2)
+    doc.add_heading("Step 1 of 5: Ponytail", level=2)
     add_link(doc, "Repository", "https://github.com/DietrichGebert/ponytail")
     add_code(doc, "codex plugin marketplace add DietrichGebert/ponytail")
     add_code(doc, "codex plugin add ponytail@ponytail")
-    doc.add_heading("Step 2 of 3: AI Sloppy Copy", level=2)
+    doc.add_heading("Step 2 of 5: AI Sloppy Copy", level=2)
     add_link(doc, "Repository", "https://github.com/plotdevice01/ai-sloppy-copy")
     add_code(doc, "codex plugin marketplace add plotdevice01/ai-sloppy-copy")
     add_code(doc, "codex plugin add ai-sloppy-copy@ai-sloppy-copy")
-    doc.add_heading("Step 3 of 3: Chief of Staff", level=2)
+    doc.add_heading("Step 3 of 5: Brand Voice Factory", level=2)
+    add_link(doc, "Repository", "https://github.com/plotdevice01/brand-voice-factory")
+    add_code(doc, "codex plugin marketplace add plotdevice01/brand-voice-factory")
+    add_code(doc, "codex plugin add brand-voice-factory@brand-voice-factory")
+    doc.add_heading("Step 4 of 5: Crafty Carousels", level=2)
+    add_link(doc, "Repository", "https://github.com/plotdevice01/crafty-carousels-skill")
+    add_code(doc, "codex plugin marketplace add plotdevice01/crafty-carousels-skill")
+    add_code(doc, "codex plugin add crafty-carousels@crafty-carousels-skill")
+    doc.add_heading("Step 5 of 5: Chief of Staff", level=2)
     add_link(doc, "Repository", "https://github.com/plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace add plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
@@ -483,11 +491,11 @@ def build(output: Path) -> Path:
         doc,
         (
             "Restart Codex.",
-            "Open /hooks. Review and trust the hooks offered by Ponytail, AI Sloppy Copy and Chief of Staff.",
+            "Open /hooks. Review and trust the hooks offered by the five installed plugins.",
             "Start a fresh task. Existing tasks do not retroactively gain startup context.",
             "Run codex plugin list --json.",
-            "Confirm ponytail@ponytail, ai-sloppy-copy@ai-sloppy-copy and "
-            "chief-of-staff@codex-chief-of-staff are installed and active.",
+            "Confirm ponytail@ponytail, ai-sloppy-copy@ai-sloppy-copy, brand-voice-factory@brand-voice-factory, "
+            "crafty-carousels@crafty-carousels-skill and chief-of-staff@codex-chief-of-staff are installed and active.",
         ),
     )
     add_callout(
@@ -509,14 +517,18 @@ def build(output: Path) -> Path:
     add_code(doc, "claude plugin install ponytail@ponytail --scope user")
     add_code(doc, "claude plugin marketplace add plotdevice01/ai-sloppy-copy")
     add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
+    add_code(doc, "claude plugin marketplace add plotdevice01/brand-voice-factory")
+    add_code(doc, "claude plugin install brand-voice-factory@brand-voice-factory --scope user")
+    add_code(doc, "claude plugin marketplace add plotdevice01/crafty-carousels-skill")
+    add_code(doc, "claude plugin install crafty-carousels@crafty-carousels-skill --scope user")
     add_code(doc, "claude plugin marketplace add plotdevice01/codex-chief-of-staff")
     add_code(doc, "claude plugin install chief-of-staff@codex-chief-of-staff --scope user")
     add_numbered(
         doc,
         (
             "Start Claude Code and run /reload-plugins.",
-            "Open /hooks and review the hooks from all three plugins.",
-            "Run claude plugin list --json and confirm all three plugin IDs are active.",
+            "Open /hooks and review the hooks from all five plugins.",
+            "Run claude plugin list --json and confirm all five plugin IDs are active.",
             "Start a fresh session so SessionStart loads the contract and retained persona.",
         ),
     )
@@ -524,10 +536,11 @@ def build(output: Path) -> Path:
     add_code(doc, r".\install-claude.ps1")
     add_code(doc, "./install-claude.sh")
     doc.add_paragraph(
-        "The scripts install or update all three plugins. The default scope is user. Use project scope only when "
+        "The scripts install or update all five plugins. The default scope is user. Use project scope only when "
         "the repository should carry shared plugin activation."
     )
     add_code(doc, r"Copy examples\claude-project-settings.json to .claude\settings.json")
+    section_page(doc, "2. Configure private authority")
     add_callout(
         doc,
         "Keep authority local: ",
@@ -535,8 +548,6 @@ def build(output: Path) -> Path:
         "and approval rules stay in ignored chief-of-staff.json.",
         alert=True,
     )
-
-    section_page(doc, "2. Configure private authority")
     doc.add_heading("Initialize", level=2)
     add_code(doc, 'python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"')
     doc.add_paragraph(
@@ -718,12 +729,15 @@ def build(output: Path) -> Path:
     doc.add_heading("Companion integrations", level=2)
     add_link(doc, "Ponytail repository", "https://github.com/DietrichGebert/ponytail")
     add_link(doc, "AI Sloppy Copy repository", "https://github.com/plotdevice01/ai-sloppy-copy")
+    add_link(doc, "Brand Voice Factory repository", "https://github.com/plotdevice01/brand-voice-factory")
+    add_link(doc, "Crafty Carousels repository", "https://github.com/plotdevice01/crafty-carousels-skill")
     add_bullets(
         doc,
         (
             "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
             "AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later for exact authored-copy governance.",
-            "No other repository or service is required for the core plugin. No connector is required either.",
+            "Brand Voice Factory 0.2.0 or later for the canonical voice package and handoff contract.",
+            "Crafty Carousels 0.6.0 or later for governed carousel production.",
         ),
     )
 
@@ -757,7 +771,7 @@ def build(output: Path) -> Path:
         "Accept only when: ",
         "static checks plus host and installed-runtime checks pass. A required model must pass unless the owner "
         "records a version-bound waiver for a pending Sol or Terra check. Failed checks cannot be waived. Pending "
-        "evidence stays pending. v0.6 evidence cannot be carried forward because v1.0.0 changes model-facing inputs. "
+        "evidence stays pending. Prior evidence cannot be carried forward because v2.0.0 changes model-facing inputs. "
         "Connector identities must match. The first briefing must stay inside the selected scope.",
     )
 
@@ -776,6 +790,14 @@ def build(output: Path) -> Path:
     add_code(doc, "claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy")
     add_code(doc, "claude plugin marketplace update ai-sloppy-copy")
     add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
+    add_code(doc, "codex plugin marketplace upgrade brand-voice-factory")
+    add_code(doc, "codex plugin add brand-voice-factory@brand-voice-factory")
+    add_code(doc, "claude plugin marketplace update brand-voice-factory")
+    add_code(doc, "claude plugin update brand-voice-factory@brand-voice-factory")
+    add_code(doc, "codex plugin marketplace upgrade crafty-carousels-skill")
+    add_code(doc, "codex plugin add crafty-carousels@crafty-carousels-skill")
+    add_code(doc, "claude plugin marketplace update crafty-carousels-skill")
+    add_code(doc, "claude plugin update crafty-carousels@crafty-carousels-skill")
     add_code(doc, "codex plugin marketplace upgrade codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
     add_code(doc, "claude plugin marketplace update codex-chief-of-staff")
@@ -798,7 +820,6 @@ def build(output: Path) -> Path:
         "Uninstalling does not delete chief-of-staff.json. Remove that private file separately only when the user "
         "intends to discard the configuration."
     )
-    doc.add_page_break()
     doc.add_heading("Version labels", level=2)
     add_table(
         doc,
@@ -806,6 +827,9 @@ def build(output: Path) -> Path:
         (
             ("Chief of Staff", VERSION, "None"),
             ("AI Sloppy Copy", "0.5.0", "Standard 2.2.0 or later"),
+            ("Brand Voice Factory", "0.2.0", "None"),
+            ("Crafty Carousels", "0.6.0", "None"),
+            ("Ponytail", "4.8.4", "None"),
         ),
         (3200, 2500, 3660),
     )

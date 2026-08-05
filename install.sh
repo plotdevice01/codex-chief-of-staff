@@ -47,9 +47,31 @@ if [[ "$UNINSTALL" == true ]]; then
 fi
 
 if [[ "$UPGRADE" == true ]]; then
+  for entry in \
+    "ponytail|ponytail@ponytail" \
+    "ai-sloppy-copy|ai-sloppy-copy@ai-sloppy-copy" \
+    "brand-voice-factory|brand-voice-factory@brand-voice-factory" \
+    "crafty-carousels-skill|crafty-carousels@crafty-carousels-skill"
+  do
+    marketplace="${entry%%|*}"
+    plugin="${entry#*|}"
+    run codex plugin marketplace upgrade "$marketplace"
+    run codex plugin add "$plugin"
+  done
   run codex plugin marketplace upgrade "$MARKETPLACE"
   run codex plugin add "$PLUGIN_ID"
 else
+  for entry in \
+    "DietrichGebert/ponytail|ponytail@ponytail" \
+    "plotdevice01/ai-sloppy-copy|ai-sloppy-copy@ai-sloppy-copy" \
+    "plotdevice01/brand-voice-factory|brand-voice-factory@brand-voice-factory" \
+    "plotdevice01/crafty-carousels-skill|crafty-carousels@crafty-carousels-skill"
+  do
+    repository="${entry%%|*}"
+    plugin="${entry#*|}"
+    run codex plugin marketplace add "$repository"
+    run codex plugin add "$plugin"
+  done
   run codex plugin marketplace add "$REPO_ROOT"
   run codex plugin add "$PLUGIN_ID"
 fi

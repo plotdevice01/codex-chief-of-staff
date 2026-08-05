@@ -12,6 +12,18 @@
         "repo": "plotdevice01/ai-sloppy-copy"
       }
     },
+    "brand-voice-factory": {
+      "source": {
+        "source": "github",
+        "repo": "plotdevice01/brand-voice-factory"
+      }
+    },
+    "crafty-carousels-skill": {
+      "source": {
+        "source": "github",
+        "repo": "plotdevice01/crafty-carousels-skill"
+      }
+    },
     "codex-chief-of-staff": {
       "source": {
         "source": "github",
@@ -22,6 +34,8 @@
   "enabledPlugins": {
     "ponytail@ponytail": true,
     "ai-sloppy-copy@ai-sloppy-copy": true,
+    "brand-voice-factory@brand-voice-factory": true,
+    "crafty-carousels@crafty-carousels-skill": true,
     "chief-of-staff@codex-chief-of-staff": true
   }
 }

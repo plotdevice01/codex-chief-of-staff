@@ -1,6 +1,6 @@
 # ICM conformance
 
-Chief of Staff v1.0.0 uses Interpretable Context Methodology as its default
+Chief of Staff v2.0.0 uses Interpretable Context Methodology as its default
 operating architecture. The compact task contract applies to every non-trivial
 task. Full workspace files appear only when the work needs persistent structure.
 
@@ -69,5 +69,5 @@ authorize external actions. Human approval remains the gate for material work.
 
 The paper discusses incremental recompilation and semantic provenance. It also
 describes cross-stage verification and markdown breakpoints. Learning from
-repeated edits is another future direction. v1.0.0 may use verified pieces, but it
+repeated edits is another future direction. v2.0.0 may use verified pieces, but it
 does not claim those research directions as complete capabilities.

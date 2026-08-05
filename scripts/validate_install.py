@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -85,6 +86,10 @@ def validate_behavior(config: dict) -> list[str]:
         "dependencies.ponytail.required_for_full_parity": True,
         "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
+        "dependencies.brand_voice_factory.minimum_version": "0.2.0",
+        "dependencies.brand_voice_factory.required_for_full_parity": True,
+        "dependencies.crafty_carousels.minimum_version": "0.6.0",
+        "dependencies.crafty_carousels.required_for_full_parity": True,
     }
     for path, required in expected.items():
         try:
@@ -211,7 +216,10 @@ def dependency_warnings(config: dict) -> list[str]:
     mapping = {
         "ponytail": "ponytail",
         "ai_sloppy_copy": "ai-sloppy-copy",
+        "brand_voice_factory": "brand-voice-factory",
+        "crafty_carousels": "crafty-carousels",
     }
+    selected_roots = {"chief-of-staff": ROOT}
     for config_name, plugin_name in mapping.items():
         requirement = dependencies.get(config_name, {})
         if not requirement.get("required_for_full_parity"):
@@ -229,6 +237,7 @@ def dependency_warnings(config: dict) -> list[str]:
             key=lambda item: parse_version(item[0]) or (0, 0, 0),
         )
         actual, root = record
+        selected_roots[plugin_name] = root
         if (parse_version(actual) or (0, 0, 0)) < (
             parse_version(minimum) or (0, 0, 0)
         ):
@@ -241,7 +250,63 @@ def dependency_warnings(config: dict) -> list[str]:
             warnings.extend(validate_ponytail(root))
         elif plugin_name == "ai-sloppy-copy":
             warnings.extend(validate_sloppy_copy(root))
+    warnings.extend(duplicate_skill_warnings(selected_roots))
     return warnings
+
+
+def skill_ids(root: Path) -> set[str]:
+    names: set[str] = set()
+    for path in root.glob("skills/*/SKILL.md"):
+        match = re.search(r"(?m)^name:\s*([^\s]+)\s*$", path.read_text(encoding="utf-8-sig"))
+        if match:
+            names.add(match.group(1))
+    return names
+
+
+def duplicate_skill_warnings(roots: dict[str, Path]) -> list[str]:
+    owners: dict[str, list[str]] = {}
+    for plugin_name, root in roots.items():
+        for skill_name in skill_ids(root):
+            owners.setdefault(skill_name, []).append(plugin_name)
+    return [
+        f"Duplicate skill ID {skill_name} is provided by: {', '.join(sorted(providers))}."
+        for skill_name, providers in sorted(owners.items())
+        if len(providers) > 1
+    ]
+
+
+def install_receipt(config_path: Path, config: dict) -> dict:
+    installed = installed_plugin_records()
+    mapping = {
+        "ponytail": "ponytail",
+        "ai_sloppy_copy": "ai-sloppy-copy",
+        "brand_voice_factory": "brand-voice-factory",
+        "crafty_carousels": "crafty-carousels",
+    }
+    records = []
+    for config_name, plugin_name in mapping.items():
+        candidates = installed.get(plugin_name, [])
+        if not candidates:
+            records.append({"plugin": plugin_name, "status": "missing"})
+            continue
+        version, root = max(candidates, key=lambda item: parse_version(item[0]) or (0, 0, 0))
+        manifest = root / ".codex-plugin" / "plugin.json"
+        records.append(
+            {
+                "plugin": plugin_name,
+                "version": version,
+                "root": str(root),
+                "manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                "skill_ids": sorted(skill_ids(root)),
+                "status": "found",
+            }
+        )
+    return {
+        "schema_version": 1,
+        "chief_of_staff_version": VERSION,
+        "config": str(config_path),
+        "dependencies": records,
+    }
 
 
 def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
@@ -384,6 +449,8 @@ def main() -> int:
         help="Validate the safe example instead of a local configuration.",
     )
     parser.add_argument("--strict-dependencies", action="store_true")
+    parser.add_argument("--doctor", action="store_true")
+    parser.add_argument("--receipt", type=Path)
     args = parser.parse_args()
 
     errors = [
@@ -401,7 +468,7 @@ def main() -> int:
     persona_errors, _ = validate_persona(config_path)
     errors.extend(f"Persona validation: {error}" for error in persona_errors)
 
-    if args.strict_dependencies:
+    if args.strict_dependencies or args.doctor:
         errors.extend(warnings)
         warnings = []
     for warning in warnings:
@@ -412,6 +479,15 @@ def main() -> int:
         return 1
     print(f"PASS: Chief of Staff v{VERSION} validated with {config_path}.")
     print("Live connector identities and fresh-task responses were not checked.")
+    if args.doctor or args.receipt:
+        config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+        receipt = install_receipt(config_path, config)
+        if args.receipt:
+            args.receipt.parent.mkdir(parents=True, exist_ok=True)
+            args.receipt.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+            print(f"PASS: install receipt written to {args.receipt}.")
+        if args.doctor:
+            print(json.dumps(receipt, indent=2))
     return 0
 
 

@@ -7,6 +7,7 @@ python Test-Persona.py
 python validate_install.py --example
 python scripts/validate_repository.py
 node tests/test_hooks.js
+python tests/test_viral_carousel_skill.py
 python tests/test_icm.py
 python tests/test_release.py
 python tests/test_sync.py
@@ -19,6 +20,8 @@ These checks cover:
 - nine integration rules and twelve live scenario definitions;
 - shared behavior, ICM routing, and configuration defaults;
 - five ICM forms and ten invariants, plus release contracts and cold-walk failures;
+- Viral Carousel skill files and ICM stage contracts, plus human gates and stamping scripts;
+- companion plugin discovery and duplicate skill detection, plus install receipts;
 - manifest, skill, hook, and version consistency;
 - session and subagent hook output;
 - intent-specific prompt activation and required response labels;
@@ -48,7 +51,7 @@ fresh Claude Code session. Record:
 - Ponytail and AI Sloppy Copy versions.
 
 The active Standard route is Sol Medium; there is no quick or lower-model
-route. v1.0.0 changes model-facing inputs and adds ICM scenarios. Evidence from
+route. v2.0.0 changes model-facing inputs and plugin ownership. Evidence from
 v0.6 cannot be carried forward. A failed scenario blocks publication. A
 pending Sol or Terra check requires an explicit version-bound owner waiver.
 Pending evidence remains pending.

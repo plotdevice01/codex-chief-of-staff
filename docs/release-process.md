@@ -39,7 +39,7 @@ separate approval after the candidate passes every required gate.
    remaining risks.
 2. Wait for explicit publication approval.
 3. Commit the canonical source.
-4. Create and push the signed or annotated `v1.0.0` tag.
+4. Create and push the signed or annotated tag for the current `VERSION`.
 5. Verify CI plus attestation. Verify the release asset and checksum. Check the
    README links and GitHub Latest. Confirm installed caches and fresh-host
    behavior.

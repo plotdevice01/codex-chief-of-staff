@@ -25,7 +25,18 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
-## What changed in v1.0.0
+## What changed in v2.0.0
+
+- Brand Voice Factory is now a standalone required plugin. Chief no longer
+  bundles a duplicate `brand-voice-copywriter` skill.
+- The complete-stack installers now install and update Ponytail, AI Sloppy
+  Copy, Brand Voice Factory, Crafty Carousels, and Chief of Staff in order.
+- Install validation now detects duplicate skill IDs and emits an install
+  receipt with active versions, paths, manifest hashes, and skill ownership.
+- Chief coordinates the approved Brand Voice package through Crafty's verified
+  importer, then routes authored copy through AI Sloppy Copy before release.
+
+### Preserved from v1.0.0
 
 - Every non-trivial task uses a compact ICM contract for scope, exact inputs,
   one job, relevant references, output, observable status, and human review.
@@ -42,13 +53,13 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - The bundled Architect is pinned to `RinDig/icm-architect` commit `8f9cdf9`.
   It includes five workspace forms, ten invariants, both operating modes,
   Codex `AGENTS.md` routing, the cold walk, and Chief safety controls.
-- The repository now carries Layer 1 routing, an ICM release pipeline, a
-  conformance matrix, deterministic validation, and failure fixtures.
+- The repository now carries Layer 1 routing and an ICM release pipeline.
+  It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
 - AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later is required for full
   reference behavior.
-- The retained persona stays unchanged at 97 requirements. v1.0.0 expands the
+- The retained persona stays unchanged at 97 requirements. v1.0.0 expanded the
   integration contract to nine rules and the live acceptance set to twelve.
-- The GitHub release, tag, ZIP, and both host manifests use `1.0.0`.
+- The GitHub release, tag, ZIP, and both host manifests use `2.0.0`.
 
 ## Version numbers
 
@@ -57,20 +68,21 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `1.0.0` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `1.0.0` |
+| Chief of Staff `2.0.0` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `2.0.0` |
 | AI Sloppy Copy `0.5.0` | The separate companion plugin used for authored prose checks | Install `0.5.0` or later |
 | AI Sloppy Copy Standard `2.2.0` | The writing-rules contract bundled inside AI Sloppy Copy | Cite the Standard when discussing rule behavior |
+| Brand Voice Factory `0.2.0` | The canonical evidence-backed voice-package producer | Install `0.2.0` or later |
+| Crafty Carousels `0.6.0` | The governed carousel producer and Brand Voice package importer | Install `0.6.0` or later |
 
 Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v1.0.0 release evidence
+## v2.0.0 release evidence
 
-The deterministic suite passed. Fresh Sol, Codex, Claude Code, and installed
-runtime checks passed too. The fresh Terra scenario run remains pending. The
-repository owner approved publication under a version-bound waiver, and Terra
-is not reported as a pass.
+The deterministic source suite passes. Fresh Sol, Terra, Codex, Claude Code,
+and installed-runtime acceptance remain pending for this candidate. No prior
+v1.0.0 model result is carried forward.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|
@@ -86,7 +98,7 @@ is not reported as a pass.
 ## Install the complete stack
 
 Use this order. Each plugin remains separate so it can update independently,
-but all three are required for exact reference-install behavior.
+and all five are required for exact reference-install behavior.
 
 Before starting, install [Git](https://git-scm.com/downloads),
 [Node.js 18 or later](https://nodejs.org/en/download), and
@@ -96,37 +108,47 @@ Before starting, install [Git](https://git-scm.com/downloads),
 
 ### Codex
 
-Run all six commands in order:
+Run all ten commands in order:
 
 ```powershell
 codex plugin marketplace add DietrichGebert/ponytail
 codex plugin add ponytail@ponytail
 codex plugin marketplace add plotdevice01/ai-sloppy-copy
 codex plugin add ai-sloppy-copy@ai-sloppy-copy
+codex plugin marketplace add plotdevice01/brand-voice-factory
+codex plugin add brand-voice-factory@brand-voice-factory
+codex plugin marketplace add plotdevice01/crafty-carousels-skill
+codex plugin add crafty-carousels@crafty-carousels-skill
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-Then restart Codex, open `/hooks`, review all three plugins, and start a fresh
+Then restart Codex, open `/hooks`, review all five plugins, and start a fresh
 task. Run `codex plugin list --json` and confirm:
-`ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`, and
+`ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`,
+`brand-voice-factory@brand-voice-factory`,
+`crafty-carousels@crafty-carousels-skill`, and
 `chief-of-staff@codex-chief-of-staff`.
 
 ### Claude Code
 
-Run all six commands in order:
+Run all ten commands in order:
 
 ```powershell
 claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 claude plugin marketplace add plotdevice01/ai-sloppy-copy
 claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/brand-voice-factory
+claude plugin install brand-voice-factory@brand-voice-factory --scope user
+claude plugin marketplace add plotdevice01/crafty-carousels-skill
+claude plugin install crafty-carousels@crafty-carousels-skill --scope user
 claude plugin marketplace add plotdevice01/codex-chief-of-staff
 claude plugin install chief-of-staff@codex-chief-of-staff --scope user
 ```
 
 Then start Claude Code, run `/reload-plugins`, review `/hooks`, and start a
-fresh session. Run `claude plugin list --json` and confirm the same three
+fresh session. Run `claude plugin list --json` and confirm the same five
 plugin IDs.
 
 See the [Claude Code deployment guide](docs/claude-code.md) for the one-command
@@ -239,14 +261,14 @@ Static tests verify:
 - ICM prompt classification and correction limits;
 - recovery plus pre-tool and final-response privacy checks;
 - deterministic release contents;
-- complete Ponytail and AI Sloppy Copy companion capabilities under strict
-  dependency validation.
+- complete companion capabilities under strict dependency validation for Ponytail;
+  AI Sloppy Copy; Brand Voice Factory; and Crafty Carousels.
 
 The twelve prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 
-## Why three plugins
+## Why five plugins
 
 Chief of Staff contains the complete retained persona and response modes. It
 also carries account gates and project routing. A compact fallback protects
@@ -256,9 +278,10 @@ efficiency modes and the complete implementation ladder. It also supplies
 lifecycle hooks plus all six bundled skills.
 [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy) adds authored
 copy hooks and the deterministic local checker.
+[Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory) owns governed client voice packages and their sealed handoff contract.
+[Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill) imports that package and produces governed carousel runs.
 
-See [dependencies](docs/dependencies.md). No other repository or plugin is
-required for the complete reference stack.
+See [dependencies](docs/dependencies.md) for ownership and minimum versions.
 
 ## Manual and offline installation
 

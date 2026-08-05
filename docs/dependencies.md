@@ -1,95 +1,64 @@
 # Complete stack and dependencies
 
-Exact reference-install behavior uses three public plugins on Codex or Claude
-Code. Install them in this order.
+The reference installation uses five plugins. Each product has one job and one canonical skill owner.
 
-## 1. Ponytail 4.8.4 or later
+## Install order
 
-- Repository: [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
-- Latest release: [Ponytail releases](https://github.com/DietrichGebert/ponytail/releases/latest)
-- Purpose: persistent implementation discipline, modes, lifecycle hooks, and
-  review skills.
+1. Ponytail `4.8.4` or later supplies implementation discipline.
+2. AI Sloppy Copy `0.5.0` or later supplies authored-copy rules and the local checker.
+3. Brand Voice Factory `0.2.0` or later owns `brand-voice-copywriter` and sealed voice packages.
+4. Crafty Carousels `0.6.0` or later imports approved voice packages and produces carousel runs.
+5. Chief of Staff coordinates scope, approvals, routing, status, and confirmed external handoffs.
+
+## Codex
 
 ```powershell
 codex plugin marketplace add DietrichGebert/ponytail
 codex plugin add ponytail@ponytail
-```
-
-```powershell
-claude plugin marketplace add DietrichGebert/ponytail
-claude plugin install ponytail@ponytail --scope user
-```
-
-## 2. AI Sloppy Copy 0.5.0
-
-- Repository: [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy)
-- Latest release: [AI Sloppy Copy releases](https://github.com/plotdevice01/ai-sloppy-copy/releases/latest)
-- Purpose: authored-copy rules, evidence and voice gates, lifecycle hooks, and
-  deterministic local checking.
-- Includes AI Sloppy Copy Standard 2.2.0 or later.
-- The GitHub release, tag, ZIP, and both host manifests use `0.5.0`.
-- Standard `2.2.0` is the separate writing-rules contract carried by the
-  product package.
-- Existing `2.2.6` installations require one remove/reinstall cycle because
-  semantic-version updaters sort `0.5.0` below `2.2.6`.
-
-```powershell
 codex plugin marketplace add plotdevice01/ai-sloppy-copy
 codex plugin add ai-sloppy-copy@ai-sloppy-copy
-```
-
-```powershell
-claude plugin marketplace add plotdevice01/ai-sloppy-copy
-claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
-```
-
-## 3. Chief of Staff 1.0.0
-
-- Repository: [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
-- Latest release: [Chief of Staff releases](https://github.com/plotdevice01/codex-chief-of-staff/releases/latest)
-- Purpose: retained persona and response modes. It also supplies account gates
-  and scope routing. Approval controls and project-rule preservation remain
-  part of Chief of Staff.
-
-```powershell
+codex plugin marketplace add plotdevice01/brand-voice-factory
+codex plugin add brand-voice-factory@brand-voice-factory
+codex plugin marketplace add plotdevice01/crafty-carousels-skill
+codex plugin add crafty-carousels@crafty-carousels-skill
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
+Repositories:
+
+- [Ponytail](https://github.com/DietrichGebert/ponytail)
+- [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy)
+- [Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory)
+- [Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill)
+- [Chief of Staff](https://github.com/plotdevice01/codex-chief-of-staff)
+
+Restart Codex after installation. Start a fresh task so lifecycle context and skill discovery use the current versions.
+
+## Claude Code
+
 ```powershell
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail --scope user
+claude plugin marketplace add plotdevice01/ai-sloppy-copy
+claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/brand-voice-factory
+claude plugin install brand-voice-factory@brand-voice-factory --scope user
+claude plugin marketplace add plotdevice01/crafty-carousels-skill
+claude plugin install crafty-carousels@crafty-carousels-skill --scope user
 claude plugin marketplace add plotdevice01/codex-chief-of-staff
 claude plugin install chief-of-staff@codex-chief-of-staff --scope user
 ```
 
-Restart Codex after its six commands. For Claude Code, run `/reload-plugins`.
-Open `/hooks`, review the hooks from all three plugins, then start a fresh task
-or session.
+Run `/reload-plugins`, review `/hooks`, and start a fresh session.
 
-Verify:
+## Verify
 
 ```powershell
-codex plugin list --json
+python validate_install.py --doctor
+python validate_install.py --strict-dependencies --receipt install-receipt.json
 ```
 
-The list must show these active entries:
+The doctor checks minimum versions and companion behavior. It also checks duplicate skill IDs across the selected plugin versions. The receipt records the active paths, versions, manifest hashes, and discovered skill IDs.
 
-- `ponytail@ponytail`;
-- `ai-sloppy-copy@ai-sloppy-copy`;
-- `chief-of-staff@codex-chief-of-staff`.
-
-Claude Code verification:
-
-```powershell
-claude plugin list --json
-```
-
-From a Chief of Staff source checkout, run:
-
-```powershell
-python validate_install.py --strict-dependencies
-```
-
-Without `--strict-dependencies`, missing companion plugins are warnings. With
-it, either missing companion fails validation. On Claude Code, verify the
-installed companions with `claude plugin list --json`. No other repository,
-runtime service, MCP server, database, paid account, or connector is required.
+AI Sloppy Copy carries a separate Standard version for its writing-rules contract. The plugin version is the number users install. The Standard version changes when the writing contract changes.

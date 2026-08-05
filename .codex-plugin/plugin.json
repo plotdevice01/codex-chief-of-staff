@@ -1,6 +1,6 @@
 {
   "name": "chief-of-staff",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A scoped Chief of Staff for Codex and Claude Code with default ICM architecture, account gates, project routing, and retained judgment.",
   "author": {
     "name": "plotdevice01",

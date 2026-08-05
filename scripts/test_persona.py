@@ -132,6 +132,10 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "dependencies.ponytail.required_for_full_parity": True,
         "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
         "dependencies.ai_sloppy_copy.required_for_full_parity": True,
+        "dependencies.brand_voice_factory.minimum_version": "0.2.0",
+        "dependencies.brand_voice_factory.required_for_full_parity": True,
+        "dependencies.crafty_carousels.minimum_version": "0.6.0",
+        "dependencies.crafty_carousels.required_for_full_parity": True,
     }
     for path, expected in expected_config.items():
         try:

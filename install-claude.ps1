@@ -13,6 +13,8 @@ if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
 $stack = @(
     @{ Marketplace = "ponytail"; Repository = "DietrichGebert/ponytail"; Plugin = "ponytail@ponytail" },
     @{ Marketplace = "ai-sloppy-copy"; Repository = "plotdevice01/ai-sloppy-copy"; Plugin = "ai-sloppy-copy@ai-sloppy-copy"; ResetFrom = "2.2.6" },
+    @{ Marketplace = "brand-voice-factory"; Repository = "plotdevice01/brand-voice-factory"; Plugin = "brand-voice-factory@brand-voice-factory" },
+    @{ Marketplace = "crafty-carousels-skill"; Repository = "plotdevice01/crafty-carousels-skill"; Plugin = "crafty-carousels@crafty-carousels-skill" },
     @{ Marketplace = "codex-chief-of-staff"; Repository = "plotdevice01/codex-chief-of-staff"; Plugin = "chief-of-staff@codex-chief-of-staff" }
 )
 

@@ -73,7 +73,7 @@ DIRECTORIES = (
 )
 SKIP_PARTS = {"__pycache__", ".DS_Store"}
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
-ZIP_TIME = (2026, 8, 3, 0, 0, 0)
+ZIP_TIME = (2026, 8, 5, 0, 0, 0)
 
 
 def sha256(path: Path) -> str:
@@ -210,7 +210,7 @@ def build(
     acceptance_status = model_acceptance_release_status(model_acceptance)
     validation = {
         "release_version": VERSION,
-        "built_at": datetime(2026, 8, 3, tzinfo=timezone.utc).isoformat(),
+        "built_at": datetime(2026, 8, 5, tzinfo=timezone.utc).isoformat(),
         "status": acceptance_status,
         "persona_requirements": metrics["persona_requirements"],
         "integration_requirements": metrics["integration_requirements"],
@@ -226,6 +226,8 @@ def build(
         "companion_requirements": {
             "ponytail": ">=4.8.4",
             "ai_sloppy_copy": ">=0.5.0 with Standard 2.2.0 or later",
+            "brand_voice_factory": ">=0.2.0",
+            "crafty_carousels": ">=0.6.0",
         },
         "files": hashes,
     }

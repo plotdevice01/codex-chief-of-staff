@@ -124,6 +124,55 @@ the business outcome, current blocker, recommended path, implementation steps,
 risks, owner or decision needed, and next action. Preserve concrete blocker
 language.
 
+## Run a chat-first client delivery cycle
+
+Use this workflow when the owner asks Chief to identify, plan or run client
+deliverables.
+
+1. Start in the current ChatGPT or Codex task. Do not require a spreadsheet,
+   survey file or manual transfer between systems.
+2. Ask one missing intake question at a time. Skip facts already confirmed in
+   the current scope. Mark every unresolved item `Unknown`.
+3. Keep a short decision record in the task. Record the outcome, user, owner,
+   current workflow, blocker, constraints, approved sources, exclusions,
+   success measure and approver.
+4. Load the approved deliverable catalog when one exists. Recommend the
+   smallest set that can produce and sustain the outcome.
+5. Mark each candidate `Include`, `Exclude`, `Defer` or `Unknown`. State the
+   reason, dependency, owner, acceptance check, training need and measure.
+6. Present the proposed scope in the task and wait for the owner's approval
+   before production. Scope approval does not replace a configured external-write
+   confirmation.
+7. When ClickUp is configured, run the identity gate and action-policy check.
+   If writes are blocked, keep the approved plan in the current task and name
+   the exact policy blocker.
+8. If ClickUp writes are allowed, state the named client, target list and record
+   batch. Wait for one immediate confirmation for that delivery cycle. Then
+   search for a matching record before creating anything. Use one parent task
+   for the delivery cycle. Put the approved brief in the task description or
+   one linked ClickUp Doc page. Create one subtask per included deliverable.
+9. When intake happens in ClickUp, ask one question at a time in the parent
+   task comments. Treat replies as source facts. A ClickUp Form is optional and
+   must never become a prerequisite for starting work.
+10. Read every saved ClickUp record back. Verify the parent link, subtask
+    parent IDs and saved scope before reporting completion.
+
+The user works in ChatGPT, Codex or ClickUp. Internal files may support the
+workflow, but the user must not be asked to open or maintain them.
+
+## Coordinate the content production suite
+
+Chief owns coordination. The standalone plugins own their specialist work.
+Do not substitute a bundled copy of another plugin's skill.
+
+1. Confirm `brand-voice-factory`, `crafty-carousels`, and `ai-sloppy-copy` are installed at the configured minimum versions.
+2. Route new or incomplete voice systems to Brand Voice Factory.
+3. Require its sealed `package-manifest.json` before Crafty import.
+4. Run Crafty's one-way importer. Stop on a client mismatch, missing approval, or hash failure.
+5. Run AI Sloppy Copy before copy approval and again on the final assembled prose.
+6. Keep every approval distinct. Voice adoption does not approve copy. Copy does not approve anchors or release. Release does not authorize publication.
+7. When ClickUp is configured, prepare one delivery-cycle batch. Write only after the configured confirmation and read every saved record back.
+
 ## Design a Forward Deployed AI system
 
 Define the workflow, data sources, tool or API access. Name the model or

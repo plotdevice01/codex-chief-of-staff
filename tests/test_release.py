@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -14,26 +15,71 @@ from scripts.validate_repository import (  # noqa: E402
     validate_model_acceptance,
     validate_release_waiver,
 )
+from scripts.validate_install import duplicate_skill_warnings  # noqa: E402
 
 
 def main() -> int:
+    chief_skill = (ROOT / "skills" / "chief-of-staff" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    for required in (
+        "## Run a chat-first client delivery cycle",
+        "Ask one missing intake question at a time.",
+        "Do not require a spreadsheet",
+        "Scope approval does not replace a configured external-write",
+        "Wait for one immediate confirmation for that delivery cycle.",
+        "Use one parent task",
+        "for the delivery cycle.",
+        "Create one subtask",
+        "per included deliverable.",
+        "Read every saved ClickUp record back.",
+    ):
+        assert required in chief_skill, f"Missing chat-first delivery rule: {required}"
+
+    assert not (ROOT / "skills" / "brand-voice-copywriter" / "SKILL.md").exists()
+    with tempfile.TemporaryDirectory() as folder:
+        temp = Path(folder)
+        roots = {}
+        for plugin in ("one", "two"):
+            root = temp / plugin
+            skill = root / "skills" / "duplicate" / "SKILL.md"
+            skill.parent.mkdir(parents=True)
+            skill.write_text("---\nname: duplicate\n---\n", encoding="utf-8")
+            roots[plugin] = root
+        warnings = duplicate_skill_warnings(roots)
+        assert len(warnings) == 1 and "Duplicate skill ID duplicate" in warnings[0]
+
     evidence = json.loads(
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
-    assert not validate_model_acceptance(require_pass=True)
-    assert model_acceptance_release_status(evidence) == "pass_with_waiver"
+    assert validate_model_acceptance(require_pass=True)
+    assert model_acceptance_release_status(evidence) == "candidate"
 
-    without_waiver = copy.deepcopy(evidence)
-    without_waiver.pop("release_waiver")
-    assert model_acceptance_release_status(without_waiver) == "candidate"
+    waived = copy.deepcopy(evidence)
+    waived["models"]["gpt-5.6-sol"]["status"] = "pass"
+    waived["hosts"]["codex"]["status"] = "pass"
+    waived["hosts"]["claude-code"]["status"] = "pass"
+    waived["installed_runtime_smoke"]["status"] = "pass"
+    waived["release_waiver"] = {
+        "status": "approved",
+        "release_version": evidence["release_version"],
+        "approved_at": "2026-08-05T00:00:00-05:00",
+        "approved_by": "repository_owner",
+        "waived_checks": ["models.gpt-5.6-terra"],
+        "reason": "Version-bound test fixture for pending Terra evidence.",
+    }
+    assert model_acceptance_release_status(waived) == "pass_with_waiver"
+    assert not validate_release_waiver(waived)[1]
 
-    failed = copy.deepcopy(evidence)
+    failed = copy.deepcopy(waived)
     failed["models"]["gpt-5.6-terra"]["status"] = "fail"
     assert model_acceptance_release_status(failed) == "candidate"
     _, errors = validate_release_waiver(failed)
     assert errors
 
-    print("PASS: release waiver is version-bound and covers only pending model checks.")
+    print(
+        "PASS: chat-first delivery rules and release waiver controls are present."
+    )
     return 0
 
 

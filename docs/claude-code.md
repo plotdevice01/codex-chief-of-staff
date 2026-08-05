@@ -1,6 +1,6 @@
 # Claude Code deployment
 
-Chief of Staff v1.0.0 supports Claude Code with the same portable operating
+Chief of Staff v2.0.0 supports Claude Code with the same portable operating
 contract, retained persona, response modes, project-rule preservation, and
 companion stack used by the Codex release. Only host-specific manifests, hook
 environment variables, and installation commands differ.
@@ -52,6 +52,8 @@ Install:
 Repositories:
 [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail),
 [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy),
+[plotdevice01/brand-voice-factory](https://github.com/plotdevice01/brand-voice-factory),
+[plotdevice01/crafty-carousels-skill](https://github.com/plotdevice01/crafty-carousels-skill),
 and
 [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff).
 
@@ -62,6 +64,10 @@ claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 claude plugin marketplace add plotdevice01/ai-sloppy-copy
 claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/brand-voice-factory
+claude plugin install brand-voice-factory@brand-voice-factory --scope user
+claude plugin marketplace add plotdevice01/crafty-carousels-skill
+claude plugin install crafty-carousels@crafty-carousels-skill --scope user
 claude plugin marketplace add plotdevice01/codex-chief-of-staff
 claude plugin install chief-of-staff@codex-chief-of-staff --scope user
 ```
@@ -70,9 +76,11 @@ Then:
 
 1. Start Claude Code.
 2. Run `/reload-plugins`.
-3. Open `/hooks` and review the hooks from all three plugins.
+3. Open `/hooks` and review the hooks from all five plugins.
 4. Run `claude plugin list --json` in a terminal.
-5. Confirm `ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`, and
+5. Confirm `ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`,
+   `brand-voice-factory@brand-voice-factory`,
+   `crafty-carousels@crafty-carousels-skill`, and
    `chief-of-staff@codex-chief-of-staff` are installed and active.
 6. Start a fresh Claude Code session so `SessionStart` loads the complete
    contract and persona.
@@ -150,9 +158,13 @@ If AI Sloppy Copy `2.2.6` is installed, uninstall it once before moving to
 claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy
 claude plugin marketplace update ponytail
 claude plugin marketplace update ai-sloppy-copy
+claude plugin marketplace update brand-voice-factory
+claude plugin marketplace update crafty-carousels-skill
 claude plugin marketplace update codex-chief-of-staff
 claude plugin update ponytail@ponytail
 claude plugin update ai-sloppy-copy@ai-sloppy-copy
+claude plugin update brand-voice-factory@brand-voice-factory
+claude plugin update crafty-carousels@crafty-carousels-skill
 claude plugin update chief-of-staff@codex-chief-of-staff
 ```
 

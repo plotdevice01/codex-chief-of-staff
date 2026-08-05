@@ -37,7 +37,21 @@ codex plugin marketplace add plotdevice01/ai-sloppy-copy
 codex plugin add ai-sloppy-copy@ai-sloppy-copy
 ```
 
-### 3. Install Chief of Staff
+### 3. Install Brand Voice Factory
+
+```powershell
+codex plugin marketplace add plotdevice01/brand-voice-factory
+codex plugin add brand-voice-factory@brand-voice-factory
+```
+
+### 4. Install Crafty Carousels
+
+```powershell
+codex plugin marketplace add plotdevice01/crafty-carousels-skill
+codex plugin add crafty-carousels@crafty-carousels-skill
+```
+
+### 5. Install Chief of Staff
 
 Repository:
 [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff)
@@ -47,7 +61,7 @@ codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-### 4. Restart and trust hooks
+### 6. Restart and trust hooks
 
 1. Restart the Codex desktop app, or start a new `codex` session.
 2. Open `/hooks`.
@@ -58,7 +72,7 @@ codex plugin add chief-of-staff@codex-chief-of-staff
 4. Start a new Codex task. Existing tasks do not receive startup context
    retroactively.
 
-### 5. Verify all three plugins
+### 7. Verify all five plugins
 
 ```powershell
 codex plugin list --json
@@ -70,12 +84,14 @@ Confirm:
 |---|---|---:|---|
 | `ponytail` | `ponytail` | `4.8.4` | active |
 | `ai-sloppy-copy` | `ai-sloppy-copy` | `0.5.0` | active |
-| `chief-of-staff` | `codex-chief-of-staff` | `1.0.0` | active |
+| `brand-voice-factory` | `brand-voice-factory` | `0.2.0` | active |
+| `crafty-carousels` | `crafty-carousels-skill` | `0.6.0` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `2.0.0` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
 Codex, and check again.
 
-### 6. Configure and validate
+### 8. Configure and validate
 
 In the new task, ask:
 
@@ -93,22 +109,28 @@ It does not authorize any project.
 The repositories are
 [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail),
 [plotdevice01/ai-sloppy-copy](https://github.com/plotdevice01/ai-sloppy-copy),
+[plotdevice01/brand-voice-factory](https://github.com/plotdevice01/brand-voice-factory),
+[plotdevice01/crafty-carousels-skill](https://github.com/plotdevice01/crafty-carousels-skill),
 and
 [plotdevice01/codex-chief-of-staff](https://github.com/plotdevice01/codex-chief-of-staff).
 
-Run all six commands in order:
+Run all ten commands in order:
 
 ```powershell
 claude plugin marketplace add DietrichGebert/ponytail
 claude plugin install ponytail@ponytail --scope user
 claude plugin marketplace add plotdevice01/ai-sloppy-copy
 claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
+claude plugin marketplace add plotdevice01/brand-voice-factory
+claude plugin install brand-voice-factory@brand-voice-factory --scope user
+claude plugin marketplace add plotdevice01/crafty-carousels-skill
+claude plugin install crafty-carousels@crafty-carousels-skill --scope user
 claude plugin marketplace add plotdevice01/codex-chief-of-staff
 claude plugin install chief-of-staff@codex-chief-of-staff --scope user
 ```
 
 Start Claude Code, run `/reload-plugins`, review `/hooks`, and start a fresh
-session. Confirm all three plugin IDs with:
+session. Confirm all five plugin IDs with:
 
 ```powershell
 claude plugin list --json
@@ -170,9 +192,13 @@ If AI Sloppy Copy `2.2.6` is installed, remove it once before moving to
 codex plugin remove ai-sloppy-copy
 codex plugin marketplace upgrade ponytail
 codex plugin marketplace upgrade ai-sloppy-copy
+codex plugin marketplace upgrade brand-voice-factory
+codex plugin marketplace upgrade crafty-carousels-skill
 codex plugin marketplace upgrade codex-chief-of-staff
 codex plugin add ponytail@ponytail
 codex plugin add ai-sloppy-copy@ai-sloppy-copy
+codex plugin add brand-voice-factory@brand-voice-factory
+codex plugin add crafty-carousels@crafty-carousels-skill
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
@@ -209,20 +235,20 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v1.0.0.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v2.0.0.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v1.0.0.zip
+sha256sum ./codex-chief-of-staff-v2.0.0.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v1.0.0.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v2.0.0.zip.sha256`.
 
 ## Recovery
 
-1. Repeat the six install commands in the recommended order.
+1. Repeat the ten install commands in the recommended order.
 2. Restart Codex and re-trust the current hooks.
 3. Run `codex plugin list --json`.
 4. Run `validate_install.py --strict-dependencies` from a checkout, or ask the

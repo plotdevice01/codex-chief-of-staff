@@ -3,6 +3,26 @@
 All notable changes are recorded here. Public releases and host manifests use
 the same three-part semantic product version.
 
+## [2.0.0] - 2026-08-05
+
+### Changed
+
+- Made Brand Voice Factory the only owner of `brand-voice-copywriter` and
+  removed Chief's duplicate bundled copy.
+- Added complete-stack installation and update coverage for Ponytail, AI
+  Sloppy Copy, Brand Voice Factory, Crafty Carousels, and Chief of Staff.
+- Added strict duplicate-skill detection plus machine-readable install
+  receipts with active paths, versions, manifests, hashes, and skill IDs.
+- Added the governed Brand Voice to Crafty handoff and AI Sloppy Copy release
+  check to Chief's content-production route.
+- Raised full-parity minimums to Brand Voice Factory `0.2.0` and Crafty
+  Carousels `0.6.0`.
+
+### Verification
+
+- Reset model and host evidence for fresh v2.0.0 acceptance. No v1.0.0 result
+  is carried forward.
+
 ## [1.0.0] - 2026-08-03
 
 ### Added

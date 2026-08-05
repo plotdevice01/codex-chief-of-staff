@@ -25,7 +25,6 @@ jobs:
       - run: python validate_install.py --example
       - run: node tests/test_hooks.js
       - run: python tests/test_icm.py
-      - run: python tests/test_brand_voice_skill.py
       - run: python tests/test_release.py
       - run: python tests/test_sync.py
       - run: python scripts/build_sop.py
