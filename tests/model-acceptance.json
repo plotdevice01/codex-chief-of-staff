@@ -1,7 +1,7 @@
 {
-  "release_version": "2.0.0",
-  "executed_at": "2026-08-05T18:41:33-05:00",
-  "runner": "Fresh installed-runtime audits in Codex desktop and Claude Code",
+  "release_version": "2.0.1",
+  "executed_at": "2026-08-06T00:08:51Z",
+  "runner": "Fresh v2.0.1 execution-trace acceptance on Codex and Claude Code",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -9,23 +9,23 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "Codex task 019fd44a-0dbc-79c0-b78e-2ed012a268d5 passed strict doctor, local parity, and persona checks with Chief 2.0.0, Ponytail 4.8.4, Sloppy Copy 0.5.0, Brand Voice 0.2.1, and Crafty 0.6.1."
+    "evidence": "CODEX CHIEF OF STAFF ACTIVE - v2.0.1 from the installed Codex plugin cache; strict dependency validation passed"
   },
   "hosts": {
     "codex": {
       "status": "pass",
-      "evidence": "Fresh Sol task 019fd44a-0dbc-79c0-b78e-2ed012a268d5 passed runtime checks; Terra turn 019fd44c-0690-77d1-926f-b6ba2bfc24af passed strict doctor and 54/54 assertions."
+      "evidence": "Sol task 019fd462-57f3-7f12-a766-58d65347951f and Terra task 019fd462-5c4f-7610-bc19-72436634aa2c; installed hook v2.0.1; 60/60 each"
     },
     "claude-code": {
       "status": "pass",
-      "evidence": "Claude Code 2.1.140 installed all five active plugins, session 22f49db5-9a3b-4c41-9aaa-a0a92d1b4d09 returned a conforming ICM contract, and session 450ea5a2-3e98-4d55-bfe1-5beed79a5848 passed 54/54 assertions."
+      "evidence": "Claude Code session d5831673-708c-483c-927d-5ba0a4596ea1 with candidate plugin-dir; hook v2.0.1; 60/60"
     }
   },
   "models": {
     "gpt-5.6-sol": {
       "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "Fresh Codex task 019fd44a-ad94-7dc1-9f62-fc6ce88aa224 initial Sol/Medium turn passed strict doctor and 54/54 assertions on the installed 2.0.0 stack.",
+      "evidence": "Task 019fd462-57f3-7f12-a766-58d65347951f; gpt-5.6-sol medium; installed v2.0.1; 13/13 scenarios and 60/60 assertions",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
@@ -39,13 +39,14 @@
         "LIVE-009",
         "LIVE-010",
         "LIVE-011",
-        "LIVE-012"
+        "LIVE-012",
+        "LIVE-013"
       ]
     },
     "gpt-5.6-terra": {
       "status": "pass",
       "reasoning_effort": "xhigh",
-      "evidence": "Fresh Codex turn 019fd44c-0690-77d1-926f-b6ba2bfc24af explicitly routed to Terra/XHigh passed strict doctor and 54/54 assertions on the installed 2.0.0 stack.",
+      "evidence": "Task 019fd462-5c4f-7610-bc19-72436634aa2c; gpt-5.6-terra xhigh; installed v2.0.1; 13/13 scenarios and 60/60 assertions",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
@@ -59,7 +60,8 @@
         "LIVE-009",
         "LIVE-010",
         "LIVE-011",
-        "LIVE-012"
+        "LIVE-012",
+        "LIVE-013"
       ]
     }
   }

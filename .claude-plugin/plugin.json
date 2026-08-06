@@ -1,6 +1,6 @@
 {
   "name": "chief-of-staff",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A scoped operating layer with default ICM architecture, account gates, project routing, and a retained technical persona.",
   "author": {
     "name": "plotdevice01",

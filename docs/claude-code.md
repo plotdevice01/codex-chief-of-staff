@@ -1,6 +1,6 @@
 # Claude Code deployment
 
-Chief of Staff v2.0.0 supports Claude Code with the same portable operating
+Chief of Staff v2.0.1 supports Claude Code with the same portable operating
 contract, retained persona, response modes, project-rule preservation, and
 companion stack used by the Codex release. Only host-specific manifests, hook
 environment variables, and installation commands differ.

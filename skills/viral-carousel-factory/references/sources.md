@@ -22,6 +22,6 @@ These sources support the copy-first and anchor-first workflow. They also suppor
 
 ## User-supplied working sources
 
-The original build also reviewed a carousel Bible PDF and two Markdown guides. It reviewed design examples plus a ten-image production guide. Their reusable principles are represented in this skill. The source files are not bundled because they may contain creator-specific material or client material. Redistribution restrictions may apply too.
+The original build also reviewed a carousel Bible PDF and two Markdown guides. It reviewed design examples plus a ten-image production guide. Their reusable principles are represented in this skill. The source files are not bundled because the skill contains the normalized operating guidance needed at runtime.
 
 User-supplied claims that conflict with current official documentation are labeled as heuristics or require a live route check.

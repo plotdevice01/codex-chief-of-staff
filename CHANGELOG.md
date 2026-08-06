@@ -3,6 +3,16 @@
 All notable changes are recorded here. Public releases and host manifests use
 the same three-part semantic product version.
 
+## [2.0.1] - 2026-08-05
+
+### Added
+
+- Added a mandatory execution trace for non-trivial tasks and every task that
+  names or automatically routes a skill or plugin.
+- Distinguished loading a skill from materially using its workflow, inputs,
+  handoffs, and validation.
+- Added live acceptance coverage for partial or fake Crafty utilization.
+
 ## [2.0.0] - 2026-08-05
 
 ### Changed

@@ -86,7 +86,7 @@ Confirm:
 | `ai-sloppy-copy` | `ai-sloppy-copy` | `0.5.0` | active |
 | `brand-voice-factory` | `brand-voice-factory` | `0.2.0` | active |
 | `crafty-carousels` | `crafty-carousels-skill` | `0.6.0` | active |
-| `chief-of-staff` | `codex-chief-of-staff` | `2.0.0` | active |
+| `chief-of-staff` | `codex-chief-of-staff` | `2.0.1` | active |
 
 If any entry is absent, repeat only that plugin's two install commands, restart
 Codex, and check again.
@@ -235,16 +235,16 @@ GitHub publishes a SHA-256 digest for every release asset. A separate
 PowerShell:
 
 ```powershell
-(Get-FileHash .\codex-chief-of-staff-v2.0.0.zip -Algorithm SHA256).Hash
+(Get-FileHash .\codex-chief-of-staff-v2.0.1.zip -Algorithm SHA256).Hash
 ```
 
 macOS or Linux:
 
 ```bash
-sha256sum ./codex-chief-of-staff-v2.0.0.zip
+sha256sum ./codex-chief-of-staff-v2.0.1.zip
 ```
 
-Compare the result with `codex-chief-of-staff-v2.0.0.zip.sha256`.
+Compare the result with `codex-chief-of-staff-v2.0.1.zip.sha256`.
 
 ## Recovery
 
@@ -253,5 +253,5 @@ Compare the result with `codex-chief-of-staff-v2.0.0.zip.sha256`.
 3. Run `codex plugin list --json`.
 4. Run `validate_install.py --strict-dependencies` from a checkout, or ask the
    Chief of Staff skill to perform strict validation.
-5. Start a new task and run the twelve persona scenarios.
+5. Start a new task and run the thirteen persona scenarios.
 6. Keep the prior release available until the new release passes.

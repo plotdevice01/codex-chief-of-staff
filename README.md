@@ -25,7 +25,7 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - a retained, traceable technical-assistant persona;
 - Ponytail execution discipline and AI Sloppy Copy integration.
 
-## What changed in v2.0.0
+## What changed in v2.0.1
 
 - Brand Voice Factory is now a standalone required plugin. Chief no longer
   bundles a duplicate `brand-voice-copywriter` skill.
@@ -35,6 +35,8 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
   receipt with active versions, paths, manifest hashes, and skill ownership.
 - Chief coordinates the approved Brand Voice package through Crafty's verified
   importer, then routes authored copy through AI Sloppy Copy before release.
+- Chief now reports an execution trace that proves whether requested skills and
+  plugins were materially used instead of merely loaded and name-dropped.
 
 ### Preserved from v1.0.0
 
@@ -57,9 +59,9 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
   It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
 - AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later is required for full
   reference behavior.
-- The retained persona stays unchanged at 97 requirements. v1.0.0 expanded the
-  integration contract to nine rules and the live acceptance set to twelve.
-- The GitHub release, tag, ZIP, and both host manifests use `2.0.0`.
+- The retained persona stays unchanged at 97 requirements. The current
+  integration contract has ten rules and thirteen live acceptance scenarios.
+- The GitHub release, tag, ZIP, and both host manifests use `2.0.1`.
 
 ## Version numbers
 
@@ -68,21 +70,21 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `2.0.0` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `2.0.0` |
+| Chief of Staff `2.0.1` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `2.0.1` |
 | AI Sloppy Copy `0.5.0` | The separate companion plugin used for authored prose checks | Install `0.5.0` or later |
 | AI Sloppy Copy Standard `2.2.0` | The writing-rules contract bundled inside AI Sloppy Copy | Cite the Standard when discussing rule behavior |
-| Brand Voice Factory `0.2.0` | The canonical evidence-backed voice-package producer | Install `0.2.0` or later |
-| Crafty Carousels `0.6.0` | The governed carousel producer and Brand Voice package importer | Install `0.6.0` or later |
+| Brand Voice Factory `0.2.1` | The canonical evidence-backed voice-package producer | Install `0.2.0` or later |
+| Crafty Carousels `0.6.1` | The governed carousel producer and Brand Voice package importer | Install `0.6.0` or later |
 
 Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.0.0 release evidence
+## v2.0.1 release evidence
 
-The deterministic source suite passes. Fresh Sol, Terra, Codex, Claude Code,
-and installed-runtime acceptance remain pending for this candidate. No prior
-v1.0.0 model result is carried forward.
+The deterministic source suite passes. Fresh Sol Medium, Terra XHigh, Codex,
+Claude Code, and installed-runtime acceptance passed for v2.0.1. Both Codex
+profiles and Claude Code passed all 13 scenarios and 60/60 live assertions.
 
 | Capability | Codex | Claude Code |
 |---|:---:|:---:|
@@ -201,7 +203,7 @@ uninstall, and recovery procedures.
 | Context and state are improvised per task | ICM names inputs, output, state and review |
 | External writes inherit vague approval | Every write follows an explicit policy |
 | Long answers bury the decision | The result leads; risks and the next action follow |
-| Persona claims are prose | 97 requirements and twelve scenarios are traceable |
+| Persona claims are prose | 97 requirements and thirteen scenarios are traceable |
 
 ## How it works
 
@@ -252,7 +254,7 @@ python scripts/build_release.py --output dist
 Static tests verify:
 
 - 97 persona requirements and source hashes;
-- nine integration rules and twelve live acceptance definitions;
+- ten integration rules and thirteen live acceptance definitions;
 - five ICM forms and ten invariants, plus cold-walk failure behavior and token budgets;
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
@@ -264,7 +266,7 @@ Static tests verify:
 - complete companion capabilities under strict dependency validation for Ponytail;
   AI Sloppy Copy; Brand Voice Factory; and Crafty Carousels.
 
-The twelve prompts in `persona/persona-contract.json` still require a fresh host
+The thirteen prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 
