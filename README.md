@@ -26,7 +26,45 @@ Chief of Staff adds durable operating judgment across ChatGPT Work and Codex:
 - one mandatory content route with pinned Brand Voice, Crafty, and AI Sloppy Copy resources.
 - one Agent Plugins skill that routes all supported work without specialist selection.
 
-## What changed in v2.1.0
+## The teammate install
+
+After OpenAI approves the public listing, a teammate does this:
+
+1. Open ChatGPT and switch to **Work**.
+2. Open **Plugins** and search for **Chief of Staff**.
+3. Select **+** to install it.
+4. Start a new chat and ask for the work normally.
+
+That is the complete teammate procedure. No terminal, Git, Python, plugin
+names, or specialist selection. A workspace admin can make it even simpler by
+setting Chief to **Installed** for the team's roles, which removes step 3.
+
+**Current availability:** `v2.1.1` is distributed through the GitHub-backed
+Chief marketplace while its public OpenAI Plugins Directory listing is prepared
+and reviewed. Do not claim that Chief is publicly searchable until the listing
+is approved and visibly published.
+
+AI Sloppy Copy, Brand Voice Factory, and Crafty Carousels are upstream source
+products. They are already pinned inside Chief and are not separate team
+installs or public-directory targets.
+
+## What changed in v2.1.1
+
+- Replaced developer-first installation instructions with a four-step teammate
+  flow for the ChatGPT desktop app and web.
+- Added the workspace-admin path: publish Chief to the required roles as
+  **Installed** so teammates do not install anything themselves.
+- Separated GitHub marketplace distribution from public OpenAI Plugins
+  Directory publication. Public availability now remains explicitly pending
+  until OpenAI review and publication are complete.
+- Marked AI Sloppy Copy as an upstream factory. Brand Voice Factory and Crafty
+  Carousels have the same role. None is a separate team-facing install.
+- Added a reviewed skills-only submission package with starter prompts, five
+  positive tests, and three negative tests.
+- Runtime behavior is unchanged from `v2.1.0`; its accepted model and host
+  evidence is carried forward under the documentation-only patch rule.
+
+### Runtime foundation from v2.1.0
 
 - Chief is the only discoverable route for business, creative, research,
   operational, document, technical, connected-app, and client-delivery work.
@@ -76,7 +114,7 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `2.1.0` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.0` |
+| Chief of Staff `2.1.1` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.1` |
 | AI Sloppy Copy `0.5.0` | Canonical source for the pinned checker and copy workflow | Bundled; install separately only for direct development |
 | AI Sloppy Copy Standard `2.2.0` | The writing-rules contract inside the pinned checker | Cite the Standard when discussing rule behavior |
 | Brand Voice Factory `0.2.1` | Canonical source for the pinned voice-package workflow | Bundled; install separately only for direct development |
@@ -86,18 +124,20 @@ Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.1.0 release evidence
+## v2.1.1 release evidence
 
-Fresh response-only acceptance passed all 15 scenarios and all 77 assertions
-in both ChatGPT Work and Codex on GPT-5.6 Sol Medium. The ChatGPT Work receipt
-records owner-verified Work UI evidence separately from its Codex runtime.
-Both runs reported zero task creation, delegation, file mutation, connector
-calls, or external actions. Terra XHigh remains pending under the version-bound
-owner waiver recorded in the release evidence.
+`v2.1.1` changes distribution documentation and release metadata only. The
+Chief skill and its internal contracts are unchanged. The bundled content
+runtime is also unchanged. The persona and routing behavior remain intact. The fresh `v2.1.0`
+response-only acceptance therefore
+carries forward: all 15 scenarios and all 77 assertions passed in ChatGPT Work
+and Codex on GPT-5.6 Sol Medium with zero forbidden actions. Terra XHigh remains
+pending under the version-bound owner waiver recorded in the release evidence.
 
 | Capability | ChatGPT Work | Codex |
 |---|:---:|:---:|
-| Marketplace installation | Yes | Yes |
+| GitHub/repo marketplace | Workspace or developer distribution | Yes |
+| Universal Plugins Directory | Pending OpenAI review | Pending OpenAI review |
 | Chief skill contract | Yes | Yes |
 | Lifecycle hooks | Host-managed | Codex hooks |
 | Complete retained persona | Yes | Yes |
@@ -111,30 +151,35 @@ owner waiver recorded in the release evidence.
 Chief contains the content runtime. Team members install or open Chief once.
 The specialist repositories remain independently maintained factories.
 
-Before starting, install [Git](https://git-scm.com/downloads),
-[Node.js 18 or later](https://nodejs.org/en/download), and
-[Python 3.11 or later](https://www.python.org/downloads/). Use
-[ChatGPT Work](https://learn.chatgpt.com/docs/get-started-with-work) or
-[Codex](https://developers.openai.com/codex/).
+### Teammates after public-directory approval
 
-### Codex
+Open ChatGPT, switch to **Work**, open **Plugins**, search **Chief of Staff**,
+and select **+**. Start a new chat and describe the result you want. Chief
+chooses the internal workflow. Do not install or invoke the specialist source
+products.
 
-Run two commands:
+### Workspace admins
+
+In Workspace settings, open **Plugins**, select **Chief of Staff**, and set its
+installation policy to **Installed** for the required roles. This is the
+brain-dead-easy rollout: members start a new Work chat and ask normally.
+
+Public store availability begins only after OpenAI approves and publishes the
+skills-only submission. Until then, admins and developers use the GitHub-backed
+marketplace below.
+
+### Admin and Codex fallback
+
+The fallback requires Git. Node.js 18 or later supports hooks. Python 3.11 or
+later supports configuration validation. Run:
 
 ```powershell
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-Then restart Codex, review Chief's hooks, and start a fresh task. Run
-`codex plugin list --json` and confirm `chief-of-staff@codex-chief-of-staff`.
-
-### ChatGPT Work
-
-Make Chief available to the required roles through workspace plugin controls,
-then install it from the Plugin Directory. Give it only the apps and permissions
-it needs. The team opens ChatGPT Work and asks Chief for the finished work.
-Separate Brand Voice, Crafty, and AI Sloppy Copy selection is not required.
+Then restart Codex and review Chief's hooks. Start a fresh task. Run
+`codex plugin list --json`, then confirm `chief-of-staff@codex-chief-of-staff`.
 
 ### Configure and validate
 

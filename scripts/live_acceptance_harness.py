@@ -114,8 +114,11 @@ Return one JSON object without a Markdown fence using this schema:
 """
 
 
-def validate_receipt(receipt: dict, host: str) -> list[str]:
+def validate_receipt(
+    receipt: dict, host: str, *, expected_version: str | None = None
+) -> list[str]:
     errors: list[str] = []
+    expected_version = expected_version or VERSION
     contract = load_contract()
     scenarios, criteria_total = expected_counts(contract)
     expected = {item["id"]: len(item["pass_criteria"]) for item in scenarios}
@@ -149,8 +152,8 @@ def validate_receipt(receipt: dict, host: str) -> list[str]:
         errors.append("model must be gpt-5.6-sol")
     if receipt.get("reasoning_effort") != "medium":
         errors.append("reasoning effort must be medium")
-    if receipt.get("chief_version") != VERSION:
-        errors.append(f"Chief version must be {VERSION}")
+    if receipt.get("chief_version") != expected_version:
+        errors.append(f"Chief version must be {expected_version}")
     required_control = expected_safety_control(host)
     if receipt.get("safety_control") != required_control:
         errors.append(
