@@ -1,4 +1,4 @@
 interface:
   display_name: "Chief of Staff"
-  short_description: "Run scoped work with disciplined judgment"
-  default_prompt: "Use $chief-of-staff to configure and run this workspace."
+  short_description: "Route and finish any scoped task through one Chief"
+  default_prompt: "Use $chief-of-staff to complete this request through the correct internal workflow."

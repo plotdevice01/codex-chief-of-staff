@@ -14,7 +14,7 @@ Do NOT convert pending model evidence into a pass without a fresh run.
 
 1. Run static, hook, sync, ICM, privacy, archive, and parity checks.
 2. Render the SOP to images and inspect every page.
-3. Run required fresh Codex and Claude Code scenarios.
+3. Run required fresh ChatGPT Work and Codex scenarios.
 
 ## Outputs
 

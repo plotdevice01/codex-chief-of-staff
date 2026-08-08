@@ -40,7 +40,7 @@ function stateRoot() {
   if (process.env.CHIEF_ICM_STATE_DIR) {
     return process.env.CHIEF_ICM_STATE_DIR;
   }
-  const base = process.env.CLAUDE_PLUGIN_DATA || process.env.PLUGIN_DATA || os.tmpdir();
+  const base = process.env.PLUGIN_DATA || os.tmpdir();
   return path.join(base, "chief-of-staff", "icm-enforcement");
 }
 
@@ -199,8 +199,8 @@ function platformConfigPath() {
 }
 
 function loadConfig(cwd) {
-  const pluginRoot = process.env.CLAUDE_PLUGIN_ROOT || process.env.PLUGIN_ROOT;
-  const dataRoot = process.env.CLAUDE_PLUGIN_DATA || process.env.PLUGIN_DATA;
+  const pluginRoot = process.env.PLUGIN_ROOT;
+  const dataRoot = process.env.PLUGIN_DATA;
   const candidates = [
     process.env.CHIEF_OF_STAFF_CONFIG,
     ...findUpConfig(cwd || process.cwd()),
@@ -297,6 +297,17 @@ function hasPrivateLeak(prompt, response, config, cwd) {
     }
   }
   return false;
+}
+
+function withoutTrustedPluginPaths(value) {
+  let normalized = normalize(value);
+  for (const root of [process.env.PLUGIN_ROOT]) {
+    const trusted = normalize(root);
+    if (trusted) {
+      normalized = normalized.replaceAll(trusted, "");
+    }
+  }
+  return normalized;
 }
 
 function labelPattern(label, value = ".+") {
@@ -500,7 +511,7 @@ function handlePreToolUse(input, file) {
     tool_name: input.tool_name,
     tool_input: input.tool_input,
   });
-  if (!hasPrivateLeak(state.prompt, toolRequest, config, input.cwd)) {
+  if (!hasPrivateLeak(state.prompt, withoutTrustedPluginPaths(toolRequest), config, input.cwd)) {
     return;
   }
   process.stdout.write(JSON.stringify({

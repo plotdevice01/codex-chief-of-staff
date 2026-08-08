@@ -4,9 +4,9 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const VERSION = "2.0.1";
+const VERSION = "2.1.0";
 const event = process.argv[2] === "subagent" ? "SubagentStart" : "SessionStart";
-const pluginRoot = process.env.PLUGIN_ROOT || process.env.CLAUDE_PLUGIN_ROOT || path.resolve(__dirname, "..");
+const pluginRoot = process.env.PLUGIN_ROOT || path.resolve(__dirname, "..");
 const SHARED_CONTRACT = "<!-- SHARED-BEHAVIOR-CONTRACT:START -->";
 
 function platformConfigPath() {
@@ -26,7 +26,6 @@ function resolveConfigPath() {
     path.join(process.cwd(), "chief-of-staff.json"),
     path.join(pluginRoot, "chief-of-staff.json"),
     process.env.PLUGIN_DATA && path.join(process.env.PLUGIN_DATA, "chief-of-staff.json"),
-    process.env.CLAUDE_PLUGIN_DATA && path.join(process.env.CLAUDE_PLUGIN_DATA, "chief-of-staff.json"),
     platformConfigPath(),
   ].filter(Boolean);
   return candidates.find((candidate) => fs.existsSync(candidate)) || null;
@@ -83,7 +82,7 @@ function emit() {
   const icmGates = [
     "ICM DEFAULT: operating architecture for non-trivial work. The communication default remains separate.",
     "ICM NEW-WORKSPACE GATE: before proposing files, say ICM and state the repeating unit. State the selected form and factory-product split. Name the human gate.",
-    "ICM FORM GATE: use one canonical form name from the bundled ICM Architect skill. Do not invent a sixth form label.",
+    "ICM FORM GATE: use one canonical form name from Chief's internal ICM Architect workflow. Do not invent a sixth form label.",
     "ICM RESPONSE GATE: for every new project, workspace, or recurring process, the first architecture block must name ICM, mode, repeating unit, one canonical form, factory, product, and human gate. Do not propose files before those fields. Use only prompt facts; mark missing inputs unknown.",
     "GENERIC SCOPE GATE: when no registered project is named, do not load or use client facts from configuration or memory. Do not suggest those facts or connector details. Stay generic.",
   ];

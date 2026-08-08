@@ -129,13 +129,6 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "execution.expert_high_risk.reasoning_effort": "high_or_xhigh",
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
-        "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
-        "dependencies.ai_sloppy_copy.required_for_full_parity": True,
-        "dependencies.brand_voice_factory.minimum_version": "0.2.0",
-        "dependencies.brand_voice_factory.required_for_full_parity": True,
-        "dependencies.crafty_carousels.minimum_version": "0.6.0",
-        "dependencies.crafty_carousels.required_for_full_parity": True,
     }
     for path, expected in expected_config.items():
         try:
@@ -149,12 +142,51 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
                 f"expected {expected!r}, got {actual!r}"
             )
 
+    execution_contract = contract.get("live_acceptance_execution_contract", {})
+    expected_execution_contract = {
+        "mode": "response_only",
+        "contract_reference": "skills/chief-of-staff/references/live-acceptance.md",
+        "host_safety_controls": {
+            "codex": {"type": "permission_profile", "value": ":read-only"},
+            "chatgpt-work": {
+                "type": "approval_policy",
+                "value": "ask_for_approval",
+            },
+        },
+        "host_evidence_rules": {
+            "codex": {
+                "ui_evidence": "runtime_observed",
+                "allowed_runtime_surfaces": ["codex"],
+            },
+            "chatgpt-work": {
+                "ui_evidence": "owner_verified",
+                "allowed_runtime_surfaces": ["codex", "chatgpt-work"],
+            },
+        },
+        "host_identity_required": True,
+        "host_evidence_separation_required": True,
+        "run_inline": True,
+        "partial_pass_reuse": False,
+        "forbidden_actions": [
+            "task_creation",
+            "delegation",
+            "file_mutation",
+            "temporary_file",
+            "connector_call",
+            "external_action",
+        ],
+        "inline_copy_validation": "ai_sloppy_copy --text",
+        "failure_policy": "any forbidden action invalidates the complete host run",
+    }
+    if execution_contract != expected_execution_contract:
+        errors.append("Live acceptance execution contract is missing or unsafe.")
+
     live_tests = contract.get("live_acceptance_tests", [])
     live_ids = [item.get("id") for item in live_tests if isinstance(item, dict)]
     if len(live_ids) != len(set(live_ids)):
         errors.append("Live acceptance test IDs must be unique.")
-    if len(live_tests) != 13:
-        errors.append("Exactly thirteen live acceptance tests are required.")
+    if len(live_tests) != 15:
+        errors.append("Exactly fifteen live acceptance tests are required.")
     for item in live_tests:
         if (
             not isinstance(item, dict)
@@ -195,26 +227,31 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Use idempotency when available.",
         "## Apply ICM by default",
         "ICM is the default operating architecture.",
-        "Invoke the bundled `icm-architect` skill automatically",
+        "Read the internal ICM workflow at `internal/icm-architect/workflow.md`",
+        "Chief is the only discoverable skill.",
+        "references/universal-request-contract.md",
         "Do not import client names or project facts from private",
         "Before proposing files, name ICM and state the repeating unit.",
         "Do not replace the canonical form name with a new label.",
         "Do not propose files first. Mark missing inputs as unknown",
-        "Run the thirteen",
+        "Run the fifteen",
+        "references/live-acceptance.md",
+        "separate UI and runtime evidence",
+        "Never create or delegate tasks",
     )
     for value in required_skill_blocks:
         if value not in skill_text:
             errors.append(f"Contextual Chief workflow is missing: {value}")
     required_agents_rules = (
         "Apply `persona/technical-assistant-persona.txt` in full.",
-        "For coding and technical build work, apply the installed Ponytail skill",
+        "For coding and technical work, first question whether code is necessary.",
         "For client-facing work, use the Chief skill's client-deliverable workflow.",
         "Use only these two tiers. There is no quick tier.",
         "`Expert/high-risk` applies",
         "Use idempotency when available.",
         "Apply the compact ICM task contract to every non-trivial task",
         "ICM is the default operating architecture for non-trivial work.",
-        "invoke the bundled ICM",
+        "load Chief's internal ICM Architect workflow",
         "If the user has not named a registered project, keep the task generic",
         "Do not invent data sources or connector names.",
         "Before proposing files, name ICM and state the repeating",
@@ -228,7 +265,6 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     if agents_text.count("Default communication mode is 85% compression.") != 1:
         errors.append("85% compression must have one canonical core definition.")
     for removed in (
-        "## Ponytail efficiency ladder",
         "6. Execute once.",
         "Use 85% compression. Lead with the answer.",
     ):

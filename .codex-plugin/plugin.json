@@ -1,7 +1,7 @@
 {
   "name": "chief-of-staff",
-  "version": "2.0.1",
-  "description": "A scoped Chief of Staff for Codex and Claude Code with default ICM architecture, account gates, project routing, and retained judgment.",
+  "version": "2.1.0",
+  "description": "One discoverable Chief that routes business, creative, research, operational, document, technical, and connected work through internal governed workflows.",
   "author": {
     "name": "plotdevice01",
     "url": "https://github.com/plotdevice01"
@@ -13,7 +13,7 @@
     "chief-of-staff",
     "context-engineering",
     "codex",
-    "claude-code",
+    "chatgpt-work",
     "operations",
     "icm",
     "persona",
@@ -22,9 +22,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Codex Chief of Staff",
+    "displayName": "Chief of Staff",
     "shortDescription": "Scoped execution with disciplined judgment",
-    "longDescription": "Run Codex as an operating chief of staff with default Interpretable Context Methodology. It enforces explicit scope and account identity gates. It preserves approval boundaries and project rules, plus a retained technical persona.",
+    "longDescription": "Run one discoverable Chief across ChatGPT Work and Codex. It classifies requests once, loads internal workflows only when needed, enforces scope and approvals, and validates the finished result without specialist selection.",
     "developerName": "plotdevice01",
     "category": "Productivity",
     "capabilities": [
@@ -32,7 +32,11 @@
       "Lifecycle hooks",
       "Local configuration",
       "Project propagation",
-      "ICM workspace architecture"
+      "ICM workspace architecture",
+      "Universal request routing",
+      "Brand voice and content production",
+      "Paid ads, paid video, and governed carousels",
+      "Research, documents, and connected actions"
     ],
     "websiteURL": "https://github.com/plotdevice01/codex-chief-of-staff",
     "privacyPolicyURL": "https://github.com/plotdevice01/codex-chief-of-staff/blob/main/PRIVACY.md",
@@ -40,7 +44,7 @@
     "defaultPrompt": [
       "Set up my Chief of Staff configuration.",
       "Run a scoped read-only daily briefing.",
-      "Build the smallest ICM workspace for this project."
+      "Handle this request through Chief and return the finished work."
     ],
     "brandColor": "#14213D",
     "composerIcon": "./assets/icon.png",

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "chief-of-staff",
+  "version": "2.1.0",
+  "description": "One discoverable Chief that routes business, creative, research, operational, document, technical, and connected work through internal governed workflows.",
+  "author": {
+    "name": "plotdevice01",
+    "url": "https://github.com/plotdevice01"
+  },
+  "homepage": "https://github.com/plotdevice01/codex-chief-of-staff",
+  "repository": "https://github.com/plotdevice01/codex-chief-of-staff",
+  "license": "MIT",
+  "keywords": [
+    "chief-of-staff",
+    "context-engineering",
+    "codex",
+    "chatgpt-work",
+    "operations",
+    "icm",
+    "persona",
+    "productivity",
+    "universal-routing",
+    "content-production",
+    "paid-video",
+    "paid-ads",
+    "workflow"
+  ]
+}

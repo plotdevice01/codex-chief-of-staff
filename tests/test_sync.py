@@ -69,18 +69,16 @@ def main() -> int:
         )
         assert work_agents.resolve() not in {item.path for item in targets}
 
-    powershell = (ROOT / "install-claude.ps1").read_text(encoding="utf-8")
-    shell = (ROOT / "install-claude.sh").read_text(encoding="utf-8")
-    assert 'ResetFrom = "2.2.6"' in powershell
-    assert powershell.index("plugin uninstall") < powershell.index(
-        "plugin marketplace update"
-    )
-    assert '"2\\.2\\.6"' in shell
-    assert shell.index("plugin uninstall") < shell.index("plugin marketplace update")
+    powershell = (ROOT / "install.ps1").read_text(encoding="utf-8")
+    shell = (ROOT / "install.sh").read_text(encoding="utf-8")
+    for installer in (powershell, shell):
+        assert "chief-of-staff@codex-chief-of-staff" in installer
+        assert "ai-sloppy-copy@ai-sloppy-copy" not in installer
+        assert "brand-voice-factory@brand-voice-factory" not in installer
+        assert "crafty-carousels@crafty-carousels-skill" not in installer
 
     print(
-        "PASS: project sync preserves rules and Claude installers handle the "
-        "AI Sloppy Copy 0.5.0 legacy-version reset."
+        "PASS: project sync preserves rules and Codex installers use one Chief."
     )
     return 0
 

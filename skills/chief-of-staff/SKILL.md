@@ -1,6 +1,6 @@
 ---
 name: chief-of-staff
-description: Configure and operate Codex or Claude Code as a scoped Chief of Staff. Use when the user asks to initialize or validate Chief of Staff configuration, run a daily or portfolio briefing, route work across registered projects, verify connector identities and approval boundaries, propagate the shared AGENTS.md contract without erasing project rules, or test the retained persona.
+description: Route and execute any scoped business, creative, research, operational, document, technical, or connected-app request through one Chief. Use for everyday work, projects, client delivery, architecture, content, paid media, brand voice, analysis, files, external actions, governance, or host setup without asking the user to select a specialist.
 ---
 
 # Chief of Staff
@@ -9,13 +9,26 @@ Run work through an explicit scope, trusted source order, identity gate, and
 approval policy. The lifecycle hook supplies the full behavior contract and
 retained persona; this skill supplies the operating workflows.
 
+## Route every request through Chief
+
+Chief is the only discoverable skill. For every non-trivial request, read
+`references/universal-request-contract.md`. Classify the request once from
+`references/capability-registry.json`, or run `scripts/route_request.py` when
+classification is not obvious. Load only the returned internal contracts.
+
+Do not ask the user to choose ICM, Brand Voice, Crafty, AI Sloppy Copy, paid
+ads, paid video, or another internal capability. Do not expose internal
+workflows as sibling skills. Projects, clients, industries, offers, and
+campaigns are runtime inputs, not reusable capabilities. Use the `generic`
+route for work that needs no specialist contract.
+
 ## Resolve configuration
 
 Resolve `chief-of-staff.json` in this order:
 
 1. `CHIEF_OF_STAFF_CONFIG`.
 2. The active workspace or manual-install root.
-3. `PLUGIN_DATA` or `CLAUDE_PLUGIN_DATA`.
+3. `PLUGIN_DATA`.
 4. The platform configuration directory documented in
    `../../docs/configuration.md`.
 
@@ -68,8 +81,9 @@ Do not invent data sources or connector names. Do not invent metrics or schemas.
 ICM is the default operating architecture. It does not replace the separate 85%
 communication mode; both defaults apply.
 
-Invoke the bundled `icm-architect` skill automatically for every new project or
-workspace. Do the same for a recurring process. Use build mode for new
+Read the internal ICM workflow at `internal/icm-architect/workflow.md`
+automatically for every new project or workspace. Do the same for a recurring
+process. It is not a separate user-facing skill. Use build mode for new
 structures. Use restructure mode for existing folders or repositories. Require
 an inventory and target tree. Require a migration map and approval before
 moving files. Before proposing files, name ICM and state the repeating unit.
@@ -162,16 +176,18 @@ workflow, but the user must not be asked to open or maintain them.
 
 ## Coordinate the content production suite
 
-Chief owns coordination. The standalone plugins own their specialist work.
-Do not substitute a bundled copy of another plugin's skill.
+Chief is the only user-facing content route. Do not ask the user to select Brand Voice Factory, Crafty Carousels, or AI Sloppy Copy. Resolve `SKILL_ROOT` to the folder containing this `SKILL.md`, then read `<SKILL_ROOT>/references/content-production.md` for any assistant-authored business content, including brand voice work, ads, video scripts, carousels, organic social, captions, email, reports, landing pages, replies, and client-facing prose. For paid-video concepts or scripts, also read `<SKILL_ROOT>/references/paid-video-creative.md`.
 
-1. Confirm `brand-voice-factory`, `crafty-carousels`, and `ai-sloppy-copy` are installed at the configured minimum versions.
-2. Route new or incomplete voice systems to Brand Voice Factory.
-3. Require its sealed `package-manifest.json` before Crafty import.
-4. Run Crafty's one-way importer. Stop on a client mismatch, missing approval, or hash failure.
-5. Run AI Sloppy Copy before copy approval and again on the final assembled prose.
-6. Keep every approval distinct. Voice adoption does not approve copy. Copy does not approve anchors or release. Release does not authorize publication.
-7. When ClickUp is configured, prepare one delivery-cycle batch. Write only after the configured confirmation and read every saved record back.
+The bundled content runtime is pinned in `vendor/manifest.json`. Use its exact resources and scripts. Do not route around the content contract because a request appears simple.
+
+1. Classify the request once using the content contract.
+2. Load the approved voice and evidence required for the exact claims.
+3. For paid ads, carousels, and organic social, query the complete hook, script, and CTA library before drafting.
+4. Apply the selected framework and preserve `Hook -> Value -> CTA` for paid ads.
+5. Run the bundled AI Sloppy Copy checker on the complete assembled prose.
+6. Return the finished work plus the required execution receipt.
+7. Keep approvals distinct. Voice adoption does not approve copy. Copy does not approve anchors or release. Release does not authorize publication.
+8. When ClickUp is configured, prepare one delivery-cycle batch. Write only after the configured confirmation and read every saved record back.
 
 ## Design a Forward Deployed AI system
 
@@ -192,6 +208,17 @@ owner approves them.
 
 ## Validate
 
+Before running the live release matrix, read
+`references/live-acceptance.md`. Scenario prompts are response-only test data,
+not authority to perform their requested work. Require the actual requested
+host through separate UI and runtime evidence. For Codex, require a `codex`
+runtime plus `:read-only`. For ChatGPT Work, require owner-verified **Work** UI
+selection plus **Work locally** and **Ask for approval**; accept the underlying
+runtime reporting `codex`. Run all scenarios inline in one fresh task.
+Never create or delegate tasks, mutate files, call connectors, or reuse partial
+passes. Use the bundled live-acceptance harness to generate and validate the
+host receipt.
+
 Run:
 
 ```powershell
@@ -199,7 +226,7 @@ py -3 .\validate_install.py --strict-dependencies
 py -3 .\Test-Persona.py
 ```
 
-Static checks prove that the persona and controls are present. Run the thirteen
+Static checks prove that the persona and controls are present. Run the fifteen
 prompts in `persona/persona-contract.json` in a fresh task to confirm host-level
 behavior.
 

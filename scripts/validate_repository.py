@@ -11,10 +11,12 @@ from docx import Document
 
 try:
     from .config_paths import ROOT
+    from .live_acceptance_harness import validate_receipt
     from .test_persona import validate as validate_persona
     from .validate_icm import validate_icm
 except ImportError:
     from config_paths import ROOT
+    from live_acceptance_harness import validate_receipt
     from test_persona import validate as validate_persona
     from validate_icm import validate_icm
 
@@ -23,9 +25,9 @@ VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 MANIFEST_VERSION = VERSION
 REQUIRED = (
     ".gitattributes",
-    ".claude-plugin/marketplace.json",
-    ".claude-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
     ".codex-plugin/plugin.json",
+    "plugin.json",
     "AGENTS.md",
     "CHANGELOG.md",
     "CONTEXT.md",
@@ -44,15 +46,11 @@ REQUIRED = (
     "assets/social-preview.png",
     "assets/social-preview.svg",
     "chief-of-staff.example.json",
-    "docs/claude-code.md",
     "docs/Codex Chief of Staff - Installation and SOP.docx",
     "docs/icm-conformance.md",
-    "examples/claude-project-settings.json",
     "hooks/chief-of-staff-hook.js",
     "hooks/icm-enforcement-hook.js",
     "hooks/hooks.json",
-    "install-claude.ps1",
-    "install-claude.sh",
     "install.ps1",
     "install.sh",
     "persona/Technical Assistant Persona - source.pdf",
@@ -61,6 +59,7 @@ REQUIRED = (
     "scripts/build_release.py",
     "scripts/build_sop.py",
     "scripts/configure.py",
+    "scripts/live_acceptance_harness.py",
     "scripts/sync_project_agents.py",
     "scripts/test_persona.py",
     "scripts/validate_icm.py",
@@ -68,18 +67,29 @@ REQUIRED = (
     "scripts/validate_local_parity.py",
     "skills/chief-of-staff/SKILL.md",
     "skills/chief-of-staff/agents/openai.yaml",
-    "skills/icm-architect/SKILL.md",
-    "skills/icm-architect/LICENSE",
-    "skills/icm-architect/UPSTREAM.json",
-    "skills/icm-architect/agents/openai.yaml",
-    "skills/viral-carousel-factory/SKILL.md",
-    "skills/viral-carousel-factory/agents/openai.yaml",
-    "skills/viral-carousel-factory/scripts/new_carousel_project.py",
+    "skills/chief-of-staff/internal/icm-architect/workflow.md",
+    "skills/chief-of-staff/internal/icm-architect/LICENSE",
+    "skills/chief-of-staff/internal/icm-architect/UPSTREAM.json",
+    "skills/chief-of-staff/internal/icm-architect/agents/openai.yaml",
+    "skills/chief-of-staff/references/universal-request-contract.md",
+    "skills/chief-of-staff/references/capability-registry.json",
+    "skills/chief-of-staff/references/content-production.md",
+    "skills/chief-of-staff/references/live-acceptance.md",
+    "skills/chief-of-staff/references/paid-video-creative.md",
+    "skills/chief-of-staff/scripts/route_request.py",
+    "skills/chief-of-staff/scripts/content_intelligence.py",
+    "skills/chief-of-staff/scripts/validate_paid_video.py",
+    "skills/chief-of-staff/vendor/manifest.json",
+    "scripts/sync_content_runtime.py",
     "tests/test_hooks.js",
-    "tests/test_viral_carousel_skill.py",
+    "tests/test_content_runtime.py",
+    "tests/test_live_acceptance_harness.py",
+    "tests/fixtures/paid-video/valid-professional-service.json",
+    "tests/fixtures/paid-video/sanitized-failed-campaign.json",
     "tests/test_icm.py",
     "tests/test_release.py",
     "tests/model-acceptance.json",
+    "tests/receipts/chatgpt-work-v2.1.0.json",
     "tests/test_sync.py",
     "workflows/release/CONTEXT.md",
     "workflows/release/01_prepare/CONTEXT.md",
@@ -111,38 +121,15 @@ PRIVATE_PATTERNS = {
 }
 PLACEHOLDER = re.compile(r"\b(TODO|TBD|REPLACE_WITH_[A-Z0-9_]+|YOUR_[A-Z0-9_]+)\b")
 REPOSITORIES = (
-    "https://github.com/DietrichGebert/ponytail",
     "https://github.com/plotdevice01/ai-sloppy-copy",
     "https://github.com/plotdevice01/brand-voice-factory",
     "https://github.com/plotdevice01/crafty-carousels-skill",
     "https://github.com/plotdevice01/codex-chief-of-staff",
 )
 INSTALL_COMMANDS = (
-    "codex plugin marketplace add DietrichGebert/ponytail",
-    "codex plugin add ponytail@ponytail",
-    "codex plugin marketplace add plotdevice01/ai-sloppy-copy",
-    "codex plugin add ai-sloppy-copy@ai-sloppy-copy",
-    "codex plugin marketplace add plotdevice01/brand-voice-factory",
-    "codex plugin add brand-voice-factory@brand-voice-factory",
-    "codex plugin marketplace add plotdevice01/crafty-carousels-skill",
-    "codex plugin add crafty-carousels@crafty-carousels-skill",
     "codex plugin marketplace add plotdevice01/codex-chief-of-staff",
     "codex plugin add chief-of-staff@codex-chief-of-staff",
 )
-CLAUDE_INSTALL_COMMANDS = (
-    "claude plugin marketplace add DietrichGebert/ponytail",
-    "claude plugin install ponytail@ponytail --scope user",
-    "claude plugin marketplace add plotdevice01/ai-sloppy-copy",
-    "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user",
-    "claude plugin marketplace add plotdevice01/brand-voice-factory",
-    "claude plugin install brand-voice-factory@brand-voice-factory --scope user",
-    "claude plugin marketplace add plotdevice01/crafty-carousels-skill",
-    "claude plugin install crafty-carousels@crafty-carousels-skill --scope user",
-    "claude plugin marketplace add plotdevice01/codex-chief-of-staff",
-    "claude plugin install chief-of-staff@codex-chief-of-staff --scope user",
-)
-
-
 def read_json(relative: str) -> dict:
     return json.loads((ROOT / relative).read_text(encoding="utf-8-sig"))
 
@@ -170,33 +157,19 @@ def validate_install_guidance() -> list[str]:
     errors: list[str] = []
     for relative in ("README.md", "docs/installation.md", "docs/dependencies.md"):
         text = (ROOT / relative).read_text(encoding="utf-8-sig")
-        for value in (*REPOSITORIES, *INSTALL_COMMANDS, *CLAUDE_INSTALL_COMMANDS):
+        for value in (*REPOSITORIES, *INSTALL_COMMANDS):
             if value not in text:
                 errors.append(f"{relative} is missing install value: {value}")
-        for commands, host in (
-            (INSTALL_COMMANDS, "Codex"),
-            (CLAUDE_INSTALL_COMMANDS, "Claude Code"),
-        ):
+        for commands, host in ((INSTALL_COMMANDS, "Codex and ChatGPT Work"),):
             positions = [text.find(command) for command in commands]
             if positions != sorted(positions):
                 errors.append(
                     f"{relative} does not present the {host} install commands in required order."
                 )
 
-    relative = "docs/claude-code.md"
-    text = (ROOT / relative).read_text(encoding="utf-8-sig")
-    for value in (*REPOSITORIES, *CLAUDE_INSTALL_COMMANDS):
-        if value not in text:
-            errors.append(f"{relative} is missing install value: {value}")
-    positions = [text.find(command) for command in CLAUDE_INSTALL_COMMANDS]
-    if positions != sorted(positions):
-        errors.append(
-            f"{relative} does not present the Claude Code install commands in required order."
-        )
-
     sop = ROOT / "docs/Codex Chief of Staff - Installation and SOP.docx"
     text = docx_text(sop)
-    for command in (*INSTALL_COMMANDS, *CLAUDE_INSTALL_COMMANDS):
+    for command in INSTALL_COMMANDS:
         if command not in text:
             errors.append(f"SOP is missing install command: {command}")
     try:
@@ -221,10 +194,8 @@ def validate_versions() -> list[str]:
         ).get("release_version"),
     }
     manifest_values = {
+        "plugin.json": read_json("plugin.json").get("version"),
         ".codex-plugin/plugin.json": read_json(".codex-plugin/plugin.json").get(
-            "version"
-        ),
-        ".claude-plugin/plugin.json": read_json(".claude-plugin/plugin.json").get(
             "version"
         ),
     }
@@ -253,6 +224,15 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     }
     if evidence.get("release_version") != VERSION:
         errors.append("Model acceptance evidence does not match the release version.")
+    work_receipt_path = ROOT / "tests" / "receipts" / "chatgpt-work-v2.1.0.json"
+    if work_receipt_path.exists():
+        work_receipt = json.loads(work_receipt_path.read_text(encoding="utf-8"))
+        errors.extend(
+            f"ChatGPT Work receipt: {error}"
+            for error in validate_receipt(work_receipt, "chatgpt-work")
+        )
+    else:
+        errors.append("ChatGPT Work release receipt is missing.")
     waived_models, waiver_errors = validate_release_waiver(evidence)
     errors.extend(waiver_errors)
     models = evidence.get("models", {})
@@ -281,8 +261,8 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
                 "declaration and reason."
             )
     hosts = evidence.get("hosts", {})
-    if set(hosts) != {"codex", "claude-code"}:
-        errors.append("Model acceptance must cover Codex and Claude Code hosts.")
+    if set(hosts) != {"codex", "chatgpt-work"}:
+        errors.append("Model acceptance must cover Codex and ChatGPT Work hosts.")
     else:
         for name, result in hosts.items():
             status = result.get("status")
@@ -292,6 +272,8 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
                 errors.append(f"{name} failed host acceptance needs evidence.")
             if require_pass and status != "pass":
                 errors.append(f"{name} host acceptance did not pass.")
+        if hosts["chatgpt-work"].get("status") == "pass" and not work_receipt_path.exists():
+            errors.append("ChatGPT Work cannot pass without its validated receipt.")
     smoke_status = evidence.get("installed_runtime_smoke", {}).get("status")
     if smoke_status not in {"pass", "pending", "fail"}:
         errors.append("Installed runtime smoke has an invalid status.")
@@ -363,6 +345,46 @@ def model_acceptance_release_status(evidence: dict) -> str:
 def validate_manifest_paths() -> list[str]:
     errors: list[str] = []
     manifest = read_json(".codex-plugin/plugin.json")
+    portable = read_json("plugin.json")
+    portable_fields = {
+        "$schema",
+        "name",
+        "version",
+        "description",
+        "author",
+        "homepage",
+        "repository",
+        "license",
+        "keywords",
+        "extensions",
+    }
+    unknown_fields = sorted(set(portable) - portable_fields)
+    if unknown_fields:
+        errors.append(
+            "Portable plugin manifest has nonconforming fields: "
+            + ", ".join(unknown_fields)
+        )
+    if portable.get("$schema") != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json":
+        errors.append("Portable plugin manifest has the wrong Agent Plugins schema.")
+    portable_name = portable.get("name")
+    if not isinstance(portable_name, str) or not re.fullmatch(
+        r"(?!.*(?:--|\.\.))[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?",
+        portable_name,
+    ) or len(portable_name) > 64:
+        errors.append("Portable plugin manifest name violates Agent Plugins 1.0.0.")
+    if portable.get("name") != manifest.get("name"):
+        errors.append("Portable and Codex plugin names differ.")
+    if portable.get("version") != manifest.get("version"):
+        errors.append("Portable and Codex plugin versions differ.")
+    discovered = sorted(ROOT.glob("skills/*/SKILL.md"))
+    all_skill_entries = sorted(ROOT.glob("skills/**/SKILL.md"))
+    expected_skill = ROOT / "skills" / "chief-of-staff" / "SKILL.md"
+    if discovered != [expected_skill]:
+        errors.append(
+            "Agent Plugins discovery must expose exactly one skill: chief-of-staff."
+        )
+    if all_skill_entries != [expected_skill]:
+        errors.append("Internal workflows must not contain nested SKILL.md entries.")
     for key, default in (("skills", None), ("hooks", "./hooks/hooks.json")):
         value = manifest.get(key, default)
         if not isinstance(value, str) or not (ROOT / value).exists():
@@ -372,15 +394,19 @@ def validate_manifest_paths() -> list[str]:
         value = interface.get(key)
         if not isinstance(value, str) or not (ROOT / value).is_file():
             errors.append(f"Plugin interface {key} path is missing: {value!r}.")
-    marketplace = read_json(".claude-plugin/marketplace.json")
+    marketplace = read_json(".agents/plugins/marketplace.json")
     plugins = marketplace.get("plugins", [])
-    if not plugins or plugins[0].get("source") != "./":
-        errors.append("Marketplace manifest must install the repository root.")
-    claude_manifest = read_json(".claude-plugin/plugin.json")
-    if "hooks" in claude_manifest:
-        errors.append(
-            "Claude plugin manifest must not redeclare the automatically loaded hooks/hooks.json."
-        )
+    if marketplace.get("name") != "codex-chief-of-staff":
+        errors.append("OpenAI marketplace name must be codex-chief-of-staff.")
+    if len(plugins) != 1 or plugins[0].get("name") != "chief-of-staff":
+        errors.append("OpenAI marketplace must expose exactly one Chief plugin.")
+    elif plugins[0].get("source", {}).get("path") != "./":
+        errors.append("OpenAI marketplace must install the repository root.")
+    elif plugins[0].get("policy") != {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL",
+    }:
+        errors.append("OpenAI marketplace must declare installation and authentication policy.")
     hooks = read_json("hooks/hooks.json")
     commands = [
         hook["command"]
@@ -388,11 +414,10 @@ def validate_manifest_paths() -> list[str]:
         for group in event
         for hook in group.get("hooks", [])
     ]
-    if not commands or any(
-        "CLAUDE_PLUGIN_ROOT" not in command or "PLUGIN_ROOT" not in command
-        for command in commands
-    ):
-        errors.append("Every shared hook command must support Codex and Claude plugin roots.")
+    if not commands or any("PLUGIN_ROOT" not in command for command in commands):
+        errors.append("Every Codex hook command must resolve PLUGIN_ROOT.")
+    if any("CLAUDE_" in command for command in commands):
+        errors.append("Codex hooks must not retain Claude-only environment variables.")
     event_names = set(hooks.get("hooks", {}))
     for event_name in ("UserPromptSubmit", "PreToolUse", "Stop"):
         if event_name not in event_names:

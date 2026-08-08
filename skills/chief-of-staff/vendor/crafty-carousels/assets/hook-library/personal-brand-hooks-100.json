@@ -1,0 +1,2157 @@
+{
+  "schema_version": "1.0.0",
+  "library_id": "personal-brand-launch-hooks-100",
+  "title": "Personal Brand Launch Hook Starters",
+  "source": {
+    "source_type": "purchased_creator_library",
+    "access_method": "owner-provided paid Gumroad subscription access",
+    "imported_on": "2026-08-05",
+    "usage_rights": "AUTHORIZED_BY_OWNER_FOR_LOCAL_AND_TEAM_SKILL_USE",
+    "runtime_network_required": false
+  },
+  "record_count": 100,
+  "records": [
+    {
+      "id": "pbl-education-01",
+      "hook": "This is how to (industry tip/hack) in under 60 seconds",
+      "source_category": "Education",
+      "source_position": 1,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-02",
+      "hook": "Next time you do X and you want (dream result) do this immediately before/during/after",
+      "source_category": "Education",
+      "source_position": 2,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-03",
+      "hook": "Here is a (industry) hack that most people don’t know about",
+      "source_category": "Education",
+      "source_position": 3,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-04",
+      "hook": "Have you ever wondered how to get (dream result) don’t worry I won’t gate-keep here is exactly how",
+      "source_category": "Education",
+      "source_position": 4,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-05",
+      "hook": "Unethical ways to get (dream result)",
+      "source_category": "Education",
+      "source_position": 5,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-06",
+      "hook": "Here is a (industry) hack I bet you didn’t know, I kind of wanted to gate-keep this but screw it I am feeling generous.",
+      "source_category": "Education",
+      "source_position": 6,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-07",
+      "hook": "If YOU want (desired result) then listen up)",
+      "source_category": "Education",
+      "source_position": 7,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video"
+      ],
+      "recommended_format": "video",
+      "format_signals": [
+        "listen"
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-052"
+    },
+    {
+      "id": "pbl-education-08",
+      "hook": "I made 10 times more X when I put all my effort towards X",
+      "source_category": "Education",
+      "source_position": 8,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "influencer",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "10 "
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-061"
+    },
+    {
+      "id": "pbl-education-09",
+      "hook": "The greatest X of our generation said (valuable industry advice person said)",
+      "source_category": "Education",
+      "source_position": 9,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-058"
+    },
+    {
+      "id": "pbl-education-10",
+      "hook": "I have made/done/grown (desired result) here are 3 things I wish I knew earlier",
+      "source_category": "Education",
+      "source_position": 10,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "3 "
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-063"
+    },
+    {
+      "id": "pbl-education-11",
+      "hook": "(industry) hack I bet you didn't know about",
+      "source_category": "Education",
+      "source_position": 11,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-12",
+      "hook": "I studied the top 10 (Ex. body builders, marketers, business owners, etc) of the last decade and here are the 3 things they all had in common",
+      "source_category": "Education",
+      "source_position": 12,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "top ",
+        "3 ",
+        "10 "
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-070"
+    },
+    {
+      "id": "pbl-education-13",
+      "hook": "I studied (huge number) (industry related item) here are the top 10 best X - ex. I studied 1,237 viral hooks and here are the top 10 best preforming hooks",
+      "source_category": "Education",
+      "source_position": 13,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-14",
+      "hook": "This (Industry related website/tool/software/book) is so good it should be illegal",
+      "source_category": "Education",
+      "source_position": 14,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-056"
+    },
+    {
+      "id": "pbl-education-15",
+      "hook": "I am going to tell you what took me X years to learn in 60 seconds about (industry)",
+      "source_category": "Education",
+      "source_position": 15,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-16",
+      "hook": "If I new what I was about to tell you when I was 20 I would be so (dream result) today.",
+      "source_category": "Education",
+      "source_position": 16,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-17",
+      "hook": "I did/or didn’t do X for 30 days straight and here are the results",
+      "source_category": "Education",
+      "source_position": 17,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "30 "
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-064"
+    },
+    {
+      "id": "pbl-education-18",
+      "hook": "Here is a secret (industry) tip/hack that helped me achieve (dream result)",
+      "source_category": "Education",
+      "source_position": 18,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "education",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-education-19",
+      "hook": "This may just be the most important video you watch today.",
+      "source_category": "Education",
+      "source_position": 19,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video"
+      ],
+      "recommended_format": "video",
+      "format_signals": [
+        "video",
+        "watch"
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-054"
+    },
+    {
+      "id": "pbl-education-20",
+      "hook": "The top .1% of (insert avatar) don’t want you to know this one secret.",
+      "source_category": "Education",
+      "source_position": 20,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "top "
+      ],
+      "hook_mechanism": "education",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-065"
+    },
+    {
+      "id": "pbl-myths-01",
+      "hook": "You’re being brainwashed into believing this (industry) myth.",
+      "source_category": "Myths",
+      "source_position": 1,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-02",
+      "hook": "If I had a dollar for every time I saw someone falling for (industry myth) I would be rich son of a…",
+      "source_category": "Myths",
+      "source_position": 2,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-03",
+      "hook": "Why (popular industry belief) is complete BS",
+      "source_category": "Myths",
+      "source_position": 3,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-001"
+    },
+    {
+      "id": "pbl-myths-04",
+      "hook": "The oldest lady to ever lived drank and smoked cigarettes until she was 116 years old. So if you believe you have to be perfect to achieve X your wrong.",
+      "source_category": "Myths",
+      "source_position": 4,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "6 "
+      ],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-017"
+    },
+    {
+      "id": "pbl-myths-05",
+      "hook": "Not seeing (dream result) then you might be falling for this common (industry) myth that’s stealing your results",
+      "source_category": "Myths",
+      "source_position": 5,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-06",
+      "hook": "Here are 5 common myths popular (niche) influencers want you to believe",
+      "source_category": "Myths",
+      "source_position": 6,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-07",
+      "hook": "Here are the top (number) (industry) myths you are being fooled by that are ruining your chances of achieving (dream result)",
+      "source_category": "Myths",
+      "source_position": 7,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-08",
+      "hook": "If you are doing (insert industry myth) you can 100% guarantee you will never achieve (dream result) here's why",
+      "source_category": "Myths",
+      "source_position": 8,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-09",
+      "hook": "-controversial statement about your industry revolving around myth- ex. yellow bananas make you fat",
+      "source_category": "Myths",
+      "source_position": 9,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-10",
+      "hook": "Remember when you were a kid and your parents used to tell you (industry related myth) Well they were lying to you…",
+      "source_category": "Myths",
+      "source_position": 10,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-11",
+      "hook": "Doing (industry myth) is like taking relationship advice from someone who was divorced 7 times. It's not going to get you very far when trying to achieve (dream result)",
+      "source_category": "Myths",
+      "source_position": 11,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-12",
+      "hook": "Remember when your mom used to tell you “if you keep making that face, it'll stay that way”. Well (industry myth) is about as true as that. But instead of mom wanting you to believe that it’s marketers who want you to buy.",
+      "source_category": "Myths",
+      "source_position": 12,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-020"
+    },
+    {
+      "id": "pbl-myths-13",
+      "hook": "(industry myth) is about as true as Santa Clause. I mean obviously he is real (wink)",
+      "source_category": "Myths",
+      "source_position": 13,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video"
+      ],
+      "recommended_format": "video",
+      "format_signals": [
+        "wink"
+      ],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-007"
+    },
+    {
+      "id": "pbl-myths-14",
+      "hook": "Saying (industry myth) is like saying I am the rock (flex your arm) its complete BS.",
+      "source_category": "Myths",
+      "source_position": 14,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-15",
+      "hook": "Marketers want you to believe (industry myth) so you will buy their products but here is why that isn't actually true",
+      "source_category": "Myths",
+      "source_position": 15,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-012"
+    },
+    {
+      "id": "pbl-myths-16",
+      "hook": "I would bet (something very important to you) that the reason you aren’t achieving X is because your falling for (industry myth)",
+      "source_category": "Myths",
+      "source_position": 16,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myth_bust",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-013"
+    },
+    {
+      "id": "pbl-myths-17",
+      "hook": "I didn’t do (industry myth) for 365 days straight and here are the results. SIKE I have not done this for YEARS because it’s a common (industry) myth that a ton of people fall for when trying to achieve (dream result)",
+      "source_category": "Myths",
+      "source_position": 17,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-18",
+      "hook": "You have better odds getting a letter being invited to Hogwarts than achieving (dream result) by doing (industry myth)",
+      "source_category": "Myths",
+      "source_position": 18,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-19",
+      "hook": "(industry myth) is about as real as vampires, dragons, and fairy’s. They aren't true…",
+      "source_category": "Myths",
+      "source_position": 19,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-myths-20",
+      "hook": "I am going to make a lot of people angry by saying this but you have been lied too and deserve to know the truth. You know how people say (insert myth) well thats not actually true…",
+      "source_category": "Myths",
+      "source_position": 20,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "myths",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-01",
+      "hook": "I charge my clients $X-$X per year, and today I am going to show you my favorite (insert industry) strategy so you can steal it and use it for yourself.",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 1,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-345"
+    },
+    {
+      "id": "pbl-step-by-step-02",
+      "hook": "This is how to (industry-related thing you will teach them) in under 60 seconds.",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 2,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [
+        "seconds",
+        "how to"
+      ],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-320"
+    },
+    {
+      "id": "pbl-step-by-step-03",
+      "hook": "What should you do if you want to (industry-related result) in (timeframe)",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 3,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-310"
+    },
+    {
+      "id": "pbl-step-by-step-04",
+      "hook": "X is overrated heres how to actually get (dream result)",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 4,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-05",
+      "hook": "Here is how to double, triple, or even 10X your (desired result) in 3 steps",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 5,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "steps",
+        "how to",
+        "3 "
+      ],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-325"
+    },
+    {
+      "id": "pbl-step-by-step-06",
+      "hook": "I am going to show you how to hack the X in 30 seconds",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 6,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "ugc_creator",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [
+        "seconds",
+        "how to",
+        "30 "
+      ],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-319"
+    },
+    {
+      "id": "pbl-step-by-step-07",
+      "hook": "I should be charging for what I am about to tell you!",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 7,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-309"
+    },
+    {
+      "id": "pbl-step-by-step-08",
+      "hook": "The top .1% of (avatar) do this",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 8,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "top "
+      ],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-288"
+    },
+    {
+      "id": "pbl-step-by-step-09",
+      "hook": "Heres how to get your (desired result) in X steps",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 9,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-10",
+      "hook": "This is YOUR SIGN to finally start X. Here are the first X steps you need to take!",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 10,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "steps"
+      ],
+      "hook_mechanism": "tutorial",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-332"
+    },
+    {
+      "id": "pbl-step-by-step-11",
+      "hook": "I studied the top 10 (avatar) of the last decade and here is the X step framework they all follow to achieve (dream result)",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 11,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-12",
+      "hook": "Want to impress all your (avatar - ex. golf buddies) with (desired result) here is the exact step by step process to get there. Trust me the look on their face will be so worth it",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 12,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-13",
+      "hook": "If you only have X hours per week to achieve (dream result) here is what you should do",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 13,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-14",
+      "hook": "If I only had 1 hour a day to work on (dream result) this is exactly step by step what I would do",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 14,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-15",
+      "hook": "If I only had 30 days to achieve (dream result) here is a breakdown of what I would do",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 15,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-16",
+      "hook": "If I could only do 1 thing to achieve (dream result) I would do X",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 16,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-17",
+      "hook": "I have (dream result) but if I had to start from scratch today this is a breakdown of exactly what I would do",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 17,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-18",
+      "hook": "Here is a breakdown on how to get (dream result) in under 60 seconds",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 18,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-19",
+      "hook": "The secret strategy to (dream result) is right under your nose… Because you are probably holding your phone under your nose right now and I am about to tell you.",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 19,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-step-by-step-20",
+      "hook": "Here is an exact breakdown of how to achieve (dream result) that they don’t teach you at school",
+      "source_category": "Step-by-Step Systems",
+      "source_position": 20,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "step-by-step",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-01",
+      "hook": "If you are stuck at/with (industry-related pain point) and you want (dream result) then you got to stop making this (industry) mistake.",
+      "source_category": "Common Mistakes",
+      "source_position": 1,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-02",
+      "hook": "You need to stop (common industry related task)! Well… at least until you do this one thing first",
+      "source_category": "Common Mistakes",
+      "source_position": 2,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-03",
+      "hook": "(common industry mistake) is destroying your (insert dream result)",
+      "source_category": "Common Mistakes",
+      "source_position": 3,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-263"
+    },
+    {
+      "id": "pbl-common-mistakes-04",
+      "hook": "Your throwing (dream results) under the freaking bus if you are doing this!",
+      "source_category": "Common Mistakes",
+      "source_position": 4,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-265"
+    },
+    {
+      "id": "pbl-common-mistakes-05",
+      "hook": "If I had a dollar for every time I saw someone falling for this common (industry) mistake I would be rich son of a….",
+      "source_category": "Common Mistakes",
+      "source_position": 5,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-06",
+      "hook": "X is dead, stop focusing on it for (desired result)",
+      "source_category": "Common Mistakes",
+      "source_position": 6,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "top "
+      ],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-264"
+    },
+    {
+      "id": "pbl-common-mistakes-07",
+      "hook": "I have been an X for over X years, here are 3 common mistakes I see newbies make that you should avoid",
+      "source_category": "Common Mistakes",
+      "source_position": 7,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "mistakes",
+        "3 "
+      ],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-275"
+    },
+    {
+      "id": "pbl-common-mistakes-08",
+      "hook": "Stop making this (common mistake) it will just give your mother-in-law one more reason to hate you",
+      "source_category": "Common Mistakes",
+      "source_position": 8,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "top "
+      ],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-270"
+    },
+    {
+      "id": "pbl-common-mistakes-09",
+      "hook": "Here are 3 newbie (industry) mistakes you should avoid to see (dream result) 10x faster",
+      "source_category": "Common Mistakes",
+      "source_position": 9,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-10",
+      "hook": "You need to (common mistake) at least that what all the gurus are trying to tell you but their WRONG",
+      "source_category": "Common Mistakes",
+      "source_position": 10,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-272"
+    },
+    {
+      "id": "pbl-common-mistakes-11",
+      "hook": "(common industry mistake) is like bringing a knife to a gun fight… You are the only one who is going to end up getting hurt in the process.",
+      "source_category": "Common Mistakes",
+      "source_position": 11,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-12",
+      "hook": "You would see better results (ridiculous way to see results) than (insert common mistake)",
+      "source_category": "Common Mistakes",
+      "source_position": 12,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-266"
+    },
+    {
+      "id": "pbl-common-mistakes-13",
+      "hook": "Making this (industry) mistake is the equivalent to going to the gym to get fit but only eating junk. You will never achieve your desired results, yet so many people still do it. Here is why you need to stop now!",
+      "source_category": "Common Mistakes",
+      "source_position": 13,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-14",
+      "hook": "You have a better chance winning the lottery than achieving (dream result) doing (common mistake)",
+      "source_category": "Common Mistakes",
+      "source_position": 14,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-15",
+      "hook": "You have a better chance of beating the rock in an arm wrestling competition than achieving (dream result) doing (common mistake)",
+      "source_category": "Common Mistakes",
+      "source_position": 15,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-16",
+      "hook": "I am literally shooting myself in the foot by telling this but I am feeling generous so here is my exact strategy to getting (dream result you charge people to help get)",
+      "source_category": "Common Mistakes",
+      "source_position": 16,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "mistake",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-280"
+    },
+    {
+      "id": "pbl-common-mistakes-17",
+      "hook": "Here are X things you should avoid like the plague if you want (dream result)",
+      "source_category": "Common Mistakes",
+      "source_position": 17,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-18",
+      "hook": "I am going to upset a lot of people by saying this but (insert common mistake) wont actually get you (dream result) here is why",
+      "source_category": "Common Mistakes",
+      "source_position": 18,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-19",
+      "hook": "You have been told by your parents, teachers, and authority figures that (common mistake) will get you (dream result). I am a (title) who has achieved (dream result) and helped many others do the same. Here is exactly why this is wrong.",
+      "source_category": "Common Mistakes",
+      "source_position": 19,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-common-mistakes-20",
+      "hook": "Want to know why most people fail at (dream result) it’s not because their lazy/dumb its actually because of this (industry) common mistake",
+      "source_category": "Common Mistakes",
+      "source_position": 20,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "common-mistakes",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-01",
+      "hook": "This week/month/year I dream result) using this method.",
+      "source_category": "Authority",
+      "source_position": 1,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-02",
+      "hook": "This strategy helped me get X in X days, here is exactly how I did it",
+      "source_category": "Authority",
+      "source_position": 2,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-026"
+    },
+    {
+      "id": "pbl-authority-03",
+      "hook": "I have done 291,200 (task ex. calf raises) in the last decade here is the best way to achieve (dream result)",
+      "source_category": "Authority",
+      "source_position": 3,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-04",
+      "hook": "I went from X to X in X (days/months/years) here is exactly how we did it so you can to",
+      "source_category": "Authority",
+      "source_position": 4,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-032"
+    },
+    {
+      "id": "pbl-authority-05",
+      "hook": "I took my client from X to X in X (days/months/years) here is exactly how we did it so you can to. I should be charging you for this information!",
+      "source_category": "Authority",
+      "source_position": 5,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-042"
+    },
+    {
+      "id": "pbl-authority-06",
+      "hook": "Steal my strategy to get (ideal customers dream result)",
+      "source_category": "Authority",
+      "source_position": 6,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-022"
+    },
+    {
+      "id": "pbl-authority-07",
+      "hook": "I am going to show you how I did X for my client in less than 1 hour",
+      "source_category": "Authority",
+      "source_position": 7,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-028"
+    },
+    {
+      "id": "pbl-authority-08",
+      "hook": "If you had (common industry problem) and hired me to get you too (dream result) in just X days, these are the main X things we would do",
+      "source_category": "Authority",
+      "source_position": 8,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-09",
+      "hook": "I’m going to show YOU how I helped/created (industry related result) in (X time)",
+      "source_category": "Authority",
+      "source_position": 9,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-025"
+    },
+    {
+      "id": "pbl-authority-10",
+      "hook": "Take if from someone who has been in the industry for X years/decades, here is the best way to achieve (dream result)",
+      "source_category": "Authority",
+      "source_position": 10,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-11",
+      "hook": "- play a viral video for 5 seconds that relates to your niche- give your professional opinion after",
+      "source_category": "Authority",
+      "source_position": 11,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [
+        "video",
+        "play ",
+        "seconds",
+        "5 "
+      ],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-027"
+    },
+    {
+      "id": "pbl-authority-12",
+      "hook": "I have worked with over X clients, you can practically call me the Gandhi of (industry). Here is how you actually get (dream result).",
+      "source_category": "Authority",
+      "source_position": 12,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-13",
+      "hook": "You take advice from a doctor when your sick, you take advice from (your name) when your trying to get (dream result). Here are the 3 best ways I teach my clients to achieve that.",
+      "source_category": "Authority",
+      "source_position": 13,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-14",
+      "hook": "(insert jaw dropping statistic) my name is (your name) and I am a (title) and this is 100% accurate",
+      "source_category": "Authority",
+      "source_position": 14,
+      "example": null,
+      "content_classes": [
+        "business",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-030"
+    },
+    {
+      "id": "pbl-authority-15",
+      "hook": "Here are 5 hard truths about (industry/niche) from a (title)",
+      "source_category": "Authority",
+      "source_position": 15,
+      "example": null,
+      "content_classes": [
+        "business"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "image_carousel"
+      ],
+      "recommended_format": "image_carousel",
+      "format_signals": [
+        "here are",
+        "truths",
+        "5 "
+      ],
+      "hook_mechanism": "authority_proof",
+      "classification_method": "matched-existing-offline-record",
+      "duplicate_of": "notion-351-023"
+    },
+    {
+      "id": "pbl-authority-16",
+      "hook": "I only work on my (dream result) for X minutes per week and it looks like this/or make me $ per year",
+      "source_category": "Authority",
+      "source_position": 16,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-17",
+      "hook": "Do you feel (ideal customer pain point) I am a (title) and I have help people go from X to X in X (time). Here is the best thing you can do…",
+      "source_category": "Authority",
+      "source_position": 17,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-18",
+      "hook": "I am a (title) and here are the top X things someone with (Characteristic or item - ex. money or depression) wants you to know",
+      "source_category": "Authority",
+      "source_position": 18,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-19",
+      "hook": "Would you take advice from someone who has (dream result you have achieved) if your answer is yes I have done that for myself and a ton of my clients. Here is my best advice when it comes to achieving (dream result)",
+      "source_category": "Authority",
+      "source_position": 19,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    },
+    {
+      "id": "pbl-authority-20",
+      "hook": "Who would you rather A) take advice from someone who achieved (dream result) or B) someone who repeats information but hasn't actually done the thing. Most people will answer A but they do the opposite and learn from a college professor teaching stuff they haven’t done in real life. Here are X things you should know if you want to achieve (dream result) that a college professor wont teach you.",
+      "source_category": "Authority",
+      "source_position": 20,
+      "example": null,
+      "content_classes": [
+        "business",
+        "ugc_creator",
+        "influencer"
+      ],
+      "primary_content_class": "business",
+      "format_fit": [
+        "video",
+        "image_carousel"
+      ],
+      "recommended_format": "both",
+      "format_signals": [],
+      "hook_mechanism": "authority",
+      "classification_method": "source-category-default-v1"
+    }
+  ]
+}

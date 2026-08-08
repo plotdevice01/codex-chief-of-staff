@@ -1,0 +1,11 @@
+Role,Named owner,Accountability,Approval source,Status,Review date
+Package owner,,Adopts voice decisions and package changes,,Unknown,
+Release owner,,Records the final decision for the exact asset and use,,Unknown,
+Claim owner,,Confirms claims and required qualifications,,Unknown,
+Privacy owner,,Approves personal-data handling and privacy language,,Unknown,
+Commercial owner,,Approves offer price contract and payment language,,Unknown,
+Operations owner,,Confirms workflows capacity timing and service boundaries,,Unknown,
+Security owner,,Confirms portal data-flow access and security statements,,Unknown,
+Media owner,,Controls public positions and spokesperson use,,Unknown,
+Rights owner,,Confirms quotation testimonial likeness and third-party rights,,Unknown,
+Domain owner,,Confirms destination redirects tracking and availability,,Unknown,

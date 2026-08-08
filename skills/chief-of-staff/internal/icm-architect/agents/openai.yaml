@@ -1,0 +1,6 @@
+interface:
+  display_name: "ICM Architect"
+  short_description: "Structure projects as agent-readable workspaces"
+  default_prompt: "Use Chief's internal ICM workflow to design the smallest ICM workspace for this work."
+policy:
+  allow_implicit_invocation: true

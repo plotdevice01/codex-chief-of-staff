@@ -1,0 +1,470 @@
+{
+  "packages": {
+    "ai-sloppy-copy": {
+      "commit": "cb70fe804a633dc7bc797c40943f61fe6dbd8986",
+      "files": [
+        {
+          "bytes": 1069,
+          "destination": "ai-sloppy-copy/notices/LICENSE",
+          "sha256": "5c9d21d89d459143b8e7cf27bec0601beee3fb96d83eacf82cb9f2efa3fda283",
+          "source": "LICENSE"
+        },
+        {
+          "bytes": 1254,
+          "destination": "ai-sloppy-copy/notices/THIRD-PARTY-NOTICES.md",
+          "sha256": "a1ec2298661e7af2a1821497d8a451c00e3ca2d9f1d3de6bb9ca4eb353f74c0e",
+          "source": "THIRD-PARTY-NOTICES.md"
+        },
+        {
+          "bytes": 343752,
+          "destination": "ai-sloppy-copy/scripts/AI-Sloppy-Copy-Rules.json",
+          "sha256": "43ff06befe3af109bfaece8622277d88bc4422dd442d268cfc25f7043a83596c",
+          "source": "plugins/ai-sloppy-copy/scripts/AI-Sloppy-Copy-Rules.json"
+        },
+        {
+          "bytes": 12319,
+          "destination": "ai-sloppy-copy/scripts/ai_sloppy_copy.py",
+          "sha256": "427285917653d70ff3cb3941bc79218578cc626709643935c650aabdcdd1c4a7",
+          "source": "plugins/ai-sloppy-copy/scripts/ai_sloppy_copy.py"
+        },
+        {
+          "bytes": 6840,
+          "destination": "ai-sloppy-copy/workflow.md",
+          "sha256": "3e0385112fff9fd7b63baabae8caa1e6d0b4feb49e4165cd6d30dfed60309701",
+          "source": "plugins/ai-sloppy-copy/skills/ai-sloppy-copy/SKILL.md"
+        }
+      ],
+      "repository": "https://github.com/plotdevice01/ai-sloppy-copy",
+      "version": "0.5.0"
+    },
+    "brand-voice-factory": {
+      "commit": "f969da4a41b79209a198b1b3d449145ab2864782",
+      "files": [
+        {
+          "bytes": 5907,
+          "destination": "brand-voice-factory/workflow.md",
+          "sha256": "557886ddd11685bd7817f439fd089b328c5fe81baea34dfe31018ccfe47fb6a8",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/SKILL.md"
+        },
+        {
+          "bytes": 558,
+          "destination": "brand-voice-factory/assets/client-workspace/AGENTS.md",
+          "sha256": "57c58912f9c70451202c0872262e48e4e463b94b66985be2d63bfb5ca835ad7b",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/AGENTS.md"
+        },
+        {
+          "bytes": 680,
+          "destination": "brand-voice-factory/assets/client-workspace/CONTEXT.md",
+          "sha256": "c8bfc2a340c6d05c16d5d66524bb40b525dd969d6db0fba4a4d208ebe6da135c",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/CONTEXT.md"
+        },
+        {
+          "bytes": 266,
+          "destination": "brand-voice-factory/assets/client-workspace/STATUS.md",
+          "sha256": "4b05546844f296fbc5c9f52bc0b4714a496f922325d619dfa090065f0c25a18b",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/STATUS.md"
+        },
+        {
+          "bytes": 419,
+          "destination": "brand-voice-factory/assets/client-workspace/_shared/evidence-policy.md",
+          "sha256": "75476ee11adb9d7ca912afd46782c007ab558a75ad903425a752d4498dfb7263",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_shared/evidence-policy.md"
+        },
+        {
+          "bytes": 504,
+          "destination": "brand-voice-factory/assets/client-workspace/_shared/release-policy.md",
+          "sha256": "786937997232a5a5097bbaa64a1d6ff7a53adbf70417af932717ad5bc0c60621",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_shared/release-policy.md"
+        },
+        {
+          "bytes": 285,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/approval-record.md",
+          "sha256": "73cffdc7688f2cf09c45cd305292ce786c6c109d42a31fcf7d0bfbb05fe5375c",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/approval-record.md"
+        },
+        {
+          "bytes": 127,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/asset-register.csv",
+          "sha256": "71151d42412e42aa067169636072c983cecd4a241d11a0fce27658f9987aeee3",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/asset-register.csv"
+        },
+        {
+          "bytes": 139,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/claim-register.csv",
+          "sha256": "630ba242e51edca73485b0f217e5ff3a27030e3dcdcd2ceefa1546eb0cc41bcc",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/claim-register.csv"
+        },
+        {
+          "bytes": 816,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/client-intake.md",
+          "sha256": "4cc110723fbcc2e453bda16716723aeab27c3fd2c990440e7bb6c44e3ba55fcc",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/client-intake.md"
+        },
+        {
+          "bytes": 312,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/copy-brief.md",
+          "sha256": "f6aa47b076264ef933e530f75852ab6e9afeb54b8ad34c98bb916fe310fa0f89",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/copy-brief.md"
+        },
+        {
+          "bytes": 846,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/owner-matrix.csv",
+          "sha256": "9038a146fe401a5dd8248dc76af976e98ba46a475dfd2650ce1b488775935d46",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/owner-matrix.csv"
+        },
+        {
+          "bytes": 898,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/package-manifest.json",
+          "sha256": "8f24912e90937f32acc059f2da7cce92e3300694cbbad62e25d3f76b7bec893f",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/package-manifest.json"
+        },
+        {
+          "bytes": 116,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/source-register.csv",
+          "sha256": "0ab93153e1bdb5f2e9aab81b305f5290e2943a01908ddbeba83c74de0151ce27",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/source-register.csv"
+        },
+        {
+          "bytes": 114,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/terminology-register.csv",
+          "sha256": "257357d5f95b6b5463f4f699b8cf43db5af645910839698d51d5f25d6e9a158d",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/terminology-register.csv"
+        },
+        {
+          "bytes": 549,
+          "destination": "brand-voice-factory/assets/client-workspace/_templates/voice-architecture.md",
+          "sha256": "8dc902a0a0f0e28c0b457904de6269e2a207c6df1406d3d52f22eff828366244",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/_templates/voice-architecture.md"
+        },
+        {
+          "bytes": 620,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/01_intake/CONTEXT.md",
+          "sha256": "f8195959978eea19dae18b9c81ee0cdbbff7ee1a69474db6f4672da8b968e6ac",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/01_intake/CONTEXT.md"
+        },
+        {
+          "bytes": 775,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/02_evidence/CONTEXT.md",
+          "sha256": "faf1ec2aaea1e685193df56fe5e827f0160fcbb249203ad3f60093d1739df8e2",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/02_evidence/CONTEXT.md"
+        },
+        {
+          "bytes": 789,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/03_voice/CONTEXT.md",
+          "sha256": "ce13f76fa36f9b6df857cb6bc2e9862ded42768446f66261ebbb3f955240b3a5",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/03_voice/CONTEXT.md"
+        },
+        {
+          "bytes": 789,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/04_package/CONTEXT.md",
+          "sha256": "813a8b865f40b0917f5ede3dce8769853ac57150ccae02e73d5d0e5e8eca7e23",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/04_package/CONTEXT.md"
+        },
+        {
+          "bytes": 741,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/05_copy/CONTEXT.md",
+          "sha256": "c3778b8c9e999fce91eff1376ca92468bb0790b17061b86d9cde7cffa3071a00",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/05_copy/CONTEXT.md"
+        },
+        {
+          "bytes": 731,
+          "destination": "brand-voice-factory/assets/client-workspace/stages/06_release/CONTEXT.md",
+          "sha256": "905c1a1355009339c900d071fddf6fea215ed6317261900e7538e67eb24f4acb",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/assets/client-workspace/stages/06_release/CONTEXT.md"
+        },
+        {
+          "bytes": 3443,
+          "destination": "brand-voice-factory/references/brand-voice-package-spec.md",
+          "sha256": "c469f2c7e7c283337b8a045375f7271a58f124ec3d3f1322112d05570aacfb63",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/brand-voice-package-spec.md"
+        },
+        {
+          "bytes": 4073,
+          "destination": "brand-voice-factory/references/copy-production.md",
+          "sha256": "4e268268fd03386ce66d7cf00ab8fd6ee8a0c30f39c056653d051f44673b7191",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/copy-production.md"
+        },
+        {
+          "bytes": 3179,
+          "destination": "brand-voice-factory/references/governance-and-claims.md",
+          "sha256": "5c92bd84ca2b553458f1a4b1302a4e07c0c35ab932ea3bd6679a97e3308bd2f5",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/governance-and-claims.md"
+        },
+        {
+          "bytes": 3031,
+          "destination": "brand-voice-factory/references/intake-and-evidence.md",
+          "sha256": "9a5c3d370db8dd76480f1283b67487977dbebbc6636bafaf51b219551c9b912d",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/intake-and-evidence.md"
+        },
+        {
+          "bytes": 1676,
+          "destination": "brand-voice-factory/references/qa-and-measurement.md",
+          "sha256": "ddb7ff8a5b93eddebfb43c0a4f90f536b041717534a6ebb7cc4f105cc52ac869",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/qa-and-measurement.md"
+        },
+        {
+          "bytes": 1816,
+          "destination": "brand-voice-factory/references/sloppy-copy-qa.md",
+          "sha256": "51cd7fe285d5698dc44753f8625cd176bf014c9c0386976e27b654c26311b11a",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/references/sloppy-copy-qa.md"
+        },
+        {
+          "bytes": 3362,
+          "destination": "brand-voice-factory/scripts/new_brand_voice_project.py",
+          "sha256": "af32ce80086dd36761139cccaf3d5673a1a73b6414f9f0e15194f20e9ee22bee",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/scripts/new_brand_voice_project.py"
+        },
+        {
+          "bytes": 6896,
+          "destination": "brand-voice-factory/scripts/package_manifest.py",
+          "sha256": "3847fcd4c523aadece57bf6a28e417cabd7c07fef09d2bab19009c6b9751756b",
+          "source": "plugins/brand-voice-factory/skills/brand-voice-copywriter/scripts/package_manifest.py"
+        }
+      ],
+      "repository": "https://github.com/plotdevice01/brand-voice-factory",
+      "version": "0.2.1"
+    },
+    "crafty-carousels": {
+      "commit": "d0aebbf4eaa42de21f5cad78c516edfcebacc625",
+      "files": [
+        {
+          "bytes": 1069,
+          "destination": "crafty-carousels/notices/LICENSE",
+          "sha256": "01fb98103507489ada3bc3e3f471337429b444666ef76a0137b3614a6cabd196",
+          "source": "LICENSE"
+        },
+        {
+          "bytes": 11060,
+          "destination": "crafty-carousels/workflow.md",
+          "sha256": "cedfd0bed1ac586e32941142e073355561dee4a546a9ce39b03c8135fe96b236",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/SKILL.md"
+        },
+        {
+          "bytes": 38,
+          "destination": "crafty-carousels/assets/client-workspace/.gitignore",
+          "sha256": "02445bf93dc0c6ed012979440826c51a7bcd6e6e57b8ff7d462cd6660dd87000",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/.gitignore"
+        },
+        {
+          "bytes": 962,
+          "destination": "crafty-carousels/assets/client-workspace/AGENTS.md",
+          "sha256": "5e49af867310dc6e1958883e26f45b5680027f6365350cbc7d4a42c70ff87954",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/AGENTS.md"
+        },
+        {
+          "bytes": 700,
+          "destination": "crafty-carousels/assets/client-workspace/CONTEXT.md",
+          "sha256": "fa482cb890895c43dff43f9e6d3daec73ff5864a85e3786962954a97c3a5020c",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/CONTEXT.md"
+        },
+        {
+          "bytes": 178,
+          "destination": "crafty-carousels/assets/client-workspace/STATUS.md",
+          "sha256": "3740a3d3057416f0ad2dd87cafabc2e3790da153c35d37b3d62e633e6c930fa2",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/STATUS.md"
+        },
+        {
+          "bytes": 250,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/asset-register.csv",
+          "sha256": "92fb75b987d8f6f8b0dbc3d4124eb31fd00dbc5b7f39247eb74fa806a5484671",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/asset-register.csv"
+        },
+        {
+          "bytes": 575,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/brand.md",
+          "sha256": "33f069befa75c6731ff635722a55e1d64e435c7dd24decceb075e9f15c9704c2",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/brand.md"
+        },
+        {
+          "bytes": 106,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/claim-register.csv",
+          "sha256": "8a74ae075361e07ab6ca79a2582766e20ee22da44e99a39bbe479b7fbeca661b",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/claim-register.csv"
+        },
+        {
+          "bytes": 870,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/people-and-likeness.md",
+          "sha256": "f4afcfe684ec4458e6032619bbd16307d40c5675fcfccdceef0db6411c7fc0d5",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/people-and-likeness.md"
+        },
+        {
+          "bytes": 485,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/release-policy.md",
+          "sha256": "8c0e69d776cf7863d5f5d234dcff3371b7728343f63007cb0c869ff179d33c4f",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/release-policy.md"
+        },
+        {
+          "bytes": 793,
+          "destination": "crafty-carousels/assets/client-workspace/_shared/voice.md",
+          "sha256": "21602665ac47c2ce86f13ab97ef60a2af2607a621ce4619055a13392b76b18e6",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_shared/voice.md"
+        },
+        {
+          "bytes": 298,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/CONTEXT.md",
+          "sha256": "ce46320e927e09a4a343a703379b961c0fa71a891134a998cb7083cf39583a20",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/CONTEXT.md"
+        },
+        {
+          "bytes": 286,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/copy.md",
+          "sha256": "6e45cde528a383b923338dd6314aa8dfdb8742ee0416fbb51f57c65c218a5649",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/copy.md"
+        },
+        {
+          "bytes": 220,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/prompts.md",
+          "sha256": "85194f728cfa3838d22ce4d77eaf6626363fe09b4363ccb7ad9baab4b0970390",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/prompts.md"
+        },
+        {
+          "bytes": 1549,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/qa.md",
+          "sha256": "ab9af3e8ba2e996584a2222fb0f1fcd265f2df1cf5ded2125244f22791f43742",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/qa.md"
+        },
+        {
+          "bytes": 2118,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/run.json",
+          "sha256": "8e307ec55c097869ecaf70638fc5feca3f69ee8d7297b49be641cc0048bbd777",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/run.json"
+        },
+        {
+          "bytes": 1327,
+          "destination": "crafty-carousels/assets/client-workspace/_templates/carousel-run/visual-brief.md",
+          "sha256": "b6612124e04f58bad36b22591466362e7cbbeec18ea3186971c36b3cfde0cf76",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/_templates/carousel-run/visual-brief.md"
+        },
+        {
+          "bytes": 3564,
+          "destination": "crafty-carousels/assets/client-workspace/setup/client-intake.md",
+          "sha256": "4022100b1637b7d71d8415be2538be99139e94b661d7f6c450c1c669cddfdf0d",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/setup/client-intake.md"
+        },
+        {
+          "bytes": 1143,
+          "destination": "crafty-carousels/assets/client-workspace/stages/01_intake/CONTEXT.md",
+          "sha256": "81b1e24138fa4134a1dee78e596ecd6d4ebb5268e63d3ff64ddec9623706d7b7",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/stages/01_intake/CONTEXT.md"
+        },
+        {
+          "bytes": 926,
+          "destination": "crafty-carousels/assets/client-workspace/stages/02_strategy_copy/CONTEXT.md",
+          "sha256": "bfa20249e590755f64e06dce2a83323da74b1ac7f9b19a59e83aeec23783ad4c",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/stages/02_strategy_copy/CONTEXT.md"
+        },
+        {
+          "bytes": 854,
+          "destination": "crafty-carousels/assets/client-workspace/stages/03_anchor/CONTEXT.md",
+          "sha256": "ecdfbcae7a56d26ecb4e43fc4ce516c44c0702ca31ba5c8c73c9591541d38ffb",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/stages/03_anchor/CONTEXT.md"
+        },
+        {
+          "bytes": 742,
+          "destination": "crafty-carousels/assets/client-workspace/stages/04_production/CONTEXT.md",
+          "sha256": "ec2a6995825b36d025c88b8fbc16627814ab639d08f67e25f939b69ed4f38cd4",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/stages/04_production/CONTEXT.md"
+        },
+        {
+          "bytes": 580,
+          "destination": "crafty-carousels/assets/client-workspace/stages/05_release/CONTEXT.md",
+          "sha256": "f12163d99350870e52ba6ee004150bf592414d4bb2e51986a62a269a90d36734",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/client-workspace/stages/05_release/CONTEXT.md"
+        },
+        {
+          "bytes": 15969,
+          "destination": "crafty-carousels/assets/copy-library/scripts-7-ctas-39.json",
+          "sha256": "ef4dcead34ab6e5ab14f59879e255d03b4a6ddf61a5575d19475c5259190048a",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/copy-library/scripts-7-ctas-39.json"
+        },
+        {
+          "bytes": 319950,
+          "destination": "crafty-carousels/assets/hook-library/notion-tiktok-hooks-351.json",
+          "sha256": "15a4dd3985b1a8a3555ea073461d17c778b420af348ca9cd941ab0a96ced74f9",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/hook-library/notion-tiktok-hooks-351.json"
+        },
+        {
+          "bytes": 65970,
+          "destination": "crafty-carousels/assets/hook-library/personal-brand-hooks-100.json",
+          "sha256": "880ca5bb697a903289c4cf5d1dbf75a5afbd3cb6fbdeff02d49d85b317dcbf26",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/hook-library/personal-brand-hooks-100.json"
+        },
+        {
+          "bytes": 210321,
+          "destination": "crafty-carousels/assets/hook-library/viral-hooks-300.json",
+          "sha256": "8156b46afd9d9a72cb9cc1944e3dd97750706721526f02ed182c250abe8e5cd7",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/assets/hook-library/viral-hooks-300.json"
+        },
+        {
+          "bytes": 3131,
+          "destination": "crafty-carousels/references/client-intake.md",
+          "sha256": "fad622dfc8a182432db03153c36f12bcf414a92315942311d054710ac52c3eb6",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/client-intake.md"
+        },
+        {
+          "bytes": 847,
+          "destination": "crafty-carousels/references/copy-library.md",
+          "sha256": "e451cec583c7800bada356eeae18b6d943f50f20653254d91c6cb0154af2ea66",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/copy-library.md"
+        },
+        {
+          "bytes": 2926,
+          "destination": "crafty-carousels/references/governance-measurement.md",
+          "sha256": "5a12f2974555d374d79dda3efe4c5ec97246ad0d49009697f860ce5ddd53405d",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/governance-measurement.md"
+        },
+        {
+          "bytes": 3445,
+          "destination": "crafty-carousels/references/hook-library.md",
+          "sha256": "4864cdb6e1932a2e16feb9e18ee6d7aba49c59865b2a175eb2ac5e6e549557f9",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/hook-library.md"
+        },
+        {
+          "bytes": 2817,
+          "destination": "crafty-carousels/references/platform-delivery.md",
+          "sha256": "5df66748dbe6e1cfac560938e0ab446f6ddf7d649311950456b9012329a8cf95",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/platform-delivery.md"
+        },
+        {
+          "bytes": 11585,
+          "destination": "crafty-carousels/references/production-system.md",
+          "sha256": "4adff3c92b1c8ddd6f40958f4397484641cee168e37c561728c03cc5fe2f66e6",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/production-system.md"
+        },
+        {
+          "bytes": 2778,
+          "destination": "crafty-carousels/references/sources.md",
+          "sha256": "2ba6913438500d0bd79c54d861cb45b3257b8e55bfe53c7a430fee64b93b63c0",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/references/sources.md"
+        },
+        {
+          "bytes": 2686,
+          "destination": "crafty-carousels/scripts/copy_library.py",
+          "sha256": "31851f97c261642bc6ac4ca0396cfff1b1db2c40e29dffd019430dc51e66bb86",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/scripts/copy_library.py"
+        },
+        {
+          "bytes": 4112,
+          "destination": "crafty-carousels/scripts/hook_library.py",
+          "sha256": "b31e2033db3e1cc32871bb5de3aff491fcaa4658a2e81e61df50fd701dd0a9a2",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/scripts/hook_library.py"
+        },
+        {
+          "bytes": 12709,
+          "destination": "crafty-carousels/scripts/import_brand_voice.py",
+          "sha256": "1596c9b57cfdd18ce4df52f947e8760105e4bbf8632f8ec34d17920a46e5b864",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/scripts/import_brand_voice.py"
+        },
+        {
+          "bytes": 22723,
+          "destination": "crafty-carousels/scripts/new_carousel_project.py",
+          "sha256": "93123985fca7c79262b006b6bc59cb3c68479e788025488a6afb1ed109e57940",
+          "source": "plugins/crafty-carousels/skills/crafty-carousels/scripts/new_carousel_project.py"
+        }
+      ],
+      "repository": "https://github.com/plotdevice01/crafty-carousels-skill",
+      "version": "0.6.1"
+    }
+  },
+  "schema_version": 1
+}

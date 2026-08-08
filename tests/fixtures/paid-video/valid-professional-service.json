@@ -1,0 +1,51 @@
+{
+  "offer_type": "paid",
+  "selected_cta": "Book the paid assessment",
+  "voice_required": true,
+  "voice_manifest_loaded": true,
+  "sources_listed": ["research-source-a", "offer-record-a"],
+  "sources_opened": ["research-source-a", "offer-record-a"],
+  "content_query": {"hooks": 751, "scripts": 7, "ctas": 39},
+  "concepts": [
+    {
+      "id": "concept-a",
+      "format": "direct-to-camera demonstration",
+      "spoken_hook": "See the decision before you buy.",
+      "mechanism": "show the assessment sequence",
+      "proof_source": "research-source-a",
+      "offer": "paid professional assessment",
+      "cta": "Book the paid assessment",
+      "first_frame_action": "Place the assessment worksheet on the desk.",
+      "visual_progression": ["blank worksheet", "three completed decision fields"]
+    },
+    {
+      "id": "concept-b",
+      "format": "screen-recorded walkthrough",
+      "spoken_hook": "Know what the assessment covers.",
+      "mechanism": "walk through the three assessment stages",
+      "proof_source": "offer-record-a",
+      "offer": "paid professional assessment",
+      "cta": "Book the paid assessment",
+      "first_frame_action": "Open the assessment overview on screen.",
+      "visual_progression": ["overview screen", "stage details", "booking page"]
+    },
+    {
+      "id": "concept-c",
+      "format": "objection response",
+      "spoken_hook": "Here is what happens after you book.",
+      "mechanism": "answer the next-step objection",
+      "proof_source": "offer-record-a",
+      "offer": "paid professional assessment",
+      "cta": "Book the paid assessment",
+      "first_frame_action": "Point to a three-step timeline card.",
+      "visual_progression": ["booking", "assessment", "written next steps"]
+    }
+  ],
+  "performance_evidence": [],
+  "regulated": false,
+  "disclosure_status": "not_required",
+  "files_used": ["voice-manifest-a", "research-source-a", "offer-record-a"],
+  "receipt": {
+    "files_used": ["voice-manifest-a", "research-source-a", "offer-record-a"]
+  }
+}

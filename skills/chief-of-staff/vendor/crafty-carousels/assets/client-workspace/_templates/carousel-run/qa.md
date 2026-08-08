@@ -1,0 +1,36 @@
+# QA and release record
+
+- Exact-copy check: UNKNOWN
+- Copy-mode and approved-copy hash: UNKNOWN
+- Current production-rules hash: UNKNOWN
+- Mobile legibility check: UNKNOWN
+- Headline family, weight, and rendered size: UNKNOWN
+- Supporting-copy family, weight, and rendered size: UNKNOWN
+- Two-font maximum: UNKNOWN
+- Three-color maximum: UNKNOWN
+- One visual thread across the deck: UNKNOWN
+- CTA family, weight, rendered size, and bottom-safe placement: UNKNOWN
+- Three distinct anchor files inspected at 320 px: UNKNOWN
+- Dimensions and safe zones: UNKNOWN
+- 180 px top/bottom plus 50 px left and 120 px right safe-zone check: UNKNOWN
+- Stable text contrast with no glow, flare, colored haze, or hotspot: UNKNOWN
+- No text overlap or crowding around the approved person or primary object: UNKNOWN
+- Likeness method and approved person asset IDs: UNKNOWN
+- No unapproved shapes, symbols, fake UI, or stray characters: UNKNOWN
+- No redundant explainer text or repeated idea: UNKNOWN
+- Anchor consistency: UNKNOWN
+- Reference fidelity and visual-interest human check: UNKNOWN
+- Claims and sources: UNKNOWN
+- Asset rights: UNKNOWN
+- People and likeness rights: UNKNOWN
+- AI edit or generation permission: UNKNOWN
+- Paid-media likeness permission: UNKNOWN
+- Disclosure decision: UNKNOWN
+- Caption and alt text: UNKNOWN
+- Live platform route and limit: UNKNOWN
+- Final file count and order: UNKNOWN
+- Strategy-copy approval: UNKNOWN
+- Intake approval: UNKNOWN
+- Anchor approval: UNKNOWN
+- Release approval: UNKNOWN
+- Publication authorization: UNKNOWN

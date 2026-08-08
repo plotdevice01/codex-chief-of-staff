@@ -1,7 +1,7 @@
 # Chief of Staff repository context
 
-Form: umbrella. The repository contains one operating contract, three bundled
-skills, lifecycle hooks, configuration tooling, validation, and a release
+Form: Umbrella. The repository contains one discoverable Chief skill, internal
+workflows, a pinned content runtime, lifecycle hooks, configuration tooling, validation, and a release
 pipeline.
 
 ## Route the task
@@ -10,9 +10,11 @@ pipeline.
 |---|---|---|
 | Change global behavior | `AGENTS.md` | Shared contract plus persona tests |
 | Change Chief workflows | `skills/chief-of-staff/SKILL.md` | Scoped operating workflow |
-| Design or restructure work | `skills/icm-architect/SKILL.md` | ICM workspace or migration plan |
-| Coordinate governed brand voice work | Installed `brand-voice-factory` plugin | Approved Brand Voice package |
-| Build a social carousel | `skills/viral-carousel-factory/SKILL.md` | Governed carousel workspace or run package |
+| Change request routing | `skills/chief-of-staff/references/universal-request-contract.md` | One-pass route and execution receipt |
+| Design or restructure work | `skills/chief-of-staff/internal/icm-architect/workflow.md` | Internal ICM workspace or migration plan |
+| Create business content | `skills/chief-of-staff/references/content-production.md` | Governed copy, voice package, ad, or carousel run |
+| Create paid-video work | `skills/chief-of-staff/references/paid-video-creative.md` | Complete concepts, scripts, QA, and results loop |
+| Update pinned content resources | `scripts/sync_content_runtime.py` | Hash-locked Chief content runtime |
 | Change hooks | `hooks/chief-of-staff-hook.js` | Session and subagent payload |
 | Change configuration | `docs/configuration.md`, then `scripts/configure.py` | Local ignored configuration |
 | Validate source | `docs/testing.md` | Test evidence |
