@@ -435,7 +435,7 @@ def build(output: Path) -> Path:
     add_table(
         doc,
         ("Release", "Audience", "Distribution", "Authority"),
-        ((VERSION, "ChatGPT Work and Codex teams", "OpenAI plugin directory", "Local configuration only"),),
+        ((VERSION, "ChatGPT Work and Codex teams", "GitHub marketplace; OpenAI review pending", "Local configuration only"),),
         (1500, 2160, 2460, 3240),
     )
     add_callout(
@@ -459,17 +459,47 @@ def build(output: Path) -> Path:
     )
 
     section_page(doc, "1. Install Chief")
-    doc.add_heading("Requirements", level=2)
-    add_bullets(
+    doc.add_heading("Teammate quick start", level=2)
+    add_numbered(
         doc,
         (
-            "ChatGPT Work or Codex with plugin support.",
-            "Git for GitHub marketplace installation.",
-            "Node.js 18 or later for Chief of Staff hooks.",
-            "Python 3.11 or later for configuration, content libraries, copy validation, and release checks.",
+            "Open ChatGPT and switch to Work.",
+            "Open Plugins and search for Chief of Staff.",
+            "Select + to install it.",
+            "Start a new chat and ask for the finished work normally.",
         ),
     )
-    doc.add_heading("Codex", level=2)
+    add_callout(
+        doc,
+        "That is the whole teammate procedure: ",
+        "No terminal or Git is required. Teammates do not need Python, plugin names or specialist selection. "
+        "Do not install AI Sloppy Copy separately. Brand Voice Factory and Crafty Carousels are already inside Chief.",
+    )
+    doc.add_heading("Workspace admin", level=2)
+    add_numbered(
+        doc,
+        (
+            "Open Workspace settings and select Plugins.",
+            "Select Chief of Staff.",
+            "Set the installation policy to Installed for the required roles.",
+            "Run one low-risk test from a member account.",
+            "Tell the team to start a new Work chat and ask Chief normally.",
+        ),
+    )
+    add_callout(
+        doc,
+        "Current status: ",
+        "Chief is available through its GitHub-backed marketplace. The public four-step store flow is not active "
+        "yet. The publisher must submit Chief and wait for OpenAI approval. After approval, the publisher must "
+        "select Publish. Until then, do not claim that Chief is publicly searchable.",
+        alert=True,
+    )
+    doc.add_heading("Admin and Codex fallback", level=2)
+    doc.add_paragraph(
+        "This fallback is for administrators. Developers may also use it for direct testing or an offline "
+        "installation. Git is required. Node.js 18 or later is needed for hooks. Python 3.11 or later is needed "
+        "for configuration validation."
+    )
     add_link(doc, "Repository", "https://github.com/plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace add plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
@@ -498,22 +528,11 @@ def build(output: Path) -> Path:
         "Use $chief-of-staff to initialize my local configuration, then validate the install with strict "
         "dependency checks. Report any missing bundled runtime file or hook.",
     )
-    work_heading = doc.add_heading("ChatGPT Work", level=2)
-    work_heading.paragraph_format.page_break_before = True
-    add_numbered(
-        doc,
-        (
-            "Make Chief of Staff available to the required roles in workspace plugin controls.",
-            "Install Chief of Staff from the Plugin Directory.",
-            "Grant only the approved apps, files and permissions.",
-            "Start a fresh ChatGPT Work task and run the acceptance prompts.",
-        ),
-    )
     doc.add_heading("Local and team deployment", level=2)
     doc.add_paragraph(
-        "The Codex installers add or update Chief from the configured marketplace. ChatGPT workspace admins "
-        "control availability and installation for team roles. Team members open ChatGPT Work and ask Chief "
-        "normally; they do not select specialist workflows."
+        "The Codex fallback installs or updates Chief from the configured marketplace. After public-directory "
+        "approval, ChatGPT workspace admins control automatic installation for team roles. Team members open "
+        "ChatGPT Work and ask Chief normally; they do not select specialist workflows."
     )
     section_page(doc, "2. Configure private authority", new_page=False)
     add_callout(
@@ -753,9 +772,9 @@ def build(output: Path) -> Path:
         "GPT-5.6 Sol Medium. "
         "Generate the host prompt with scripts/live_acceptance_harness.py. For ChatGPT Work, the owner verifies "
         "the Work UI, Work locally and Ask for approval; record the underlying runtime separately because it may "
-        "report Codex. For Codex, require the built-in read-only permission profile. Run responses inline; "
-        "any task creation, delegation, "
-        "file mutation, connector call, external action, or host substitution invalidates the run. "
+        "report Codex. For Codex, require the built-in read-only permission profile. Run responses inline. "
+        "Any task creation or delegation invalidates the run. A file mutation also invalidates it. "
+        "The same rule applies to a connector call, external action or host substitution. "
         "Terra XHigh is owner-waived for this release to conserve the reset token budget. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
@@ -763,8 +782,9 @@ def build(output: Path) -> Path:
         doc,
         "Accept only when: ",
         "static, host and installed-runtime checks pass. Sol or Terra may be waived only while pending; failures "
-        "cannot. v2.1.0 evidence must be fresh because model-facing inputs changed. Connector identities and scope "
-        "must match.",
+        "cannot. Releases that change model-facing behavior require fresh evidence. A documentation-only patch may "
+        "carry forward prior host evidence only when the unchanged behavior and source release are recorded. "
+        "Connector identities and scope must match.",
     )
 
     section_page(doc, "7. Update, uninstall, recover", new_page=False)

@@ -75,12 +75,15 @@ def main() -> int:
     release_status = model_acceptance_release_status(evidence)
     assert release_status == "pass_with_waiver"
     assert not validate_model_acceptance(require_pass=True)
+    receipt_version = evidence.get("carried_forward_from_release", evidence["release_version"])
     work_receipt = json.loads(
-        (ROOT / "tests" / "receipts" / "chatgpt-work-v2.1.0.json").read_text(
+        (ROOT / "tests" / "receipts" / f"chatgpt-work-v{receipt_version}.json").read_text(
             encoding="utf-8"
         )
     )
-    assert not validate_receipt(work_receipt, "chatgpt-work")
+    assert not validate_receipt(
+        work_receipt, "chatgpt-work", expected_version=receipt_version
+    )
 
     waived = copy.deepcopy(evidence)
     waived["models"]["gpt-5.6-sol"]["status"] = "pass"

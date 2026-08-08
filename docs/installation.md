@@ -2,14 +2,46 @@
 
 Install one user-facing plugin. Chief includes the pinned content runtime.
 
-## Requirements
+## Teammates: four steps
 
-- Git for marketplace installation;
-- Node.js 18 or later for lifecycle-hook validation;
-- Python 3.11 or later for configuration, content libraries, copy validation,
-  and release checks.
+After OpenAI approves and publishes Chief in the universal Plugins Directory:
 
-## Codex and local ChatGPT Work
+1. Open ChatGPT and switch to **Work**.
+2. Open **Plugins** and search for **Chief of Staff**.
+3. Select **+** to install it.
+4. Start a new chat and ask for the finished work normally.
+
+No terminal or Git is required. Teammates do not need Python, plugin names, or
+specialist selection. Do not install AI Sloppy Copy separately. Brand Voice
+Factory and Crafty Carousels are also already inside Chief.
+
+## Workspace admins
+
+After the public listing is available:
+
+1. Open **Workspace settings** and select **Plugins**.
+2. Select **Chief of Staff**.
+3. Set the installation policy to **Installed** for the required roles.
+4. Start one low-risk test chat with a member account.
+5. Tell the team to open a new Work chat and ask Chief normally.
+
+Chief is skills-only in this release. Installing it does not grant connector,
+project, file, or external-write authority. Configure those separately only
+when the team actually needs them.
+
+## Current publication status
+
+Chief `2.1.1` is available from its GitHub-backed marketplace. Its universal
+OpenAI Plugins Directory listing is not public yet. The publisher must submit
+it and wait for OpenAI approval. After approval, the publisher must select
+**Publish**. Until that happens, do not tell teammates that Chief is publicly
+searchable.
+
+## Admin and Codex fallback
+
+This fallback is for administrators. Developers may also use it for direct
+testing or an offline installation. It requires Git. Node.js 18 or later is
+needed for hooks. Python 3.11 or later is needed for configuration validation.
 
 ```powershell
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
@@ -31,17 +63,6 @@ On macOS or Linux:
 Restart the ChatGPT desktop app. Start a fresh task in ChatGPT Work or Codex
 and confirm `chief-of-staff@codex-chief-of-staff` is active with only the
 `chief-of-staff` skill discoverable.
-
-## ChatGPT Work
-
-1. In workspace plugin controls, make Chief of Staff available to the required roles.
-2. Open the Plugin Directory and install Chief of Staff.
-3. Grant only the approved apps, files, and permissions.
-4. Run the fresh-task acceptance prompts in ChatGPT Work.
-5. Tell the team to open ChatGPT Work and ask Chief normally; no specialist selection is required.
-
-Do not install AI Sloppy Copy, Brand Voice Factory, or Crafty Carousels for
-ordinary team use. Their pinned runtime files are already inside Chief.
 
 ## Canonical source products
 

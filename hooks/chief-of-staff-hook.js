@@ -4,7 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const VERSION = "2.1.0";
+const VERSION = "2.1.1";
 const event = process.argv[2] === "subagent" ? "SubagentStart" : "SessionStart";
 const pluginRoot = process.env.PLUGIN_ROOT || path.resolve(__dirname, "..");
 const SHARED_CONTRACT = "<!-- SHARED-BEHAVIOR-CONTRACT:START -->";

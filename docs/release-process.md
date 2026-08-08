@@ -36,7 +36,12 @@ separate approval after the candidate passes every required gate.
 6. An owner may approve a version-bound release waiver for pending Sol or Terra
    checks. Failed checks, host acceptance, and installed-runtime smoke cannot be
    waived. Pending evidence stays pending.
-7. Rebuild with `--require-model-acceptance`. The embedded status must be
+7. A documentation-only patch may carry forward prior host and model evidence
+   only when it names the prior release and records why runtime behavior is
+   unchanged. Keep the prior receipt intact. Run a fresh installed-runtime
+   smoke check. Any skill, contract, hook behavior, bundled runtime, routing,
+   permission, or validator behavior change requires fresh host acceptance.
+8. Rebuild with `--require-model-acceptance`. The embedded status must be
    `pass` or `pass_with_waiver`.
 
 ## 04 Publish
@@ -51,3 +56,32 @@ separate approval after the candidate passes every required gate.
    behavior.
 
 Historical tags and release assets are immutable. Fixes ship as a new version.
+
+## Public OpenAI Plugins Directory
+
+GitHub publication and public-directory publication are separate gates. A
+GitHub or repo marketplace can distribute Chief to developers and a controlled
+team, but it does not make Chief publicly searchable.
+
+Chief is submitted as one skills-only plugin. AI Sloppy Copy, Brand Voice
+Factory, and Crafty Carousels remain upstream source products and are not
+separate team-facing submissions.
+
+Before submission:
+
+1. Confirm the publisher has **Apps Management: Write** in the OpenAI Platform.
+2. Confirm the publisher's individual or business identity is verified.
+3. Confirm the public website, support, privacy, and terms URLs match that identity.
+4. Load the listing and starter prompts from
+   `tests/openai-directory-submission.json`. Load its five positive tests and
+   three negative tests too.
+5. Upload the final Chief skill bundle and submit it through the OpenAI plugin
+   submission portal.
+6. Wait for OpenAI approval. Submission is not publication.
+7. After approval, select **Publish** and verify that **Chief of Staff** is
+   searchable in the universal Plugins Directory from both ChatGPT Work and Codex.
+8. Test installation from a separate member account before workspace-wide rollout.
+
+Do not use “available in the OpenAI Plugins Directory” in release copy until
+step 7 is visibly confirmed. A directory listing is an external fact, not a
+motivational poster.

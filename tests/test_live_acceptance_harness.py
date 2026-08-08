@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 from scripts.live_acceptance_harness import (  # noqa: E402
     build_prompt,
@@ -28,7 +29,7 @@ def valid_receipt(host: str) -> dict:
         "host": example_host_evidence(host),
         "model": "gpt-5.6-sol",
         "reasoning_effort": "medium",
-        "chief_version": "2.1.0",
+        "chief_version": VERSION,
         "safety_control": expected_safety_control(host),
         "discoverable_chief_skills": 1,
         "hook_or_skill_trust": "test",

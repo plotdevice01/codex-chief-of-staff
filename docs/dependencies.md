@@ -15,7 +15,19 @@ The files remain authoritative in their source repositories. Chief's
 release commit, destination, SHA-256, and byte count. The release validator
 rejects drift.
 
-## Codex and ChatGPT Work
+## Team distribution
+
+After public-directory approval, teammates open ChatGPT Work or Codex in the
+ChatGPT desktop app, open **Plugins**, search for **Chief of Staff**, select
+**+**, and start a new chat. Workspace admins can set Chief to **Installed**
+for the required roles so members skip the install step.
+
+The three source products above are not separate team installs or public
+directory targets. Chief is the single discoverable product.
+
+The public listing is not available until the OpenAI submission is approved
+and published. Before then, administrators and developers can use the
+GitHub-backed marketplace:
 
 ```powershell
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
@@ -26,10 +38,6 @@ Repository: [Chief of Staff](https://github.com/plotdevice01/codex-chief-of-staf
 
 Restart the ChatGPT desktop app after local installation. Start a fresh task so
 ChatGPT Work or Codex discovers the current package and its single Chief skill.
-For workspace distribution, make Chief available through ChatGPT workspace
-plugin controls, then install it from the Plugin Directory with the approved
-apps, files, and permissions. Team members open Chief or invoke `@Chief`; they
-do not select specialist workflows.
 
 ## Verify
 

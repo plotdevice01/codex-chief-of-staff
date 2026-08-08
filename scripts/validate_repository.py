@@ -89,6 +89,7 @@ REQUIRED = (
     "tests/test_icm.py",
     "tests/test_release.py",
     "tests/model-acceptance.json",
+    "tests/openai-directory-submission.json",
     "tests/receipts/chatgpt-work-v2.1.0.json",
     "tests/test_sync.py",
     "workflows/release/CONTEXT.md",
@@ -215,6 +216,57 @@ def validate_versions() -> list[str]:
     return errors
 
 
+def validate_openai_submission() -> list[str]:
+    errors: list[str] = []
+    submission = read_json("tests/openai-directory-submission.json")
+    if submission.get("release_version") != VERSION:
+        errors.append("OpenAI directory submission version does not match VERSION.")
+    if submission.get("submission_type") != "skills_only":
+        errors.append("Chief must use the skills-only OpenAI submission type.")
+    if submission.get("submission_status") not in {
+        "not_submitted",
+        "submitted",
+        "approved",
+        "published",
+    }:
+        errors.append("OpenAI directory submission status is invalid.")
+    for field in (
+        "plugin_name",
+        "short_description",
+        "long_description",
+        "website_url",
+        "support_url",
+        "privacy_policy_url",
+        "terms_url",
+    ):
+        value = submission.get(field)
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"OpenAI directory submission is missing {field}.")
+    for field in ("website_url", "support_url", "privacy_policy_url", "terms_url"):
+        value = submission.get(field, "")
+        if isinstance(value, str) and not value.startswith("https://"):
+            errors.append(f"OpenAI directory submission {field} must use HTTPS.")
+    prompts = submission.get("starter_prompts", [])
+    if not isinstance(prompts, list) or len(prompts) < 3:
+        errors.append("OpenAI directory submission needs at least three starter prompts.")
+    for field, expected in (("positive_tests", 5), ("negative_tests", 3)):
+        cases = submission.get(field, [])
+        if not isinstance(cases, list) or len(cases) < expected:
+            errors.append(f"OpenAI directory submission needs at least {expected} {field}.")
+            continue
+        ids = [case.get("id") for case in cases if isinstance(case, dict)]
+        if len(ids) != len(cases) or len(ids) != len(set(ids)):
+            errors.append(f"OpenAI directory submission {field} IDs must be unique.")
+        for case in cases:
+            if not isinstance(case, dict) or any(
+                not isinstance(case.get(key), str) or not case[key].strip()
+                for key in ("id", "prompt", "expected_behavior", "expected_result_shape")
+            ):
+                errors.append(f"OpenAI directory submission has an incomplete {field} case.")
+                break
+    return errors
+
+
 def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     errors: list[str] = []
     evidence = read_json("tests/model-acceptance.json")
@@ -224,12 +276,18 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     }
     if evidence.get("release_version") != VERSION:
         errors.append("Model acceptance evidence does not match the release version.")
-    work_receipt_path = ROOT / "tests" / "receipts" / "chatgpt-work-v2.1.0.json"
+    carried_from = evidence.get("carried_forward_from_release")
+    receipt_version = carried_from if isinstance(carried_from, str) else VERSION
+    work_receipt_path = (
+        ROOT / "tests" / "receipts" / f"chatgpt-work-v{receipt_version}.json"
+    )
     if work_receipt_path.exists():
         work_receipt = json.loads(work_receipt_path.read_text(encoding="utf-8"))
         errors.extend(
             f"ChatGPT Work receipt: {error}"
-            for error in validate_receipt(work_receipt, "chatgpt-work")
+            for error in validate_receipt(
+                work_receipt, "chatgpt-work", expected_version=receipt_version
+            )
         )
     else:
         errors.append("ChatGPT Work release receipt is missing.")
@@ -260,6 +318,19 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
                 f"Carried-forward {name} evidence requires an unchanged-input "
                 "declaration and reason."
             )
+    if carried_from:
+        if not re.fullmatch(r"\d+\.\d+\.\d+", str(carried_from)):
+            errors.append("Carried-forward release must use a semantic version.")
+        if evidence.get("patch_scope") != "documentation_and_distribution_only":
+            errors.append("Carried-forward evidence requires a documentation-only patch scope.")
+        for name, result in evidence.get("hosts", {}).items():
+            if result.get("status") == "pass" and (
+                not str(result.get("evidence", "")).startswith("carried_forward_")
+                or not result.get("carried_forward_reason")
+            ):
+                errors.append(
+                    f"Carried-forward {name} host evidence requires a reason."
+                )
     hosts = evidence.get("hosts", {})
     if set(hosts) != {"codex", "chatgpt-work"}:
         errors.append("Model acceptance must cover Codex and ChatGPT Work hosts.")
@@ -479,6 +550,7 @@ def validate_repository(
     errors.extend(validate_versions())
     errors.extend(validate_model_acceptance(require_pass=require_model_acceptance))
     errors.extend(validate_manifest_paths())
+    errors.extend(validate_openai_submission())
     errors.extend(validate_install_guidance())
     errors.extend(validate_public_text())
     icm_errors, _ = validate_icm()

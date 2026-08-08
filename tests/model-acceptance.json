@@ -1,7 +1,9 @@
 {
-  "release_version": "2.1.0",
+  "release_version": "2.1.1",
+  "carried_forward_from_release": "2.1.0",
+  "patch_scope": "documentation_and_distribution_only",
   "executed_at": "2026-08-07",
-  "runner": "Owner-verified ChatGPT Work and Codex Desktop fresh v2.1.0 single-Chief universal acceptance",
+  "runner": "v2.1.1 distribution-only patch carrying forward accepted v2.1.0 model-facing behavior, plus a fresh installed-runtime smoke",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -9,13 +11,13 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "2026-08-07: Codex cache refreshed from the local marketplace and strict install validation passed. Fresh-runtime smoke checks on both required hosts reported Chief v2.1.0, exactly one discoverable Chief skill, internal ICM and content routes, and zero Claude or Ponytail routes. Fresh read-only release matrices then passed on Codex Desktop and ChatGPT Work."
+    "evidence": "2026-08-07: Chief v2.1.1 was installed from the rebuilt local package. Strict installed-package validation and local parity passed. Inspection found exactly one discoverable Chief skill, internal ICM and content routes, pinned specialist runtimes, and zero Claude or Ponytail routes. Runtime contracts and model-facing workflow files match v2.1.0; v2.1.1 changes distribution documentation, submission materials, and version labels only. Live connector identities and fresh-task responses were not rechecked for this distribution-only patch."
   },
   "fresh_host_smoke": {
     "status": "pass",
     "scope": "Runtime plumbing only; not release-wide acceptance",
     "required_hosts_reported": 2,
-    "evidence": "The owner reported the first instructed host smoke PASS, then supplied the second host PASS receipt with v2.1.0, one Chief skill, internal workflow routing, and no Claude or Ponytail routes."
+    "evidence": "Carried forward from the accepted v2.1.0 host matrices because v2.1.1 changes no model-facing contract, workflow, asset, dataset, validator, or routing behavior. A fresh v2.1.1 installed-runtime smoke separately verifies package plumbing."
   },
   "invalid_attempts": [
     {
@@ -50,7 +52,7 @@
   },
   "release_waiver": {
     "status": "approved",
-    "release_version": "2.1.0",
+    "release_version": "2.1.1",
     "approved_at": "2026-08-06",
     "approved_by": "Aaron Thomas",
     "reason": "The owner explicitly directed the overhaul to skip Terra XHigh and conserve the reset token budget.",
@@ -59,19 +61,22 @@
   "hosts": {
     "codex": {
       "status": "pass",
-      "evidence": "2026-08-07: Codex Desktop 26.730.8199.0 on Windows x64, GPT-5.6 Sol Medium, Chief v2.1.0. Fresh read-only run passed LIVE-001 through LIVE-015 with 77/77 assertions. One Chief-owned skill was discoverable; ICM and content routes were internal. AI Sloppy Copy 0.5.0, Brand Voice Factory 0.2.1, and Crafty Carousels 0.6.1 were loaded. Workspace and installed persona-contract SHA-256 matched at C9EA23359B7331E0C48FE2139206D033EB8CB982EB397727D181ABE178291907. The lifecycle-hook header was absent, so the canonical AGENTS.md loader and persona fallback supplied the contract. No external actions, connectors, client facts, or file changes occurred."
+      "evidence": "carried_forward_v2.1.0_codex_15_of_15_77_of_77",
+      "carried_forward_reason": "v2.1.1 changes distribution documentation, OpenAI submission materials, tests for that metadata, and version labels only; Chief's model-facing contracts, router, workflows, datasets, validators, and assets are unchanged."
     },
     "chatgpt-work": {
       "status": "pass",
-      "evidence": "2026-08-07: Owner-verified ChatGPT Work UI with Work locally, Ask for approval, GPT-5.6 Sol Medium, and Chief selected. Runtime reported Codex 26.803.5235.0 beneath the Work UI. The schema-v3 response-only receipt in tests/receipts/chatgpt-work-v2.1.0.json passed all LIVE-001 through LIVE-015 scenarios and 77/77 assertions with zero tasks, delegation, file mutations, connector calls, or external actions; workspace state matched."
+      "evidence": "carried_forward_v2.1.0_chatgpt_work_15_of_15_77_of_77",
+      "carried_forward_reason": "v2.1.1 changes distribution documentation, OpenAI submission materials, tests for that metadata, and version labels only; the validated v2.1.0 ChatGPT Work receipt remains the applicable model-behavior evidence."
     }
   },
   "models": {
     "gpt-5.6-sol": {
       "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "Codex Desktop and owner-verified ChatGPT Work each passed LIVE-001 through LIVE-015 with 77/77 assertions on GPT-5.6 Sol Medium. Both runs were response-only and reported zero forbidden actions.",
-      "model_facing_inputs_unchanged": false,
+      "evidence": "carried_forward_v2.1.0_sol_medium_both_hosts_15_of_15_77_of_77",
+      "carried_forward_reason": "All model-facing Chief contracts, internal workflows, datasets, validators, routing rules, and assets are byte-for-byte unchanged from the accepted v2.1.0 release.",
+      "model_facing_inputs_unchanged": true,
       "tests": [
         "LIVE-001",
         "LIVE-002",
@@ -94,7 +99,7 @@
       "status": "pending",
       "reasoning_effort": "xhigh",
       "evidence": "",
-      "model_facing_inputs_unchanged": false,
+      "model_facing_inputs_unchanged": true,
       "tests": [
         "LIVE-001",
         "LIVE-002",
