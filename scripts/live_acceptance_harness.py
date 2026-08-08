@@ -229,7 +229,7 @@ def main() -> int:
     if args.command == "self-test":
         contract = load_contract()
         scenarios, total = expected_counts(contract)
-        assert len(scenarios) == 16 and total == 84
+        assert len(scenarios) == 17 and total == 90
         for host in HOSTS:
             prompt = build_prompt(host, owner_verified_ui=host == "chatgpt-work")
             assert "Do not create or delegate tasks" in prompt
@@ -241,7 +241,7 @@ def main() -> int:
                 assert "owner_verified" in prompt
                 assert '"runtime_surface":"codex"' in prompt
                 assert '\"value\":\"ask_for_approval\"' in prompt
-        print("PASS: host-safe live acceptance harness covers 16 scenarios and 84 criteria.")
+        print("PASS: host-safe live acceptance harness covers 17 scenarios and 90 criteria.")
         return 0
 
     raw = args.receipt.read_text(encoding="utf-8") if args.receipt else sys.stdin.read()

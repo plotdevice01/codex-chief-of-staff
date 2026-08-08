@@ -37,6 +37,8 @@ def main() -> int:
         "references/live-acceptance.md",
         "separate UI and runtime evidence",
         "Never create or delegate tasks",
+        "put `Next steps` immediately before",
+        "Never insert a closing summary before the trace",
     ):
         assert required in chief_skill, f"Missing chat-first delivery rule: {required}"
     for forbidden in (
@@ -55,6 +57,7 @@ def main() -> int:
         "Do not request a new approval for each step of an approved plan.",
         "full access is",
         "idempotent retry does not require new",
+        "Never insert a closing",
     ):
         assert required in universal, f"Missing plan-scoped authorization rule: {required}"
 

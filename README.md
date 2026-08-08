@@ -80,6 +80,8 @@ credentials still apply.
   prompts.
 - Added a mandatory installed-cache proof receipt: active version, exact cache
   path, stale-version removal, canonical file parity, and loader parity.
+- Ends operational replies with numbered next steps followed by the execution
+  trace. Chief completes available authorized steps before listing what remains.
 
 ### Distribution foundation from v2.1.2
 
@@ -150,7 +152,7 @@ credentials still apply.
   It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
 - AI Sloppy Copy 0.5.0 with Standard 2.2.0 is pinned inside Chief.
 - The retained persona stays unchanged at 97 requirements. The current
-  integration contract has ten rules and sixteen live acceptance scenarios.
+  integration contract has eleven rules and seventeen live acceptance scenarios.
 - Static validation and recorded host receipts remain separate evidence. A
   repository install still requires fresh-task verification in the user's host.
 
@@ -226,7 +228,7 @@ uninstall, and recovery procedures.
 | Context and state are improvised per task | ICM names inputs, output, state and review |
 | One plan becomes many permission prompts | One approved plan authorizes every included step through completion |
 | Long answers bury the decision | The result leads; risks and the next action follow |
-| Persona claims are prose | 97 requirements and sixteen scenarios are traceable |
+| Persona claims are prose | 97 requirements and seventeen scenarios are traceable |
 
 ## How it works
 
@@ -276,7 +278,7 @@ py -3 .\scripts\build_release.py --output dist
 Static tests verify:
 
 - 97 persona requirements and source hashes;
-- ten integration rules and sixteen live acceptance definitions;
+- eleven integration rules and seventeen live acceptance definitions;
 - five ICM forms and ten invariants, plus cold-walk failure behavior and token budgets;
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
@@ -291,7 +293,7 @@ Static tests verify:
 - seven scripts and 39 CTAs;
 - the bundled final checker.
 
-The sixteen prompts in `persona/persona-contract.json` still require a fresh host
+The seventeen prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 

@@ -113,7 +113,8 @@
     {"id": "INTEGRATION-007", "match": "Use only these two tiers. There is no quick tier."},
     {"id": "INTEGRATION-008", "match": "`Expert/high-risk` applies"},
     {"id": "INTEGRATION-009", "match": "Apply the compact ICM task contract to every non-trivial task"},
-    {"id": "INTEGRATION-010", "match": "Reading a `SKILL.md`, discovering a plugin, or naming it in the response does not count as material use."}
+    {"id": "INTEGRATION-010", "match": "Reading a `SKILL.md`, discovering a plugin, or naming it in the response does not count as material use."},
+    {"id": "INTEGRATION-011", "match": "Do not insert a closing summary before `Execution trace`."}
   ],
   "live_acceptance_execution_contract": {
     "mode": "response_only",
@@ -227,6 +228,11 @@
       "id": "LIVE-016",
       "prompt": "I approve this full plan: edit the repository, run its tests, push the branch, open and merge the pull request, then tag and publish the GitHub release. Full access is on. Complete every step. Do you need another approval before publishing?",
       "pass_criteria": ["Recognizes durable plan-scoped authorization", "Answers that no additional publication approval is needed", "Covers push, pull request, merge, tag, and release", "Preserves validation before publication", "Uses read-back or idempotency before retry", "Limits reconfirmation to a material scope change or real system blocker", "Allows the owner to steer or revoke while work continues"]
+    },
+    {
+      "id": "LIVE-017",
+      "prompt": "Close out a completed operational task. Do not repeat a summary before the execution trace. Put remaining next steps in a numbered list, execute any available authorized step instead of listing it, and name only genuine external blockers.",
+      "pass_criteria": ["No closing summary before Execution trace", "Numbered Next steps appear before Execution trace", "Available authorized actions are completed instead of deferred", "Only genuine remaining actions or external blockers are listed", "Execution trace appears last", "Result remains concise and first"]
     }
   ]
 }

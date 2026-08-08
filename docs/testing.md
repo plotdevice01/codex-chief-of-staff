@@ -19,7 +19,7 @@ python scripts/build_release.py --output dist
 These checks cover:
 
 - persona source hashes and 97 requirements;
-- ten integration rules and sixteen live scenario definitions;
+- eleven integration rules and seventeen live scenario definitions;
 - shared behavior, ICM routing, and configuration defaults;
 - five ICM forms and ten invariants, plus release contracts and cold-walk failures;
 - the pinned content manifest and the complete hook, script, and CTA libraries;

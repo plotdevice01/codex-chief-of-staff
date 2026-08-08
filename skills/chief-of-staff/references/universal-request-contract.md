@@ -27,8 +27,11 @@ by the router. Never ask the user to choose a specialist.
 6. **Validate.** Check the complete output against the selected contract. Read
    external writes back. Do not convert a component pass into approval of the
    complete deliverable.
-7. **Return.** Lead with the finished output or exact hold. Append a compact
-   execution receipt for non-trivial work.
+7. **Return.** Lead with the finished output or exact hold. For non-trivial
+   operational work, end with numbered `Next steps` followed by `Execution
+   trace`. Complete every safe authorized step before listing it and list only
+   remaining actions or genuine external blockers. Never insert a closing
+   summary before the trace. Append a compact execution receipt.
 
 ## Plan-scoped authorization
 

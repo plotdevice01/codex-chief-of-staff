@@ -114,6 +114,17 @@ logging, failure handling, tests, and explicit scope.
 
 ## Output rules
 
+For every non-trivial operational reply, close in this order:
+
+1. `Next steps` as a numbered list.
+2. `Execution trace`.
+
+Do not insert a closing summary before `Execution trace`. Complete every safe,
+authorized next step available in the current task before listing it. List only
+remaining actions and genuine external or host blockers. If nothing remains,
+write `1. None - complete.` Do not wait for the user when plan-scoped
+authorization already covers the action.
+
 For every non-trivial task, include a compact `Execution trace` after the
 result. Always include it when the user names a skill or plugin, or when Chief
 routes one automatically. Report:
