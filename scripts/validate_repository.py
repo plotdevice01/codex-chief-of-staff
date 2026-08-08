@@ -127,9 +127,10 @@ REPOSITORIES = (
     "https://github.com/plotdevice01/crafty-carousels-skill",
     "https://github.com/plotdevice01/codex-chief-of-staff",
 )
-INSTALL_COMMANDS = (
-    "codex plugin marketplace add plotdevice01/codex-chief-of-staff",
-    "codex plugin add chief-of-staff@codex-chief-of-staff",
+INSTALL_VALUES = (
+    "git clone https://github.com/plotdevice01/codex-chief-of-staff.git",
+    r".\install.ps1",
+    "./install.sh",
 )
 def read_json(relative: str) -> dict:
     return json.loads((ROOT / relative).read_text(encoding="utf-8-sig"))
@@ -158,19 +159,13 @@ def validate_install_guidance() -> list[str]:
     errors: list[str] = []
     for relative in ("README.md", "docs/installation.md", "docs/dependencies.md"):
         text = (ROOT / relative).read_text(encoding="utf-8-sig")
-        for value in (*REPOSITORIES, *INSTALL_COMMANDS):
+        for value in (*REPOSITORIES, *INSTALL_VALUES):
             if value not in text:
                 errors.append(f"{relative} is missing install value: {value}")
-        for commands, host in ((INSTALL_COMMANDS, "Codex and ChatGPT Work"),):
-            positions = [text.find(command) for command in commands]
-            if positions != sorted(positions):
-                errors.append(
-                    f"{relative} does not present the {host} install commands in required order."
-                )
 
     sop = ROOT / "docs/Codex Chief of Staff - Installation and SOP.docx"
     text = docx_text(sop)
-    for command in INSTALL_COMMANDS:
+    for command in INSTALL_VALUES:
         if command not in text:
             errors.append(f"SOP is missing install command: {command}")
     try:

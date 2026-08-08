@@ -231,8 +231,8 @@ For external writes:
 - Read the saved result back before reporting completion.
 
 Blocked actions remain blocked until the local configuration and these
-instructions are deliberately updated by the workspace owner. A date or
-completed pilot does not expand authority automatically.
+instructions are deliberately updated by the workspace owner. Authority changes
+only through an explicit owner-approved configuration update.
 
 ## Daily briefing
 

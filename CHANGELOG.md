@@ -7,23 +7,18 @@ the same three-part semantic product version.
 
 ### Changed
 
-- Replaced the developer-first installation story with a four-click teammate
-  path for the public OpenAI Plugins Directory: open Work, find Chief, click
-  **+**, and start a new chat.
-- Added a workspace-admin option that makes Chief available to required roles
-  without each teammate installing it separately.
+- Made the GitHub repository and its bundled installer scripts the only
+  documented installation path.
 - Marked AI Sloppy Copy as a pinned upstream runtime source. Brand Voice
   Factory and Crafty Carousels have the same role. None is a separate
   team-facing plugin selection.
-- Separated the currently available GitHub marketplace from the pending public
-  OpenAI directory listing so no release page claims approval before OpenAI
-  publishes it.
+- Removed unperformed third-party submission, approval, directory, and
+  workspace-rollout steps from public installation guidance.
+- Replaced expired time-boxed authority language with the durable local policy
+  model. Authority changes only through an owner-approved configuration update.
 
 ### Added
 
-- Added a validated skills-only OpenAI directory submission record with listing
-  copy, starter prompts, five positive tests, three negative tests, and explicit
-  human publication gates.
 - Added an immutable-release rule: packaged SOP corrections require a patch
   release instead of replacing the v2.1.0 ZIP.
 

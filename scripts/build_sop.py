@@ -105,7 +105,7 @@ def configure(doc: Document) -> None:
 
     for header in (section.header,):
         paragraph = header.paragraphs[0]
-        paragraph.text = "CHIEF OF STAFF  /  CHATGPT WORK + CODEX  /  INSTALLATION AND OPERATING SOP"
+        paragraph.text = "CHIEF OF STAFF  /  CODEX  /  INSTALLATION AND OPERATING SOP"
         paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
         for run in paragraph.runs:
             set_font(run, "Calibri", 8, bold=True, color=GRAY)
@@ -435,13 +435,13 @@ def build(output: Path) -> Path:
     add_table(
         doc,
         ("Release", "Audience", "Distribution", "Authority"),
-        ((VERSION, "ChatGPT Work and Codex teams", "GitHub marketplace; OpenAI review pending", "Local configuration only"),),
+        ((VERSION, "Codex users", "GitHub repository installer", "Local configuration only"),),
         (1500, 2160, 2460, 3240),
     )
     add_callout(
         doc,
         "What this installs: ",
-        "One ChatGPT Work and Codex plugin that loads the operating contract, retained persona, and pinned content runtime. "
+        "One Codex plugin that loads the operating contract, retained persona, and pinned content runtime. "
         "It grants no connector access, project authority, or external-write permission.",
     )
     doc.add_heading("Operating result", level=1)
@@ -459,50 +459,37 @@ def build(output: Path) -> Path:
     )
 
     section_page(doc, "1. Install Chief")
-    doc.add_heading("Teammate quick start", level=2)
-    add_numbered(
-        doc,
-        (
-            "Open ChatGPT and switch to Work.",
-            "Open Plugins and search for Chief of Staff.",
-            "Select + to install it.",
-            "Start a new chat and ask for the finished work normally.",
-        ),
-    )
     add_callout(
         doc,
-        "That is the whole teammate procedure: ",
-        "No terminal or Git is required. Teammates do not need Python, plugin names or specialist selection. "
-        "Do not install AI Sloppy Copy separately. Brand Voice Factory and Crafty Carousels are already inside Chief.",
-    )
-    doc.add_heading("Workspace admin", level=2)
-    add_numbered(
-        doc,
-        (
-            "Open Workspace settings and select Plugins.",
-            "Select Chief of Staff.",
-            "Set the installation policy to Installed for the required roles.",
-            "Run one low-risk test from a member account.",
-            "Tell the team to start a new Work chat and ask Chief normally.",
-        ),
-    )
-    add_callout(
-        doc,
-        "Current status: ",
-        "Chief is available through its GitHub-backed marketplace. The public four-step store flow is not active "
-        "yet. The publisher must submit Chief and wait for OpenAI approval. After approval, the publisher must "
-        "select Publish. Until then, do not claim that Chief is publicly searchable.",
+        "Repository install only: ",
+        "Chief is installed from its GitHub repository. This project does not claim an OpenAI review, approval, "
+        "directory listing or store distribution.",
         alert=True,
     )
-    doc.add_heading("Admin and Codex fallback", level=2)
-    doc.add_paragraph(
-        "This fallback is for administrators. Developers may also use it for direct testing or an offline "
-        "installation. Git is required. Node.js 18 or later is needed for hooks. Python 3.11 or later is needed "
-        "for configuration validation."
-    )
+    doc.add_heading("Windows", level=2)
     add_link(doc, "Repository", "https://github.com/plotdevice01/codex-chief-of-staff")
-    add_code(doc, "codex plugin marketplace add plotdevice01/codex-chief-of-staff")
-    add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
+    add_code(doc, "git clone https://github.com/plotdevice01/codex-chief-of-staff.git")
+    add_code(doc, r"Set-Location .\codex-chief-of-staff")
+    add_code(doc, r".\install.ps1")
+    doc.add_heading("macOS or Linux", level=2)
+    add_code(doc, "git clone https://github.com/plotdevice01/codex-chief-of-staff.git")
+    add_code(doc, "cd codex-chief-of-staff")
+    add_code(doc, "./install.sh")
+    doc.add_heading("What the repository installer does", level=2)
+    add_numbered(
+        doc,
+        (
+            "Registers the checked-out repository as the local Codex marketplace.",
+            "Installs chief-of-staff@codex-chief-of-staff.",
+            "Initializes a private local configuration when Python is available.",
+            "Leaves connector and project authority disabled until configured.",
+        ),
+    )
+    doc.add_paragraph(
+        "Git is required. Node.js 18 or later supports hooks. Python 3.11 or later supports configuration and "
+        "validation. AI Sloppy Copy, Brand Voice Factory and Crafty Carousels are bundled; do not install them "
+        "separately for normal Chief use."
+    )
     doc.add_heading("Restart, trust and verify", level=2)
     add_numbered(
         doc,
@@ -519,7 +506,7 @@ def build(output: Path) -> Path:
         "Hook trust: ",
         "Chief loads the retained persona and injects AGENTS.md only when Codex has not already loaded the canonical contract. "
         "Content routing happens in the Chief skill, not another lifecycle hook. "
-        "ChatGPT Work applies the same contract through the installed skill. Review every Codex hook before trust.",
+        "Review every Codex hook before trust.",
         alert=True,
     )
     doc.add_heading("Configure from the fresh task", level=2)
@@ -528,11 +515,10 @@ def build(output: Path) -> Path:
         "Use $chief-of-staff to initialize my local configuration, then validate the install with strict "
         "dependency checks. Report any missing bundled runtime file or hook.",
     )
-    doc.add_heading("Local and team deployment", level=2)
+    doc.add_heading("Repository ownership", level=2)
     doc.add_paragraph(
-        "The Codex fallback installs or updates Chief from the configured marketplace. After public-directory "
-        "approval, ChatGPT workspace admins control automatic installation for team roles. Team members open "
-        "ChatGPT Work and ask Chief normally; they do not select specialist workflows."
+        "Every documented install starts from the Chief repository and runs its installer. The installer registers "
+        "that checkout with Codex. No third-party review, approval, listing or distribution is claimed."
     )
     section_page(doc, "2. Configure private authority", new_page=False)
     add_callout(
@@ -542,10 +528,15 @@ def build(output: Path) -> Path:
         "and approval rules stay in ignored chief-of-staff.json.",
         alert=True,
     )
+    doc.add_paragraph(
+        "Chief uses durable local policy, not an expiring or time-boxed mode. Connector access starts disabled. "
+        "External writes are blocked or require explicit confirmation. Authority changes only through an "
+        "owner-approved update to the private configuration."
+    )
     doc.add_heading("Initialize", level=2)
     add_code(doc, 'python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"')
     doc.add_paragraph(
-        "Or start a fresh ChatGPT Work or Codex task and ask the Chief of Staff skill to initialize the "
+        "Or start a fresh Codex task and ask the Chief of Staff skill to initialize the "
         "local configuration."
     )
     add_table(
@@ -789,20 +780,21 @@ def build(output: Path) -> Path:
 
     section_page(doc, "7. Update, uninstall, recover", new_page=False)
     doc.add_heading("Upgrade", level=2)
-    add_code(doc, "codex plugin marketplace upgrade codex-chief-of-staff")
-    add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
+    add_code(doc, "git pull --ff-only")
+    add_code(doc, r".\install.ps1 -Upgrade")
+    add_code(doc, "./install.sh --upgrade")
     add_bullets(
         doc,
         (
             "Read CHANGELOG.md.",
             "Run validation again.",
-            "Restart the ChatGPT desktop app, then repeat the fresh-task acceptance prompts.",
+            "Restart Codex, then repeat the fresh-task acceptance prompts.",
             "Keep the prior tagged release available until acceptance passes.",
         ),
     )
     doc.add_heading("Uninstall", level=2)
-    add_code(doc, "codex plugin remove chief-of-staff@codex-chief-of-staff")
-    add_code(doc, "codex plugin marketplace remove codex-chief-of-staff")
+    add_code(doc, r".\install.ps1 -Uninstall")
+    add_code(doc, "./install.sh --uninstall")
     doc.add_paragraph(
         "Uninstalling does not delete chief-of-staff.json. Remove that private file separately only when the user "
         "intends to discard the configuration."
@@ -821,7 +813,7 @@ def build(output: Path) -> Path:
     )
     version_note = doc.add_paragraph(
         "Each product uses one three-part version for its GitHub release and tag. "
-        "The ZIP and both the portable and OpenAI manifests use that same number. AI Sloppy Copy "
+        "The ZIP and both the portable and Codex manifests use that same number. AI Sloppy Copy "
         "also carries a separately versioned writing-rules contract."
     )
     version_note.paragraph_format.space_after = Pt(12)
@@ -834,7 +826,7 @@ def build(output: Path) -> Path:
         doc,
         ("Symptom", "Response"),
         (
-            ("Hooks do not load", "Restart the ChatGPT desktop app, review Codex hooks, then start a fresh task."),
+            ("Hooks do not load", "Restart Codex, review the Chief hooks, then start a fresh task."),
             ("ICM response stops", "Start a new prompt. For repair only, set CHIEF_ICM_ENFORCEMENT=off, reload plugins and fix the installation. Set enforcement to on afterward."),
             ("No configuration", "Run the initializer; generic behavior remains active, connector authority remains blocked."),
             ("Wrong account", "Stop and reconnect the approved identity. Then repeat the live check."),
@@ -844,13 +836,13 @@ def build(output: Path) -> Path:
         (2880, 6480),
     )
     properties = doc.core_properties
-    properties.title = "Chief of Staff - ChatGPT Work and Codex Operating SOP"
-    properties.subject = "Public plugin installation, configuration, operation, validation, and recovery"
+    properties.title = "Chief of Staff - Codex Operating SOP"
+    properties.subject = "Repository installation, configuration, operation, validation, and recovery"
     properties.author = "Codex Chief of Staff contributors"
     properties.last_modified_by = "Codex Chief of Staff contributors"
     properties.created = datetime(2026, 8, 3, tzinfo=timezone.utc)
     properties.modified = datetime(2026, 8, 6, tzinfo=timezone.utc)
-    properties.keywords = "ChatGPT Work, Codex, chief of staff, ICM, context engineering, plugin, SOP"
+    properties.keywords = "Codex, chief of staff, ICM, context engineering, plugin, SOP"
 
     temporary = output.with_suffix(".tmp.docx")
     doc.save(temporary)

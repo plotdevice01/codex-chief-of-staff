@@ -96,8 +96,9 @@ Supported external-write values:
 - `blocked`;
 - `confirm_each`.
 
-`automatic_authority_expansion` must remain `false`. A completed pilot or date
-does not create standing permission. Repeated approval does not create it either.
+`automatic_authority_expansion` must remain `false`. Authority changes only
+through an explicit owner-approved configuration update. Repeated approval does
+not create standing permission.
 
 ## Validate
 

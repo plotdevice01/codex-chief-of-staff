@@ -15,36 +15,39 @@ The files remain authoritative in their source repositories. Chief's
 release commit, destination, SHA-256, and byte count. The release validator
 rejects drift.
 
-## Team distribution
+## Repository distribution
 
-After public-directory approval, teammates open ChatGPT Work or Codex in the
-ChatGPT desktop app, open **Plugins**, search for **Chief of Staff**, select
-**+**, and start a new chat. Workspace admins can set Chief to **Installed**
-for the required roles so members skip the install step.
+Users install Chief from its GitHub repository. The project does not claim an
+OpenAI review, approval, directory listing, or store distribution.
 
-The three source products above are not separate team installs or public
-directory targets. Chief is the single discoverable product.
+The three source products above are not separate user installs. Chief is the
+single discoverable product.
 
-The public listing is not available until the OpenAI submission is approved
-and published. Before then, administrators and developers can use the
-GitHub-backed marketplace:
+Windows:
 
 ```powershell
-codex plugin marketplace add plotdevice01/codex-chief-of-staff
-codex plugin add chief-of-staff@codex-chief-of-staff
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+Set-Location .\codex-chief-of-staff
+.\install.ps1
 ```
 
-Repository: [Chief of Staff](https://github.com/plotdevice01/codex-chief-of-staff)
+macOS or Linux:
 
-Restart the ChatGPT desktop app after local installation. Start a fresh task so
-ChatGPT Work or Codex discovers the current package and its single Chief skill.
+```bash
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+cd codex-chief-of-staff
+./install.sh
+```
+
+Restart Codex after local installation. Start a fresh task so Codex discovers
+the current package and its single Chief skill.
 
 ## Verify
 
 ```powershell
-python validate_install.py --doctor
-python validate_install.py --strict-dependencies --receipt install-receipt.json
-python tests/test_content_runtime.py
+py -3 .\validate_install.py --doctor
+py -3 .\validate_install.py --strict-dependencies --receipt install-receipt.json
+py -3 .\tests\test_content_runtime.py
 ```
 
 The receipt records the active Chief version, the single discoverable skill,
