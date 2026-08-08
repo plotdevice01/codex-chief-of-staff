@@ -10,7 +10,6 @@
   <a href="https://github.com/plotdevice01/codex-chief-of-staff/releases"><img src="https://img.shields.io/github/v/release/plotdevice01/codex-chief-of-staff" alt="Release"></a>
   <a href="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml"><img src="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml/badge.svg" alt="Validation"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2A9D8F" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/ChatGPT_Work-plugin-10A37F" alt="ChatGPT Work plugin">
   <img src="https://img.shields.io/badge/Codex-plugin-14213D" alt="Codex plugin">
 </p>
 
@@ -26,41 +25,51 @@ Chief of Staff adds durable operating judgment across ChatGPT Work and Codex:
 - one mandatory content route with pinned Brand Voice, Crafty, and AI Sloppy Copy resources.
 - one Agent Plugins skill that routes all supported work without specialist selection.
 
-## The teammate install
+## Install from this repository
 
-After OpenAI approves the public listing, a teammate does this:
+Chief is installed from this GitHub repository. This project does not claim an
+OpenAI review, approval, directory listing, or store distribution.
 
-1. Open ChatGPT and switch to **Work**.
-2. Open **Plugins** and search for **Chief of Staff**.
-3. Select **+** to install it.
-4. Start a new chat and ask for the work normally.
+### Windows
 
-That is the complete teammate procedure. No terminal, Git, Python, plugin
-names, or specialist selection. A workspace admin can make it even simpler by
-setting Chief to **Installed** for the team's roles, which removes step 3.
+```powershell
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+Set-Location .\codex-chief-of-staff
+.\install.ps1
+```
 
-**Current availability:** `v2.1.1` is distributed through the GitHub-backed
-Chief marketplace while its public OpenAI Plugins Directory listing is prepared
-and reviewed. Do not claim that Chief is publicly searchable until the listing
-is approved and visibly published.
+### macOS or Linux
+
+```bash
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+cd codex-chief-of-staff
+./install.sh
+```
+
+The installer registers the checked-out repository with Codex, installs
+`chief-of-staff@codex-chief-of-staff`, and initializes a private local
+configuration when Python is available. Restart Codex, review the Chief hooks,
+and start a fresh task after installation.
 
 AI Sloppy Copy, Brand Voice Factory, and Crafty Carousels are upstream source
-products. They are already pinned inside Chief and are not separate team
-installs or public-directory targets.
+products. They are already pinned inside Chief and are not separate user
+installs.
+
+## Current authority model
+
+Chief uses durable local policy, not an expiring or time-boxed mode. Connector
+access starts disabled. External writes are either blocked or require explicit
+confirmation. Authority changes only when the workspace owner deliberately
+updates the private configuration.
 
 ## What changed in v2.1.1
 
-- Replaced developer-first installation instructions with a four-step teammate
-  flow for the ChatGPT desktop app and web.
-- Added the workspace-admin path: publish Chief to the required roles as
-  **Installed** so teammates do not install anything themselves.
-- Separated GitHub marketplace distribution from public OpenAI Plugins
-  Directory publication. Public availability now remains explicitly pending
-  until OpenAI review and publication are complete.
+- Made the GitHub repository and its bundled installer scripts the only
+  documented installation path.
+- Removed unperformed OpenAI submission, approval, directory, and workspace
+  rollout steps from public installation guidance.
 - Marked AI Sloppy Copy as an upstream factory. Brand Voice Factory and Crafty
   Carousels have the same role. None is a separate team-facing install.
-- Added a reviewed skills-only submission package with starter prompts, five
-  positive tests, and three negative tests.
 - Runtime behavior is unchanged from `v2.1.0`; its accepted model and host
   evidence is carried forward under the documentation-only patch rule.
 
@@ -68,14 +77,18 @@ installs or public-directory targets.
 
 - Chief is the only discoverable route for business, creative, research,
   operational, document, technical, connected-app, and client-delivery work.
-- A universal request contract classifies once, loads only the selected
-  internal contracts, validates the complete result, and returns a receipt.
-- Chief vendors exact released runtime files from AI Sloppy Copy `0.5.0`,
-  Brand Voice Factory `0.2.1`, and Crafty Carousels `0.6.1`. The source commit,
-  file hash, and byte count are locked in the bundled manifest.
-- Paid ads and organic social query all 751 hooks, seven script frameworks,
-  and 39 CTAs through one local command before drafting. Paid video also checks
-  offer compatibility, first-frame action, visual progression, and true concept variation.
+- A universal request contract classifies once and loads only the selected
+  internal contracts. It validates the complete result and returns a receipt.
+- Chief vendors exact released runtime files from pinned sources:
+  - AI Sloppy Copy `0.5.0`;
+  - Brand Voice Factory `0.2.1`;
+  - Crafty Carousels `0.6.1`.
+  The bundled manifest locks the source commit. It also locks each file hash
+  and byte count.
+- Paid ads and organic social query all 751 hooks before drafting. The same
+  query covers seven script frameworks and 39 CTAs. Paid video checks offer
+  compatibility and first-frame action. It also checks visual progression and
+  true concept variation.
 - The stale bundled `viral-carousel-factory` copy is removed. Current Crafty
   production controls now live behind the Chief content route.
 - AI Sloppy Copy activation happens in the content contract. No extra content
@@ -89,23 +102,24 @@ installs or public-directory targets.
 
 - Every non-trivial task uses a compact ICM contract for scope, exact inputs,
   one job, relevant references, output, observable status, and human review.
-- Every new project, workspace, or recurring process automatically loads the
-  internal ICM Architect workflow. Full folders appear only when persistent work
-  needs them.
+- Every new project or workspace automatically loads the internal ICM Architect
+  workflow. Recurring processes load it too. Full folders appear only when
+  persistent work needs them.
 - A pre-tool privacy check blocks configured project or connector values when
   the current prompt did not supply them.
 - Restructure mode limits inventory reads and blocks mutation until approval.
   It requires reference checks plus content proof before a deletion proposal.
 - The bundled Architect is pinned to `RinDig/icm-architect` commit `8f9cdf9`.
-  It includes five workspace forms, ten invariants, both operating modes,
-  Codex `AGENTS.md` routing, the cold walk, and Chief safety controls.
+  It includes five workspace forms and ten invariants. Both operating modes are
+  present. Codex `AGENTS.md` routing and the cold walk are included. Chief
+  safety controls remain active.
 - The repository now carries Layer 1 routing and an ICM release pipeline.
   It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
 - AI Sloppy Copy 0.5.0 with Standard 2.2.0 is pinned inside Chief.
 - The retained persona stays unchanged at 97 requirements. The current
   integration contract has ten rules and fifteen live acceptance scenarios.
-- Fresh v2.1.0 acceptance passed on ChatGPT Work and Codex with GPT-5.6 Sol
-  Medium. Terra XHigh remains pending under the recorded owner waiver.
+- Static validation and recorded host receipts remain separate evidence. A
+  repository install still requires fresh-task verification in the user's host.
 
 ## Version numbers
 
@@ -124,62 +138,13 @@ Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.1.1 release evidence
+## v2.1.1 validation status
 
-`v2.1.1` changes distribution documentation and release metadata only. The
-Chief skill and its internal contracts are unchanged. The bundled content
-runtime is also unchanged. The persona and routing behavior remain intact. The fresh `v2.1.0`
-response-only acceptance therefore
-carries forward: all 15 scenarios and all 77 assertions passed in ChatGPT Work
-and Codex on GPT-5.6 Sol Medium with zero forbidden actions. Terra XHigh remains
-pending under the version-bound owner waiver recorded in the release evidence.
-
-| Capability | ChatGPT Work | Codex |
-|---|:---:|:---:|
-| GitHub/repo marketplace | Workspace or developer distribution | Yes |
-| Universal Plugins Directory | Pending OpenAI review | Pending OpenAI review |
-| Chief skill contract | Yes | Yes |
-| Lifecycle hooks | Host-managed | Codex hooks |
-| Complete retained persona | Yes | Yes |
-| Default ICM task and project architecture | Yes | Yes |
-| Bundled content runtime | Passed | Passed |
-| Local private configuration | Yes | Yes |
-| Project-level team setup | Workspace plugin controls | `AGENTS.md` sync |
-
-## Install Chief
-
-Chief contains the content runtime. Team members install or open Chief once.
-The specialist repositories remain independently maintained factories.
-
-### Teammates after public-directory approval
-
-Open ChatGPT, switch to **Work**, open **Plugins**, search **Chief of Staff**,
-and select **+**. Start a new chat and describe the result you want. Chief
-chooses the internal workflow. Do not install or invoke the specialist source
-products.
-
-### Workspace admins
-
-In Workspace settings, open **Plugins**, select **Chief of Staff**, and set its
-installation policy to **Installed** for the required roles. This is the
-brain-dead-easy rollout: members start a new Work chat and ask normally.
-
-Public store availability begins only after OpenAI approves and publishes the
-skills-only submission. Until then, admins and developers use the GitHub-backed
-marketplace below.
-
-### Admin and Codex fallback
-
-The fallback requires Git. Node.js 18 or later supports hooks. Python 3.11 or
-later supports configuration validation. Run:
-
-```powershell
-codex plugin marketplace add plotdevice01/codex-chief-of-staff
-codex plugin add chief-of-staff@codex-chief-of-staff
-```
-
-Then restart Codex and review Chief's hooks. Start a fresh task. Run
-`codex plugin list --json`, then confirm `chief-of-staff@codex-chief-of-staff`.
+`v2.1.1` contains the Chief skill and its internal contracts. It contains the
+hooks and bundled content runtime. Repository installers and deterministic
+validators are included. Repository tests do not establish OpenAI approval or
+directory publication. They also do not replace a fresh-task check after
+installation.
 
 ### Configure and validate
 
@@ -205,14 +170,14 @@ The initializer creates a private `chief-of-staff.json` in the platform
 configuration directory. Connectors remain disabled and projects remain empty
 until the user adds them.
 
-For a source checkout:
+From the cloned repository:
 
-```bash
-python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"
-python validate_install.py --strict-dependencies
+```powershell
+py -3 .\scripts\configure.py init --owner "Your Name" --timezone "Etc/UTC"
+py -3 .\validate_install.py --strict-dependencies
 ```
 
-Windows users can use `py -3` instead of `python`.
+On macOS or Linux, use `python3` and forward-slash paths.
 
 See [installation](docs/installation.md) and
 [configuration](docs/configuration.md) for the complete paths, upgrade,
@@ -239,9 +204,8 @@ uninstall, and recovery procedures.
 The plugin is skills-only. It does not run a server or add connector access.
 Codex lifecycle hooks load the generic operating contract and retained persona
 once and omit duplicate injection when the instruction chain already contains
-the canonical block. ChatGPT Work uses the same Chief skill contract through
-the shared OpenAI plugin package. Project loaders retain local rules and provide
-an explicit fallback if a Codex hook is absent.
+the canonical block. Project loaders retain local rules and provide an explicit
+fallback if a Codex hook is absent.
 Private identities, scopes, paths, and approvals live in a local ignored
 configuration.
 
@@ -264,15 +228,15 @@ user explicitly asks.
 
 ## Validate
 
-```bash
-python Test-Persona.py
-python validate_install.py --example
-python scripts/validate_repository.py
+```powershell
+py -3 .\Test-Persona.py
+py -3 .\validate_install.py --example
+py -3 .\scripts\validate_repository.py
 node tests/test_hooks.js
-python tests/test_icm.py
-python tests/test_release.py
-python tests/test_sync.py
-python scripts/build_release.py --output dist
+py -3 .\tests\test_icm.py
+py -3 .\tests\test_release.py
+py -3 .\tests\test_sync.py
+py -3 .\scripts\build_release.py --output dist
 ```
 
 Static tests verify:
@@ -287,8 +251,9 @@ Static tests verify:
 - ICM prompt classification and correction limits;
 - recovery plus pre-tool and final-response privacy checks;
 - deterministic release contents;
-- the pinned content manifest, all 751 hooks, seven scripts, 39 CTAs, and the
-  bundled final checker.
+- the pinned content manifest and all 751 hooks;
+- seven scripts and 39 CTAs;
+- the bundled final checker.
 
 The fifteen prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
@@ -297,8 +262,8 @@ theater.
 ## Why one plugin and internal source products
 
 Chief of Staff contains the complete retained persona and response modes. It
-also carries account gates, project routing, universal task routing, and the
-only discoverable skill the team needs.
+also carries account gates and project routing. Universal task routing is built
+in. Chief remains the only discoverable skill the team needs.
 [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy),
 [Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory), and
 [Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill)
@@ -306,26 +271,6 @@ remain the canonical source products. Chief vendors their pinned runtime files
 so teams do not negotiate three extra plugins for every content request.
 
 See [dependencies](docs/dependencies.md) for ownership and minimum versions.
-
-## Manual and offline installation
-
-Download the latest release ZIP or clone the repository. For Codex, run:
-
-PowerShell:
-
-```powershell
-.\install.ps1
-```
-
-macOS or Linux:
-
-```bash
-./install.sh
-```
-
-Checksum verification is optional and documented under
-[release verification](docs/installation.md#optional-release-verification).
-The checksum remains available for users and environments that require it.
 
 ## Documentation
 

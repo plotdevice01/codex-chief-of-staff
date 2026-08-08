@@ -1,101 +1,75 @@
 # Installation
 
-Install one user-facing plugin. Chief includes the pinned content runtime.
+Install Chief of Staff from the GitHub repository. This project does not claim
+an OpenAI review, approval, directory listing, or store distribution.
 
-## Teammates: four steps
+Chief is the only user-facing plugin in this package. AI Sloppy Copy, Brand
+Voice Factory, and Crafty Carousels are already bundled as pinned runtime
+dependencies.
 
-After OpenAI approves and publishes Chief in the universal Plugins Directory:
+## Requirements
 
-1. Open ChatGPT and switch to **Work**.
-2. Open **Plugins** and search for **Chief of Staff**.
-3. Select **+** to install it.
-4. Start a new chat and ask for the finished work normally.
+- Git
+- Codex with plugin support
+- Node.js 18 or later for lifecycle hooks
+- Python 3.11 or later for configuration and validation
 
-No terminal or Git is required. Teammates do not need Python, plugin names, or
-specialist selection. Do not install AI Sloppy Copy separately. Brand Voice
-Factory and Crafty Carousels are also already inside Chief.
-
-## Workspace admins
-
-After the public listing is available:
-
-1. Open **Workspace settings** and select **Plugins**.
-2. Select **Chief of Staff**.
-3. Set the installation policy to **Installed** for the required roles.
-4. Start one low-risk test chat with a member account.
-5. Tell the team to open a new Work chat and ask Chief normally.
-
-Chief is skills-only in this release. Installing it does not grant connector,
-project, file, or external-write authority. Configure those separately only
-when the team actually needs them.
-
-## Current publication status
-
-Chief `2.1.1` is available from its GitHub-backed marketplace. Its universal
-OpenAI Plugins Directory listing is not public yet. The publisher must submit
-it and wait for OpenAI approval. After approval, the publisher must select
-**Publish**. Until that happens, do not tell teammates that Chief is publicly
-searchable.
-
-## Admin and Codex fallback
-
-This fallback is for administrators. Developers may also use it for direct
-testing or an offline installation. It requires Git. Node.js 18 or later is
-needed for hooks. Python 3.11 or later is needed for configuration validation.
+## Windows
 
 ```powershell
-codex plugin marketplace add plotdevice01/codex-chief-of-staff
-codex plugin add chief-of-staff@codex-chief-of-staff
-```
-
-For a local checkout:
-
-```powershell
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+Set-Location .\codex-chief-of-staff
 .\install.ps1
 ```
 
-On macOS or Linux:
+The PowerShell installer registers the checked-out repository as the local
+Codex marketplace, installs `chief-of-staff@codex-chief-of-staff`, and runs the
+configuration initializer when Python is available.
+
+Useful installer options:
+
+```powershell
+.\install.ps1 -DryRun
+.\install.ps1 -SkipConfig
+.\install.ps1 -Owner "Your Name" -Timezone "Etc/UTC"
+```
+
+## macOS or Linux
 
 ```bash
+git clone https://github.com/plotdevice01/codex-chief-of-staff.git
+cd codex-chief-of-staff
 ./install.sh
 ```
 
-Restart the ChatGPT desktop app. Start a fresh task in ChatGPT Work or Codex
-and confirm `chief-of-staff@codex-chief-of-staff` is active with only the
-`chief-of-staff` skill discoverable.
+Useful installer options:
 
-## Canonical source products
-
-Chief is the team-facing install. These repositories remain the upstream
-source and release boundaries used to update its pinned runtime:
-
-- [Chief of Staff](https://github.com/plotdevice01/codex-chief-of-staff)
-- [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy)
-- [Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory)
-- [Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill)
-
-## Configure
-
-```powershell
-python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"
+```bash
+./install.sh --dry-run
+./install.sh --skip-config
+./install.sh --owner "Your Name" --timezone "Etc/UTC"
 ```
 
-The initializer creates a private `chief-of-staff.json`. Connector authority
-remains disabled until that file explicitly enables it.
+## Restart and verify
 
-## Verify
+Restart Codex after installation. Review and trust the Chief hooks, then start
+a fresh task. Existing tasks do not retroactively load startup context.
+
+From the repository root, run:
 
 ```powershell
-python validate_install.py --example --strict-dependencies
-python tests/test_content_runtime.py
-python scripts/validate_repository.py
+py -3 .\validate_install.py --example --strict-dependencies
+py -3 .\tests\test_content_runtime.py
+py -3 .\scripts\validate_repository.py
 ```
+
+On macOS or Linux, use `python3` and forward-slash paths.
 
 Expected installed state:
 
 | Component | Delivery | Required state |
 |---|---|---|
-| Chief of Staff | Installed plugin | Active |
+| Chief of Staff | Repository installer | Active |
 | AI Sloppy Copy `0.5.0` | Bundled runtime | Hash match |
 | Brand Voice Factory `0.2.1` | Bundled runtime | Hash match |
 | Crafty Carousels `0.6.1` | Bundled runtime | Hash match |
@@ -105,32 +79,58 @@ The content test verifies the complete 751-hook database. It also verifies all
 seven script frameworks, 39 CTAs, the voice and carousel scripts, and the final
 AI Sloppy Copy checker.
 
+Installation grants no connector, project, file, or external-write authority.
+Those permissions remain disabled until the private configuration explicitly
+enables them.
+
 ## Upgrade
 
+Update the local checkout, then rerun its installer:
+
 ```powershell
-codex plugin marketplace upgrade codex-chief-of-staff
-codex plugin add chief-of-staff@codex-chief-of-staff
+git pull --ff-only
+.\install.ps1 -Upgrade
 ```
 
-Restart the ChatGPT desktop app, then repeat fresh-task acceptance. A source-product
-release does not change Chief until `scripts/sync_content_runtime.py` imports
-the selected release and validation approves its new hashes.
+On macOS or Linux:
+
+```bash
+git pull --ff-only
+./install.sh --upgrade
+```
+
+Restart Codex and repeat the fresh-task verification. A source-product release
+does not change Chief until `scripts/sync_content_runtime.py` imports the
+selected release and validation approves its new hashes.
 
 ## Uninstall
 
+Run the repository installer in uninstall mode:
+
 ```powershell
-codex plugin remove chief-of-staff@codex-chief-of-staff
-codex plugin marketplace remove codex-chief-of-staff
+.\install.ps1 -Uninstall
 ```
 
-Uninstalling does not delete the private configuration.
+On macOS or Linux:
+
+```bash
+./install.sh --uninstall
+```
+
+Uninstalling does not delete the private `chief-of-staff.json` configuration.
 
 ## Troubleshooting
 
-- Missing content runtime: reinstall Chief and run
-  `python tests/test_content_runtime.py`.
-- Hooks do not load in Codex: restart the ChatGPT desktop app and start a fresh task.
+- Missing content runtime: update the checkout, rerun the repository installer,
+  and run `py -3 .\tests\test_content_runtime.py`.
+- Hooks do not load: restart Codex, review the hooks, and start a fresh task.
 - Wrong account: stop and reconnect the configured identity before reading.
-- ChatGPT cannot run a required bundled script: keep the output at `Draft` and
-  route the deterministic content operation through one approved remote MCP
-  action.
+- Python unavailable: rerun the installer with configuration enabled after
+  Python 3.11 or later is installed.
+
+## Canonical repositories
+
+- [Chief of Staff](https://github.com/plotdevice01/codex-chief-of-staff)
+- [AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy)
+- [Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory)
+- [Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill)
