@@ -15,8 +15,8 @@ from scripts.validate_repository import (  # noqa: E402
     validate_model_acceptance,
     validate_release_waiver,
 )
-from scripts.live_acceptance_harness import validate_receipt  # noqa: E402
 from scripts.validate_install import duplicate_skill_warnings  # noqa: E402
+from scripts.package_files import copied_files  # noqa: E402
 
 
 def main() -> int:
@@ -27,8 +27,8 @@ def main() -> int:
         "## Run a chat-first client delivery cycle",
         "Ask one missing intake question at a time.",
         "Do not require a spreadsheet",
-        "Scope approval does not replace a configured external-write",
-        "Wait for one immediate confirmation for that delivery cycle.",
+        "durable authorization for every included production and delivery action",
+        "second confirmation gate for the record batch.",
         "Use one parent task",
         "for the delivery cycle.",
         "Create one subtask",
@@ -39,6 +39,34 @@ def main() -> int:
         "Never create or delegate tasks",
     ):
         assert required in chief_skill, f"Missing chat-first delivery rule: {required}"
+    for forbidden in (
+        "Scope approval does not replace",
+        "Wait for one immediate confirmation",
+        "Release does not authorize publication",
+        "Run `--apply` only after the workspace owner approves",
+    ):
+        assert forbidden not in chief_skill, f"Stale repeated-approval rule remains: {forbidden}"
+
+    universal = (
+        ROOT / "skills" / "chief-of-staff" / "references" / "universal-request-contract.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "## Plan-scoped authorization",
+        "Do not request a new approval for each step of an approved plan.",
+        "full access is",
+        "idempotent retry does not require new",
+    ):
+        assert required in universal, f"Missing plan-scoped authorization rule: {required}"
+
+    content_production = (
+        ROOT / "skills" / "chief-of-staff" / "references" / "content-production.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "quality record is not another permission prompt",
+        "approved plan already includes downstream production",
+    ):
+        assert required in content_production, f"Missing bundled-workflow override: {required}"
+    assert "Do not generate slides before exact copy and the anchor direction are approved." not in content_production
 
     live_acceptance = (
         ROOT / "skills" / "chief-of-staff" / "references" / "live-acceptance.md"
@@ -50,6 +78,7 @@ def main() -> int:
         "cannot satisfy ChatGPT Work acceptance.",
         "**Ask for approval**",
         "built-in `:read-only` permission profile",
+        "reason to ask for permission again",
         "Run all scenarios inline in the one fresh task.",
         "temporary files",
         "invalidates the entire run",
@@ -58,6 +87,21 @@ def main() -> int:
 
     assert not (ROOT / "skills" / "brand-voice-copywriter" / "SKILL.md").exists()
     assert not (ROOT / "tests" / "openai-directory-submission.json").exists()
+    assert not (ROOT / "tests" / "receipts" / "chatgpt-work-v2.1.0.json").exists()
+    packaged = {path.relative_to(ROOT).as_posix() for path in copied_files()}
+    assert not any(
+        name == ".git" or name.startswith((".git/", ".install/", "dist/", "qa/", "tmp/"))
+        for name in packaged
+    )
+    windows_installer = (ROOT / "install.ps1").read_text(encoding="utf-8")
+    posix_installer = (ROOT / "install.sh").read_text(encoding="utf-8")
+    for installer in (windows_installer, posix_installer):
+        assert "stage_install.py" in installer
+        assert "codex-chief-of-staff" in installer
+    validator = (ROOT / "scripts" / "validate_repository.py").read_text(encoding="utf-8")
+    assert '".install/"' in validator
+    assert 'marketplace", "add", $RepoRoot' not in windows_installer
+    assert 'marketplace add "$REPO_ROOT"' not in posix_installer
     with tempfile.TemporaryDirectory() as folder:
         temp = Path(folder)
         roots = {}
@@ -74,17 +118,9 @@ def main() -> int:
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
     release_status = model_acceptance_release_status(evidence)
-    assert release_status == "pass_with_waiver"
-    assert not validate_model_acceptance(require_pass=True)
-    receipt_version = evidence.get("carried_forward_from_release", evidence["release_version"])
-    work_receipt = json.loads(
-        (ROOT / "tests" / "receipts" / f"chatgpt-work-v{receipt_version}.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert not validate_receipt(
-        work_receipt, "chatgpt-work", expected_version=receipt_version
-    )
+    assert release_status == "candidate"
+    assert not validate_model_acceptance()
+    assert validate_model_acceptance(require_pass=True)
 
     waived = copy.deepcopy(evidence)
     waived["models"]["gpt-5.6-sol"]["status"] = "pass"
@@ -110,7 +146,7 @@ def main() -> int:
     assert errors
 
     print(
-        "PASS: chat-first delivery rules and release waiver controls are present."
+        "PASS: plan-scoped delivery rules and release waiver controls are present."
     )
     return 0
 

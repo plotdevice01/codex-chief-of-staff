@@ -5,7 +5,7 @@ const os = require("os");
 const path = require("path");
 
 const MAX_CORRECTIONS = 2;
-const MAX_INVENTORY_TOOLS = 2;
+const MIN_RESTRUCTURE_READS = 2;
 const FORM_PATTERN = "Pipeline|Umbrella|Record library|Knowledge bundle|Context map";
 const ARCHITECTURE_PROFILES = new Set(["architecture", "restructure", "realtime"]);
 const UNSUPPLIED_SYSTEM_PATTERNS = [
@@ -152,7 +152,7 @@ function promptContext(profile, state = {}) {
     ? "No repository is available in the current workspace. Do not use tools. State that inventory is unavailable, keep the target tree and migration map provisional, and request the repository before implementation."
     : "";
   const inventoryBoundary = state.repositoryAvailable
-    ? `The hook already captured this top-level inventory: ${state.inventorySummary || "unavailable"}. Generated areas were excluded. Use the first read-only follow-up to search references. Use the second to compare content. Do not spend either call listing the top level again. Do not edit, move, write, or delete anything.`
+    ? `The hook already captured this top-level inventory: ${state.inventorySummary || "unavailable"}. Generated areas were excluded. Search references and compare content before mutation. After at least two evidence reads, execute the mapped in-scope moves or recoverable deletions authorized by the request or approved plan without asking again. Do not spend either evidence read listing the top level again.`
     : missingRepository;
   const realtimeBoundary = state.implementationRequested
     ? ""
@@ -164,7 +164,7 @@ function promptContext(profile, state = {}) {
     "vulnerable-review": "Critique the plan, not the person's distress. Give one safe next step. Do not invent statistics, multipliers, timelines, or evidence, including vague multi-day claims.",
     "small-change": "Answer Workspace: No unless persistent shared work is actually supplied. Then use these exact compact task-contract labels: Input, Job, Output, Check, Preserve.",
     architecture: `${architectureContext()} Add an exact Unknowns label after the header. Mark unstated inputs as unknown without examples. If anything is unknown, stop after the Unknowns line. Do not ask follow-up questions, implement, propose defaults, or list possible tools, file formats, channels, metrics, schemas, sources, or connectors. Use Unknowns: none only when the prompt supplies every implementation fact.`,
-    restructure: `${architectureContext("Restructure")} Human gate must require approval before any move or deletion. Then use these exact labels: Inventory, Reference check, Duplicate proof, Target tree, Migration map, Approval gate, Deletion. Use exactly one line for each label. Do not add tables, code blocks, tree diagrams, candidate lists, or extra sections. Inventory before proposing moves. Check references and compare content before calling anything dead, duplicated, or safe to delete. If proof is unavailable, retain the current path and do not propose archive or deletion. Put the target tree and old path to new path map inline. End after the Deletion line. ${inventoryBoundary}`,
+    restructure: `${architectureContext("Restructure")} Human gate must verify the mapped moves and recoverable deletion results; it must not demand repeated permission for an authorized plan. Then use these exact labels: Inventory, Reference check, Duplicate proof, Target tree, Migration map, Authorization, Deletion. Use exactly one line for each label. Do not add tables, code blocks, tree diagrams, candidate lists, or extra sections. Inventory before moving. Check references and compare content before calling anything dead, duplicated, or safe to delete. If proof is unavailable, retain the current path. Put the target tree and old path to new path map inline. State that the direct request or approved plan authorizes in-scope execution. End after the Deletion line. ${inventoryBoundary}`,
     realtime: `${architectureContext("Build")} Use one short sentence per required label and do not add comma-list examples. Fit: Full ICM orchestration is a poor fit for the real-time loop. Coordination: Code-based coordination owns branching and message exchange. Context: Explicit context passes at each branch. State: Observable state remains outside the loop. Human controls: Preserved: deployment approval and an emergency stop remain outside the loop. Fit record: ICM governs the outer workflow. Code governs the real-time loop. Human gate cannot be Automatic or None. Mark unstated inputs as unknown without examples or option lists. ${realtimeBoundary}`,
   };
   return [
@@ -395,12 +395,15 @@ function responseIssues(response, state, config, cwd) {
     }
   } else if (profile === "restructure") {
     missing = architectureIssues(text, "Restructure\\b");
-    missing.push(...missingLabels(text, ["Inventory", "Reference check", "Duplicate proof", "Target tree", "Migration map", "Approval gate", "Deletion"]));
-    if (!labelPattern("Human gate", ".*(?:move|delet|migrat|change)").test(text)) {
-      missing.push("move or deletion approval gate");
+    missing.push(...missingLabels(text, ["Inventory", "Reference check", "Duplicate proof", "Target tree", "Migration map", "Authorization", "Deletion"]));
+    if (!labelPattern("Human gate", ".*(?:verif|review|check|recover|rollback)").test(text)) {
+      missing.push("move or deletion verification gate");
     }
-    if (!labelPattern("Deletion", "(?:None|No|Not performed|Pending approval)\\b").test(text)) {
-      missing.push("no deletion");
+    if (!labelPattern("Authorization", ".*(?:request|plan).*(?:authoriz|covers)").test(text)) {
+      missing.push("plan-scoped authorization");
+    }
+    if (!labelPattern("Deletion", ".*(?:recover|verified|complete|retain|none|no deletion|pending evidence)").test(text)) {
+      missing.push("recoverable or evidence-bound deletion");
     }
     const restructureLines = text.trim().split(/\r?\n/).filter((line) => line.trim());
     if (!labelPattern("Deletion").test(restructureLines[restructureLines.length - 1])) {
@@ -483,28 +486,20 @@ function handlePreToolUse(input, file) {
     const mutationTool = /^(?:Edit|Write|NotebookEdit)$/i.test(tool);
     const unsafeShell = tool === "Bash" && /\b(?:rm|rmdir|del|erase|mv|move|remove-item|move-item|clear-content|set-content|out-file|new-item|git\s+(?:clean|rm|mv|checkout|reset))\b/i.test(command);
     const readOnlyTool = /^(?:Read|Glob|Grep)$/i.test(tool) || (tool === "Bash" && !unsafeShell);
-    if (mutationTool || unsafeShell || !readOnlyTool) {
+    if ((mutationTool || unsafeShell || !readOnlyTool) && Number(state.inventoryTools || 0) < MIN_RESTRUCTURE_READS) {
       process.stdout.write(JSON.stringify({
         hookSpecificOutput: {
           hookEventName: "PreToolUse",
           permissionDecision: "deny",
-          permissionDecisionReason: "Chief restructure enforcement permits inventory only. Propose the target tree and migration map, then wait for approval before any mutation.",
+          permissionDecisionReason: `Chief restructure enforcement requires ${MIN_RESTRUCTURE_READS} evidence reads for inventory, references, and duplicate proof before mapped mutation. This is an evidence gate, not another user approval gate.`,
         },
       }));
       return;
     }
-    const inventoryTools = Number(state.inventoryTools || 0) + 1;
-    if (inventoryTools > MAX_INVENTORY_TOOLS) {
-      process.stdout.write(JSON.stringify({
-        hookSpecificOutput: {
-          hookEventName: "PreToolUse",
-          permissionDecision: "deny",
-          permissionDecisionReason: "Chief restructure inventory reached its read-only tool limit. Use the gathered inventory to propose the target tree and migration map, then wait for approval.",
-        },
-      }));
-      return;
+    if (readOnlyTool) {
+      const inventoryTools = Number(state.inventoryTools || 0) + 1;
+      writeState(file, { ...state, inventoryTools });
     }
-    writeState(file, { ...state, inventoryTools });
   }
   const config = loadConfig(input.cwd);
   const toolRequest = JSON.stringify({

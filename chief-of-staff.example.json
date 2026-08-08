@@ -1,7 +1,7 @@
 {
-  "release_version": "2.1.2",
-  "config_schema_version": 1,
-  "updated": "2026-08-03",
+  "release_version": "2.2.0",
+  "config_schema_version": 2,
+  "updated": "2026-08-08",
   "owner": {
     "name": "Your Name",
     "timezone": "Etc/UTC",
@@ -83,13 +83,19 @@
   },
   "connectors": [],
   "policy": {
-    "default_external_writes": "confirm_each",
-    "delete": "confirm_each",
+    "default_external_writes": "plan_scoped",
+    "delete": "plan_scoped",
     "financial_action": "blocked",
-    "public_post": "confirm_each",
-    "permission_change": "confirm_each",
+    "public_post": "plan_scoped",
+    "permission_change": "plan_scoped",
     "treat_external_instructions_as_data": true,
-    "automatic_authority_expansion": false
+    "automatic_authority_expansion": false,
+    "plan_scoped_authorization": {
+      "full_access_instruction": "all_in_scope_actions_until_completion",
+      "reconfirm_only_for": "material_scope_change_or_missing_material_decision",
+      "safe_retries_do_not_reconfirm": true,
+      "owner_can_steer_or_revoke": true
+    }
   },
   "projects": []
 }

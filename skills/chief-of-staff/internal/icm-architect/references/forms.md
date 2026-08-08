@@ -136,7 +136,7 @@ workspace/
 - A closed set of node types is defined once in `_meta/schema.md`: team, job, process, data-asset, governance and pattern. Every node declares its `type:` in frontmatter.
 - Process nodes carry scoring frontmatter for owner and AI level (L0 manual -> L3 connected). They also record frequency, value 1-5 and pain 1-5. `consumes:` and `produces:` use wikilinks to data assets. The links draw the org graph on their own; high value + high pain = pilot candidate.
 - **The workshop is the data event.** Map live with the team; every session ends in clean node files, not slides. "You don't point an agent at a legacy mess - you clean the shelf first."
-- The librarian ritual per team: inventory -> single source of truth -> give it shape -> catalogue -> shelve by sensitivity -> connect the agent. The human stays the approval gate; the agent drafts and proposes.
+- The librarian ritual per team: inventory -> single source of truth -> give it shape -> catalogue -> shelve by sensitivity -> connect the agent. The human stays the verification and recovery gate; an approved plan authorizes mapped execution.
 - Patterns require three independent occurrences: one team complaining is a gripe, three teams landing on the same workflow and the same pain is structure.
 
 **Watch for:** schema mandating names the files stopped using (reconcile immediately); duplicate entry files drifting; instance data tangled into the reusable method (extract the blank starter kit early); node types multiplying past what anyone queries.

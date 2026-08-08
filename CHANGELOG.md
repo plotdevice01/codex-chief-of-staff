@@ -3,6 +3,39 @@
 All notable changes are recorded here. Public releases and host manifests use
 the same three-part semantic product version.
 
+## [2.2.0] - 2026-08-08
+
+### Changed
+
+- Replaced per-write `confirm_each` policy with durable `plan_scoped`
+  authorization. A direct request, approved plan, approved goal, or full-access
+  instruction now covers every plainly included local and external action
+  through completion.
+- Removed redundant confirmation gates from client-delivery batches, project
+  propagation, repository publication, and release workflows.
+- Removed the stale v2.1.0 host receipt from the active source and install
+  package so its superseded approval behavior cannot be mistaken for policy.
+- Limited reconfirmation to material scope expansion, a new target or
+  recipient, an unplanned irreversible destructive action, or a missing
+  decision that can change a material outcome.
+- Preserved identity checks, blocked financial actions, evidence and rights
+  gates, missing credentials, and host or system safeguards.
+
+### Added
+
+- Added explicit plan-scoped authorization context to the lifecycle hook.
+- Added a live regression scenario proving that an approved repository publish
+  plan proceeds through merge and release without another permission prompt.
+- Added an installed-cache proof gate covering active version, exact path,
+  stale-version removal, canonical parity, project-loader parity, and a visual
+  receipt.
+
+### Validation
+
+- This release changes model-facing behavior. Prior host receipts are not
+  carried forward; fresh Codex and ChatGPT Work acceptance is required before
+  a public release is tagged.
+
 ## [2.1.2] - 2026-08-08
 
 ### Fixed

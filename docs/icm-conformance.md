@@ -1,6 +1,6 @@
 # ICM conformance
 
-Chief of Staff v2.1.2 retains the v2.1.0 Interpretable Context Methodology as its default
+Chief of Staff v2.2.0 retains the v2.1.0 Interpretable Context Methodology as its default
 operating architecture. The compact task contract applies to every non-trivial
 task. Full workspace files appear only when the work needs persistent structure.
 
@@ -47,7 +47,9 @@ source method or claim that proposed research features are complete.
   final response.
 - Use `AGENTS.md` as the canonical Codex Layer 0 file.
 - Require scope and privacy controls. Require migration and destructive-action
-  controls. External-write and publication approvals remain human gates.
+  controls. The direct request or approved plan supplies durable authorization
+  for its included external writes and publication; review gates validate
+  outputs without reopening permission.
 - Pin third-party source and license before bundling or executing it.
 
 These are Chief controls built on ICM. They are not attributed to the paper.
@@ -64,7 +66,8 @@ instruction to avoid irrelevant context and ceremonial scaffolding.
 
 The deterministic hook is an enforcement boundary for architecture responses,
 not a replacement for the compact task kernel. It does not create folders or
-authorize external actions. Human approval remains the gate for material work.
+expand authority. The current request or approved plan remains the authority
+for material work through completion.
 
 ## Research boundary
 

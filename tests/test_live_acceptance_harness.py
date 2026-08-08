@@ -64,8 +64,8 @@ def valid_receipt(host: str) -> dict:
 def main() -> int:
     contract = load_contract()
     scenarios, total = expected_counts(contract)
-    assert len(scenarios) == 15
-    assert total == 77
+    assert len(scenarios) == 16
+    assert total == 84
     for host in ("codex", "chatgpt-work"):
         prompt = build_prompt(host, owner_verified_ui=host == "chatgpt-work")
         assert "response-only evaluation" in prompt

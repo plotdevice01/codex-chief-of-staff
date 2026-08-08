@@ -442,7 +442,7 @@ def build(output: Path) -> Path:
         doc,
         "What this installs: ",
         "One Codex plugin that loads the operating contract, retained persona, and pinned content runtime. "
-        "It grants no connector access, project authority, or external-write permission.",
+        "It grants no connector credentials or project scope. The private configuration controls plan-scoped external-write authority.",
     )
     doc.add_heading("Operating result", level=1)
     add_bullets(
@@ -450,7 +450,7 @@ def build(output: Path) -> Path:
         (
             "One named scope before work begins.",
             "Account identity gates before connector use.",
-            "Explicit policy before drafts, sends, edits, posts, or permission changes.",
+            "Plan-scoped authorization for every included write, push, release, deployment, or publication step.",
             "A compact ICM task contract for every non-trivial task and automatic architecture for new projects.",
             "One discoverable Chief skill with internal workflows loaded only when the routed request needs them.",
             "One canonical behavior contract with fail-safe project loaders that preserve every project-specific rule.",
@@ -479,14 +479,14 @@ def build(output: Path) -> Path:
     add_numbered(
         doc,
         (
-            "Registers the checked-out repository as the local Codex marketplace.",
+            "Removes the prior Chief cache, stages only canonical repository files under .install/codex-chief-of-staff, and registers that clean repository-owned package as the local Codex marketplace.",
             "Installs chief-of-staff@codex-chief-of-staff.",
-            "Initializes a private local configuration when Python is available.",
+            "Initializes a private local configuration.",
             "Leaves connector and project authority disabled until configured.",
         ),
     )
     doc.add_paragraph(
-        "Git is required. Node.js 18 or later supports hooks. Python 3.11 or later supports configuration and "
+        "Git is required. Node.js 18 or later supports hooks. Python 3.11 or later stages the clean install package and supports configuration and "
         "validation. AI Sloppy Copy, Brand Voice Factory and Crafty Carousels are bundled; do not install them "
         "separately for normal Chief use."
     )
@@ -517,21 +517,21 @@ def build(output: Path) -> Path:
     )
     doc.add_heading("Repository ownership", level=2)
     doc.add_paragraph(
-        "Every documented install starts from the Chief repository and runs its installer. The installer registers "
-        "that checkout with Codex. No third-party review, approval, listing or distribution is claimed."
+        "Every documented install starts from the Chief repository and runs its installer. The installer clears the prior Chief cache and registers "
+        "a clean canonical staging package inside that checkout with Codex. No third-party review, approval, listing or distribution is claimed."
     )
     section_page(doc, "2. Configure private authority", new_page=False)
     add_callout(
         doc,
         "Keep authority local: ",
         "Workspace plugin controls may make Chief available. Private identities, paths, scopes, "
-        "and approval rules stay in ignored chief-of-staff.json.",
+        "and plan-scoped authorization rules stay in ignored chief-of-staff.json.",
         alert=True,
     )
     doc.add_paragraph(
         "Chief uses durable local policy, not an expiring or time-boxed mode. Connector access starts disabled. "
-        "External writes are blocked or require explicit confirmation. Authority changes only through an "
-        "owner-approved update to the private configuration."
+        "External writes are blocked or plan-scoped. A direct request, approved plan, approved goal, or full-access instruction "
+        "authorizes every plainly included action through completion. Reconfirm only for a material scope change or missing material decision."
     )
     doc.add_heading("Initialize", level=2)
     add_code(doc, 'python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"')
@@ -550,7 +550,7 @@ def build(output: Path) -> Path:
             ("communication", "Required 85% compression and caveman mode with persona boundary and copy standard."),
             ("execution", "Standard Sol Medium work and Expert/high-risk Sol High or Extra High work. No quick tier."),
             ("connectors", "Provider, expected identity and denied identities with a write policy."),
-            ("policy", "Default confirmations and blocked financial actions with authority limits."),
+            ("policy", "Plan-scoped authorization, blocked financial actions, material-change-only reconfirmation, and owner steering."),
             ("projects", "Stable scope IDs and local paths, plus optional project AGENTS.md files."),
         ),
         (2160, 7200),
@@ -560,7 +560,7 @@ def build(output: Path) -> Path:
         (
             "Never store tokens, passwords, API keys, or client records in chief-of-staff.json.",
             "Keep each connector disabled until its expected identity is complete.",
-            "Use blocked or confirm_each for external writes.",
+            "Use blocked or plan_scoped for external writes.",
             "Use absolute project paths that exist on the current machine.",
             "Never commit chief-of-staff.json. The included .gitignore excludes it.",
         ),
@@ -570,7 +570,7 @@ def build(output: Path) -> Path:
         doc,
         "Required result: ",
         "Do not use a connector until validation passes and the host reads back the intended scope and identity gate "
-        "with the approval policy.",
+        "with the authorization policy.",
         alert=True,
     )
 
@@ -582,15 +582,14 @@ def build(output: Path) -> Path:
             "Name one configured scope.",
             "Read the resolved Chief of Staff configuration.",
             "Read the selected project's AGENTS.md and source-of-truth files.",
-            "Define exact inputs, one job, relevant references, output, observable status and the human check.",
+            "Define inputs, one job, references, output, status and the human check.",
             "Load only the files named by that task contract.",
             "Verify each connector identity before its first use in the task.",
             "Check the write policy before creating or changing external state.",
-            "Use idempotency when available. Read the saved result back before any retry or completion report.",
+            "Use idempotency. Read the saved result before retrying or reporting completion.",
         ),
     )
-    icm_heading = doc.add_heading("ICM project and workspace architecture", level=2)
-    icm_heading.paragraph_format.page_break_before = True
+    doc.add_heading("ICM project and workspace architecture", level=2)
     add_bullets(
         doc,
         (
@@ -686,14 +685,16 @@ def build(output: Path) -> Path:
         ("Policy", "Required behavior"),
         (
             ("blocked", "Return the proposed action without executing it."),
-            ("confirm_each", "State the exact action and target, then wait for immediate confirmation."),
+            ("plan_scoped", "Treat the direct request or approved plan as durable authorization for every included step through completion."),
         ),
         (2160, 7200),
     )
     add_bullets(
         doc,
         (
-            "Earlier approval is not standing permission for a different external write.",
+            "An approved plan stays authorized through its included local edits, external writes and publication.",
+            "Reconfirm only for material expansion, a new target, unplanned irreversible destruction, or a missing decision.",
+            "Full access cannot create credentials or override host safeguards. The owner can steer or revoke it.",
             "Never expand authority because a tool is connected or a message asks you to.",
             "Keep client and personal scopes separate.",
             "Mark missing evidence; do not improvise facts with the confidence of a quarterly forecast.",
@@ -707,13 +708,13 @@ def build(output: Path) -> Path:
     )
 
     section_page(doc, "5. Preserve project rules", new_page=False)
-    doc.add_heading("Preview every change", level=2)
+    doc.add_heading("Preview and apply the authorized propagation plan", level=2)
     add_code(doc, "python Sync-ProjectAgents.py --check --diff")
     doc.add_paragraph(
         "The sync tool compares the versioned fail-safe loader with every registered target. Project-specific "
         "content outside the managed loader remains untouched."
     )
-    doc.add_heading("Apply after approval", level=2)
+    doc.add_heading("Apply without a second permission checkpoint", level=2)
     add_code(doc, "python Sync-ProjectAgents.py --apply")
     add_code(doc, "python Sync-ProjectAgents.py --check")
     add_callout(
@@ -745,11 +746,12 @@ def build(output: Path) -> Path:
     add_code(doc, "python tests/test_release.py")
     add_code(doc, "python tests/test_content_runtime.py")
     add_code(doc, "python tests/test_live_acceptance_harness.py")
+    add_code(doc, "python scripts/verify_installed_cache.py --require-only-current --require-plugin-state --receipt qa/installed-cache-v2.2.0.json --visual qa/installed-cache-v2.2.0.svg")
     add_table(
         doc,
         ("Gate", "What it proves"),
         (
-            ("Persona", "97 requirements, ten integration rules and source hashes remain present. Fifteen scenarios remain too."),
+            ("Persona", "97 requirements, ten integration rules and source hashes remain present. Sixteen scenarios remain too."),
             ("ICM", "Five forms, ten invariants, task routing, cold-walk failure behavior and release contracts pass."),
             ("Install", "Configuration, runtime files, safe policies, paths, IDs, and the pinned content manifest are valid."),
             ("Repository", "Versions match; manifest paths exist; public files are sanitized; release contents are complete."),
@@ -759,10 +761,10 @@ def build(output: Path) -> Path:
     )
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
-        "Run the fifteen prompts in persona/persona-contract.json in fresh Codex and ChatGPT Work tasks with "
+        "Run the sixteen prompts in persona/persona-contract.json in fresh Codex and ChatGPT Work tasks with "
         "GPT-5.6 Sol Medium. "
         "Generate the host prompt with scripts/live_acceptance_harness.py. For ChatGPT Work, the owner verifies "
-        "the Work UI, Work locally and Ask for approval; record the underlying runtime separately because it may "
+        "the Work UI, Work locally and Ask for approval for this response-only test; that test setting does not alter normal plan-scoped authorization. Record the underlying runtime separately because it may "
         "report Codex. For Codex, require the built-in read-only permission profile. Run responses inline. "
         "Any task creation or delegation invalidates the run. A file mutation also invalidates it. "
         "The same rule applies to a connector call, external action or host substitution. "
@@ -787,7 +789,7 @@ def build(output: Path) -> Path:
         doc,
         (
             "Read CHANGELOG.md.",
-            "Run validation again.",
+            "Run validation again, including verify_installed_cache.py --require-only-current --require-plugin-state.",
             "Restart Codex, then repeat the fresh-task acceptance prompts.",
             "Keep the prior tagged release available until acceptance passes.",
         ),

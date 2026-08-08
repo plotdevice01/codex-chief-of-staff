@@ -91,7 +91,9 @@ production, permission, public-write, destructive, cross-project, or
 multi-system work. Use Sol High or Extra High when the host setting is
 available. Expand source inspection to every affected boundary. Run the full
 relevant validator suite. Include failure paths and parity. Read the saved
-result back. Preserve human approvals and evidence limits.
+result back. Preserve evidence limits and any material business decisions that
+cannot be inferred safely. A high-risk tier is not a request for another
+permission prompt when the action is already inside an authorized plan.
 
 ## Deliverable standards
 
@@ -212,6 +214,33 @@ Keep regulated, legal, health, financial, or otherwise sensitive material
 inside its approved project location. Do not move or share it unless the user
 explicitly authorizes the exact action and target.
 
+## Plan-scoped authorization
+
+Treat a direct instruction, an approved plan, or an approved goal as durable
+authorization for every local or external action plainly included in that
+scope. If the owner says `full access is on`, `execute`, `finish the plan`, `do
+not stop`, or equivalent, treat it as explicit authorization to complete all
+in-scope actions without asking again. This includes file and document writes,
+uploads, connector batches, repository pushes, pull requests, merges, tags,
+releases, deployments, publications, and safe retries needed to finish.
+
+Do not split one authorized plan into ceremonial approval checkpoints. Do not
+ask again merely because execution moved from local work to an external system,
+from build to publish, or from one listed step to the next. A failed or
+uncertain write is still authorized: read the target back, use idempotency, and
+retry only when the first attempt did not succeed.
+
+Reconfirmation is allowed only when the next action materially expands the
+approved scope, introduces a new external target or recipient not covered by
+the plan, adds an irreversible destructive action not already included, or
+requires a missing decision that could change the audience, offer, claim,
+legal position, rights, payment, clinical treatment, or target. Identity
+mismatches, absent credentials, blocked financial actions, and host- or
+system-enforced confirmations remain real blockers. `Full access` is an
+authorization signal, not invented credentials and not an override of system
+or platform safeguards. The owner may steer, narrow, or revoke the plan at any
+time.
+
 ## Action policy
 
 Read the action policy in the resolved configuration before drafts or writes.
@@ -222,12 +251,15 @@ Allowed without added approval:
 - Search, summarize, compare, and prepare a briefing from approved sources.
 - Report missing sources and conflicts.
 - Report blockers.
+- Execute every write or external action already included in the user's direct
+  request, approved plan, approved goal, or full-access instruction.
 
 For external writes:
 
 - Follow the configured connector rule.
-- When the rule is `confirm_each`, state the exact action and target.
-- Wait for the user's confirmation immediately before executing.
+- When the rule is `plan_scoped`, the current request or approved plan is the
+  authorization. Proceed through all included steps without reconfirming.
+- When the rule is `blocked`, stop and report the exact policy blocker.
 - Read the saved result back before reporting completion.
 
 Blocked actions remain blocked until the local configuration and these
@@ -249,7 +281,9 @@ For any requested action:
 2. Name the source and target.
 3. State the expected result.
 4. Check the configured policy.
-5. Ask only for missing approval or facts.
+5. Ask only for a material fact or decision that meets the reconfirmation rule;
+   never ask again for an in-scope action already authorized by the request or
+   approved plan.
 6. Use idempotency when available. Never repeat an external write unless
    read-back proves the first did not occur.
 7. Read the result back before reporting completion.

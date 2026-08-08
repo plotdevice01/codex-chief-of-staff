@@ -12,7 +12,7 @@ dependencies.
 - Git
 - Codex with plugin support
 - Node.js 18 or later for lifecycle hooks
-- Python 3.11 or later for configuration and validation
+- Python 3.11 or later for clean install staging, configuration, and validation
 
 ## Windows
 
@@ -22,9 +22,11 @@ Set-Location .\codex-chief-of-staff
 .\install.ps1
 ```
 
-The PowerShell installer registers the checked-out repository as the local
-Codex marketplace, installs `chief-of-staff@codex-chief-of-staff`, and runs the
-configuration initializer when Python is available.
+The PowerShell installer removes the prior Chief cache, stages only canonical
+repository files under `.install/codex-chief-of-staff`, registers that clean
+repository-owned staging folder as the local Codex marketplace, installs
+`chief-of-staff@codex-chief-of-staff`, and runs the configuration initializer.
+The macOS and Linux installer applies the same clean-cache process.
 
 Useful installer options:
 
@@ -61,6 +63,7 @@ From the repository root, run:
 py -3 .\validate_install.py --example --strict-dependencies
 py -3 .\tests\test_content_runtime.py
 py -3 .\scripts\validate_repository.py
+py -3 .\scripts\verify_installed_cache.py --require-only-current --require-plugin-state --receipt qa\installed-cache-v2.2.0.json --visual qa\installed-cache-v2.2.0.svg
 ```
 
 On macOS or Linux, use `python3` and forward-slash paths.
@@ -79,9 +82,10 @@ The content test verifies the complete 751-hook database. It also verifies all
 seven script frameworks, 39 CTAs, the voice and carousel scripts, and the final
 AI Sloppy Copy checker.
 
-Installation grants no connector, project, file, or external-write authority.
-Those permissions remain disabled until the private configuration explicitly
-enables them.
+Installation grants no connector credentials or project scope. Those remain
+disabled until the private configuration explicitly enables them. Once the
+configuration permits `plan_scoped` writes, a direct request or approved plan
+authorizes every included action without repeated confirmation.
 
 ## Upgrade
 
@@ -99,7 +103,9 @@ git pull --ff-only
 ./install.sh --upgrade
 ```
 
-Restart Codex and repeat the fresh-task verification. A source-product release
+Upgrade mode removes the exact prior Chief cache and rebuilds it from the
+updated repository staging package. Restart Codex and repeat the fresh-task
+verification. A source-product release
 does not change Chief until `scripts/sync_content_runtime.py` imports the
 selected release and validation approves its new hashes.
 
@@ -124,6 +130,9 @@ Uninstalling does not delete the private `chief-of-staff.json` configuration.
 - Missing content runtime: update the checkout, rerun the repository installer,
   and run `py -3 .\tests\test_content_runtime.py`.
 - Hooks do not load: restart Codex, review the hooks, and start a fresh task.
+- Stale Chief cache: rerun the repository installer with upgrade mode, then run
+  `scripts/verify_installed_cache.py --require-only-current --require-plugin-state` and inspect its
+  version, path, stale-version, missing-file, differing-file, and loader fields.
 - Wrong account: stop and reconnect the configured identity before reading.
 - Python unavailable: rerun the installer with configuration enabled after
   Python 3.11 or later is installed.

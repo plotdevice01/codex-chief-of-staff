@@ -27,6 +27,14 @@ For a named client or speaker, load the approved voice package and the source re
 
 Use only supplied or verified facts. Mark a material missing fact `UNKNOWN`. Stop when it could change the audience, offer, claim, legal position, or release decision.
 
+Bundled workflow references may say an action requires explicit authorization
+or a recorded approval. The current direct request, approved plan, approved
+goal, or full-access instruction satisfies that authorization for every
+included production, delivery, release, and publication action. Record quality,
+evidence, rights, copy, anchor, and release decisions as the workflow requires,
+but do not turn those records into repeated user permission prompts. Ask only
+when a missing material decision meets the universal reconfirmation rule.
+
 ## Query content intelligence
 
 For `paid_video`, `paid_ad`, `carousel`, and `organic_social`, run one complete library query before drafting. Resolve `SKILL_ROOT` to this Chief skill folder.
@@ -48,8 +56,8 @@ The finished copy must preserve the semantic structure of every record reported 
 Read `<SKILL_ROOT>/references/paid-video-creative.md`. Build complete concepts,
 not isolated copy. Every concept needs a creator-native format, first-frame
 action, spoken hook, visual progression, mechanism, sourced proof, offer,
-compatible CTA, pacing, captions, and edit direction. Expand only approved
-concepts into recording-ready variations. Cosmetic hook rewrites are not
+compatible CTA, pacing, captions, and edit direction. Expand concepts selected
+by the current request or approved plan into recording-ready variations. Cosmetic hook rewrites are not
 distinct concepts.
 
 ### Paid ad
@@ -66,11 +74,11 @@ Use one selected hook pattern and one selected script framework. Lock one CTA. D
 
 ### Carousel
 
-Read `<SKILL_ROOT>/vendor/crafty-carousels/workflow.md`. Follow its copy-first and anchor-first gates. Use its bundled workspace scripts and assets under `<SKILL_ROOT>/vendor/crafty-carousels/`. Do not generate slides before exact copy and the anchor direction are approved.
+Read `<SKILL_ROOT>/vendor/crafty-carousels/workflow.md`. Follow its copy-first and anchor-first quality gates. Use its bundled workspace scripts and assets under `<SKILL_ROOT>/vendor/crafty-carousels/`. Validate and freeze exact copy and the anchor direction before generating slides. The current request or approved plan supplies the execution authority; the quality record is not another permission prompt.
 
 ### Brand voice
 
-Read `<SKILL_ROOT>/vendor/brand-voice-factory/workflow.md`. Use its references, scripts, and workspace assets under `<SKILL_ROOT>/vendor/brand-voice-factory/`. Seal the approved package manifest before downstream use.
+Read `<SKILL_ROOT>/vendor/brand-voice-factory/workflow.md`. Use its references, scripts, and workspace assets under `<SKILL_ROOT>/vendor/brand-voice-factory/`. Seal the validated package manifest before downstream use. Do not insert a second permission checkpoint when the approved plan already includes downstream production.
 
 ### Organic social
 
