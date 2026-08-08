@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "run_id": "{{RUN_ID}}",
+  "client": "{{CLIENT_NAME}}",
+  "created": "{{CREATED_DATE}}",
+  "status": "intake",
+  "goal": "UNKNOWN",
+  "audience": "UNKNOWN",
+  "content_class": "UNKNOWN",
+  "hook_research_format": "UNKNOWN",
+  "idea": "UNKNOWN",
+  "narrative_format": "UNKNOWN",
+  "ruleset": {
+    "version": "{{RULESET_VERSION}}",
+    "production_system_sha256": "{{RULESET_SHA256}}"
+  },
+  "copy_policy": {
+    "mode": "UNKNOWN",
+    "source_copy_sha256": "UNKNOWN",
+    "approved_copy_sha256": "UNKNOWN"
+  },
+  "hook_library": {
+    "selected_record_ids": [],
+    "selection_reason": "UNKNOWN"
+  },
+  "typography": {
+    "family": "UNKNOWN",
+    "weight": 800,
+    "headline_min_px": 68,
+    "supporting_min_px": 40,
+    "cta_min_px": 48,
+    "thumbnail_test_width_px": 320
+  },
+  "design_system": {
+    "secondary_font_family": "NONE",
+    "background_color": "UNKNOWN",
+    "text_color": "UNKNOWN",
+    "accent_color": "UNKNOWN",
+    "visual_thread": "UNKNOWN",
+    "safe_zone_px": {
+      "top": 180,
+      "bottom": 180,
+      "left": 50,
+      "right": 120
+    }
+  },
+  "anchor_candidates": [
+    {"id": "A", "file": "UNKNOWN", "sha256": "UNKNOWN", "composition": "UNKNOWN", "thumbnail_pass": false},
+    {"id": "B", "file": "UNKNOWN", "sha256": "UNKNOWN", "composition": "UNKNOWN", "thumbnail_pass": false},
+    {"id": "C", "file": "UNKNOWN", "sha256": "UNKNOWN", "composition": "UNKNOWN", "thumbnail_pass": false}
+  ],
+  "selected_anchor": "UNKNOWN",
+  "visual_policy": {
+    "approved_anchor_rules_sha256": "UNKNOWN",
+    "likeness_method": "UNKNOWN"
+  },
+  "platform": {
+    "route": "{{PLATFORM_ROUTE}}",
+    "width": {{WIDTH}},
+    "height": {{HEIGHT}},
+    "verified_max": "UNKNOWN",
+    "verified_on": "UNKNOWN"
+  },
+  "slide_count": {{SLIDE_COUNT}},
+  "client_profile_versions": {
+    "brand": "UNKNOWN",
+    "voice": "UNKNOWN",
+    "people_likeness": "UNKNOWN",
+    "asset_register": "UNKNOWN",
+    "claim_register": "UNKNOWN"
+  },
+  "approvals": {
+    "intake": false,
+    "strategy_copy": false,
+    "anchor": false,
+    "release": false
+  },
+  "slides": {{SLIDES_JSON}}
+}

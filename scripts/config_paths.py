@@ -22,9 +22,7 @@ def platform_config_path() -> Path:
 
 
 def default_write_path() -> Path:
-    plugin_data = os.environ.get("PLUGIN_DATA") or os.environ.get(
-        "CLAUDE_PLUGIN_DATA"
-    )
+    plugin_data = os.environ.get("PLUGIN_DATA")
     return Path(plugin_data) / CONFIG_NAME if plugin_data else platform_config_path()
 
 
@@ -35,9 +33,7 @@ def candidate_paths(explicit: str | Path | None = None) -> list[Path]:
     if os.environ.get("CHIEF_OF_STAFF_CONFIG"):
         candidates.append(Path(os.environ["CHIEF_OF_STAFF_CONFIG"]).expanduser())
     candidates.extend((Path.cwd() / CONFIG_NAME, ROOT / CONFIG_NAME))
-    plugin_data = os.environ.get("PLUGIN_DATA") or os.environ.get(
-        "CLAUDE_PLUGIN_DATA"
-    )
+    plugin_data = os.environ.get("PLUGIN_DATA")
     if plugin_data:
         candidates.append(Path(plugin_data) / CONFIG_NAME)
     candidates.append(platform_config_path())

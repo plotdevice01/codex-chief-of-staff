@@ -1,7 +1,7 @@
 {
-  "release_version": "2.0.1",
-  "executed_at": "2026-08-06T00:08:51Z",
-  "runner": "Fresh v2.0.1 execution-trace acceptance on Codex and Claude Code",
+  "release_version": "2.1.0",
+  "executed_at": "2026-08-07",
+  "runner": "Owner-verified ChatGPT Work and Codex Desktop fresh v2.1.0 single-Chief universal acceptance",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -9,23 +9,68 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "CODEX CHIEF OF STAFF ACTIVE - v2.0.1 from the installed Codex plugin cache; strict dependency validation passed"
+    "evidence": "2026-08-07: Codex cache refreshed from the local marketplace and strict install validation passed. Fresh-runtime smoke checks on both required hosts reported Chief v2.1.0, exactly one discoverable Chief skill, internal ICM and content routes, and zero Claude or Ponytail routes. Fresh read-only release matrices then passed on Codex Desktop and ChatGPT Work."
+  },
+  "fresh_host_smoke": {
+    "status": "pass",
+    "scope": "Runtime plumbing only; not release-wide acceptance",
+    "required_hosts_reported": 2,
+    "evidence": "The owner reported the first instructed host smoke PASS, then supplied the second host PASS receipt with v2.1.0, one Chief skill, internal workflow routing, and no Claude or Ponytail routes."
+  },
+  "invalid_attempts": [
+    {
+      "date": "2026-08-07",
+      "requested_host": "chatgpt-work",
+      "observed_host": "codex",
+      "status": "invalid",
+      "completed_scenarios": 8,
+      "completed_assertions": 34,
+      "evidence": "The parent and all nine spawned tasks were local Codex tasks, so the run could not satisfy ChatGPT Work acceptance. The run also violated its no-edit boundary: LIVE-006 created and deleted a temporary draft file, and LIVE-009 created a workspace and build script before interruption. Generated material was moved to the Recycle Bin. Partial passes are not reusable."
+    }
+  ],
+  "candidate_smoke": {
+    "status": "superseded",
+    "superseded_by": "Universal single-skill overhaul and revised LIVE-014 paid-video acceptance",
+    "scope": "Historical consolidated-content scenarios only; does not satisfy current model or host acceptance",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
+    "executed_at": "2026-08-06T18:57:01Z",
+    "tests": {
+      "LIVE-014": {
+        "status": "pass",
+        "session_id": "019fd866-53ca-7060-b725-a305839c8659",
+        "evidence": "Chief-only paid-ad route searched 751 hooks, 7 scripts, and 39 CTAs; applied business-089, pbl-script-07, and pbl-cta-sales-13; final checker passed"
+      },
+      "LIVE-015": {
+        "status": "pass",
+        "session_id": "019fd86b-a45c-7a72-b1a1-749d081c71cd",
+        "evidence": "Chief routed to pinned Crafty workflow, asked one blocking question, and produced no copy, images, files, or release claim"
+      }
+    }
+  },
+  "release_waiver": {
+    "status": "approved",
+    "release_version": "2.1.0",
+    "approved_at": "2026-08-06",
+    "approved_by": "Aaron Thomas",
+    "reason": "The owner explicitly directed the overhaul to skip Terra XHigh and conserve the reset token budget.",
+    "waived_checks": ["models.gpt-5.6-terra"]
   },
   "hosts": {
     "codex": {
       "status": "pass",
-      "evidence": "Sol task 019fd462-57f3-7f12-a766-58d65347951f and Terra task 019fd462-5c4f-7610-bc19-72436634aa2c; installed hook v2.0.1; 60/60 each"
+      "evidence": "2026-08-07: Codex Desktop 26.730.8199.0 on Windows x64, GPT-5.6 Sol Medium, Chief v2.1.0. Fresh read-only run passed LIVE-001 through LIVE-015 with 77/77 assertions. One Chief-owned skill was discoverable; ICM and content routes were internal. AI Sloppy Copy 0.5.0, Brand Voice Factory 0.2.1, and Crafty Carousels 0.6.1 were loaded. Workspace and installed persona-contract SHA-256 matched at C9EA23359B7331E0C48FE2139206D033EB8CB982EB397727D181ABE178291907. The lifecycle-hook header was absent, so the canonical AGENTS.md loader and persona fallback supplied the contract. No external actions, connectors, client facts, or file changes occurred."
     },
-    "claude-code": {
+    "chatgpt-work": {
       "status": "pass",
-      "evidence": "Claude Code session d5831673-708c-483c-927d-5ba0a4596ea1 with candidate plugin-dir; hook v2.0.1; 60/60"
+      "evidence": "2026-08-07: Owner-verified ChatGPT Work UI with Work locally, Ask for approval, GPT-5.6 Sol Medium, and Chief selected. Runtime reported Codex 26.803.5235.0 beneath the Work UI. The schema-v3 response-only receipt in tests/receipts/chatgpt-work-v2.1.0.json passed all LIVE-001 through LIVE-015 scenarios and 77/77 assertions with zero tasks, delegation, file mutations, connector calls, or external actions; workspace state matched."
     }
   },
   "models": {
     "gpt-5.6-sol": {
       "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "Task 019fd462-57f3-7f12-a766-58d65347951f; gpt-5.6-sol medium; installed v2.0.1; 13/13 scenarios and 60/60 assertions",
+      "evidence": "Codex Desktop and owner-verified ChatGPT Work each passed LIVE-001 through LIVE-015 with 77/77 assertions on GPT-5.6 Sol Medium. Both runs were response-only and reported zero forbidden actions.",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
@@ -40,13 +85,15 @@
         "LIVE-010",
         "LIVE-011",
         "LIVE-012",
-        "LIVE-013"
+        "LIVE-013",
+        "LIVE-014",
+        "LIVE-015"
       ]
     },
     "gpt-5.6-terra": {
-      "status": "pass",
+      "status": "pending",
       "reasoning_effort": "xhigh",
-      "evidence": "Task 019fd462-5c4f-7610-bc19-72436634aa2c; gpt-5.6-terra xhigh; installed v2.0.1; 13/13 scenarios and 60/60 assertions",
+      "evidence": "",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001",
@@ -61,7 +108,9 @@
         "LIVE-010",
         "LIVE-011",
         "LIVE-012",
-        "LIVE-013"
+        "LIVE-013",
+        "LIVE-014",
+        "LIVE-015"
       ]
     }
   }

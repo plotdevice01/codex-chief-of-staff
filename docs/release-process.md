@@ -23,9 +23,15 @@ separate approval after the candidate passes every required gate.
 1. Run the complete suite in `docs/testing.md`.
 2. Render the generated SOP to PNG and inspect every page.
 3. Install the candidate locally and run all live scenarios in fresh Codex and
-   Claude Code sessions.
-4. Confirm a fresh Claude Code architecture prompt activates ICM enforcement
-   and returns a conforming answer after no more than two correction cycles.
+   ChatGPT Work tasks through `scripts/live_acceptance_harness.py`. Require the
+   host-specific safety control (`:read-only` for Codex; **Work locally** plus
+   **Ask for approval** for ChatGPT Work), separate UI and runtime evidence,
+   inline response-only execution, and zero task, file, connector, or external
+   mutations. ChatGPT Work requires owner-verified Work UI evidence; its agent
+   runtime may report `codex`.
+4. Confirm a fresh Codex architecture prompt activates ICM enforcement and
+   returns a conforming answer after no more than two correction cycles. Confirm
+   ChatGPT Work applies the same ICM contract through the Chief skill.
 5. Update `tests/model-acceptance.json` only from observed evidence.
 6. An owner may approve a version-bound release waiver for pending Sol or Terra
    checks. Failed checks, host acceptance, and installed-runtime smoke cannot be

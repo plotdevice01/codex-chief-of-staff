@@ -26,19 +26,6 @@ function runCodex(event, pluginData, cwd, codexHome) {
   return JSON.parse(result.stdout);
 }
 
-function runClaude(event, cwd = root) {
-  const env = { ...process.env, CLAUDE_PLUGIN_ROOT: root };
-  delete env.PLUGIN_ROOT;
-  delete env.PLUGIN_DATA;
-  const result = spawnSync(process.execPath, [hook, event], {
-    cwd,
-    encoding: "utf8",
-    env,
-  });
-  assert.strictEqual(result.status, 0, result.stderr);
-  return result.stdout;
-}
-
 function runEnforcement(input, stateDirectory, config, extraEnv = {}) {
   const result = spawnSync(process.execPath, [enforcementHook], {
     cwd: input.cwd || root,
@@ -92,22 +79,6 @@ try {
   const deduplicated = runCodex("session", temp, emptyProject, emptyHome);
   assert.doesNotMatch(deduplicated.hookSpecificOutput.additionalContext, /85% compression/);
   assert.match(deduplicated.hookSpecificOutput.additionalContext, /Technical Assistant Persona/i);
-
-  const session = runClaude("session");
-  assert.match(session, new RegExp(`CODEX CHIEF OF STAFF ACTIVE - v${version.replace(".", "\\.")}`));
-  assert.match(session, /85% compression/);
-  assert.match(session, /ICM DEFAULT: operating architecture/);
-  assert.match(session, /ICM NEW-WORKSPACE GATE/);
-  assert.match(session, /ICM FORM GATE/);
-  assert.match(session, /ICM RESPONSE GATE/);
-  assert.match(session, /GENERIC SCOPE GATE/);
-  assert.match(session, /Technical Assistant Persona/i);
-  assert.match(session, /ICM operating architecture/i);
-  assert.match(session, /Local configuration: not found/);
-
-  const subagent = JSON.parse(runClaude("subagent"));
-  assert.strictEqual(subagent.hookSpecificOutput.hookEventName, "SubagentStart");
-  assert.match(subagent.hookSpecificOutput.additionalContext, /caveman/i);
 
   const enforcementState = path.join(temp, "icm-state");
   const publicProject = path.join(temp, "public-project");
@@ -265,7 +236,7 @@ try {
     hook_event_name: "PreToolUse",
     session_id: "missing-repository",
     tool_name: "Skill",
-    tool_input: { skill: "chief-of-staff:icm-architect" },
+    tool_input: { skill: "chief-of-staff" },
     cwd: publicProject,
   }, enforcementState, enforcementConfig);
   assert.strictEqual(missingRepositorySkill, null);
@@ -549,6 +520,22 @@ try {
     cwd: publicProject,
   }, enforcementState, enforcementConfig);
   assert.strictEqual(genericToolAllowed, null);
+  const pluginReadAllowed = runEnforcement({
+    hook_event_name: "PreToolUse",
+    session_id: "private-tool",
+    tool_name: "Bash",
+    tool_input: { command: `Get-Content -Raw -LiteralPath '${path.join(root, "skills", "chief-of-staff", "SKILL.md")}'` },
+    cwd: publicProject,
+  }, enforcementState, enforcementConfig, { PLUGIN_ROOT: root });
+  assert.strictEqual(pluginReadAllowed, null);
+  const pluginAndPrivateBlocked = runEnforcement({
+    hook_event_name: "PreToolUse",
+    session_id: "private-tool",
+    tool_name: "Bash",
+    tool_input: { command: `Get-Content '${path.join(root, "skills", "chief-of-staff", "SKILL.md")}'; open Private Red Project` },
+    cwd: publicProject,
+  }, enforcementState, enforcementConfig, { PLUGIN_ROOT: root });
+  assert.strictEqual(pluginAndPrivateBlocked.hookSpecificOutput.permissionDecision, "deny");
 
   runEnforcement({
     hook_event_name: "UserPromptSubmit",
@@ -575,7 +562,7 @@ try {
   const homeLeakBlocked = runEnforcement({
     hook_event_name: "Stop",
     session_id: "home-leak",
-    last_assistant_message: `${validResponse}\nRead ${path.join(os.homedir(), ".claude")}.`,
+    last_assistant_message: `${validResponse}\nRead ${path.join(os.homedir(), ".codex")}.`,
     cwd: publicProject,
   }, enforcementState, enforcementConfig);
   assert.strictEqual(homeLeakBlocked.decision, "block");

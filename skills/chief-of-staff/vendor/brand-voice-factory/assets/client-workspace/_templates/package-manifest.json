@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "package_id": "{{CLIENT_SLUG}}-brand-voice",
+  "client_id": "{{CLIENT_SLUG}}",
+  "client_name": "{{CLIENT_NAME}}",
+  "package_version": "0.2.1",
+  "status": "Draft",
+  "approved_by": "UNKNOWN",
+  "approved_on": "UNKNOWN",
+  "files": {
+    "voice_architecture": {
+      "path": "stages/03_voice/output/voice-architecture.md",
+      "sha256": "UNKNOWN"
+    },
+    "terminology_register": {
+      "path": "stages/03_voice/output/terminology-register.csv",
+      "sha256": "UNKNOWN"
+    },
+    "claim_register": {
+      "path": "stages/02_evidence/output/claim-register.csv",
+      "sha256": "UNKNOWN"
+    },
+    "asset_register": {
+      "path": "stages/04_package/output/package/asset-register.csv",
+      "sha256": "UNKNOWN"
+    },
+    "prohibited_language": {
+      "path": "stages/04_package/output/package/prohibited-language.md",
+      "sha256": "UNKNOWN"
+    }
+  }
+}

@@ -12,12 +12,6 @@ $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $PluginId = "chief-of-staff@codex-chief-of-staff"
 $Marketplace = "codex-chief-of-staff"
-$Dependencies = @(
-    @{ Marketplace = "ponytail"; Repository = "DietrichGebert/ponytail"; Plugin = "ponytail@ponytail" },
-    @{ Marketplace = "ai-sloppy-copy"; Repository = "plotdevice01/ai-sloppy-copy"; Plugin = "ai-sloppy-copy@ai-sloppy-copy" },
-    @{ Marketplace = "brand-voice-factory"; Repository = "plotdevice01/brand-voice-factory"; Plugin = "brand-voice-factory@brand-voice-factory" },
-    @{ Marketplace = "crafty-carousels-skill"; Repository = "plotdevice01/crafty-carousels-skill"; Plugin = "crafty-carousels@crafty-carousels-skill" }
-)
 
 function Invoke-ChiefCommand {
     param([string[]]$Arguments)
@@ -39,17 +33,9 @@ if ($Uninstall) {
 }
 
 if ($Upgrade) {
-    foreach ($item in $Dependencies) {
-        Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "upgrade", $item.Marketplace)
-        Invoke-ChiefCommand -Arguments @("plugin", "add", $item.Plugin)
-    }
     Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "upgrade", $Marketplace)
     Invoke-ChiefCommand -Arguments @("plugin", "add", $PluginId)
 } else {
-    foreach ($item in $Dependencies) {
-        Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "add", $item.Repository)
-        Invoke-ChiefCommand -Arguments @("plugin", "add", $item.Plugin)
-    }
     Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "add", $RepoRoot)
     Invoke-ChiefCommand -Arguments @("plugin", "add", $PluginId)
 }
@@ -82,4 +68,4 @@ if (-not $SkipConfig) {
     }
 }
 
-Write-Host "Restart Codex, review and trust the Chief of Staff hooks, then start a new task."
+Write-Host "Restart Codex, review and trust the Chief of Staff hooks, then start a new task. All internal workflows are bundled."

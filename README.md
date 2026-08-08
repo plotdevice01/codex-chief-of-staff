@@ -1,20 +1,20 @@
 <p align="center">
-  <img src="assets/logo.svg" width="680" alt="Codex Chief of Staff">
+  <img src="assets/logo.svg" width="680" alt="Chief of Staff">
 </p>
 
 <p align="center">
-  <strong>Turn Codex or Claude Code into a scoped operating partner, not an enthusiastic tab-completion machine.</strong>
+  <strong>Give ChatGPT Work and Codex one scoped operating Chief instead of a pile of tools to negotiate.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/plotdevice01/codex-chief-of-staff/releases"><img src="https://img.shields.io/github/v/release/plotdevice01/codex-chief-of-staff" alt="Release"></a>
   <a href="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml"><img src="https://github.com/plotdevice01/codex-chief-of-staff/actions/workflows/validate.yml/badge.svg" alt="Validation"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2A9D8F" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/ChatGPT_Work-plugin-10A37F" alt="ChatGPT Work plugin">
   <img src="https://img.shields.io/badge/Codex-plugin-14213D" alt="Codex plugin">
-  <img src="https://img.shields.io/badge/Claude_Code-plugin-D97757" alt="Claude Code plugin">
 </p>
 
-Chief of Staff adds durable operating judgment to Codex and Claude Code:
+Chief of Staff adds durable operating judgment across ChatGPT Work and Codex:
 
 - explicit project scope and source order;
 - account identity checks before connector access;
@@ -23,31 +23,37 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
 - default ICM task contracts and automatic project architecture;
 - 85% compression and `caveman` mode;
 - a retained, traceable technical-assistant persona;
-- Ponytail execution discipline and AI Sloppy Copy integration.
+- one mandatory content route with pinned Brand Voice, Crafty, and AI Sloppy Copy resources.
+- one Agent Plugins skill that routes all supported work without specialist selection.
 
-## What changed in v2.0.1
+## What changed in v2.1.0
 
-- Brand Voice Factory is now a standalone required plugin. Chief no longer
-  bundles a duplicate `brand-voice-copywriter` skill.
-- The complete-stack installers now install and update Ponytail, AI Sloppy
-  Copy, Brand Voice Factory, Crafty Carousels, and Chief of Staff in order.
-- Install validation now detects duplicate skill IDs and emits an install
-  receipt with active versions, paths, manifest hashes, and skill ownership.
-- Chief coordinates the approved Brand Voice package through Crafty's verified
-  importer, then routes authored copy through AI Sloppy Copy before release.
+- Chief is the only discoverable route for business, creative, research,
+  operational, document, technical, connected-app, and client-delivery work.
+- A universal request contract classifies once, loads only the selected
+  internal contracts, validates the complete result, and returns a receipt.
+- Chief vendors exact released runtime files from AI Sloppy Copy `0.5.0`,
+  Brand Voice Factory `0.2.1`, and Crafty Carousels `0.6.1`. The source commit,
+  file hash, and byte count are locked in the bundled manifest.
+- Paid ads and organic social query all 751 hooks, seven script frameworks,
+  and 39 CTAs through one local command before drafting. Paid video also checks
+  offer compatibility, first-frame action, visual progression, and true concept variation.
+- The stale bundled `viral-carousel-factory` copy is removed. Current Crafty
+  production controls now live behind the Chief content route.
+- AI Sloppy Copy activation happens in the content contract. No extra content
+  hook or separate specialist installation is required.
 - Chief now reports an execution trace that proves whether requested skills and
   plugins were materially used instead of merely loaded and name-dropped.
+- The active package targets ChatGPT Work and Codex only. Legacy third-party
+  host manifests, installers, templates, validators, and acceptance requirements are removed.
 
 ### Preserved from v1.0.0
 
 - Every non-trivial task uses a compact ICM contract for scope, exact inputs,
   one job, relevant references, output, observable status, and human review.
-- Every new project, workspace, or recurring process automatically invokes the
-  bundled ICM Architect skill. Full folders appear only when persistent work
+- Every new project, workspace, or recurring process automatically loads the
+  internal ICM Architect workflow. Full folders appear only when persistent work
   needs them.
-- Claude Code now enforces response contracts for analysis, debugging,
-  contained changes, and ICM architecture. It allows two correction cycles,
-  then stops with a documented recovery bypass.
 - A pre-tool privacy check blocks configured project or connector values when
   the current prompt did not supply them.
 - Restructure mode limits inventory reads and blocks mutation until approval.
@@ -57,11 +63,11 @@ Chief of Staff adds durable operating judgment to Codex and Claude Code:
   Codex `AGENTS.md` routing, the cold walk, and Chief safety controls.
 - The repository now carries Layer 1 routing and an ICM release pipeline.
   It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
-- AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later is required for full
-  reference behavior.
+- AI Sloppy Copy 0.5.0 with Standard 2.2.0 is pinned inside Chief.
 - The retained persona stays unchanged at 97 requirements. The current
-  integration contract has ten rules and thirteen live acceptance scenarios.
-- The GitHub release, tag, ZIP, and both host manifests use `2.0.1`.
+  integration contract has ten rules and fifteen live acceptance scenarios.
+- Fresh v2.1.0 acceptance passed on ChatGPT Work and Codex with GPT-5.6 Sol
+  Medium. Terra XHigh remains pending under the recorded owner waiver.
 
 ## Version numbers
 
@@ -70,99 +76,73 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `2.0.1` | This plugin, including its skills, hooks, documentation, and host manifests | Install or cite `2.0.1` |
-| AI Sloppy Copy `0.5.0` | The separate companion plugin used for authored prose checks | Install `0.5.0` or later |
-| AI Sloppy Copy Standard `2.2.0` | The writing-rules contract bundled inside AI Sloppy Copy | Cite the Standard when discussing rule behavior |
-| Brand Voice Factory `0.2.1` | The canonical evidence-backed voice-package producer | Install `0.2.0` or later |
-| Crafty Carousels `0.6.1` | The governed carousel producer and Brand Voice package importer | Install `0.6.0` or later |
+| Chief of Staff `2.1.0` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.0` |
+| AI Sloppy Copy `0.5.0` | Canonical source for the pinned checker and copy workflow | Bundled; install separately only for direct development |
+| AI Sloppy Copy Standard `2.2.0` | The writing-rules contract inside the pinned checker | Cite the Standard when discussing rule behavior |
+| Brand Voice Factory `0.2.1` | Canonical source for the pinned voice-package workflow | Bundled; install separately only for direct development |
+| Crafty Carousels `0.6.1` | Canonical source for the pinned carousel workflow and content libraries | Bundled; install separately only for direct development |
 
 Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.0.1 release evidence
+## v2.1.0 release evidence
 
-The deterministic source suite passes. Fresh Sol Medium, Terra XHigh, Codex,
-Claude Code, and installed-runtime acceptance passed for v2.0.1. Both Codex
-profiles and Claude Code passed all 13 scenarios and 60/60 live assertions.
+Fresh response-only acceptance passed all 15 scenarios and all 77 assertions
+in both ChatGPT Work and Codex on GPT-5.6 Sol Medium. The ChatGPT Work receipt
+records owner-verified Work UI evidence separately from its Codex runtime.
+Both runs reported zero task creation, delegation, file mutation, connector
+calls, or external actions. Terra XHigh remains pending under the version-bound
+owner waiver recorded in the release evidence.
 
-| Capability | Codex | Claude Code |
+| Capability | ChatGPT Work | Codex |
 |---|:---:|:---:|
 | Marketplace installation | Yes | Yes |
-| Lifecycle contract loading | Yes | Yes |
-| Chief response-contract enforcement | Host contract | Prompt and stop hooks |
+| Chief skill contract | Yes | Yes |
+| Lifecycle hooks | Host-managed | Codex hooks |
 | Complete retained persona | Yes | Yes |
 | Default ICM task and project architecture | Yes | Yes |
-| Ponytail and AI Sloppy Copy stack | Yes | Yes |
+| Bundled content runtime | Passed | Passed |
 | Local private configuration | Yes | Yes |
-| Project-level team setup | `AGENTS.md` sync | `.claude/settings.json` |
+| Project-level team setup | Workspace plugin controls | `AGENTS.md` sync |
 
-## Install the complete stack
+## Install Chief
 
-Use this order. Each plugin remains separate so it can update independently,
-and all five are required for exact reference-install behavior.
+Chief contains the content runtime. Team members install or open Chief once.
+The specialist repositories remain independently maintained factories.
 
 Before starting, install [Git](https://git-scm.com/downloads),
 [Node.js 18 or later](https://nodejs.org/en/download), and
-[Python 3.11 or later](https://www.python.org/downloads/). Choose
-[Codex](https://developers.openai.com/codex/) or
-[Claude Code](https://code.claude.com/docs/en/setup).
+[Python 3.11 or later](https://www.python.org/downloads/). Use
+[ChatGPT Work](https://learn.chatgpt.com/docs/get-started-with-work) or
+[Codex](https://developers.openai.com/codex/).
 
 ### Codex
 
-Run all ten commands in order:
+Run two commands:
 
 ```powershell
-codex plugin marketplace add DietrichGebert/ponytail
-codex plugin add ponytail@ponytail
-codex plugin marketplace add plotdevice01/ai-sloppy-copy
-codex plugin add ai-sloppy-copy@ai-sloppy-copy
-codex plugin marketplace add plotdevice01/brand-voice-factory
-codex plugin add brand-voice-factory@brand-voice-factory
-codex plugin marketplace add plotdevice01/crafty-carousels-skill
-codex plugin add crafty-carousels@crafty-carousels-skill
 codex plugin marketplace add plotdevice01/codex-chief-of-staff
 codex plugin add chief-of-staff@codex-chief-of-staff
 ```
 
-Then restart Codex, open `/hooks`, review all five plugins, and start a fresh
-task. Run `codex plugin list --json` and confirm:
-`ponytail@ponytail`, `ai-sloppy-copy@ai-sloppy-copy`,
-`brand-voice-factory@brand-voice-factory`,
-`crafty-carousels@crafty-carousels-skill`, and
-`chief-of-staff@codex-chief-of-staff`.
+Then restart Codex, review Chief's hooks, and start a fresh task. Run
+`codex plugin list --json` and confirm `chief-of-staff@codex-chief-of-staff`.
 
-### Claude Code
+### ChatGPT Work
 
-Run all ten commands in order:
-
-```powershell
-claude plugin marketplace add DietrichGebert/ponytail
-claude plugin install ponytail@ponytail --scope user
-claude plugin marketplace add plotdevice01/ai-sloppy-copy
-claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user
-claude plugin marketplace add plotdevice01/brand-voice-factory
-claude plugin install brand-voice-factory@brand-voice-factory --scope user
-claude plugin marketplace add plotdevice01/crafty-carousels-skill
-claude plugin install crafty-carousels@crafty-carousels-skill --scope user
-claude plugin marketplace add plotdevice01/codex-chief-of-staff
-claude plugin install chief-of-staff@codex-chief-of-staff --scope user
-```
-
-Then start Claude Code, run `/reload-plugins`, review `/hooks`, and start a
-fresh session. Run `claude plugin list --json` and confirm the same five
-plugin IDs.
-
-See the [Claude Code deployment guide](docs/claude-code.md) for the one-command
-installer, project and team scopes, shared settings plus update and removal.
+Make Chief available to the required roles through workspace plugin controls,
+then install it from the Plugin Directory. Give it only the apps and permissions
+it needs. The team opens ChatGPT Work and asks Chief for the finished work.
+Separate Brand Voice, Crafty, and AI Sloppy Copy selection is not required.
 
 ### Configure and validate
 
-In the fresh task or session, ask:
+In the fresh task, ask:
 
 ```text
 Use the Chief of Staff skill to initialize my local configuration, then
-validate the install. Report any missing plugin or hook.
+validate the install. Report any missing bundled runtime file or hook.
 ```
 
 Installation activates no connector or project access. Those remain off until
@@ -170,7 +150,7 @@ the local configuration explicitly turns them on.
 
 ## Configure
 
-Start a fresh task or session and ask:
+Start a fresh task and ask:
 
 ```text
 Use the Chief of Staff skill to initialize my local configuration.
@@ -203,7 +183,7 @@ uninstall, and recovery procedures.
 | Context and state are improvised per task | ICM names inputs, output, state and review |
 | External writes inherit vague approval | Every write follows an explicit policy |
 | Long answers bury the decision | The result leads; risks and the next action follow |
-| Persona claims are prose | 97 requirements and thirteen scenarios are traceable |
+| Persona claims are prose | 97 requirements and fifteen scenarios are traceable |
 
 ## How it works
 
@@ -212,12 +192,11 @@ uninstall, and recovery procedures.
 </p>
 
 The plugin is skills-only. It does not run a server or add connector access.
-Shared Codex and Claude Code lifecycle hooks load the generic operating
-contract and retained persona once. Codex omits duplicate contract injection
-when its instruction chain already contains the canonical block. Claude Code
-also uses prompt and stop hooks to reject architecture responses that omit the
-required ICM header. Project loaders retain local rules and provide an explicit
-fallback if a hook is absent.
+Codex lifecycle hooks load the generic operating contract and retained persona
+once and omit duplicate injection when the instruction chain already contains
+the canonical block. ChatGPT Work uses the same Chief skill contract through
+the shared OpenAI plugin package. Project loaders retain local rules and provide
+an explicit fallback if a Codex hook is absent.
 Private identities, scopes, paths, and approvals live in a local ignored
 configuration.
 
@@ -254,34 +233,32 @@ python scripts/build_release.py --output dist
 Static tests verify:
 
 - 97 persona requirements and source hashes;
-- ten integration rules and thirteen live acceptance definitions;
+- ten integration rules and fifteen live acceptance definitions;
 - five ICM forms and ten invariants, plus cold-walk failure behavior and token budgets;
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
 - public-file privacy scanning;
-- Codex and Claude Code lifecycle hook output;
+- Codex lifecycle hook output;
 - ICM prompt classification and correction limits;
 - recovery plus pre-tool and final-response privacy checks;
 - deterministic release contents;
-- complete companion capabilities under strict dependency validation for Ponytail;
-  AI Sloppy Copy; Brand Voice Factory; and Crafty Carousels.
+- the pinned content manifest, all 751 hooks, seven scripts, 39 CTAs, and the
+  bundled final checker.
 
-The thirteen prompts in `persona/persona-contract.json` still require a fresh host
+The fifteen prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 
-## Why five plugins
+## Why one plugin and internal source products
 
 Chief of Staff contains the complete retained persona and response modes. It
-also carries account gates and project routing. A compact fallback protects
-minimum implementation discipline when Ponytail is unavailable.
-[Ponytail](https://github.com/DietrichGebert/ponytail) adds persistent
-efficiency modes and the complete implementation ladder. It also supplies
-lifecycle hooks plus all six bundled skills.
-[AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy) adds authored
-copy hooks and the deterministic local checker.
-[Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory) owns governed client voice packages and their sealed handoff contract.
-[Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill) imports that package and produces governed carousel runs.
+also carries account gates, project routing, universal task routing, and the
+only discoverable skill the team needs.
+[AI Sloppy Copy](https://github.com/plotdevice01/ai-sloppy-copy),
+[Brand Voice Factory](https://github.com/plotdevice01/brand-voice-factory), and
+[Crafty Carousels](https://github.com/plotdevice01/crafty-carousels-skill)
+remain the canonical source products. Chief vendors their pinned runtime files
+so teams do not negotiate three extra plugins for every content request.
 
 See [dependencies](docs/dependencies.md) for ownership and minimum versions.
 
@@ -301,16 +278,6 @@ macOS or Linux:
 ./install.sh
 ```
 
-For Claude Code, run:
-
-```powershell
-.\install-claude.ps1
-```
-
-```bash
-./install-claude.sh
-```
-
 Checksum verification is optional and documented under
 [release verification](docs/installation.md#optional-release-verification).
 The checksum remains available for users and environments that require it.
@@ -318,7 +285,6 @@ The checksum remains available for users and environments that require it.
 ## Documentation
 
 - [Installation and upgrades](docs/installation.md)
-- [Claude Code deployment](docs/claude-code.md)
 - [Configuration](docs/configuration.md)
 - [Architecture](docs/architecture.md)
 - [ICM conformance](docs/icm-conformance.md)

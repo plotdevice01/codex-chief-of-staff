@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0.0",
+  "library_id": "personal-brand-launch-scripts-ctas",
+  "title": "Personal Brand Launch Scripts and CTAs",
+  "source": {
+    "source_type": "purchased_creator_library",
+    "access_method": "owner-provided paid Gumroad subscription access",
+    "imported_on": "2026-08-05",
+    "usage_rights": "AUTHORIZED_BY_OWNER_FOR_LOCAL_AND_TEAM_SKILL_USE",
+    "runtime_network_required": false
+  },
+  "source_note": "Note: Make your CTA as CLEAR as possible… Literally tell them EXACTLY what you want them to do (book a call, follow you, click the link in bio, etc)",
+  "record_counts": {
+    "script_frameworks": 7,
+    "ctas": 39
+  },
+  "scripts": [
+    {
+      "id": "pbl-script-01",
+      "name": "Educational Tip/Hack Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "Let them know you are about to let them in on some valuable information - use hook from education section of template"
+        },
+        {
+          "name": "Hack/Tip",
+          "instruction": "In a short sentence let them know what it is you are about to teach them (only if hook did not mention it)"
+        },
+        {
+          "name": "How - To",
+          "instruction": "Show viewer exactly how to do hack/tip with practical steps they can do"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Let them know you post valuable stuff like this everyday and they should definitely follow ;) - use CTA from follow section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-02",
+      "name": "Myth Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "Use hook from myth section of template"
+        },
+        {
+          "name": "Myth",
+          "instruction": "State the myth (skip this if you state the myth in your hook)"
+        },
+        {
+          "name": "Debunk",
+          "instruction": "Explain why this myth is wrong"
+        },
+        {
+          "name": "Solution",
+          "instruction": "Introduce what they should do instead to achieve their dream result"
+        },
+        {
+          "name": "Promote",
+          "instruction": "Subtly hit that your product/service helps people achieve their dream result"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Let them know where they can find more information about your product or service - use CTA from sales section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-03",
+      "name": "Viral Video Reaction Template",
+      "fields": [
+        {
+          "name": "Viral Video Hook",
+          "instruction": "Add in a 5-7 second viral Tiktok or Instagram Reel that talks about something relating to your niche"
+        },
+        {
+          "name": "Share Your Expert Opinion",
+          "instruction": "Is it true or complete BS? If it’s true explain why, if it’s BS explain what you should do instead"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Remind them you are an expert in your field and they should follow - use hook from follow section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-04",
+      "name": "Step-By-Step System Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "Use hook from step-by-step system section of template"
+        },
+        {
+          "name": "Introduce",
+          "instruction": "State the name of the framework you are about to teach them if applicable or state you are about to tell them the steps - Ex. Here are the X steps you need to take"
+        },
+        {
+          "name": "Step #1",
+          "instruction": "State step and explain the step in 1-2 brief sentences"
+        },
+        {
+          "name": "Step #2",
+          "instruction": "State step and explain the step in 1-2 brief sentences"
+        },
+        {
+          "name": "Step #3",
+          "instruction": "State step and explain the step in 1-2 brief sentences"
+        },
+        {
+          "name": "Promote (optional)",
+          "instruction": "Let them know you help people do exactly this (in the CTA you would go and let them know where they can find more information about your product and service)"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Use CTA from sales, engagement, or follow section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-05",
+      "name": "Common Mistake Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "Use hook from common mistake section of template"
+        },
+        {
+          "name": "Common Mistake",
+          "instruction": "Introduce common mistake (if you did not in the hook)"
+        },
+        {
+          "name": "Debrief",
+          "instruction": "Explain why this is a mistake"
+        },
+        {
+          "name": "Solution",
+          "instruction": "Let them know what they can do instead to achieve their dream result"
+        },
+        {
+          "name": "Promote (optional)",
+          "instruction": "Let them know you help (ideal customer) achieve (dream result) (in the CTA you would go and let them know where they can find more information about your product and service)"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Use CTA from sales, engagement, or follow section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-06",
+      "name": "Authority Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "Use hook from authority section of template"
+        },
+        {
+          "name": "Social Proof",
+          "instruction": "Show real results you got or got a client"
+        },
+        {
+          "name": "How-To",
+          "instruction": "Explain tip/hack or step by step breakdown the viewer can do to achieve dream result"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Use CTA from sales section of template"
+        }
+      ]
+    },
+    {
+      "id": "pbl-script-07",
+      "name": "Selling Product/Service Template",
+      "fields": [
+        {
+          "name": "Hook",
+          "instruction": "State a common pain point of your ideal customer/client"
+        },
+        {
+          "name": "Solution",
+          "instruction": "Let them know there is light at the end of the tunnel aka a solution and they don’t have to feel like that if they don’t want to"
+        },
+        {
+          "name": "Value",
+          "instruction": "Give them an actionable step by step solution to help solve said problem"
+        },
+        {
+          "name": "Promote",
+          "instruction": "Subtly let them know your product/service helps people do exactly this to achieve dream result"
+        },
+        {
+          "name": "CTA",
+          "instruction": "Use CTA from sales section of template"
+        }
+      ]
+    }
+  ],
+  "ctas": [
+    {
+      "id": "pbl-cta-engagement-01",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 1,
+      "cta": "Tag someone below who needs to hear this!"
+    },
+    {
+      "id": "pbl-cta-engagement-02",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 2,
+      "cta": "Remember to save this post for the next time you do X!"
+    },
+    {
+      "id": "pbl-cta-engagement-03",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 3,
+      "cta": "Drop a 'X' emoji if you agree!"
+    },
+    {
+      "id": "pbl-cta-engagement-04",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 4,
+      "cta": "Share this with your best-friend/mom/golf buddy!"
+    },
+    {
+      "id": "pbl-cta-engagement-05",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 5,
+      "cta": "Double tap if you found this valuable!"
+    },
+    {
+      "id": "pbl-cta-engagement-06",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 6,
+      "cta": "Want to remember this? Make sure to save this post!"
+    },
+    {
+      "id": "pbl-cta-engagement-07",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 7,
+      "cta": "Comment below your opinion on X!"
+    },
+    {
+      "id": "pbl-cta-engagement-08",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 8,
+      "cta": "Still confused? Comment below you questions!"
+    },
+    {
+      "id": "pbl-cta-engagement-09",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 9,
+      "cta": "Would you do this? Yes or no? Comment below!"
+    },
+    {
+      "id": "pbl-cta-engagement-10",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 10,
+      "cta": "Do you know a (avatar) make sure to share this them!"
+    },
+    {
+      "id": "pbl-cta-engagement-11",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 11,
+      "cta": "Share this with the person you thought of!"
+    },
+    {
+      "id": "pbl-cta-engagement-12",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 12,
+      "cta": "Comment questions you have about (industry) and I will answer them in the next videos!"
+    },
+    {
+      "id": "pbl-cta-engagement-13",
+      "category": "engagement",
+      "source_category": "Engagement (like, comment, save, share)",
+      "source_position": 13,
+      "cta": "If you found this relatable make sure to drop a like!"
+    },
+    {
+      "id": "pbl-cta-follow-01",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 1,
+      "cta": "Follow for more (industry) education!"
+    },
+    {
+      "id": "pbl-cta-follow-02",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 2,
+      "cta": "Follow @_______ for more (industry) tips!"
+    },
+    {
+      "id": "pbl-cta-follow-03",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 3,
+      "cta": "Want to see more content like this? Make sure to follow!"
+    },
+    {
+      "id": "pbl-cta-follow-04",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 4,
+      "cta": "If you actually found this post valuable make sure to follow because I post stuff like this everyday!"
+    },
+    {
+      "id": "pbl-cta-follow-05",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 5,
+      "cta": "Want more (industry) tips/hacks for the Free? Make sure to follow!"
+    },
+    {
+      "id": "pbl-cta-follow-06",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 6,
+      "cta": "Want to achieve (dream result) but not sure how? Follow for more (industry) content where I show you exactly how too!"
+    },
+    {
+      "id": "pbl-cta-follow-07",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 7,
+      "cta": "I share all the secrets when it comes to getting (dream result). Don’t believe me? Follow and find out!"
+    },
+    {
+      "id": "pbl-cta-follow-08",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 8,
+      "cta": "Do you want to achieve (dream result) but have no idea where to start? Follow for all the education you could possibly need!"
+    },
+    {
+      "id": "pbl-cta-follow-09",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 9,
+      "cta": "I am an (title) and if you want to learn more (industry) education make sure to follow!"
+    },
+    {
+      "id": "pbl-cta-follow-10",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 10,
+      "cta": "I have been a (title) for the last X years. On my page I share all the lessons I have learned. Interested? make sure to follow!"
+    },
+    {
+      "id": "pbl-cta-follow-11",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 11,
+      "cta": "On my page I am sharing all the secrets that helped me achieve (dream result) make sure to follow so you don’t miss it!"
+    },
+    {
+      "id": "pbl-cta-follow-12",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 12,
+      "cta": "Are you a (avatar) make sure to follow for more (industry) related content!"
+    },
+    {
+      "id": "pbl-cta-follow-13",
+      "category": "follow",
+      "source_category": "Follow",
+      "source_position": 13,
+      "cta": "I have done (huge number) of X… want to learn how to do the same? Make sure to follow!"
+    },
+    {
+      "id": "pbl-cta-sales-01",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 1,
+      "cta": "Want to learn more information about (product/service)? Tap the link in my bio."
+    },
+    {
+      "id": "pbl-cta-sales-02",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 2,
+      "cta": "DM me the word “X” for more information!"
+    },
+    {
+      "id": "pbl-cta-sales-03",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 3,
+      "cta": "Want results like this? DM me “X” to schedule a 1:1 call!"
+    },
+    {
+      "id": "pbl-cta-sales-04",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 4,
+      "cta": "Want more information? Click on my (highlight name) highlight!"
+    },
+    {
+      "id": "pbl-cta-sales-05",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 5,
+      "cta": "Still confused but what to learn more? Click the link in my bio for more information!"
+    },
+    {
+      "id": "pbl-cta-sales-06",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 6,
+      "cta": "DM me to find out how you can go from X to (dream result)!"
+    },
+    {
+      "id": "pbl-cta-sales-07",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 7,
+      "cta": "Ready to take action? DM me the word “X”!"
+    },
+    {
+      "id": "pbl-cta-sales-08",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 8,
+      "cta": "Click the link in my bio to download your free X!"
+    },
+    {
+      "id": "pbl-cta-sales-09",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 9,
+      "cta": "DM me for the link"
+    },
+    {
+      "id": "pbl-cta-sales-10",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 10,
+      "cta": "Ready to save £X? Buy today with code [insert code]"
+    },
+    {
+      "id": "pbl-cta-sales-11",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 11,
+      "cta": "Hurry! Limited spaces remaining! Click the link in my bio to register."
+    },
+    {
+      "id": "pbl-cta-sales-12",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 12,
+      "cta": "Ready to hire out X? Click the link in my bio to see if we would be a good fit!"
+    },
+    {
+      "id": "pbl-cta-sales-13",
+      "category": "sales",
+      "source_category": "Sales",
+      "source_position": 13,
+      "cta": "Interested? Click the link and book a discovery call to learn more!"
+    }
+  ]
+}

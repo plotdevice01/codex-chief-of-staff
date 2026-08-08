@@ -3,6 +3,51 @@
 All notable changes are recorded here. Public releases and host manifests use
 the same three-part semantic product version.
 
+## [2.1.0] - 2026-08-06
+
+### Changed
+
+- Made Chief the only discoverable skill and the universal route for business,
+  creative, research, operational, document, technical, connected-app, and
+  client-delivery work.
+- Moved ICM Architect under Chief as an internal progressively loaded workflow.
+- Replaced the stale bundled carousel skill with pinned runtime files from AI
+  Sloppy Copy `0.5.0`, Brand Voice Factory `0.2.1`, and Crafty Carousels `0.6.1`.
+- Removed the Ponytail dependency and standalone installation path.
+- Added the Agent Plugins v1 root manifest.
+- Limited the active build to ChatGPT Work and Codex. Removed the Claude Code
+  manifest, marketplace, installers, templates, documentation, and acceptance gate.
+- Replaced the legacy marketplace catalog with OpenAI's
+  `.agents/plugins/marketplace.json` layout.
+- Changed inline AI Sloppy Copy validation to use `--text` so chat drafts are
+  not written to temporary files solely for checking.
+- Corrected ChatGPT Work acceptance to use its visible **Work locally** and
+  **Ask for approval** controls. Codex alone requires the built-in
+  `:read-only` permission profile.
+- Separated owner-verified Work UI evidence from agent-observed runtime
+  evidence. A `codex` runtime is valid beneath the Work UI and no longer causes
+  a false host mismatch.
+
+### Added
+
+- Added a hash-locked content-runtime manifest and deterministic source sync.
+- Added one complete content query across 751 hooks, seven script frameworks,
+  and 39 CTAs.
+- Added content-mode routing and a mandatory execution receipt.
+- Added a universal one-pass request contract and capability registry.
+- Added a generic paid-video workflow, offer-compatible CTA ranking, and
+  sanitized regression fixtures for creative completeness and receipt truth.
+- Added a host-verified, response-only live-acceptance harness that requires
+  the host's own safety control and rejects task delegation, file mutations,
+  connector calls, host substitution, and partial-pass reuse.
+
+### Verification
+
+- Fresh GPT-5.6 Sol Medium acceptance passed all 15 scenarios and 77 assertions
+  in both ChatGPT Work and Codex. Both response-only runs reported zero
+  forbidden actions. Terra XHigh remains pending under the recorded
+  version-bound owner waiver.
+
 ## [2.0.1] - 2026-08-05
 
 ### Added

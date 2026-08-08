@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "discoverable_skill": "chief-of-staff",
+  "fallback": "generic",
+  "capabilities": [
+    {
+      "id": "paid_video",
+      "triggers": ["video ad", "video ads", "paid video", "ad script", "ad scripts", "commercial script", "performance creative"],
+      "contracts": ["references/content-production.md", "references/paid-video-creative.md"]
+    },
+    {
+      "id": "paid_ad",
+      "triggers": ["paid ad", "paid ads", "advertising copy", "meta ad", "google ad", "linkedin ad", "ppc creative", "paid campaign"],
+      "contracts": ["references/content-production.md"]
+    },
+    {
+      "id": "brand_voice",
+      "triggers": ["brand voice", "voice guide", "voice package", "tone of voice", "message architecture"],
+      "contracts": ["references/content-production.md", "vendor/brand-voice-factory/workflow.md"]
+    },
+    {
+      "id": "carousel",
+      "triggers": ["carousel", "slide copy", "instagram slides", "linkedin slides"],
+      "contracts": ["references/content-production.md", "vendor/crafty-carousels/workflow.md"]
+    },
+    {
+      "id": "organic_social",
+      "triggers": ["organic social", "social post", "caption", "reel script", "short-form video", "short form video", "linkedin post", "instagram post"],
+      "contracts": ["references/content-production.md"]
+    },
+    {
+      "id": "general_copy",
+      "triggers": ["write copy", "rewrite", "landing page", "sales page", "email copy", "article", "press release", "sop", "reply", "proposal"],
+      "contracts": ["references/content-production.md"]
+    },
+    {
+      "id": "architecture",
+      "triggers": ["new workspace", "restructure", "architecture", "operating system", "pipeline", "recurring process", "icm"],
+      "contracts": ["internal/icm-architect/workflow.md"]
+    },
+    {
+      "id": "document",
+      "triggers": ["document", "docx", "word file", "word document"],
+      "contracts": []
+    },
+    {
+      "id": "presentation",
+      "triggers": ["presentation", "slides", "slide deck", "powerpoint", "pptx"],
+      "contracts": []
+    },
+    {
+      "id": "spreadsheet",
+      "triggers": ["spreadsheet", "excel", "workbook", "xlsx", "csv"],
+      "contracts": []
+    },
+    {
+      "id": "pdf",
+      "triggers": ["pdf", "fixed-layout", "fixed layout"],
+      "contracts": []
+    },
+    {
+      "id": "research_analysis",
+      "triggers": ["research", "analyze", "analysis", "investigate", "audit", "compare", "market sizing", "report findings"],
+      "contracts": []
+    },
+    {
+      "id": "client_delivery",
+      "triggers": ["client deliverable", "client delivery", "delivery cycle", "clickup brief", "scope deliverables"],
+      "contracts": []
+    },
+    {
+      "id": "connected_action",
+      "triggers": ["send email", "schedule meeting", "update clickup", "post to slack", "upload to drive", "create calendar event", "external action"],
+      "contracts": []
+    },
+    {
+      "id": "technical",
+      "triggers": ["debug", "implement code", "build app", "fix code", "repository", "api integration", "technical execution"],
+      "contracts": []
+    },
+    {
+      "id": "generic",
+      "triggers": [],
+      "contracts": []
+    }
+  ]
+}

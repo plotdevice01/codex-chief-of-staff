@@ -64,7 +64,7 @@ def set_style(style, name: str, size: float, *, bold=False, color="000000") -> N
 
 def configure(doc: Document) -> None:
     section = doc.sections[0]
-    doc.settings.odd_and_even_pages_header_footer = True
+    doc.settings.odd_and_even_pages_header_footer = False
     section.different_first_page_header_footer = False
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
@@ -103,18 +103,16 @@ def configure(doc: Document) -> None:
         if contextual_spacing is not None:
             contextual_spacing.getparent().remove(contextual_spacing)
 
-    for header in (section.header, section.even_page_header):
+    for header in (section.header,):
         paragraph = header.paragraphs[0]
-        paragraph.text = "CHIEF OF STAFF  /  CODEX + CLAUDE CODE  /  INSTALLATION AND OPERATING SOP"
+        paragraph.text = "CHIEF OF STAFF  /  CHATGPT WORK + CODEX  /  INSTALLATION AND OPERATING SOP"
         paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
         for run in paragraph.runs:
             set_font(run, "Calibri", 8, bold=True, color=GRAY)
 
-    for footer in (section.footer, section.even_page_footer):
+    for footer in (section.footer,):
         paragraph = footer.paragraphs[0]
         paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        label = paragraph.add_run(f"v{VERSION}   /   ")
-        set_font(label, "Calibri", 8, color=GRAY)
         field = OxmlElement("w:fldSimple")
         field.set(qn("w:instr"), "PAGE")
         paragraph._p.append(field)
@@ -220,6 +218,8 @@ def add_table(
             row.cells[index].text = value
     table_geometry(table, widths)
     for row_index, row in enumerate(table.rows):
+        row_properties = row._tr.get_or_add_trPr()
+        row_properties.append(OxmlElement("w:cantSplit"))
         for cell in row.cells:
             cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
             set_cell_margins(cell)
@@ -414,7 +414,9 @@ def build(output: Path) -> Path:
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     paragraph.paragraph_format.space_before = Pt(18)
-    paragraph.add_run().add_picture(str(logo), width=Inches(6.5))
+    logo_shape = paragraph.add_run().add_picture(str(logo), width=Inches(6.5))
+    logo_shape._inline.docPr.set("title", "Codex Chief of Staff")
+    logo_shape._inline.docPr.set("descr", "Codex Chief of Staff logo")
 
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -433,13 +435,13 @@ def build(output: Path) -> Path:
     add_table(
         doc,
         ("Release", "Audience", "Distribution", "Authority"),
-        ((VERSION, "Any Codex or Claude Code user", "Public GitHub", "Local configuration only"),),
+        ((VERSION, "ChatGPT Work and Codex teams", "OpenAI plugin directory", "Local configuration only"),),
         (1500, 2160, 2460, 3240),
     )
     add_callout(
         doc,
         "What this installs: ",
-        "A skills-only Codex and Claude Code plugin that loads the complete generic operating contract and retained persona. "
+        "One ChatGPT Work and Codex plugin that loads the operating contract, retained persona, and pinned content runtime. "
         "It grants no connector access, project authority, or external-write permission.",
     )
     doc.add_heading("Operating result", level=1)
@@ -450,39 +452,24 @@ def build(output: Path) -> Path:
             "Account identity gates before connector use.",
             "Explicit policy before drafts, sends, edits, posts, or permission changes.",
             "A compact ICM task contract for every non-trivial task and automatic architecture for new projects.",
+            "One discoverable Chief skill with internal workflows loaded only when the routed request needs them.",
             "One canonical behavior contract with fail-safe project loaders that preserve every project-specific rule.",
-            "85% compression, caveman mode, Ponytail discipline, and all 97 retained persona requirements.",
+            "85% compression, caveman mode, and all 97 retained persona requirements.",
         ),
     )
 
-    section_page(doc, "1. Install the complete stack")
+    section_page(doc, "1. Install Chief")
     doc.add_heading("Requirements", level=2)
     add_bullets(
         doc,
         (
-            "Codex with plugin support or Claude Code.",
+            "ChatGPT Work or Codex with plugin support.",
             "Git for GitHub marketplace installation.",
-            "Node.js 18 or later for Ponytail and Chief of Staff hooks.",
-            "Python 3.11 or later for AI Sloppy Copy, configuration, and validation.",
+            "Node.js 18 or later for Chief of Staff hooks.",
+            "Python 3.11 or later for configuration, content libraries, copy validation, and release checks.",
         ),
     )
-    doc.add_heading("Step 1 of 5: Ponytail", level=2)
-    add_link(doc, "Repository", "https://github.com/DietrichGebert/ponytail")
-    add_code(doc, "codex plugin marketplace add DietrichGebert/ponytail")
-    add_code(doc, "codex plugin add ponytail@ponytail")
-    doc.add_heading("Step 2 of 5: AI Sloppy Copy", level=2)
-    add_link(doc, "Repository", "https://github.com/plotdevice01/ai-sloppy-copy")
-    add_code(doc, "codex plugin marketplace add plotdevice01/ai-sloppy-copy")
-    add_code(doc, "codex plugin add ai-sloppy-copy@ai-sloppy-copy")
-    doc.add_heading("Step 3 of 5: Brand Voice Factory", level=2)
-    add_link(doc, "Repository", "https://github.com/plotdevice01/brand-voice-factory")
-    add_code(doc, "codex plugin marketplace add plotdevice01/brand-voice-factory")
-    add_code(doc, "codex plugin add brand-voice-factory@brand-voice-factory")
-    doc.add_heading("Step 4 of 5: Crafty Carousels", level=2)
-    add_link(doc, "Repository", "https://github.com/plotdevice01/crafty-carousels-skill")
-    add_code(doc, "codex plugin marketplace add plotdevice01/crafty-carousels-skill")
-    add_code(doc, "codex plugin add crafty-carousels@crafty-carousels-skill")
-    doc.add_heading("Step 5 of 5: Chief of Staff", level=2)
+    doc.add_heading("Codex", level=2)
     add_link(doc, "Repository", "https://github.com/plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace add plotdevice01/codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
@@ -491,67 +478,55 @@ def build(output: Path) -> Path:
         doc,
         (
             "Restart Codex.",
-            "Open /hooks. Review and trust the hooks offered by the five installed plugins.",
+            "Open /hooks. Review and trust the Chief hooks.",
             "Start a fresh task. Existing tasks do not retroactively gain startup context.",
             "Run codex plugin list --json.",
-            "Confirm ponytail@ponytail, ai-sloppy-copy@ai-sloppy-copy, brand-voice-factory@brand-voice-factory, "
-            "crafty-carousels@crafty-carousels-skill and chief-of-staff@codex-chief-of-staff are installed and active.",
+            "Confirm chief-of-staff@codex-chief-of-staff is installed and active.",
         ),
     )
     add_callout(
         doc,
         "Hook trust: ",
-        "Ponytail loads its mode and tracks changes. AI Sloppy Copy checks authored prose locally. Chief of Staff "
-        "loads the retained persona and injects AGENTS.md only when Codex has not already loaded the canonical contract. "
-        "Claude Code receives the full contract through the hook. Review every command before trust.",
+        "Chief loads the retained persona and injects AGENTS.md only when Codex has not already loaded the canonical contract. "
+        "Content routing happens in the Chief skill, not another lifecycle hook. "
+        "ChatGPT Work applies the same contract through the installed skill. Review every Codex hook before trust.",
         alert=True,
     )
     doc.add_heading("Configure from the fresh task", level=2)
     add_code(
         doc,
         "Use $chief-of-staff to initialize my local configuration, then validate the install with strict "
-        "dependency checks. Report any missing plugin or hook.",
+        "dependency checks. Report any missing bundled runtime file or hook.",
     )
-    doc.add_heading("Claude Code alternative", level=2)
-    add_code(doc, "claude plugin marketplace add DietrichGebert/ponytail")
-    add_code(doc, "claude plugin install ponytail@ponytail --scope user")
-    add_code(doc, "claude plugin marketplace add plotdevice01/ai-sloppy-copy")
-    add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
-    add_code(doc, "claude plugin marketplace add plotdevice01/brand-voice-factory")
-    add_code(doc, "claude plugin install brand-voice-factory@brand-voice-factory --scope user")
-    add_code(doc, "claude plugin marketplace add plotdevice01/crafty-carousels-skill")
-    add_code(doc, "claude plugin install crafty-carousels@crafty-carousels-skill --scope user")
-    add_code(doc, "claude plugin marketplace add plotdevice01/codex-chief-of-staff")
-    add_code(doc, "claude plugin install chief-of-staff@codex-chief-of-staff --scope user")
+    work_heading = doc.add_heading("ChatGPT Work", level=2)
+    work_heading.paragraph_format.page_break_before = True
     add_numbered(
         doc,
         (
-            "Start Claude Code and run /reload-plugins.",
-            "Open /hooks and review the hooks from all five plugins.",
-            "Run claude plugin list --json and confirm all five plugin IDs are active.",
-            "Start a fresh session so SessionStart loads the contract and retained persona.",
+            "Make Chief of Staff available to the required roles in workspace plugin controls.",
+            "Install Chief of Staff from the Plugin Directory.",
+            "Grant only the approved apps, files and permissions.",
+            "Start a fresh ChatGPT Work task and run the acceptance prompts.",
         ),
     )
-    doc.add_heading("One-command and team deployment", level=2)
-    add_code(doc, r".\install-claude.ps1")
-    add_code(doc, "./install-claude.sh")
+    doc.add_heading("Local and team deployment", level=2)
     doc.add_paragraph(
-        "The scripts install or update all five plugins. The default scope is user. Use project scope only when "
-        "the repository should carry shared plugin activation."
+        "The Codex installers add or update Chief from the configured marketplace. ChatGPT workspace admins "
+        "control availability and installation for team roles. Team members open ChatGPT Work and ask Chief "
+        "normally; they do not select specialist workflows."
     )
-    add_code(doc, r"Copy examples\claude-project-settings.json to .claude\settings.json")
-    section_page(doc, "2. Configure private authority")
+    section_page(doc, "2. Configure private authority", new_page=False)
     add_callout(
         doc,
         "Keep authority local: ",
-        "Shared Claude settings may name marketplaces and active plugins. Private identities, paths, scopes, "
+        "Workspace plugin controls may make Chief available. Private identities, paths, scopes, "
         "and approval rules stay in ignored chief-of-staff.json.",
         alert=True,
     )
     doc.add_heading("Initialize", level=2)
     add_code(doc, 'python scripts/configure.py init --owner "Your Name" --timezone "Etc/UTC"')
     doc.add_paragraph(
-        "Or start a fresh Codex task or Claude Code session and ask the Chief of Staff skill to initialize the "
+        "Or start a fresh ChatGPT Work or Codex task and ask the Chief of Staff skill to initialize the "
         "local configuration."
     )
     add_table(
@@ -589,7 +564,7 @@ def build(output: Path) -> Path:
         alert=True,
     )
 
-    section_page(doc, "3. Run scoped work")
+    section_page(doc, "3. Run scoped work", new_page=False)
     doc.add_heading("Start every task", level=2)
     add_numbered(
         doc,
@@ -604,12 +579,13 @@ def build(output: Path) -> Path:
             "Use idempotency when available. Read the saved result back before any retry or completion report.",
         ),
     )
-    doc.add_heading("ICM project and workspace architecture", level=2)
+    icm_heading = doc.add_heading("ICM project and workspace architecture", level=2)
+    icm_heading.paragraph_format.page_break_before = True
     add_bullets(
         doc,
         (
             "ICM is the default operating architecture. The 85% communication mode remains a separate default.",
-            "Invoke ICM Architect automatically for every new project, workspace or recurring process.",
+            "Load Chief's internal ICM Architect workflow automatically for every new project, workspace or recurring process.",
             "If the prompt does not name a registered project, stay generic. Do not import a client or project fact from configuration or memory.",
             "Do not invent data sources, connector names, metrics or schemas.",
             "Before proposing files, name ICM and the repeating unit. Use one canonical form name from ICM Architect. State the factory-product split and human gate.",
@@ -620,10 +596,10 @@ def build(output: Path) -> Path:
             "Keep real-time coordination, high concurrency and automated branching in suitable code while preserving explicit context and human controls.",
         ),
     )
-    add_code(doc, "Use $icm-architect to build the smallest ICM workspace for this project.")
+    add_code(doc, "Ask Chief to build the smallest ICM workspace for this project.")
     add_callout(
         doc,
-        "Claude Code enforcement: ",
+        "Codex enforcement: ",
         "Architecture prompts activate a seven-line ICM response contract. The stop hook returns an invalid "
         "answer for correction up to two times. A third invalid answer stops with recovery instructions. "
         "A pre-tool check blocks private configured context absent from the prompt. Set "
@@ -659,7 +635,7 @@ def build(output: Path) -> Path:
     add_bullets(
         doc,
         (
-            "For every non-trivial task, report requested and automatically routed skills or plugins, plus the loaded version or path when available.",
+            "For every non-trivial task, report Chief, the internal capability actually routed, and any host tool or app actually used.",
             "Name the workflow steps, inputs, references, handoffs and validation actually used.",
             "Report partial use, substitutions, skipped requirements, failures and resulting limitations.",
             "Reading a SKILL.md or naming a plugin is not material use. Claim utilization only when its workflow changed the execution or output.",
@@ -737,18 +713,16 @@ def build(output: Path) -> Path:
         "Secrets and project data may differ too.",
         alert=True,
     )
-    doc.add_heading("Companion integrations", level=2)
-    add_link(doc, "Ponytail repository", "https://github.com/DietrichGebert/ponytail")
+    doc.add_heading("Bundled source products", level=2)
     add_link(doc, "AI Sloppy Copy repository", "https://github.com/plotdevice01/ai-sloppy-copy")
     add_link(doc, "Brand Voice Factory repository", "https://github.com/plotdevice01/brand-voice-factory")
     add_link(doc, "Crafty Carousels repository", "https://github.com/plotdevice01/crafty-carousels-skill")
     add_bullets(
         doc,
         (
-            "Ponytail 4.8.4 or later for exact reference-install efficiency behavior.",
-            "AI Sloppy Copy 0.5.0 with Standard 2.2.0 or later for exact authored-copy governance.",
-            "Brand Voice Factory 0.2.0 or later for the canonical voice package and handoff contract.",
-            "Crafty Carousels 0.6.0 or later for governed carousel production.",
+            "AI Sloppy Copy 0.5.0 with Standard 2.2.0 is pinned inside Chief.",
+            "Brand Voice Factory 0.2.1 is pinned inside Chief.",
+            "Crafty Carousels 0.6.1 is pinned inside Chief.",
         ),
     )
 
@@ -759,13 +733,15 @@ def build(output: Path) -> Path:
     add_code(doc, "node tests/test_hooks.js")
     add_code(doc, "python tests/test_icm.py")
     add_code(doc, "python tests/test_release.py")
+    add_code(doc, "python tests/test_content_runtime.py")
+    add_code(doc, "python tests/test_live_acceptance_harness.py")
     add_table(
         doc,
         ("Gate", "What it proves"),
         (
-            ("Persona", "97 requirements, ten integration rules and source hashes remain present. Thirteen scenarios remain too."),
+            ("Persona", "97 requirements, ten integration rules and source hashes remain present. Fifteen scenarios remain too."),
             ("ICM", "Five forms, ten invariants, task routing, cold-walk failure behavior and release contracts pass."),
-            ("Install", "Configuration, runtime files, safe policies, paths, IDs, and dependencies are structurally valid."),
+            ("Install", "Configuration, runtime files, safe policies, paths, IDs, and the pinned content manifest are valid."),
             ("Repository", "Versions match; manifest paths exist; public files are sanitized; release contents are complete."),
             ("Hooks", "Lifecycle output contains the contract and persona. ICM enforcement also passes activation, correction, recovery and privacy checks."),
         ),
@@ -773,64 +749,45 @@ def build(output: Path) -> Path:
     )
     doc.add_heading("Fresh-task acceptance", level=2)
     doc.add_paragraph(
-        "Run the thirteen prompts in persona/persona-contract.json in fresh Codex tasks with "
-        "GPT-5.6 Sol Medium and GPT-5.6 Terra XHigh. Repeat them in a fresh Claude Code session. "
+        "Run the fifteen prompts in persona/persona-contract.json in fresh Codex and ChatGPT Work tasks with "
+        "GPT-5.6 Sol Medium. "
+        "Generate the host prompt with scripts/live_acceptance_harness.py. For ChatGPT Work, the owner verifies "
+        "the Work UI, Work locally and Ask for approval; record the underlying runtime separately because it may "
+        "report Codex. For Codex, require the built-in read-only permission profile. Run responses inline; "
+        "any task creation, delegation, "
+        "file mutation, connector call, external action, or host substitution invalidates the run. "
+        "Terra XHigh is owner-waived for this release to conserve the reset token budget. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(
         doc,
         "Accept only when: ",
         "static, host and installed-runtime checks pass. Sol or Terra may be waived only while pending; failures "
-        "cannot. v2.0.1 evidence must be fresh because model-facing inputs changed. Connector identities and scope "
+        "cannot. v2.1.0 evidence must be fresh because model-facing inputs changed. Connector identities and scope "
         "must match.",
     )
 
     section_page(doc, "7. Update, uninstall, recover", new_page=False)
     doc.add_heading("Upgrade", level=2)
-    add_callout(
-        doc,
-        "AI Sloppy Copy legacy-version reset: ",
-        "Remove an existing 2.2.6 installation once before reinstalling. "
-        "Version 0.5.0 sorts below 2.2.6 in semantic-version updaters.",
-        alert=True,
-    )
-    add_code(doc, "codex plugin remove ai-sloppy-copy@ai-sloppy-copy")
-    add_code(doc, "codex plugin marketplace upgrade ai-sloppy-copy")
-    add_code(doc, "codex plugin add ai-sloppy-copy@ai-sloppy-copy")
-    add_code(doc, "claude plugin uninstall ai-sloppy-copy@ai-sloppy-copy")
-    add_code(doc, "claude plugin marketplace update ai-sloppy-copy")
-    add_code(doc, "claude plugin install ai-sloppy-copy@ai-sloppy-copy --scope user")
-    add_code(doc, "codex plugin marketplace upgrade brand-voice-factory")
-    add_code(doc, "codex plugin add brand-voice-factory@brand-voice-factory")
-    add_code(doc, "claude plugin marketplace update brand-voice-factory")
-    add_code(doc, "claude plugin update brand-voice-factory@brand-voice-factory")
-    add_code(doc, "codex plugin marketplace upgrade crafty-carousels-skill")
-    add_code(doc, "codex plugin add crafty-carousels@crafty-carousels-skill")
-    add_code(doc, "claude plugin marketplace update crafty-carousels-skill")
-    add_code(doc, "claude plugin update crafty-carousels@crafty-carousels-skill")
     add_code(doc, "codex plugin marketplace upgrade codex-chief-of-staff")
     add_code(doc, "codex plugin add chief-of-staff@codex-chief-of-staff")
-    add_code(doc, "claude plugin marketplace update codex-chief-of-staff")
-    add_code(doc, "claude plugin update chief-of-staff@codex-chief-of-staff")
     add_bullets(
         doc,
         (
             "Read CHANGELOG.md.",
             "Run validation again.",
-            "Restart Codex or run Claude Code /reload-plugins, then repeat the fresh-session acceptance prompts.",
+            "Restart the ChatGPT desktop app, then repeat the fresh-task acceptance prompts.",
             "Keep the prior tagged release available until acceptance passes.",
         ),
     )
     doc.add_heading("Uninstall", level=2)
     add_code(doc, "codex plugin remove chief-of-staff@codex-chief-of-staff")
     add_code(doc, "codex plugin marketplace remove codex-chief-of-staff")
-    add_code(doc, "claude plugin uninstall chief-of-staff@codex-chief-of-staff")
-    add_code(doc, "claude plugin marketplace remove codex-chief-of-staff")
     doc.add_paragraph(
         "Uninstalling does not delete chief-of-staff.json. Remove that private file separately only when the user "
         "intends to discard the configuration."
     )
-    doc.add_heading("Version labels", level=2)
+    version_heading = doc.add_heading("Version labels", level=2)
     add_table(
         doc,
         ("Product", "Product version", "Separate rules contract"),
@@ -839,21 +796,25 @@ def build(output: Path) -> Path:
             ("AI Sloppy Copy", "0.5.0", "Standard 2.2.0 or later"),
             ("Brand Voice Factory", "0.2.1", "None"),
             ("Crafty Carousels", "0.6.1", "None"),
-            ("Ponytail", "4.8.4", "None"),
         ),
         (3200, 2500, 3660),
     )
-    doc.add_paragraph(
+    version_note = doc.add_paragraph(
         "Each product uses one three-part version for its GitHub release and tag. "
-        "The ZIP and both host manifests use that same number. AI Sloppy Copy "
+        "The ZIP and both the portable and OpenAI manifests use that same number. AI Sloppy Copy "
         "also carries a separately versioned writing-rules contract."
     )
-    doc.add_heading("Troubleshooting", level=2)
+    version_note.paragraph_format.space_after = Pt(12)
+    troubleshooting_heading = doc.add_heading("Troubleshooting", level=2)
+    # Keep the final reference table visually stable across Word and LibreOffice.
+    # Word's paginator can otherwise place this heading on the final wrapped line
+    # of the version note even when both paragraphs declare spacing.
+    troubleshooting_heading.paragraph_format.page_break_before = True
     add_table(
         doc,
         ("Symptom", "Response"),
         (
-            ("Hooks do not load", "Restart Codex or run Claude Code /reload-plugins, review /hooks, then start fresh."),
+            ("Hooks do not load", "Restart the ChatGPT desktop app, review Codex hooks, then start a fresh task."),
             ("ICM response stops", "Start a new prompt. For repair only, set CHIEF_ICM_ENFORCEMENT=off, reload plugins and fix the installation. Set enforcement to on afterward."),
             ("No configuration", "Run the initializer; generic behavior remains active, connector authority remains blocked."),
             ("Wrong account", "Stop and reconnect the approved identity. Then repeat the live check."),
@@ -863,13 +824,13 @@ def build(output: Path) -> Path:
         (2880, 6480),
     )
     properties = doc.core_properties
-    properties.title = "Chief of Staff - Codex and Claude Code Installation and Operating SOP"
-    properties.subject = "Public dual-host plugin installation, configuration, operation, validation, and recovery"
+    properties.title = "Chief of Staff - ChatGPT Work and Codex Operating SOP"
+    properties.subject = "Public plugin installation, configuration, operation, validation, and recovery"
     properties.author = "Codex Chief of Staff contributors"
     properties.last_modified_by = "Codex Chief of Staff contributors"
     properties.created = datetime(2026, 8, 3, tzinfo=timezone.utc)
-    properties.modified = datetime(2026, 8, 3, tzinfo=timezone.utc)
-    properties.keywords = "Codex, Claude Code, chief of staff, ICM, context engineering, plugin, SOP"
+    properties.modified = datetime(2026, 8, 6, tzinfo=timezone.utc)
+    properties.keywords = "ChatGPT Work, Codex, chief of staff, ICM, context engineering, plugin, SOP"
 
     temporary = output.with_suffix(".tmp.docx")
     doc.save(temporary)

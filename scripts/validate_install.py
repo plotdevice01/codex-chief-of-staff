@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import sys
@@ -9,9 +8,11 @@ from pathlib import Path
 
 try:
     from .config_paths import ROOT, resolve_config_path
+    from .sync_content_runtime import check as check_content_runtime
     from .test_persona import get_nested, validate as validate_persona
 except ImportError:
     from config_paths import ROOT, resolve_config_path
+    from sync_content_runtime import check as check_content_runtime
     from test_persona import get_nested, validate as validate_persona
 
 
@@ -21,7 +22,6 @@ SAFE_WRITE_POLICIES = {"blocked", "confirm_each"}
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 REQUIRED_FILES = (
     ".codex-plugin/plugin.json",
-    ".claude-plugin/marketplace.json",
     ".gitignore",
     "AGENTS.md",
     "README.md",
@@ -33,10 +33,23 @@ REQUIRED_FILES = (
     "persona/Technical Assistant Persona - source.pdf",
     "persona/technical-assistant-persona.txt",
     "persona/persona-contract.json",
+    "scripts/live_acceptance_harness.py",
     "skills/chief-of-staff/SKILL.md",
-    "skills/icm-architect/SKILL.md",
-    "skills/icm-architect/LICENSE",
-    "skills/icm-architect/UPSTREAM.json",
+    "skills/chief-of-staff/references/universal-request-contract.md",
+    "skills/chief-of-staff/references/capability-registry.json",
+    "skills/chief-of-staff/references/content-production.md",
+    "skills/chief-of-staff/references/live-acceptance.md",
+    "skills/chief-of-staff/references/paid-video-creative.md",
+    "skills/chief-of-staff/scripts/route_request.py",
+    "skills/chief-of-staff/scripts/content_intelligence.py",
+    "skills/chief-of-staff/scripts/validate_paid_video.py",
+    "skills/chief-of-staff/vendor/manifest.json",
+    "skills/chief-of-staff/internal/icm-architect/workflow.md",
+    "skills/chief-of-staff/internal/icm-architect/LICENSE",
+    "skills/chief-of-staff/internal/icm-architect/UPSTREAM.json",
+    "tests/fixtures/paid-video/valid-professional-service.json",
+    "tests/fixtures/paid-video/sanitized-failed-campaign.json",
+    "tests/test_live_acceptance_harness.py",
 )
 
 
@@ -83,13 +96,6 @@ def validate_behavior(config: dict) -> list[str]:
         "execution.expert_high_risk.reasoning_effort": "high_or_xhigh",
         "execution.expert_high_risk.workspace_scan": "all_affected_boundaries",
         "execution.expert_high_risk.validation": "full_relevant_suite",
-        "dependencies.ponytail.required_for_full_parity": True,
-        "dependencies.ai_sloppy_copy.minimum_version": "0.5.0",
-        "dependencies.ai_sloppy_copy.required_for_full_parity": True,
-        "dependencies.brand_voice_factory.minimum_version": "0.2.0",
-        "dependencies.brand_voice_factory.required_for_full_parity": True,
-        "dependencies.crafty_carousels.minimum_version": "0.6.0",
-        "dependencies.crafty_carousels.required_for_full_parity": True,
     }
     for path, required in expected.items():
         try:
@@ -103,155 +109,6 @@ def validate_behavior(config: dict) -> list[str]:
                 f"expected {required!r}, got {actual!r}"
             )
     return errors
-
-
-def parse_version(value: str) -> tuple[int, int, int] | None:
-    match = re.match(r"^(\d+)\.(\d+)\.(\d+)", value)
-    return tuple(map(int, match.groups())) if match else None
-
-
-def installed_plugin_records() -> dict[str, list[tuple[str, Path]]]:
-    found: dict[str, list[tuple[str, Path]]] = {}
-    cache = Path.home() / ".codex" / "plugins" / "cache"
-    if not cache.is_dir():
-        return found
-    for manifest_path in cache.glob("*/*/*/.codex-plugin/plugin.json"):
-        try:
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
-        except (OSError, json.JSONDecodeError):
-            continue
-        name = manifest.get("name")
-        version = manifest.get("version")
-        if isinstance(name, str) and isinstance(version, str):
-            found.setdefault(name, []).append(
-                (version, manifest_path.parent.parent)
-            )
-    return found
-
-
-def validate_ponytail(root: Path) -> list[str]:
-    warnings: list[str] = []
-    skill_names = (
-        "ponytail",
-        "ponytail-review",
-        "ponytail-audit",
-        "ponytail-debt",
-        "ponytail-gain",
-        "ponytail-help",
-    )
-    for name in skill_names:
-        if not (root / "skills" / name / "SKILL.md").is_file():
-            warnings.append(f"Ponytail capability is missing: {name}.")
-    hooks_path = root / "hooks" / "claude-codex-hooks.json"
-    try:
-        hooks = json.loads(hooks_path.read_text(encoding="utf-8-sig"))
-    except (OSError, json.JSONDecodeError):
-        warnings.append("Ponytail Codex hooks could not be read.")
-    else:
-        events = hooks.get("hooks", {})
-        for event in ("SessionStart", "SubagentStart"):
-            if event not in events:
-                warnings.append(f"Ponytail hook is missing: {event}.")
-    skill_path = root / "skills" / "ponytail" / "SKILL.md"
-    try:
-        skill = skill_path.read_text(encoding="utf-8-sig")
-    except OSError:
-        return warnings
-    for required in (
-        "User insists on the full version",
-        "Hardware is never the ideal on paper",
-        "Lazy code without its check is unfinished",
-    ):
-        if required not in skill:
-            warnings.append(f"Ponytail full-mode rule is missing: {required}.")
-    return warnings
-
-
-def validate_sloppy_copy(root: Path) -> list[str]:
-    warnings: list[str] = []
-    hooks_path = root / "hooks" / "hooks.json"
-    rules_path = root / "scripts" / "AI-Sloppy-Copy-Rules.json"
-    skill_path = root / "skills" / "ai-sloppy-copy" / "SKILL.md"
-    try:
-        hooks = json.loads(hooks_path.read_text(encoding="utf-8-sig"))
-    except (OSError, json.JSONDecodeError):
-        warnings.append("AI Sloppy Copy hooks could not be read.")
-    else:
-        events = hooks.get("hooks", {})
-        for event in ("UserPromptSubmit", "Stop"):
-            if event not in events:
-                warnings.append(f"AI Sloppy Copy hook is missing: {event}.")
-    try:
-        rules = json.loads(rules_path.read_text(encoding="utf-8-sig"))
-    except (OSError, json.JSONDecodeError):
-        warnings.append("AI Sloppy Copy rules could not be read.")
-    else:
-        counts = {
-            "term": len(rules.get("banned_terms", [])),
-            "expression": len(rules.get("prohibited_patterns", [])),
-            "style": len(rules.get("style_rules", [])),
-        }
-        expected = {"term": 288, "expression": 21, "style": 41}
-        if counts != expected:
-            warnings.append(
-                f"AI Sloppy Copy rule counts changed: expected {expected}, found {counts}."
-            )
-        if rules.get("standard", {}).get("version") != "2.2.0":
-            warnings.append("AI Sloppy Copy standard 2.2.0 is required.")
-    try:
-        skill = skill_path.read_text(encoding="utf-8-sig")
-    except OSError:
-        warnings.append("AI Sloppy Copy skill could not be read.")
-    else:
-        for required in ("Evidence and voice gate", "Stop after two repair passes"):
-            if required not in skill:
-                warnings.append(f"AI Sloppy Copy behavior is missing: {required}.")
-    return warnings
-
-
-def dependency_warnings(config: dict) -> list[str]:
-    warnings: list[str] = []
-    installed = installed_plugin_records()
-    dependencies = config.get("dependencies", {})
-    mapping = {
-        "ponytail": "ponytail",
-        "ai_sloppy_copy": "ai-sloppy-copy",
-        "brand_voice_factory": "brand-voice-factory",
-        "crafty_carousels": "crafty-carousels",
-    }
-    selected_roots = {"chief-of-staff": ROOT}
-    for config_name, plugin_name in mapping.items():
-        requirement = dependencies.get(config_name, {})
-        if not requirement.get("required_for_full_parity"):
-            continue
-        minimum = str(requirement.get("minimum_version", "0.0.0"))
-        records = installed.get(plugin_name, [])
-        if not records:
-            warnings.append(
-                f"Full parity requires {plugin_name} {minimum} or later; "
-                "it was not found in the local Codex plugin cache."
-            )
-            continue
-        record = max(
-            records,
-            key=lambda item: parse_version(item[0]) or (0, 0, 0),
-        )
-        actual, root = record
-        selected_roots[plugin_name] = root
-        if (parse_version(actual) or (0, 0, 0)) < (
-            parse_version(minimum) or (0, 0, 0)
-        ):
-            warnings.append(
-                f"Full parity requires {plugin_name} {minimum} or later; "
-                f"found {actual}."
-            )
-            continue
-        if plugin_name == "ponytail":
-            warnings.extend(validate_ponytail(root))
-        elif plugin_name == "ai-sloppy-copy":
-            warnings.extend(validate_sloppy_copy(root))
-    warnings.extend(duplicate_skill_warnings(selected_roots))
-    return warnings
 
 
 def skill_ids(root: Path) -> set[str]:
@@ -275,37 +132,42 @@ def duplicate_skill_warnings(roots: dict[str, Path]) -> list[str]:
     ]
 
 
+def dependency_warnings(config: dict) -> list[str]:
+    del config
+    discovered = skill_ids(ROOT)
+    if discovered != {"chief-of-staff"}:
+        return [
+            "Chief must expose exactly one discoverable skill; found: "
+            + ", ".join(sorted(discovered))
+        ]
+    expected = ROOT / "skills" / "chief-of-staff" / "SKILL.md"
+    if sorted(ROOT.glob("skills/**/SKILL.md")) != [expected]:
+        return ["Chief internal workflows must not expose nested SKILL.md entries."]
+    return duplicate_skill_warnings({"chief-of-staff": ROOT})
+
+
 def install_receipt(config_path: Path, config: dict) -> dict:
-    installed = installed_plugin_records()
-    mapping = {
-        "ponytail": "ponytail",
-        "ai_sloppy_copy": "ai-sloppy-copy",
-        "brand_voice_factory": "brand-voice-factory",
-        "crafty_carousels": "crafty-carousels",
-    }
-    records = []
-    for config_name, plugin_name in mapping.items():
-        candidates = installed.get(plugin_name, [])
-        if not candidates:
-            records.append({"plugin": plugin_name, "status": "missing"})
-            continue
-        version, root = max(candidates, key=lambda item: parse_version(item[0]) or (0, 0, 0))
-        manifest = root / ".codex-plugin" / "plugin.json"
-        records.append(
-            {
-                "plugin": plugin_name,
-                "version": version,
-                "root": str(root),
-                "manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
-                "skill_ids": sorted(skill_ids(root)),
-                "status": "found",
-            }
+    del config
+    vendor = json.loads(
+        (ROOT / "skills" / "chief-of-staff" / "vendor" / "manifest.json").read_text(
+            encoding="utf-8"
         )
+    )
     return {
         "schema_version": 1,
         "chief_of_staff_version": VERSION,
         "config": str(config_path),
-        "dependencies": records,
+        "discoverable_skills": sorted(skill_ids(ROOT)),
+        "standalone_dependencies": [],
+        "bundled_content_runtime": {
+            name: {
+                "version": item["version"],
+                "commit": item["commit"],
+                "files": len(item["files"]),
+                "status": "found",
+            }
+            for name, item in vendor["packages"].items()
+        },
     }
 
 
@@ -458,6 +320,10 @@ def main() -> int:
         for name in REQUIRED_FILES
         if not (ROOT / name).is_file()
     ]
+    try:
+        check_content_runtime()
+    except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
+        errors.append(f"Bundled content runtime failed validation: {exc}")
     config_path = (
         ROOT / "chief-of-staff.example.json"
         if args.example

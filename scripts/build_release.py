@@ -45,6 +45,7 @@ FILES = (
     "CONTRIBUTING.md",
     "LICENSE",
     "PRIVACY.md",
+    "plugin.json",
     "README.md",
     "SECURITY.md",
     "Sync-ProjectAgents.py",
@@ -52,14 +53,12 @@ FILES = (
     "Test-Persona.py",
     "VERSION",
     "chief-of-staff.example.json",
-    "install-claude.ps1",
-    "install-claude.sh",
     "install.ps1",
     "install.sh",
     "validate_install.py",
 )
 DIRECTORIES = (
-    ".claude-plugin",
+    ".agents",
     ".codex-plugin",
     "assets",
     "docs",
@@ -73,7 +72,7 @@ DIRECTORIES = (
 )
 SKIP_PARTS = {"__pycache__", ".DS_Store"}
 TEXT_SUFFIXES = {".json", ".md", ".ps1", ".py", ".sh", ".svg", ".txt", ".yaml", ".yml"}
-ZIP_TIME = (2026, 8, 5, 0, 0, 0)
+ZIP_TIME = (2026, 8, 6, 0, 0, 0)
 
 
 def sha256(path: Path) -> str:
@@ -158,6 +157,14 @@ def run_hook_tests(node: str) -> None:
     )
     if release.returncode:
         raise RuntimeError(release.stderr or release.stdout)
+    content = subprocess.run(
+        [sys.executable, str(ROOT / "tests" / "test_content_runtime.py")],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    if content.returncode:
+        raise RuntimeError(content.stderr or content.stdout)
 
 
 def write_zip(stage: Path, archive: Path) -> None:
@@ -210,7 +217,7 @@ def build(
     acceptance_status = model_acceptance_release_status(model_acceptance)
     validation = {
         "release_version": VERSION,
-        "built_at": datetime(2026, 8, 5, tzinfo=timezone.utc).isoformat(),
+        "built_at": datetime(2026, 8, 6, tzinfo=timezone.utc).isoformat(),
         "status": acceptance_status,
         "persona_requirements": metrics["persona_requirements"],
         "integration_requirements": metrics["integration_requirements"],
@@ -223,11 +230,14 @@ def build(
         "icm_conformance": {"status": "pass", **icm_metrics},
         "configuration_validation": "pass",
         "repository_privacy_scan": "pass",
-        "companion_requirements": {
-            "ponytail": ">=4.8.4",
-            "ai_sloppy_copy": ">=0.5.0 with Standard 2.2.0 or later",
-            "brand_voice_factory": ">=0.2.0",
-            "crafty_carousels": ">=0.6.0",
+        "runtime_requirements": {
+            "discoverable_skills": ["chief-of-staff"],
+            "standalone_dependencies": [],
+            "bundled_content_runtime": {
+                "ai_sloppy_copy": "0.5.0 with Standard 2.2.0",
+                "brand_voice_factory": "0.2.1",
+                "crafty_carousels": "0.6.1",
+            },
         },
         "files": hashes,
     }

@@ -1,0 +1,40 @@
+{
+  "offer_type": "paid",
+  "selected_cta": "Click the link to download your free guide",
+  "voice_required": true,
+  "voice_manifest_loaded": false,
+  "sources_listed": ["research-source-a"],
+  "sources_opened": [],
+  "content_query": {"hooks": 12, "scripts": 1, "ctas": 2},
+  "concepts": [
+    {
+      "id": "cosmetic-a",
+      "format": "direct to camera",
+      "spoken_hook": "You should know this.",
+      "mechanism": "generic explanation",
+      "proof_source": "",
+      "offer": "paid professional assessment",
+      "cta": "Download the free guide",
+      "first_frame_action": "",
+      "visual_progression": [],
+      "claim": "This winning script is high-converting."
+    },
+    {
+      "id": "cosmetic-b",
+      "format": "direct to camera",
+      "spoken_hook": "Bet you did not know this.",
+      "mechanism": "generic explanation",
+      "proof_source": "",
+      "offer": "paid professional assessment",
+      "cta": "Download the free guide",
+      "first_frame_action": "",
+      "visual_progression": [],
+      "claim": "This winning script is high-converting."
+    }
+  ],
+  "performance_evidence": [],
+  "regulated": true,
+  "disclosure_status": "unknown",
+  "files_used": ["research-source-a"],
+  "receipt": {"files_used": ["different-source"]}
+}

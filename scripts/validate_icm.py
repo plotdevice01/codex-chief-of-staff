@@ -13,7 +13,7 @@ except ImportError:
     from config_paths import ROOT
 
 
-SKILL = ROOT / "skills" / "icm-architect"
+SKILL = ROOT / "skills" / "chief-of-staff" / "internal" / "icm-architect"
 EXPECTED_COMMIT = "8f9cdf95e5051f126babc455b7a0558426db43d4"
 FORMS = ("Pipeline", "Umbrella", "Record library", "Knowledge bundle", "Context map")
 INVARIANTS = (
@@ -29,14 +29,13 @@ INVARIANTS = (
     "Instantiate by copying",
 )
 REQUIRED = (
-    "SKILL.md",
+    "workflow.md",
     "LICENSE",
     "UPSTREAM.json",
     "agents/openai.yaml",
     "references/core.md",
     "references/forms.md",
     "assets/templates/AGENTS.md",
-    "assets/templates/CLAUDE.md",
     "assets/templates/CONTEXT.md",
     "assets/templates/stage-CONTEXT.md",
     "assets/templates/node.md",
@@ -75,8 +74,6 @@ def validate_contract(path: Path, *, limit: int = 80) -> list[str]:
 def validate_workspace(workspace: Path) -> list[str]:
     errors: list[str] = []
     entry = workspace / "AGENTS.md"
-    if not entry.is_file():
-        entry = workspace / "CLAUDE.md"
     if not entry.is_file():
         return [f"{workspace} has no Layer 0 entry file."]
     if line_count(entry) > 60:
@@ -120,7 +117,7 @@ def validate_icm() -> tuple[list[str], dict[str, int]]:
     if "Jake Van Clief" not in license_text or "MIT License" not in license_text:
         errors.append("ICM license attribution is incomplete.")
 
-    skill_text = text(SKILL / "SKILL.md")
+    skill_text = text(SKILL / "workflow.md")
     for value in (*FORMS, *INVARIANTS):
         if value not in skill_text:
             errors.append(f"ICM skill is missing required method text: {value}")
@@ -135,11 +132,8 @@ def validate_icm() -> tuple[list[str], dict[str, int]]:
             errors.append(f"ICM skill is missing safety control: {value}")
 
     agents = SKILL / "assets" / "templates" / "AGENTS.md"
-    claude = SKILL / "assets" / "templates" / "CLAUDE.md"
     if line_count(agents) > 60:
         errors.append("ICM AGENTS.md template exceeds 60 lines.")
-    if "`AGENTS.md`" not in text(claude) or "canonical" not in text(claude):
-        errors.append("ICM Claude template must point to canonical AGENTS.md.")
     errors.extend(validate_contract(SKILL / "assets" / "templates" / "stage-CONTEXT.md"))
 
     for path in SKILL.rglob("*.md"):

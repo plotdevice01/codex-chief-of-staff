@@ -6,8 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/chief-of-staff-hook.js\" session; fi",
-            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\chief-of-staff-hook.js') session }",
+            "command": "ROOT=\"${PLUGIN_ROOT:-}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/chief-of-staff-hook.js\" session; fi",
+            "commandWindows": "$root = $env:PLUGIN_ROOT; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\chief-of-staff-hook.js') session }",
             "timeout": 5,
             "statusMessage": "Loading Chief of Staff contract..."
           }
@@ -19,8 +19,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/chief-of-staff-hook.js\" subagent; fi",
-            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\chief-of-staff-hook.js') subagent }",
+            "command": "ROOT=\"${PLUGIN_ROOT:-}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/chief-of-staff-hook.js\" subagent; fi",
+            "commandWindows": "$root = $env:PLUGIN_ROOT; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\chief-of-staff-hook.js') subagent }",
             "timeout": 5,
             "statusMessage": "Loading Chief of Staff contract..."
           }
@@ -32,8 +32,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
-            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "command": "ROOT=\"${PLUGIN_ROOT:-}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = $env:PLUGIN_ROOT; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
             "timeout": 5,
             "statusMessage": "Applying ICM response enforcement..."
           }
@@ -46,8 +46,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
-            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "command": "ROOT=\"${PLUGIN_ROOT:-}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = $env:PLUGIN_ROOT; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
             "timeout": 5,
             "statusMessage": "Checking ICM prompt-only scope..."
           }
@@ -59,8 +59,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "ROOT=\"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
-            "commandWindows": "$root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT } else { $env:PLUGIN_ROOT }; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
+            "command": "ROOT=\"${PLUGIN_ROOT:-}\"; if command -v node >/dev/null 2>&1 && [ -n \"$ROOT\" ]; then node \"$ROOT/hooks/icm-enforcement-hook.js\"; fi",
+            "commandWindows": "$root = $env:PLUGIN_ROOT; if ($root -and (Get-Command node -ErrorAction SilentlyContinue)) { node (Join-Path $root 'hooks\\icm-enforcement-hook.js') }",
             "timeout": 5,
             "statusMessage": "Validating ICM response contract..."
           }

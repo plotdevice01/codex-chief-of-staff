@@ -1,6 +1,6 @@
 # ICM conformance
 
-Chief of Staff v2.0.1 uses Interpretable Context Methodology as its default
+Chief of Staff v2.1.0 uses Interpretable Context Methodology as its default
 operating architecture. The compact task contract applies to every non-trivial
 task. Full workspace files appear only when the work needs persistent structure.
 
@@ -10,7 +10,8 @@ Use sources in this order:
 
 1. Van Clief and McDermott, arXiv:2603.16021, for method intent.
 2. `RinDig/icm-architect` at the commit recorded in
-   `skills/icm-architect/UPSTREAM.json` for the build and restructure skill.
+   `skills/chief-of-staff/internal/icm-architect/UPSTREAM.json` for Chief's
+   internal build and restructure workflow.
 3. Chief rules for Codex routing, scope, privacy, approval, validation, and
    release behavior.
 
@@ -26,7 +27,7 @@ source method or claim that proposed research features are complete.
 | Layered context loading | Exact task inputs and selective skill references | Persona contract and ICM tests |
 | Every output is an edit surface | Named output plus human check | Contract validation |
 | Configure factory, not product | `skills/`, `persona/`, `docs/` apart from `dist/` and `qa/` | Root `CONTEXT.md` |
-| Layer 0 identity | Root `AGENTS.md`; Claude pointer where needed | Entry validation |
+| Layer 0 identity | Root `AGENTS.md` | Entry validation |
 | Layer 1 routing | Root `CONTEXT.md` | Line and route checks |
 | Layer 2 control point | Folder `CONTEXT.md` contracts | Required heading checks |
 | Layer 3 references | Named stable source files | Exact input paths |
@@ -40,8 +41,8 @@ source method or claim that proposed research features are complete.
 - Apply a compact ICM task contract to all non-trivial work.
 - Invoke ICM Architect automatically for each new project or workspace. Apply
   it to recurring processes too.
-- On Claude Code, enforce the seven-line architecture header through prompt and
-  stop hooks. Permit two correction cycles, then stop with a recovery path.
+- On Codex, enforce the seven-line architecture header through supported prompt
+  and lifecycle hooks. Permit two correction cycles, then stop with a recovery path.
 - Apply the prompt-only privacy boundary before each tool request and again at
   final response.
 - Use `AGENTS.md` as the canonical Codex Layer 0 file.
@@ -69,5 +70,5 @@ authorize external actions. Human approval remains the gate for material work.
 
 The paper discusses incremental recompilation and semantic provenance. It also
 describes cross-stage verification and markdown breakpoints. Learning from
-repeated edits is another future direction. v2.0.1 may use verified pieces, but it
+repeated edits is another future direction. v2.1.0 may use verified pieces, but it
 does not claim those research directions as complete capabilities.

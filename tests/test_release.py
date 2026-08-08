@@ -15,6 +15,7 @@ from scripts.validate_repository import (  # noqa: E402
     validate_model_acceptance,
     validate_release_waiver,
 )
+from scripts.live_acceptance_harness import validate_receipt  # noqa: E402
 from scripts.validate_install import duplicate_skill_warnings  # noqa: E402
 
 
@@ -33,8 +34,27 @@ def main() -> int:
         "Create one subtask",
         "per included deliverable.",
         "Read every saved ClickUp record back.",
+        "references/live-acceptance.md",
+        "separate UI and runtime evidence",
+        "Never create or delegate tasks",
     ):
         assert required in chief_skill, f"Missing chat-first delivery rule: {required}"
+
+    live_acceptance = (
+        ROOT / "skills" / "chief-of-staff" / "references" / "live-acceptance.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "self-report cannot prove",
+        "ui_evidence=owner_verified",
+        "runtime value of `codex` or `chatgpt-work` is valid",
+        "cannot satisfy ChatGPT Work acceptance.",
+        "**Ask for approval**",
+        "built-in `:read-only` permission profile",
+        "Run all scenarios inline in the one fresh task.",
+        "temporary files",
+        "invalidates the entire run",
+    ):
+        assert required in live_acceptance, f"Missing read-only acceptance rule: {required}"
 
     assert not (ROOT / "skills" / "brand-voice-copywriter" / "SKILL.md").exists()
     with tempfile.TemporaryDirectory() as folder:
@@ -53,17 +73,20 @@ def main() -> int:
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
     release_status = model_acceptance_release_status(evidence)
-    assert release_status in {"candidate", "pass"}
-    if release_status == "pass":
-        assert not validate_model_acceptance(require_pass=True)
-    else:
-        assert validate_model_acceptance(require_pass=True)
+    assert release_status == "pass_with_waiver"
+    assert not validate_model_acceptance(require_pass=True)
+    work_receipt = json.loads(
+        (ROOT / "tests" / "receipts" / "chatgpt-work-v2.1.0.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert not validate_receipt(work_receipt, "chatgpt-work")
 
     waived = copy.deepcopy(evidence)
     waived["models"]["gpt-5.6-sol"]["status"] = "pass"
     waived["models"]["gpt-5.6-terra"]["status"] = "pending"
     waived["hosts"]["codex"]["status"] = "pass"
-    waived["hosts"]["claude-code"]["status"] = "pass"
+    waived["hosts"]["chatgpt-work"]["status"] = "pass"
     waived["installed_runtime_smoke"]["status"] = "pass"
     waived["release_waiver"] = {
         "status": "approved",
