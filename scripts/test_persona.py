@@ -185,8 +185,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     live_ids = [item.get("id") for item in live_tests if isinstance(item, dict)]
     if len(live_ids) != len(set(live_ids)):
         errors.append("Live acceptance test IDs must be unique.")
-    if len(live_tests) != 16:
-        errors.append("Exactly sixteen live acceptance tests are required.")
+    if len(live_tests) != 17:
+        errors.append("Exactly seventeen live acceptance tests are required.")
     for item in live_tests:
         if (
             not isinstance(item, dict)
@@ -234,7 +234,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Before proposing files, name ICM and state the repeating unit.",
         "Do not replace the canonical form name with a new label.",
         "Do not propose files first. Mark missing inputs as unknown",
-        "Run the sixteen",
+        "Run the seventeen",
         "references/live-acceptance.md",
         "separate UI and runtime evidence",
         "Never create or delegate tasks",

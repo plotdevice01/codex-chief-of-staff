@@ -15,6 +15,9 @@ the same three-part semantic product version.
   propagation, repository publication, and release workflows.
 - Removed the stale v2.1.0 host receipt from the active source and install
   package so its superseded approval behavior cannot be mistaken for policy.
+- Changed operational closeout to numbered next steps followed by the execution
+  trace. Available authorized steps must be completed before they are listed,
+  and a closing summary may not be inserted before the trace.
 - Limited reconfirmation to material scope expansion, a new target or
   recipient, an unplanned irreversible destructive action, or a missing
   decision that can change a material outcome.
