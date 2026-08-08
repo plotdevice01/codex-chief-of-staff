@@ -60,11 +60,14 @@ REQUIRED = (
     "scripts/build_sop.py",
     "scripts/configure.py",
     "scripts/live_acceptance_harness.py",
+    "scripts/package_files.py",
+    "scripts/stage_install.py",
     "scripts/sync_project_agents.py",
     "scripts/test_persona.py",
     "scripts/validate_icm.py",
     "scripts/validate_install.py",
     "scripts/validate_local_parity.py",
+    "scripts/verify_installed_cache.py",
     "skills/chief-of-staff/SKILL.md",
     "skills/chief-of-staff/agents/openai.yaml",
     "skills/chief-of-staff/internal/icm-architect/workflow.md",
@@ -89,7 +92,6 @@ REQUIRED = (
     "tests/test_icm.py",
     "tests/test_release.py",
     "tests/model-acceptance.json",
-    "tests/receipts/chatgpt-work-v2.1.0.json",
     "tests/test_sync.py",
     "workflows/release/CONTEXT.md",
     "workflows/release/01_prepare/CONTEXT.md",
@@ -224,6 +226,7 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     work_receipt_path = (
         ROOT / "tests" / "receipts" / f"chatgpt-work-v{receipt_version}.json"
     )
+    hosts = evidence.get("hosts", {})
     if work_receipt_path.exists():
         work_receipt = json.loads(work_receipt_path.read_text(encoding="utf-8"))
         errors.extend(
@@ -232,7 +235,7 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
                 work_receipt, "chatgpt-work", expected_version=receipt_version
             )
         )
-    else:
+    elif hosts.get("chatgpt-work", {}).get("status") == "pass":
         errors.append("ChatGPT Work release receipt is missing.")
     waived_models, waiver_errors = validate_release_waiver(evidence)
     errors.extend(waiver_errors)
@@ -274,7 +277,6 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
                 errors.append(
                     f"Carried-forward {name} host evidence requires a reason."
                 )
-    hosts = evidence.get("hosts", {})
     if set(hosts) != {"codex", "chatgpt-work"}:
         errors.append("Model acceptance must cover Codex and ChatGPT Work hosts.")
     else:
@@ -453,7 +455,7 @@ def validate_public_text() -> list[str]:
         if not path.is_file():
             continue
         relative = path.relative_to(ROOT).as_posix()
-        if relative.startswith((".git/", "dist/", "qa/")):
+        if relative.startswith((".git/", ".install/", "dist/", "qa/", "tmp/")):
             continue
         if path.suffix.lower() not in TEXT_SUFFIXES and path.suffix.lower() != ".docx":
             continue

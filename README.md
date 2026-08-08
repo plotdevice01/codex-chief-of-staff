@@ -17,7 +17,7 @@ Chief of Staff adds durable operating judgment across ChatGPT Work and Codex:
 
 - explicit project scope and source order;
 - account identity checks before connector access;
-- approval gates for drafts and external writes;
+- plan-scoped authorization for local and external execution;
 - fail-safe `AGENTS.md` loaders without erasing local rules;
 - default ICM task contracts and automatic project architecture;
 - 85% compression and `caveman` mode;
@@ -46,10 +46,11 @@ cd codex-chief-of-staff
 ./install.sh
 ```
 
-The installer registers the checked-out repository with Codex, installs
-`chief-of-staff@codex-chief-of-staff`, and initializes a private local
-configuration when Python is available. Restart Codex, review the Chief hooks,
-and start a fresh task after installation.
+The installer clears the prior Chief cache, creates a clean canonical staging
+package inside the checked-out repository, registers that repository-owned
+package with Codex, installs `chief-of-staff@codex-chief-of-staff`, and
+initializes a private local configuration. Restart Codex, review the Chief
+hooks, and start a fresh task after installation.
 
 AI Sloppy Copy, Brand Voice Factory, and Crafty Carousels are upstream source
 products. They are already pinned inside Chief and are not separate user
@@ -58,11 +59,29 @@ installs.
 ## Current authority model
 
 Chief uses durable local policy, not an expiring or time-boxed mode. Connector
-access starts disabled. External writes are either blocked or require explicit
-confirmation. Authority changes only when the workspace owner deliberately
-updates the private configuration.
+access starts disabled. Once the user directly requests or approves a plan that
+includes writes, pushes, releases, deployments, or publication, Chief executes
+the complete in-scope path without asking again at each step. `Full access is
+on` and equivalent instructions activate the same plan-scoped authorization.
+The user may steer or revoke it at any time. Host safeguards and missing
+credentials still apply.
 
-## What changed in v2.1.2
+## What changed in v2.2.0
+
+- Replaced `confirm_each` with plan-scoped authorization across the canonical
+  contract, Chief skill, hook output, configuration, SOP, release workflow, and
+  tests.
+- Made one approved plan cover its listed local writes, connector batches,
+  pushes, pull requests, merges, tags, releases, deployments, and publication.
+- Limited reconfirmation to material scope expansion, a new target or
+  recipient, an unplanned irreversible destructive action, or a missing
+  decision that changes a material outcome.
+- Added hook and live-scenario regression coverage against repeated approval
+  prompts.
+- Added a mandatory installed-cache proof receipt: active version, exact cache
+  path, stale-version removal, canonical file parity, and loader parity.
+
+### Distribution foundation from v2.1.2
 
 - Fixed project-loader synchronization so it replaces only Chief's managed
   block and preserves every project-owned instruction outside that block.
@@ -82,8 +101,9 @@ updates the private configuration.
   rollout steps from public installation guidance.
 - Marked AI Sloppy Copy as an upstream factory. Brand Voice Factory and Crafty
   Carousels have the same role. None is a separate team-facing install.
-- Runtime behavior is unchanged from `v2.1.0`; its accepted model and host
-  evidence is carried forward under the documentation-only patch rule.
+- `v2.1.2` carried forward the accepted `v2.1.0` behavior under the
+  documentation-only patch rule. `v2.2.0` changes model-facing authorization
+  behavior and therefore requires fresh host acceptance.
 
 ### Runtime foundation from v2.1.0
 
@@ -119,8 +139,9 @@ updates the private configuration.
   persistent work needs them.
 - A pre-tool privacy check blocks configured project or connector values when
   the current prompt did not supply them.
-- Restructure mode limits inventory reads and blocks mutation until approval.
-  It requires reference checks plus content proof before a deletion proposal.
+- Restructure mode requires inventory, reference checks, content proof, a
+  target tree, and a migration map. An approved restructure plan authorizes the
+  mapped moves and deletions without another permission prompt.
 - The bundled Architect is pinned to `RinDig/icm-architect` commit `8f9cdf9`.
   It includes five workspace forms and ten invariants. Both operating modes are
   present. Codex `AGENTS.md` routing and the cold walk are included. Chief
@@ -129,7 +150,7 @@ updates the private configuration.
   It also includes a conformance matrix and deterministic validation. Failure fixtures cover rejected paths.
 - AI Sloppy Copy 0.5.0 with Standard 2.2.0 is pinned inside Chief.
 - The retained persona stays unchanged at 97 requirements. The current
-  integration contract has ten rules and fifteen live acceptance scenarios.
+  integration contract has ten rules and sixteen live acceptance scenarios.
 - Static validation and recorded host receipts remain separate evidence. A
   repository install still requires fresh-task verification in the user's host.
 
@@ -140,7 +161,7 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `2.1.2` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.2` |
+| Chief of Staff `2.2.0` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.2.0` |
 | AI Sloppy Copy `0.5.0` | Canonical source for the pinned checker and copy workflow | Bundled; install separately only for direct development |
 | AI Sloppy Copy Standard `2.2.0` | The writing-rules contract inside the pinned checker | Cite the Standard when discussing rule behavior |
 | Brand Voice Factory `0.2.1` | Canonical source for the pinned voice-package workflow | Bundled; install separately only for direct development |
@@ -150,9 +171,9 @@ Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.1.2 validation status
+## v2.2.0 validation status
 
-`v2.1.2` contains the Chief skill and its internal contracts. It contains the
+`v2.2.0` contains the Chief skill and its internal contracts. It contains the
 hooks and bundled content runtime. Repository installers and deterministic
 validators are included. Repository tests do not establish OpenAI approval or
 directory publication. They also do not replace a fresh-task check after
@@ -203,9 +224,9 @@ uninstall, and recovery procedures.
 | A connected account is assumed correct | Live identity must match configuration |
 | Project instructions can overwrite each other | Shared and project rules remain separate |
 | Context and state are improvised per task | ICM names inputs, output, state and review |
-| External writes inherit vague approval | Every write follows an explicit policy |
+| One plan becomes many permission prompts | One approved plan authorizes every included step through completion |
 | Long answers bury the decision | The result leads; risks and the next action follow |
-| Persona claims are prose | 97 requirements and fifteen scenarios are traceable |
+| Persona claims are prose | 97 requirements and sixteen scenarios are traceable |
 
 ## How it works
 
@@ -218,7 +239,7 @@ Codex lifecycle hooks load the generic operating contract and retained persona
 once and omit duplicate injection when the instruction chain already contains
 the canonical block. Project loaders retain local rules and provide an explicit
 fallback if a Codex hook is absent.
-Private identities, scopes, paths, and approvals live in a local ignored
+Private identities, scopes, paths, and authorization rules live in a local ignored
 configuration.
 
 The shared contract applies the compact ICM task kernel by default. The bundled
@@ -248,13 +269,14 @@ node tests/test_hooks.js
 py -3 .\tests\test_icm.py
 py -3 .\tests\test_release.py
 py -3 .\tests\test_sync.py
+py -3 .\scripts\verify_installed_cache.py --require-only-current --require-plugin-state
 py -3 .\scripts\build_release.py --output dist
 ```
 
 Static tests verify:
 
 - 97 persona requirements and source hashes;
-- ten integration rules and fifteen live acceptance definitions;
+- ten integration rules and sixteen live acceptance definitions;
 - five ICM forms and ten invariants, plus cold-walk failure behavior and token budgets;
 - communication and safety defaults;
 - plugin, hook, skill, configuration, and release version parity;
@@ -263,11 +285,13 @@ Static tests verify:
 - ICM prompt classification and correction limits;
 - recovery plus pre-tool and final-response privacy checks;
 - deterministic release contents;
+- active installed-cache version, canonical parity, stale-version removal, and
+  project-loader parity;
 - the pinned content manifest and all 751 hooks;
 - seven scripts and 39 CTAs;
 - the bundled final checker.
 
-The fifteen prompts in `persona/persona-contract.json` still require a fresh host
+The sixteen prompts in `persona/persona-contract.json` still require a fresh host
 session. Static tests cannot grade live model behavior without becoming test
 theater.
 

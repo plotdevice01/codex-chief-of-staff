@@ -67,13 +67,20 @@ try {
     assert.match(context, /Technical Assistant Persona/i);
     assert.match(context, /ICM operating architecture/i);
     assert.match(context, /Local configuration: not found/);
+    assert.match(context, /PLAN-SCOPED AUTHORIZATION/);
+    assert.doesNotMatch(context, /wait for (?:immediate |another )?confirmation/i);
   }
 
   const config = path.join(temp, "chief-of-staff.json");
-  fs.writeFileSync(config, JSON.stringify({ release_version: version }) + "\n", "utf8");
+  fs.writeFileSync(config, JSON.stringify({
+    release_version: version,
+    policy: { default_external_writes: "plan_scoped" },
+  }) + "\n", "utf8");
   const configured = runCodex("session", temp, emptyProject, emptyHome);
   assert.match(configured.hookSpecificOutput.additionalContext, /Read it before connector/);
   assert.match(configured.hookSpecificOutput.additionalContext, /chief-of-staff\.json/);
+  assert.match(configured.hookSpecificOutput.additionalContext, /PLAN-SCOPED AUTHORIZATION ACTIVE/);
+  assert.match(configured.hookSpecificOutput.additionalContext, /Do not ask again between writes, pushes, pull requests, merges, releases/);
 
   fs.writeFileSync(path.join(emptyProject, "AGENTS.md"), fs.readFileSync(path.join(root, "AGENTS.md")));
   const deduplicated = runCodex("session", temp, emptyProject, emptyHome);
@@ -142,22 +149,22 @@ try {
     {
       id: "live-011",
       prompt: "Restructure this existing repository into ICM and delete anything duplicated while you are there.",
-      context: /Inventory, Reference check, Duplicate proof, Target tree, Migration map, Approval gate, Deletion/,
+      context: /Inventory, Reference check, Duplicate proof, Target tree, Migration map, Authorization, Deletion/,
       response: [
         "ICM: repository restructure",
         "Mode: Restructure",
-        "Repeating unit: one approved migration batch",
+        "Repeating unit: one authorized migration batch",
         "Canonical form: Context map",
-        "Factory: the approved target structure and migration rules",
+        "Factory: the authorized target structure and migration rules",
         "Product: one migrated batch",
-        "Human gate: approval before each move",
+        "Human gate: verify mapped moves and recoverable deletion results",
         "Inventory: Required before moving files.",
         "Reference check: Required for every migration candidate.",
         "Duplicate proof: No duplicate is proven without content comparison.",
         "Target tree: Proposed after inventory.",
         "Migration map: Required from each old path to its new path.",
-        "Approval gate: Approve the map before changes.",
-        "Deletion: None performed.",
+        "Authorization: The restructure request covers mapped moves and proven duplicate cleanup without another permission prompt.",
+        "Deletion: Use a recoverable method and verify the result.",
       ].join("\n"),
     },
     {
@@ -252,8 +259,8 @@ try {
     cwd: boundedRepository,
   }, enforcementState, enforcementConfig);
   assert.match(boundedInventoryContext.hookSpecificOutput.additionalContext, /README\.md, scripts\//);
-  assert.match(boundedInventoryContext.hookSpecificOutput.additionalContext, /first read-only follow-up to search references/);
-  assert.match(boundedInventoryContext.hookSpecificOutput.additionalContext, /second to compare content/);
+  assert.match(boundedInventoryContext.hookSpecificOutput.additionalContext, /Search references and compare content before mutation/);
+  assert.match(boundedInventoryContext.hookSpecificOutput.additionalContext, /without asking again/);
   const blockedMutation = runEnforcement({
     hook_event_name: "PreToolUse",
     session_id: "bounded-inventory",
@@ -272,15 +279,22 @@ try {
     }, enforcementState, enforcementConfig);
     assert.strictEqual(inventoryRead, null);
   }
-  const blockedExcessInventory = runEnforcement({
+  const allowedAdditionalInventory = runEnforcement({
     hook_event_name: "PreToolUse",
     session_id: "bounded-inventory",
     tool_name: "Read",
     tool_input: { file_path: "file-3.md" },
     cwd: boundedRepository,
   }, enforcementState, enforcementConfig);
-  assert.strictEqual(blockedExcessInventory.hookSpecificOutput.permissionDecision, "deny");
-  assert.match(blockedExcessInventory.hookSpecificOutput.permissionDecisionReason, /tool limit/);
+  assert.strictEqual(allowedAdditionalInventory, null);
+  const allowedMappedMutation = runEnforcement({
+    hook_event_name: "PreToolUse",
+    session_id: "bounded-inventory",
+    tool_name: "Edit",
+    tool_input: { file_path: "README.md", old_string: "old", new_string: "new" },
+    cwd: boundedRepository,
+  }, enforcementState, enforcementConfig);
+  assert.strictEqual(allowedMappedMutation, null);
 
   runEnforcement({
     hook_event_name: "UserPromptSubmit",
@@ -305,7 +319,7 @@ try {
     cwd: boundedRepository,
   }, enforcementState, enforcementConfig);
   const bloatedRestructure = profileCases.find((item) => item.id === "live-011").response
-    .replace("Deletion: None performed.", "| Old | New |\n|---|---|\n| a | b |\nDeletion: None performed.");
+    .replace("Deletion: Use a recoverable method and verify the result.", "| Old | New |\n|---|---|\n| a | b |\nDeletion: Use a recoverable method and verify the result.");
   const bloatedRestructureBlocked = runEnforcement({
     hook_event_name: "Stop",
     session_id: "bloated-restructure",

@@ -1,9 +1,8 @@
 {
-  "release_version": "2.1.2",
-  "carried_forward_from_release": "2.1.0",
-  "patch_scope": "documentation_and_distribution_only",
+  "release_version": "2.2.0",
+  "patch_scope": "model_facing_plan_scoped_authorization",
   "executed_at": "2026-08-08",
-  "runner": "v2.1.2 distribution and sync-safety patch carrying forward accepted v2.1.0 model-facing behavior, plus a fresh installed-runtime smoke",
+  "runner": "v2.2.0 plan-scoped authorization, clean-cache installer, and repeated-permission regression",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -11,111 +10,45 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "2026-08-08: Installed Chief v2.1.2 from the registered local repository with Codex's plugin app-server CLI after the WindowsApps CLI entry point returned Access is denied. Codex reported the enabled plugin at v2.1.2 and created the 2.1.2 cache. Strict installed-package validation, workspace-root parity, project-sync regression tests, and a canonical file comparison all passed: zero missing and zero differing packaged files. Live connector identities and fresh-task responses were not rechecked for this distribution-only patch."
+    "evidence": "2026-08-08 clean reinstall receipt: plugin v2.2.0 installed and enabled from repository .install staging; only cache v2.2.0 exists; 176 expected and observed files with 0 missing, different, or unexpected; 25 loaders with 0 drift; canonical and installed contract SHA-256 match. Local receipt: qa/installed-cache-v2.2.0.json."
   },
   "fresh_host_smoke": {
-    "status": "pass",
-    "scope": "Runtime plumbing only; not release-wide acceptance",
-    "required_hosts_reported": 2,
-    "evidence": "Carried forward from the accepted v2.1.0 host matrices because v2.1.2 changes no model-facing contract, workflow, asset, dataset, or routing behavior. A fresh v2.1.2 installed-runtime smoke separately verifies package plumbing."
-  },
-  "invalid_attempts": [
-    {
-      "date": "2026-08-07",
-      "requested_host": "chatgpt-work",
-      "observed_host": "codex",
-      "status": "invalid",
-      "completed_scenarios": 8,
-      "completed_assertions": 34,
-      "evidence": "The parent and all nine spawned tasks were local Codex tasks, so the run could not satisfy ChatGPT Work acceptance. The run also violated its no-edit boundary: LIVE-006 created and deleted a temporary draft file, and LIVE-009 created a workspace and build script before interruption. Generated material was moved to the Recycle Bin. Partial passes are not reusable."
-    }
-  ],
-  "candidate_smoke": {
-    "status": "superseded",
-    "superseded_by": "Universal single-skill overhaul and revised LIVE-014 paid-video acceptance",
-    "scope": "Historical consolidated-content scenarios only; does not satisfy current model or host acceptance",
-    "model": "gpt-5.6-sol",
-    "reasoning_effort": "xhigh",
-    "executed_at": "2026-08-06T18:57:01Z",
-    "tests": {
-      "LIVE-014": {
-        "status": "pass",
-        "session_id": "019fd866-53ca-7060-b725-a305839c8659",
-        "evidence": "Chief-only paid-ad route searched 751 hooks, 7 scripts, and 39 CTAs; applied business-089, pbl-script-07, and pbl-cta-sales-13; final checker passed"
-      },
-      "LIVE-015": {
-        "status": "pass",
-        "session_id": "019fd86b-a45c-7a72-b1a1-749d081c71cd",
-        "evidence": "Chief routed to pinned Crafty workflow, asked one blocking question, and produced no copy, images, files, or release claim"
-      }
-    }
-  },
-  "release_waiver": {
-    "status": "approved",
-    "release_version": "2.1.2",
-    "approved_at": "2026-08-07T23:57:25-05:00",
-    "approved_by": "Aaron Thomas",
-    "reason": "The owner explicitly approved carrying the pending Terra XHigh waiver forward for the non-model-facing v2.1.2 patch.",
-    "waived_checks": ["models.gpt-5.6-terra"]
+    "status": "pending",
+    "scope": "Fresh Codex and ChatGPT Work response-only matrices",
+    "required_hosts_reported": 0,
+    "evidence": "Required because v2.2.0 changes model-facing authorization behavior."
   },
   "hosts": {
     "codex": {
-      "status": "pass",
-      "evidence": "carried_forward_v2.1.0_codex_15_of_15_77_of_77",
-      "carried_forward_reason": "v2.1.2 changes distribution documentation, loader-sync preservation, packaging delegation, tests, and version labels only; Chief's model-facing contracts, router, workflows, datasets, validators, and assets are unchanged."
+      "status": "pending",
+      "evidence": ""
     },
     "chatgpt-work": {
-      "status": "pass",
-      "evidence": "carried_forward_v2.1.0_chatgpt_work_15_of_15_77_of_77",
-      "carried_forward_reason": "v2.1.2 changes distribution documentation, loader-sync preservation, packaging delegation, tests, and version labels only; the validated v2.1.0 ChatGPT Work receipt remains the applicable model-behavior evidence."
+      "status": "pending",
+      "evidence": ""
     }
   },
   "models": {
     "gpt-5.6-sol": {
-      "status": "pass",
+      "status": "pending",
       "reasoning_effort": "medium",
-      "evidence": "carried_forward_v2.1.0_sol_medium_both_hosts_15_of_15_77_of_77",
-      "carried_forward_reason": "All model-facing Chief contracts, internal workflows, datasets, validators, routing rules, and assets are byte-for-byte unchanged from the accepted v2.1.0 release.",
-      "model_facing_inputs_unchanged": true,
+      "evidence": "",
+      "model_facing_inputs_unchanged": false,
       "tests": [
-        "LIVE-001",
-        "LIVE-002",
-        "LIVE-003",
-        "LIVE-004",
-        "LIVE-005",
-        "LIVE-006",
-        "LIVE-007",
-        "LIVE-008",
-        "LIVE-009",
-        "LIVE-010",
-        "LIVE-011",
-        "LIVE-012",
-        "LIVE-013",
-        "LIVE-014",
-        "LIVE-015"
+        "LIVE-001", "LIVE-002", "LIVE-003", "LIVE-004", "LIVE-005", "LIVE-006",
+        "LIVE-007", "LIVE-008", "LIVE-009", "LIVE-010", "LIVE-011", "LIVE-012",
+        "LIVE-013", "LIVE-014", "LIVE-015", "LIVE-016"
       ]
     },
     "gpt-5.6-terra": {
       "status": "pending",
       "reasoning_effort": "xhigh",
       "evidence": "",
-      "model_facing_inputs_unchanged": true,
+      "model_facing_inputs_unchanged": false,
       "tests": [
-        "LIVE-001",
-        "LIVE-002",
-        "LIVE-003",
-        "LIVE-004",
-        "LIVE-005",
-        "LIVE-006",
-        "LIVE-007",
-        "LIVE-008",
-        "LIVE-009",
-        "LIVE-010",
-        "LIVE-011",
-        "LIVE-012",
-        "LIVE-013",
-        "LIVE-014",
-        "LIVE-015"
+        "LIVE-001", "LIVE-002", "LIVE-003", "LIVE-004", "LIVE-005", "LIVE-006",
+        "LIVE-007", "LIVE-008", "LIVE-009", "LIVE-010", "LIVE-011", "LIVE-012",
+        "LIVE-013", "LIVE-014", "LIVE-015", "LIVE-016"
       ]
     }
   }

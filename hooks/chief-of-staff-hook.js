@@ -4,7 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const VERSION = "2.1.2";
+const VERSION = "2.2.0";
 const event = process.argv[2] === "subagent" ? "SubagentStart" : "SessionStart";
 const pluginRoot = process.env.PLUGIN_ROOT || path.resolve(__dirname, "..");
 const SHARED_CONTRACT = "<!-- SHARED-BEHAVIOR-CONTRACT:START -->";
@@ -29,6 +29,25 @@ function resolveConfigPath() {
     platformConfigPath(),
   ].filter(Boolean);
   return candidates.find((candidate) => fs.existsSync(candidate)) || null;
+}
+
+function authorizationContext(configPath) {
+  if (!configPath) {
+    return "PLAN-SCOPED AUTHORIZATION: no local configuration is loaded. A direct request or approved plan still authorizes its plainly stated in-scope local work; connector authority remains unavailable.";
+  }
+  try {
+    const config = JSON.parse(fs.readFileSync(configPath, "utf8").replace(/^\uFEFF/, ""));
+    const mode = config.policy && config.policy.default_external_writes;
+    if (mode === "plan_scoped") {
+      return "PLAN-SCOPED AUTHORIZATION ACTIVE: a direct instruction, approved plan, approved goal, or full-access instruction authorizes every plainly included local and external action through completion. Do not ask again between writes, pushes, pull requests, merges, releases, deployments, publications, connector batches, or safe retries. Reconfirm only for a material scope expansion, a new target or recipient, an unplanned irreversible destructive action, or a missing decision that changes a material outcome. Host and system safeguards still apply; the owner may steer or revoke at any time.";
+    }
+    if (mode === "blocked") {
+      return "EXTERNAL WRITES BLOCKED BY LOCAL POLICY: keep external actions on hold until the owner deliberately updates the configuration.";
+    }
+    return `UNSUPPORTED WRITE POLICY: ${String(mode)}. Do not perform connector or external writes until the local configuration is repaired.`;
+  } catch (error) {
+    return `INVALID LOCAL AUTHORIZATION CONFIGURATION: ${error.message}. Do not perform connector or external writes until it is repaired.`;
+  }
 }
 
 function readRequired(relativePath) {
@@ -93,6 +112,7 @@ function emit() {
   contextParts.push(
     readRequired(path.join("persona", "technical-assistant-persona.txt")),
     configStatus,
+    authorizationContext(configPath),
     ...icmGates,
   );
   const context = contextParts.join("\n\n");

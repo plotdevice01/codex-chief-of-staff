@@ -1,7 +1,8 @@
 # Release process
 
-Use `workflows/release/CONTEXT.md` as the routing file. Publication is a
-separate approval after the candidate passes every required gate.
+Use `workflows/release/CONTEXT.md` as the routing file. When the approved plan
+includes publication, its authorization continues through push, tag, release,
+and public verification after every required gate passes.
 
 ## 01 Prepare
 
@@ -46,9 +47,10 @@ separate approval after the candidate passes every required gate.
 
 ## 04 Publish
 
-1. Present the exact commit, proposed tag, archive, checksum, evidence, and
+1. Record the exact commit, proposed tag, archive, checksum, evidence, and
    remaining risks.
-2. Wait for explicit publication approval.
+2. Confirm that repository publication is included in the current request or
+   approved plan. This is a scope check, not a new approval checkpoint.
 3. Commit the canonical source.
 4. Create and push the signed or annotated tag for the current `VERSION`.
 5. Verify CI plus attestation. Verify the release asset and checksum. Check the
@@ -60,4 +62,4 @@ Historical tags and release assets are immutable. Fixes ship as a new version.
 Repository publication is the only documented distribution path. Release copy
 must point users to the GitHub repository and its installer scripts. Do not
 claim third-party review, approval, listing, or distribution without completed
-evidence and a separately approved documentation change.
+evidence and an owner-authorized documentation change.

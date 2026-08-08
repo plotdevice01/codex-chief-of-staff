@@ -12,13 +12,14 @@ python tests/test_live_acceptance_harness.py
 python tests/test_icm.py
 python tests/test_release.py
 python tests/test_sync.py
+python scripts/verify_installed_cache.py --require-only-current --require-plugin-state
 python scripts/build_release.py --output dist
 ```
 
 These checks cover:
 
 - persona source hashes and 97 requirements;
-- ten integration rules and fifteen live scenario definitions;
+- ten integration rules and sixteen live scenario definitions;
 - shared behavior, ICM routing, and configuration defaults;
 - five ICM forms and ten invariants, plus release contracts and cold-walk failures;
 - the pinned content manifest and the complete hook, script, and CTA libraries;
@@ -36,16 +37,18 @@ These checks cover:
 - private-context rejection before tool use and at final response;
 - generic hook results that do not repeat the private marker;
 - project-rule preservation during fail-safe loader updates;
+- clean installed-cache version, canonical file parity, stale-version removal,
+  and project-loader parity;
 - private-value scanning;
 - release contents and archive integrity.
 
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` after candidate installation
-on GPT-5.6 Sol Medium in fresh Codex and ChatGPT Work tasks. The accepted v2.1.0
-host and Sol evidence may be carried forward only for a documented
-non-model-facing patch. Terra XHigh remains pending unless the owner explicitly
-approves a version-bound release waiver. Record:
+on GPT-5.6 Sol Medium in fresh Codex and ChatGPT Work tasks. v2.2.0 changes the
+model-facing authorization contract, so prior host evidence cannot be carried
+forward. Terra XHigh remains pending unless the owner explicitly approves a
+version-bound release waiver. Record:
 
 - prompt and response;
 - pass criteria met or missed;
@@ -62,7 +65,9 @@ opened from **Work**, using
 For Codex, use the built-in `:read-only` permission profile. For ChatGPT Work,
 select **Work**, **Work locally**, and **Ask for approval**. Record that UI
 selection as owner-verified evidence and record the agent runtime separately;
-the runtime may validly report `codex` beneath the Work UI.
+the runtime may validly report `codex` beneath the Work UI. This is a
+response-only acceptance control, not the production authorization policy; it
+must never cause per-step approval prompts in normal tasks.
 Run the scenarios inline. Task creation, delegation, any file or temporary-file
 mutation, connector use, or host substitution invalidates the complete run.
 Validate the returned JSON with
@@ -88,9 +93,11 @@ A release fails when:
 - ICM enforcement accepts a response that misses its required header;
 - the enforcement state can loop beyond two corrections;
 - a tool request or final response can leak a private marker;
-- a restructure can mutate files before approval;
+- a restructure can mutate files outside its mapped and authorized plan;
 - an unverified duplicate can be proposed for deletion;
 - generated archive files differ from the staged release;
+- the installed cache reports another Chief version, an unexpected file, a
+  missing or differing canonical file, or project-loader drift;
 - version values disagree;
 - the DOCX SOP does not render cleanly;
 - either required model profile misses a live scenario;

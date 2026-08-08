@@ -185,8 +185,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     live_ids = [item.get("id") for item in live_tests if isinstance(item, dict)]
     if len(live_ids) != len(set(live_ids)):
         errors.append("Live acceptance test IDs must be unique.")
-    if len(live_tests) != 15:
-        errors.append("Exactly fifteen live acceptance tests are required.")
+    if len(live_tests) != 16:
+        errors.append("Exactly sixteen live acceptance tests are required.")
     for item in live_tests:
         if (
             not isinstance(item, dict)
@@ -234,7 +234,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Before proposing files, name ICM and state the repeating unit.",
         "Do not replace the canonical form name with a new label.",
         "Do not propose files first. Mark missing inputs as unknown",
-        "Run the fifteen",
+        "Run the sixteen",
         "references/live-acceptance.md",
         "separate UI and runtime evidence",
         "Never create or delegate tasks",
@@ -258,6 +258,8 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Use one canonical form name from ICM Architect",
         "Do not propose files before those fields. Mark missing inputs as",
         "Reading a `SKILL.md`, discovering a plugin, or naming it in the response does not count as material use.",
+        "## Plan-scoped authorization",
+        "Do not split one authorized plan into ceremonial approval checkpoints.",
     )
     for value in required_agents_rules:
         if value not in agents_text:

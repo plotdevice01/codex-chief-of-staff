@@ -18,7 +18,7 @@ except ImportError:
 
 PLACEHOLDER = re.compile(r"(YOUR_|REPLACE_WITH_|<[^>]+>)", re.IGNORECASE)
 RELEASE_VERSION = re.compile(r"^\d+\.\d+\.\d+$")
-SAFE_WRITE_POLICIES = {"blocked", "confirm_each"}
+SAFE_WRITE_POLICIES = {"blocked", "plan_scoped"}
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 REQUIRED_FILES = (
     ".codex-plugin/plugin.json",
@@ -34,6 +34,9 @@ REQUIRED_FILES = (
     "persona/technical-assistant-persona.txt",
     "persona/persona-contract.json",
     "scripts/live_acceptance_harness.py",
+    "scripts/package_files.py",
+    "scripts/stage_install.py",
+    "scripts/verify_installed_cache.py",
     "skills/chief-of-staff/SKILL.md",
     "skills/chief-of-staff/references/universal-request-contract.md",
     "skills/chief-of-staff/references/capability-registry.json",
@@ -183,6 +186,9 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
     if placeholders:
         errors.append("Template placeholders remain at: " + ", ".join(placeholders))
 
+    if config.get("config_schema_version") != 2:
+        errors.append("config_schema_version must be 2 for plan-scoped authorization.")
+
     version = config.get("release_version", "")
     if not isinstance(version, str) or not RELEASE_VERSION.fullmatch(version):
         errors.append("release_version must use a three-part semantic version.")
@@ -219,7 +225,7 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
         else:
             connector_ids.append(str(connector_id))
         if connector.get("external_writes") not in SAFE_WRITE_POLICIES:
-            errors.append(f"{location}.external_writes must be blocked or confirm_each.")
+            errors.append(f"{location}.external_writes must be blocked or plan_scoped.")
         if connector.get("enabled"):
             if not connector.get("provider"):
                 errors.append(f"{location}.provider is required when enabled.")
@@ -252,10 +258,27 @@ def validate_config(config_path: Path) -> tuple[list[str], list[str]]:
     else:
         if policy.get("default_external_writes") not in SAFE_WRITE_POLICIES:
             errors.append(
-                "policy.default_external_writes must be blocked or confirm_each."
+                "policy.default_external_writes must be blocked or plan_scoped."
             )
         if policy.get("automatic_authority_expansion") is not False:
             errors.append("policy.automatic_authority_expansion must be false.")
+        authorization = policy.get("plan_scoped_authorization")
+        expected_authorization = {
+            "full_access_instruction": "all_in_scope_actions_until_completion",
+            "reconfirm_only_for": "material_scope_change_or_missing_material_decision",
+            "safe_retries_do_not_reconfirm": True,
+            "owner_can_steer_or_revoke": True,
+        }
+        if authorization != expected_authorization:
+            errors.append(
+                "policy.plan_scoped_authorization must define durable full-access, "
+                "material-change-only reconfirmation, safe retries, and owner steering."
+            )
+        for key in ("delete", "public_post", "permission_change"):
+            if policy.get(key) not in SAFE_WRITE_POLICIES:
+                errors.append(f"policy.{key} must be blocked or plan_scoped.")
+        if policy.get("financial_action") != "blocked":
+            errors.append("policy.financial_action must remain blocked.")
 
     projects = config.get("projects")
     if not isinstance(projects, list):

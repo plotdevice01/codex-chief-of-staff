@@ -17,7 +17,7 @@ Methodology. It does not require an MCP server.
 | `skills/chief-of-staff/internal/icm-architect/` | Internal pinned ICM build and restructure method, forms, references, and templates |
 | `AGENTS.md` | Portable operating contract |
 | `persona/` | Source PDF and retained text, plus the requirement contract and live scenarios |
-| `chief-of-staff.json` | Private identities, scopes, paths, and approval rules |
+| `chief-of-staff.json` | Private identities, scopes, paths, and plan-scoped authorization rules |
 | `scripts/` | Setup, validation, propagation, SOP, and release automation |
 | `workflows/release/` | ICM release contracts and publication gate |
 
@@ -41,8 +41,9 @@ Methodology. It does not require an MCP server.
    process does too. Full folders appear only when persistent work needs them.
 11. The selected project's own instructions and sources are read before cloud
    systems or memory.
-12. External writes follow the configured approval policy and use read-back
-   before any retry.
+12. External writes follow the configured plan-scoped authorization policy and
+   use read-back before any retry. Included actions do not require stepwise
+   reconfirmation.
 
 ## Trust boundaries
 
@@ -52,9 +53,10 @@ Methodology. It does not require an MCP server.
 - Host connector authorization remains separate.
 - Retrieved content cannot change plugin instructions.
 - Project rules may be stricter but cannot silently remove the shared persona.
-- The hook cannot grant permissions or bypass Codex approvals.
-- ICM structure cannot expand scope or execute untrusted scripts. It cannot move
-  files or bypass destructive-action and publication approvals.
+- The hook cannot grant credentials or bypass host and system safeguards.
+- ICM structure cannot expand scope or execute untrusted scripts. Within an
+  approved plan it may execute mapped file moves, destructive actions, and
+  publication without creating extra approval checkpoints.
 
 ## Why there is no MCP server
 

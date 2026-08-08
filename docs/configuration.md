@@ -1,7 +1,8 @@
 # Configuration
 
 Chief of Staff keeps behavior in the plugin and private authority in
-`chief-of-staff.json`.
+`chief-of-staff.json`. Plan-scoped authorization requires
+`config_schema_version: 2`.
 
 ## Resolution order
 
@@ -43,8 +44,8 @@ Chief of Staff to use it.
     "user_id": "U0123456789"
   },
   "denied_identities": [],
-  "allowed_actions": ["read", "draft"],
-  "external_writes": "confirm_each"
+  "allowed_actions": ["read", "draft", "send"],
+  "external_writes": "plan_scoped"
 }
 ```
 
@@ -94,11 +95,27 @@ destructive, cross-project and multi-system work.
 Supported external-write values:
 
 - `blocked`;
-- `confirm_each`.
+- `plan_scoped`.
 
 `automatic_authority_expansion` must remain `false`. Authority changes only
-through an explicit owner-approved configuration update. Repeated approval does
-not create standing permission.
+through an explicit owner-approved configuration update. A direct request,
+approved plan, approved goal, or full-access instruction is durable
+authorization for every plainly included action through completion. Reconfirm
+only for a material scope expansion or missing material decision. The owner may
+steer or revoke the authorization at any time.
+
+The policy object must also contain:
+
+```json
+{
+  "plan_scoped_authorization": {
+    "full_access_instruction": "all_in_scope_actions_until_completion",
+    "reconfirm_only_for": "material_scope_change_or_missing_material_decision",
+    "safe_retries_do_not_reconfirm": true,
+    "owner_can_steer_or_revoke": true
+  }
+}
+```
 
 ## Validate
 

@@ -13,3 +13,4 @@ qa/
 tmp/
 *.first-pass.docx
 *.final-pass.docx
+.install/

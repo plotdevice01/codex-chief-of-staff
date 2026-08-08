@@ -1,6 +1,6 @@
 {
   "name": "chief-of-staff",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "One discoverable Chief that routes business, creative, research, operational, document, technical, and connected work through internal governed workflows.",
   "author": {
     "name": "plotdevice01",
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "Chief of Staff",
     "shortDescription": "Scoped execution with disciplined judgment",
-    "longDescription": "Run one discoverable Chief across ChatGPT Work and Codex. It classifies requests once, loads internal workflows only when needed, enforces scope and approvals, and validates the finished result without specialist selection.",
+    "longDescription": "Run one discoverable Chief across ChatGPT Work and Codex. It classifies requests once, loads internal workflows only when needed, applies plan-scoped authorization without repeated permission prompts, and validates the finished result without specialist selection.",
     "developerName": "plotdevice01",
     "category": "Productivity",
     "capabilities": [

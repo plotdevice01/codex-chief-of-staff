@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "chief-of-staff",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "One discoverable Chief that routes business, creative, research, operational, document, technical, and connected work through internal governed workflows.",
   "author": {
     "name": "plotdevice01",
