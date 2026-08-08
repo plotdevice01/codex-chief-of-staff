@@ -143,6 +143,17 @@ def extract_project_rules(current: str, target: Target) -> str:
 
 
 def render_target(managed: str, current: str, target: Target) -> str:
+    if (
+        MANAGED_START in current
+        and MANAGED_END in current
+        and PROJECT_START in current
+        and PROJECT_END in current
+    ):
+        start = current.index(MANAGED_START)
+        end = current.index(MANAGED_END, start) + len(MANAGED_END)
+        return f"{current[:start]}{managed}{current[end:]}"
+    if PROJECT_START in current and PROJECT_END in current:
+        return f"{managed}\n\n{current}"
     return (
         f"{managed}\n\n{PROJECT_START}\n"
         f"{extract_project_rules(current, target)}\n{PROJECT_END}\n"

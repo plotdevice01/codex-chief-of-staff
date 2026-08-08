@@ -45,6 +45,19 @@ def main() -> int:
         assert updated.count(PROJECT_START) == 1
         assert updated.count(PROJECT_END) == 1
 
+        prefix = "# Local preface\n\n"
+        bridge = "\n\n<!-- LOCAL-BRIDGE -->\n\n"
+        suffix = "\n\n# Project-local output versioning\n\n- Keep every release.\n"
+        current_with_extras = (
+            f"{prefix}{managed_v1}{bridge}{PROJECT_START}\n{local_rules}\n"
+            f"{PROJECT_END}{suffix}"
+        )
+        preserved = render_target(managed_v2, current_with_extras, target)
+        assert preserved == (
+            f"{prefix}{managed_v2}{bridge}{PROJECT_START}\n{local_rules}\n"
+            f"{PROJECT_END}{suffix}"
+        )
+
         chief_target = Target(path, "chief-of-staff", "personal")
         legacy = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         migrated = render_target(managed_v2, legacy, chief_target)
@@ -73,6 +86,8 @@ def main() -> int:
     shell = (ROOT / "install.sh").read_text(encoding="utf-8")
     for installer in (powershell, shell):
         assert "chief-of-staff@codex-chief-of-staff" in installer
+        assert "marketplace\", \"upgrade" not in installer
+        assert "marketplace upgrade" not in installer
         assert "ai-sloppy-copy@ai-sloppy-copy" not in installer
         assert "brand-voice-factory@brand-voice-factory" not in installer
         assert "crafty-carousels@crafty-carousels-skill" not in installer

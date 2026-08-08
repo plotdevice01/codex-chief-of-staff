@@ -57,6 +57,7 @@ def main() -> int:
         assert required in live_acceptance, f"Missing read-only acceptance rule: {required}"
 
     assert not (ROOT / "skills" / "brand-voice-copywriter" / "SKILL.md").exists()
+    assert not (ROOT / "tests" / "openai-directory-submission.json").exists()
     with tempfile.TemporaryDirectory() as folder:
         temp = Path(folder)
         roots = {}

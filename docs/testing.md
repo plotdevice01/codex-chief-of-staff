@@ -42,8 +42,10 @@ These checks cover:
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` after candidate installation
-on GPT-5.6 Sol Medium in fresh Codex and ChatGPT Work tasks. Terra XHigh is owner-waived for v2.1.0
-to conserve the reset token budget. Record:
+on GPT-5.6 Sol Medium in fresh Codex and ChatGPT Work tasks. The accepted v2.1.0
+host and Sol evidence may be carried forward only for a documented
+non-model-facing patch. Terra XHigh remains pending unless the owner explicitly
+approves a version-bound release waiver. Record:
 
 - prompt and response;
 - pass criteria met or missed;
@@ -67,8 +69,8 @@ Validate the returned JSON with
 `python scripts/live_acceptance_harness.py validate --host <host>`.
 
 The active Standard route is Sol Medium; there is no quick or lower-model
-route. v2.1.0 changes model-facing inputs and content routing. Evidence from
-v2.0.1 cannot be carried forward. A failed scenario blocks publication. A
+route. v2.1.0 changed model-facing inputs and content routing, so evidence from
+v2.0.1 could not be carried forward. A failed scenario blocks publication. A
 pending Sol or Terra check requires an explicit version-bound owner waiver.
 Pending evidence remains pending.
 

@@ -46,13 +46,8 @@ if [[ "$UNINSTALL" == true ]]; then
   exit 0
 fi
 
-if [[ "$UPGRADE" == true ]]; then
-  run codex plugin marketplace upgrade "$MARKETPLACE"
-  run codex plugin add "$PLUGIN_ID"
-else
-  run codex plugin marketplace add "$REPO_ROOT"
-  run codex plugin add "$PLUGIN_ID"
-fi
+run codex plugin marketplace add "$REPO_ROOT"
+run codex plugin add "$PLUGIN_ID"
 
 if [[ "$SKIP_CONFIG" == false ]]; then
   if command -v python3 >/dev/null 2>&1; then

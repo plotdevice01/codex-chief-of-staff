@@ -766,7 +766,7 @@ def build(output: Path) -> Path:
         "report Codex. For Codex, require the built-in read-only permission profile. Run responses inline. "
         "Any task creation or delegation invalidates the run. A file mutation also invalidates it. "
         "The same rule applies to a connector call, external action or host substitution. "
-        "Terra XHigh is owner-waived for this release to conserve the reset token budget. "
+        "Terra XHigh remains pending unless the owner explicitly approves a version-bound release waiver. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(

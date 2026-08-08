@@ -1,6 +1,6 @@
 # ICM conformance
 
-Chief of Staff v2.1.1 retains the v2.1.0 Interpretable Context Methodology as its default
+Chief of Staff v2.1.2 retains the v2.1.0 Interpretable Context Methodology as its default
 operating architecture. The compact task contract applies to every non-trivial
 task. Full workspace files appear only when the work needs persistent structure.
 
