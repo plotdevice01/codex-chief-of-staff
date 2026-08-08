@@ -57,6 +57,7 @@ def main() -> int:
         assert required in live_acceptance, f"Missing read-only acceptance rule: {required}"
 
     assert not (ROOT / "skills" / "brand-voice-copywriter" / "SKILL.md").exists()
+    assert not (ROOT / "tests" / "openai-directory-submission.json").exists()
     with tempfile.TemporaryDirectory() as folder:
         temp = Path(folder)
         roots = {}
@@ -73,8 +74,8 @@ def main() -> int:
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
     release_status = model_acceptance_release_status(evidence)
-    assert release_status == "pass_with_waiver"
-    assert not validate_model_acceptance(require_pass=True)
+    assert release_status == "candidate"
+    assert validate_model_acceptance(require_pass=True)
     receipt_version = evidence.get("carried_forward_from_release", evidence["release_version"])
     work_receipt = json.loads(
         (ROOT / "tests" / "receipts" / f"chatgpt-work-v{receipt_version}.json").read_text(

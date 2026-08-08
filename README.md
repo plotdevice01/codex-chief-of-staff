@@ -62,7 +62,19 @@ access starts disabled. External writes are either blocked or require explicit
 confirmation. Authority changes only when the workspace owner deliberately
 updates the private configuration.
 
-## What changed in v2.1.1
+## What changed in v2.1.2
+
+- Fixed project-loader synchronization so it replaces only Chief's managed
+  block and preserves every project-owned instruction outside that block.
+- Added regression coverage for project text before, between, and after Chief's
+  managed sections.
+- Removed obsolete OpenAI submission scaffolding.
+- Corrected both repository installers so upgrade mode re-registers the local
+  checkout instead of calling a Git-only marketplace command.
+- Rebuilt the repository release and installed cache from the same canonical
+  source and version.
+
+### Distribution corrections from v2.1.1
 
 - Made the GitHub repository and its bundled installer scripts the only
   documented installation path.
@@ -128,7 +140,7 @@ versions of the same file.
 
 | Number | What it contains | What users install or cite |
 |---|---|---|
-| Chief of Staff `2.1.1` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.1` |
+| Chief of Staff `2.1.2` | The plugin, Agent Plugins manifest, Chief workflows, hooks, ICM, and bundled content runtime | Install or cite `2.1.2` |
 | AI Sloppy Copy `0.5.0` | Canonical source for the pinned checker and copy workflow | Bundled; install separately only for direct development |
 | AI Sloppy Copy Standard `2.2.0` | The writing-rules contract inside the pinned checker | Cite the Standard when discussing rule behavior |
 | Brand Voice Factory `0.2.1` | Canonical source for the pinned voice-package workflow | Bundled; install separately only for direct development |
@@ -138,9 +150,9 @@ Chief and AI Sloppy Copy now use the same three-part product version on their
 GitHub release, tag, ZIP, and manifests. A manifest is host metadata inside a
 release. It is not another product.
 
-## v2.1.1 validation status
+## v2.1.2 validation status
 
-`v2.1.1` contains the Chief skill and its internal contracts. It contains the
+`v2.1.2` contains the Chief skill and its internal contracts. It contains the
 hooks and bundled content runtime. Repository installers and deterministic
 validators are included. Repository tests do not establish OpenAI approval or
 directory publication. They also do not replace a fresh-task check after

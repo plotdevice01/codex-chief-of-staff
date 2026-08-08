@@ -1,9 +1,9 @@
 {
-  "release_version": "2.1.1",
+  "release_version": "2.1.2",
   "carried_forward_from_release": "2.1.0",
   "patch_scope": "documentation_and_distribution_only",
-  "executed_at": "2026-08-07",
-  "runner": "v2.1.1 distribution-only patch carrying forward accepted v2.1.0 model-facing behavior, plus a fresh installed-runtime smoke",
+  "executed_at": "2026-08-08",
+  "runner": "v2.1.2 distribution and sync-safety patch carrying forward accepted v2.1.0 model-facing behavior, plus a fresh installed-runtime smoke",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -11,13 +11,13 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "2026-08-07: Chief v2.1.1 was installed from the rebuilt local package. Strict installed-package validation and local parity passed. Inspection found exactly one discoverable Chief skill, internal ICM and content routes, pinned specialist runtimes, and zero Claude or Ponytail routes. Runtime contracts and model-facing workflow files match v2.1.0; v2.1.1 changes distribution documentation, submission materials, and version labels only. Live connector identities and fresh-task responses were not rechecked for this distribution-only patch."
+    "evidence": "2026-08-08: Installed Chief v2.1.2 from the registered local repository with Codex's plugin app-server CLI after the WindowsApps CLI entry point returned Access is denied. Codex reported the enabled plugin at v2.1.2 and created the 2.1.2 cache. Strict installed-package validation, workspace-root parity, project-sync regression tests, and a canonical file comparison all passed: zero missing and zero differing packaged files. Live connector identities and fresh-task responses were not rechecked for this distribution-only patch."
   },
   "fresh_host_smoke": {
     "status": "pass",
     "scope": "Runtime plumbing only; not release-wide acceptance",
     "required_hosts_reported": 2,
-    "evidence": "Carried forward from the accepted v2.1.0 host matrices because v2.1.1 changes no model-facing contract, workflow, asset, dataset, validator, or routing behavior. A fresh v2.1.1 installed-runtime smoke separately verifies package plumbing."
+    "evidence": "Carried forward from the accepted v2.1.0 host matrices because v2.1.2 changes no model-facing contract, workflow, asset, dataset, or routing behavior. A fresh v2.1.2 installed-runtime smoke separately verifies package plumbing."
   },
   "invalid_attempts": [
     {
@@ -50,24 +50,16 @@
       }
     }
   },
-  "release_waiver": {
-    "status": "approved",
-    "release_version": "2.1.1",
-    "approved_at": "2026-08-06",
-    "approved_by": "Aaron Thomas",
-    "reason": "The owner explicitly directed the overhaul to skip Terra XHigh and conserve the reset token budget.",
-    "waived_checks": ["models.gpt-5.6-terra"]
-  },
   "hosts": {
     "codex": {
       "status": "pass",
       "evidence": "carried_forward_v2.1.0_codex_15_of_15_77_of_77",
-      "carried_forward_reason": "v2.1.1 changes distribution documentation, OpenAI submission materials, tests for that metadata, and version labels only; Chief's model-facing contracts, router, workflows, datasets, validators, and assets are unchanged."
+      "carried_forward_reason": "v2.1.2 changes distribution documentation, loader-sync preservation, packaging delegation, tests, and version labels only; Chief's model-facing contracts, router, workflows, datasets, validators, and assets are unchanged."
     },
     "chatgpt-work": {
       "status": "pass",
       "evidence": "carried_forward_v2.1.0_chatgpt_work_15_of_15_77_of_77",
-      "carried_forward_reason": "v2.1.1 changes distribution documentation, OpenAI submission materials, tests for that metadata, and version labels only; the validated v2.1.0 ChatGPT Work receipt remains the applicable model-behavior evidence."
+      "carried_forward_reason": "v2.1.2 changes distribution documentation, loader-sync preservation, packaging delegation, tests, and version labels only; the validated v2.1.0 ChatGPT Work receipt remains the applicable model-behavior evidence."
     }
   },
   "models": {

@@ -89,7 +89,6 @@ REQUIRED = (
     "tests/test_icm.py",
     "tests/test_release.py",
     "tests/model-acceptance.json",
-    "tests/openai-directory-submission.json",
     "tests/receipts/chatgpt-work-v2.1.0.json",
     "tests/test_sync.py",
     "workflows/release/CONTEXT.md",
@@ -208,57 +207,6 @@ def validate_versions() -> list[str]:
             errors.append(
                 f"{name} host version is {value!r}; expected {MANIFEST_VERSION!r}."
             )
-    return errors
-
-
-def validate_openai_submission() -> list[str]:
-    errors: list[str] = []
-    submission = read_json("tests/openai-directory-submission.json")
-    if submission.get("release_version") != VERSION:
-        errors.append("OpenAI directory submission version does not match VERSION.")
-    if submission.get("submission_type") != "skills_only":
-        errors.append("Chief must use the skills-only OpenAI submission type.")
-    if submission.get("submission_status") not in {
-        "not_submitted",
-        "submitted",
-        "approved",
-        "published",
-    }:
-        errors.append("OpenAI directory submission status is invalid.")
-    for field in (
-        "plugin_name",
-        "short_description",
-        "long_description",
-        "website_url",
-        "support_url",
-        "privacy_policy_url",
-        "terms_url",
-    ):
-        value = submission.get(field)
-        if not isinstance(value, str) or not value.strip():
-            errors.append(f"OpenAI directory submission is missing {field}.")
-    for field in ("website_url", "support_url", "privacy_policy_url", "terms_url"):
-        value = submission.get(field, "")
-        if isinstance(value, str) and not value.startswith("https://"):
-            errors.append(f"OpenAI directory submission {field} must use HTTPS.")
-    prompts = submission.get("starter_prompts", [])
-    if not isinstance(prompts, list) or len(prompts) < 3:
-        errors.append("OpenAI directory submission needs at least three starter prompts.")
-    for field, expected in (("positive_tests", 5), ("negative_tests", 3)):
-        cases = submission.get(field, [])
-        if not isinstance(cases, list) or len(cases) < expected:
-            errors.append(f"OpenAI directory submission needs at least {expected} {field}.")
-            continue
-        ids = [case.get("id") for case in cases if isinstance(case, dict)]
-        if len(ids) != len(cases) or len(ids) != len(set(ids)):
-            errors.append(f"OpenAI directory submission {field} IDs must be unique.")
-        for case in cases:
-            if not isinstance(case, dict) or any(
-                not isinstance(case.get(key), str) or not case[key].strip()
-                for key in ("id", "prompt", "expected_behavior", "expected_result_shape")
-            ):
-                errors.append(f"OpenAI directory submission has an incomplete {field} case.")
-                break
     return errors
 
 
@@ -463,16 +411,16 @@ def validate_manifest_paths() -> list[str]:
     marketplace = read_json(".agents/plugins/marketplace.json")
     plugins = marketplace.get("plugins", [])
     if marketplace.get("name") != "codex-chief-of-staff":
-        errors.append("OpenAI marketplace name must be codex-chief-of-staff.")
+        errors.append("Agent Plugins marketplace name must be codex-chief-of-staff.")
     if len(plugins) != 1 or plugins[0].get("name") != "chief-of-staff":
-        errors.append("OpenAI marketplace must expose exactly one Chief plugin.")
+        errors.append("Agent Plugins marketplace must expose exactly one Chief plugin.")
     elif plugins[0].get("source", {}).get("path") != "./":
-        errors.append("OpenAI marketplace must install the repository root.")
+        errors.append("Agent Plugins marketplace must install the repository root.")
     elif plugins[0].get("policy") != {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL",
     }:
-        errors.append("OpenAI marketplace must declare installation and authentication policy.")
+        errors.append("Agent Plugins marketplace must declare installation and authentication policy.")
     hooks = read_json("hooks/hooks.json")
     commands = [
         hook["command"]
@@ -545,7 +493,6 @@ def validate_repository(
     errors.extend(validate_versions())
     errors.extend(validate_model_acceptance(require_pass=require_model_acceptance))
     errors.extend(validate_manifest_paths())
-    errors.extend(validate_openai_submission())
     errors.extend(validate_install_guidance())
     errors.extend(validate_public_text())
     icm_errors, _ = validate_icm()

@@ -3,6 +3,28 @@
 All notable changes are recorded here. Public releases and host manifests use
 the same three-part semantic product version.
 
+## [2.1.2] - 2026-08-08
+
+### Fixed
+
+- Changed project synchronization to replace only Chief's managed loader block.
+  Project-owned instructions before, between, or after the managed sections are
+  now preserved exactly.
+- Added regression coverage for project-local suffix and prefix preservation.
+- Removed stale OpenAI directory-submission scaffolding that described steps
+  the project did not take.
+- Corrected both repository installers so upgrade mode re-registers the local
+  checkout instead of calling a Git-only marketplace command.
+- Aligned the repository release, registered project loaders, and installed
+  cache on one immutable patch version.
+
+### Distribution
+
+- The GitHub repository and its bundled installer scripts remain the only
+  documented installation path.
+- Historical `v2.1.1` assets remain immutable; these corrections ship as
+  `v2.1.2`.
+
 ## [2.1.1] - 2026-08-07
 
 ### Changed

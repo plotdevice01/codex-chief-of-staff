@@ -32,13 +32,8 @@ if ($Uninstall) {
     exit 0
 }
 
-if ($Upgrade) {
-    Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "upgrade", $Marketplace)
-    Invoke-ChiefCommand -Arguments @("plugin", "add", $PluginId)
-} else {
-    Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "add", $RepoRoot)
-    Invoke-ChiefCommand -Arguments @("plugin", "add", $PluginId)
-}
+Invoke-ChiefCommand -Arguments @("plugin", "marketplace", "add", $RepoRoot)
+Invoke-ChiefCommand -Arguments @("plugin", "add", $PluginId)
 
 if (-not $SkipConfig) {
     $Python = Get-Command py -ErrorAction SilentlyContinue
