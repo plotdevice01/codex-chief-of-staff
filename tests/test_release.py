@@ -81,7 +81,7 @@ def main() -> int:
         "cannot satisfy ChatGPT Work acceptance.",
         "**Ask for approval**",
         "**Ask for Approval**, **Approved",
-        "codex exec --ephemeral --sandbox",
+        "codex --ask-for-approval never exec",
         "ui_surface=codex-cli",
         "reason to ask for permission again",
         "Run all scenarios inline in the one fresh task.",

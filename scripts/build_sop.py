@@ -775,7 +775,7 @@ def build(output: Path) -> Path:
         "GPT-5.6 Sol Medium. "
         "Generate the host prompt with scripts/live_acceptance_harness.py. For ChatGPT Work, the owner verifies "
         "the Work UI, Work locally and Ask for approval for this response-only test; that test setting does not alter normal plan-scoped authorization. Record the underlying runtime separately because it may "
-        "report Codex. For Codex, run the matrix through an ephemeral local CLI process with the read-only sandbox and approvals disabled. The Desktop approval presets are not proof of a read-only filesystem sandbox; use Desktop for the separate fresh-load smoke check. Run responses inline. "
+        "report Codex. For Codex, pipe the generated prompt into codex --ask-for-approval never exec --ephemeral --sandbox read-only. The Desktop approval presets are not proof of a read-only filesystem sandbox; use Desktop for the separate fresh-load smoke check. Run responses inline. "
         "Any task creation or delegation invalidates the run. A write attempt, approval request, or file mutation also invalidates it. "
         "The same rule applies to a connector call, external action or host substitution. "
         "Terra XHigh remains pending unless the owner explicitly approves a version-bound release waiver. "

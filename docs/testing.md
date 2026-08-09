@@ -63,7 +63,7 @@ ChatGPT Work prompt only after the owner verifies the current desktop task was
 opened from **Work**, using
 `python scripts/live_acceptance_harness.py prompt --host chatgpt-work --owner-verified-ui`.
 For Codex, pipe that prompt into a fresh local CLI run launched with `codex
-exec --ephemeral --sandbox read-only --ask-for-approval never`. The Codex
+--ask-for-approval never exec --ephemeral --sandbox read-only`. The Codex
 Desktop approval menu does not expose a `Read-only` preset; **Ask for
 Approval**, **Approved by Me**, **Full access**, and **Custom** are not evidence
 of the CLI sandbox mode. Use a fresh Desktop task only to verify the installed

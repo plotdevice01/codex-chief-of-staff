@@ -69,8 +69,8 @@ def build_prompt(host: str, *, owner_verified_ui: bool = False) -> str:
     safety_controls = expected_safety_controls(host)
     if host == "codex":
         safety_line = (
-            "- Codex CLI launched with --ephemeral, --sandbox read-only, and "
-            "--ask-for-approval never;"
+            "- Codex CLI launched with codex --ask-for-approval never exec "
+            "--ephemeral --sandbox read-only;"
         )
     else:
         safety_line = "- Work locally and Ask for approval selected;"
@@ -87,8 +87,8 @@ do not reclassify the owner-verified Work UI from the runtime label.
 """
     else:
         host_evidence = """Command and runtime evidence for this run:
-- launch a fresh local Codex CLI run with `codex exec --ephemeral --sandbox
-  read-only --ask-for-approval never`;
+- launch a fresh local Codex CLI run with `codex --ask-for-approval never exec
+  --ephemeral --sandbox read-only`;
 - the current runtime must report codex;
 - record ui_surface=codex-cli and ui_evidence=command_observed.
 """
@@ -249,9 +249,10 @@ def main() -> int:
             assert "Do not create or delegate tasks" in prompt
             assert f'"requested_surface":"{host}"' in prompt
             if host == "codex":
-                assert "--sandbox read-only" in prompt
-                assert "--ask-for-approval never" in prompt
-                assert "--ephemeral" in prompt
+                assert (
+                    "codex --ask-for-approval never exec --ephemeral "
+                    "--sandbox read-only"
+                ) in prompt.replace("\n", " ")
                 assert '"ui_surface":"codex-cli"' in prompt
             else:
                 assert "Ask for approval" in prompt

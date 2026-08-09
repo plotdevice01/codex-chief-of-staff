@@ -25,8 +25,8 @@ and public verification after every required gate passes.
 2. Render the generated SOP to PNG and inspect every page.
 3. Install the candidate locally and run all live scenarios in a fresh Codex
    CLI run and ChatGPT Work task through `scripts/live_acceptance_harness.py`. Run the
-   Codex matrix in an ephemeral local CLI process with `--sandbox read-only`
-   and `--ask-for-approval never`; use Codex Desktop for a separate fresh-load
+   Codex matrix in an ephemeral local CLI process with `codex
+   --ask-for-approval never exec --ephemeral --sandbox read-only`; use Codex Desktop for a separate fresh-load
    smoke check. Require the host-specific safety control (CLI read-only plus
    no approvals and no persistence for Codex; **Work locally** plus **Ask for
    approval** for ChatGPT Work), separate UI and runtime evidence, inline

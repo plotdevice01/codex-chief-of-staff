@@ -73,9 +73,11 @@ def main() -> int:
         assert "response-only evaluation" in prompt
         assert "Do not create or delegate tasks" in prompt
         assert not validate_receipt(valid_receipt(host), host)
-    assert "--sandbox read-only" in build_prompt("codex")
-    assert "--ask-for-approval never" in build_prompt("codex")
-    assert "--ephemeral" in build_prompt("codex")
+    codex_prompt = build_prompt("codex").replace("\n", " ")
+    assert (
+        "codex --ask-for-approval never exec --ephemeral --sandbox read-only"
+        in codex_prompt
+    )
     assert "Ask for approval" in build_prompt(
         "chatgpt-work", owner_verified_ui=True
     )
