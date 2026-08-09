@@ -109,6 +109,10 @@ the same three-part semantic product version.
   **Ask for approval** controls. Corrected Codex acceptance to use an
   ephemeral CLI run with an enforced read-only sandbox; the Desktop approval
   presets are no longer mislabeled as a `Read-only` UI option.
+- Sealed live acceptance now embeds installed Chief sources, the complete
+  LIVE-014 content query, and inline AI Sloppy Copy evidence before the model
+  run. The model makes zero tool calls, avoiding native Windows sandbox process
+  failures without weakening the read-only or never-approve controls.
 - Separated owner-verified Work UI evidence from agent-observed runtime
   evidence. A `codex` runtime is valid beneath the Work UI and no longer causes
   a false host mismatch.

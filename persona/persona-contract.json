@@ -118,6 +118,7 @@
   ],
   "live_acceptance_execution_contract": {
     "mode": "response_only",
+    "evidence_mode": "embedded_preflight",
     "contract_reference": "skills/chief-of-staff/references/live-acceptance.md",
     "host_safety_controls": {
       "codex": {"sandbox_mode": "read-only", "approval_policy": "never", "session_persistence": "ephemeral"},
@@ -136,16 +137,20 @@
     "host_identity_required": true,
     "host_evidence_separation_required": true,
     "run_inline": true,
+    "sealed_model_tool_calls": 0,
     "partial_pass_reuse": false,
     "forbidden_actions": [
+      "tool_call",
       "task_creation",
       "delegation",
+      "write_attempt",
+      "approval_request",
       "file_mutation",
       "temporary_file",
       "connector_call",
       "external_action"
     ],
-    "inline_copy_validation": "ai_sloppy_copy --text",
+    "inline_copy_validation": "embedded preflight ai_sloppy_copy --text receipt",
     "failure_policy": "any forbidden action invalidates the complete host run"
   },
   "live_acceptance_tests": [

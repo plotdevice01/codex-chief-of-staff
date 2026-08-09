@@ -27,10 +27,13 @@ and public verification after every required gate passes.
    CLI run and ChatGPT Work task through `scripts/live_acceptance_harness.py`. Run the
    Codex matrix in an ephemeral local CLI process with `codex
    --ask-for-approval never exec --ephemeral --sandbox read-only`; use Codex Desktop for a separate fresh-load
-   smoke check. Require the host-specific safety control (CLI read-only plus
+   smoke check. Generate the sealed prompt with `--plugin-root` and the observed
+   `--runtime-version` so the harness
+   embeds installed sources and deterministic content evidence before the model
+   run. Require the host-specific safety control (CLI read-only plus
    no approvals and no persistence for Codex; **Work locally** plus **Ask for
    approval** for ChatGPT Work), separate UI and runtime evidence, inline
-   response-only execution, and zero task, attempted-write, approval, file,
+   response-only execution, zero model tool calls, and zero task, attempted-write, approval, file,
    connector, or external mutations. ChatGPT Work requires owner-verified Work UI evidence; its agent
    runtime may report `codex`.
 4. Confirm a fresh Codex architecture prompt activates ICM enforcement and

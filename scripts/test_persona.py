@@ -145,6 +145,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
     execution_contract = contract.get("live_acceptance_execution_contract", {})
     expected_execution_contract = {
         "mode": "response_only",
+        "evidence_mode": "embedded_preflight",
         "contract_reference": "skills/chief-of-staff/references/live-acceptance.md",
         "host_safety_controls": {
             "codex": {
@@ -170,16 +171,20 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "host_identity_required": True,
         "host_evidence_separation_required": True,
         "run_inline": True,
+        "sealed_model_tool_calls": 0,
         "partial_pass_reuse": False,
         "forbidden_actions": [
+            "tool_call",
             "task_creation",
             "delegation",
+            "write_attempt",
+            "approval_request",
             "file_mutation",
             "temporary_file",
             "connector_call",
             "external_action",
         ],
-        "inline_copy_validation": "ai_sloppy_copy --text",
+        "inline_copy_validation": "embedded preflight ai_sloppy_copy --text receipt",
         "failure_policy": "any forbidden action invalidates the complete host run",
     }
     if execution_contract != expected_execution_contract:
@@ -241,6 +246,7 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "Run the seventeen",
         "references/live-acceptance.md",
         "separate UI and runtime evidence",
+        "zero tool calls",
         "Never create or delegate tasks",
     )
     for value in required_skill_blocks:
