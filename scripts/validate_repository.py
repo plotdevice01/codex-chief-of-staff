@@ -237,11 +237,9 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
         )
     elif hosts.get("chatgpt-work", {}).get("status") == "pass":
         errors.append("ChatGPT Work release receipt is missing.")
-    waived_models, waiver_errors = validate_release_waiver(evidence)
-    errors.extend(waiver_errors)
     models = evidence.get("models", {})
-    if set(models) != {"gpt-5.6-sol", "gpt-5.6-terra"}:
-        errors.append("Model acceptance must cover GPT-5.6 Sol and GPT-5.6 Terra.")
+    if set(models) != {"gpt-5.6-sol"}:
+        errors.append("Model acceptance must cover only the active GPT-5.6 Sol profile.")
         return errors
     for name, result in models.items():
         status = result.get("status")
@@ -249,7 +247,7 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
             errors.append(f"{name} model acceptance has invalid status {status!r}.")
         if status == "fail" and not result.get("evidence"):
             errors.append(f"{name} failed model acceptance needs evidence.")
-        if require_pass and status != "pass" and name not in waived_models:
+        if require_pass and status != "pass":
             errors.append(f"{name} model acceptance did not pass.")
         if set(result.get("tests", [])) != expected_tests:
             errors.append(f"{name} model acceptance does not cover every live test.")
@@ -298,49 +296,7 @@ def validate_model_acceptance(*, require_pass: bool = False) -> list[str]:
     return errors
 
 
-def validate_release_waiver(evidence: dict) -> tuple[set[str], list[str]]:
-    waiver = evidence.get("release_waiver")
-    if waiver is None:
-        return set(), []
-
-    errors: list[str] = []
-    if waiver.get("status") != "approved":
-        errors.append("Release waiver status must be approved.")
-    if waiver.get("release_version") != VERSION:
-        errors.append("Release waiver does not match the release version.")
-    for field in ("approved_at", "approved_by", "reason"):
-        if not isinstance(waiver.get(field), str) or not waiver[field].strip():
-            errors.append(f"Release waiver requires {field}.")
-
-    waived_checks = waiver.get("waived_checks")
-    if not isinstance(waived_checks, list) or not waived_checks:
-        errors.append("Release waiver requires at least one waived check.")
-        return set(), errors
-    if len(waived_checks) != len(set(waived_checks)):
-        errors.append("Release waiver contains duplicate checks.")
-
-    allowed = {"gpt-5.6-sol", "gpt-5.6-terra"}
-    waived_models = {
-        check.removeprefix("models.")
-        for check in waived_checks
-        if isinstance(check, str) and check.startswith("models.")
-    }
-    invalid = set(waived_checks) - {f"models.{name}" for name in allowed}
-    if invalid:
-        errors.append(
-            "Release waiver may cover only pending Sol or Terra model checks."
-        )
-    models = evidence.get("models", {})
-    for name in waived_models:
-        if models.get(name, {}).get("status") != "pending":
-            errors.append(f"Release waiver may cover only pending {name} evidence.")
-    return waived_models & allowed, errors
-
-
 def model_acceptance_release_status(evidence: dict) -> str:
-    waived_models, waiver_errors = validate_release_waiver(evidence)
-    if waiver_errors:
-        return "candidate"
     if evidence.get("installed_runtime_smoke", {}).get("status") != "pass":
         return "candidate"
     if not all(
@@ -351,11 +307,10 @@ def model_acceptance_release_status(evidence: dict) -> str:
     models = evidence.get("models", {})
     if not all(
         result.get("status") == "pass"
-        or (result.get("status") == "pending" and name in waived_models)
-        for name, result in models.items()
+        for result in models.values()
     ):
         return "candidate"
-    return "pass_with_waiver" if waived_models else "pass"
+    return "pass"
 
 
 def validate_manifest_paths() -> list[str]:

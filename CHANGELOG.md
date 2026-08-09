@@ -38,6 +38,8 @@ the same three-part semantic product version.
 - This release changes model-facing behavior. Prior host receipts are not
   carried forward; fresh Codex and ChatGPT Work acceptance is required before
   a public release is tagged.
+- Removed the secondary Terra test and its waiver path. Sol Medium is the sole
+  active release profile.
 
 ## [2.1.2] - 2026-08-08
 

@@ -1,0 +1,164 @@
+{
+    "schema_version": 5,
+    "status": "PASS",
+    "host": {
+        "requested_surface": "chatgpt-work",
+        "ui_surface": "work",
+        "ui_evidence": "owner_verified",
+        "runtime_surface": "codex",
+        "version": "gpt-5.6-sol-medium",
+        "mode": "local"
+    },
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "chief_version": "2.2.0",
+    "safety_controls": {
+        "execution_mode": "work_locally",
+        "approval_policy": "ask_for_approval"
+    },
+    "evidence_mode": "embedded_preflight",
+    "discoverable_chief_skills": 1,
+    "hook_or_skill_trust": "Owner selected Chief; installed v2.2.0 sources, manifest, package boundary, and embedded acceptance evidence verified.",
+    "bundled_runtimes": {
+        "ai-sloppy-copy": "0.5.0",
+        "brand-voice-factory": "0.2.1",
+        "crafty-carousels": "0.6.1"
+    },
+    "scenario_results": [
+        {
+            "id": "LIVE-001",
+            "status": "PASS",
+            "criteria_passed": 3,
+            "criteria_total": 3,
+            "evidence": "Response led with 2 + 2 = 4, briefly explained combining two pairs, and omitted forced analysis headings and motivational filler."
+        },
+        {
+            "id": "LIVE-002",
+            "status": "PASS",
+            "criteria_passed": 4,
+            "criteria_total": 4,
+            "evidence": "Response directly rejected three microservices as needless operational overhead, named deployment and failure costs, recommended one tested shared function or module, and used brief architecture sarcasm only to clarify the criticism."
+        },
+        {
+            "id": "LIVE-003",
+            "status": "PASS",
+            "criteria_passed": 4,
+            "criteria_total": 4,
+            "evidence": "Response used Actionable Items, Noise / Deflection, and The Real Problem; it required a named owner, committed deadline, concrete deliverable, and current blocker."
+        },
+        {
+            "id": "LIVE-004",
+            "status": "PASS",
+            "criteria_passed": 5,
+            "criteria_total": 5,
+            "evidence": "Response identified a 144x annualization symptom, separated it from the duplicated x12 root cause, ranked the duplicated conversion first, removed one multiplier, and verified that monthly revenue of 100 becomes 1,200 rather than 14,400."
+        },
+        {
+            "id": "LIVE-005",
+            "status": "PASS",
+            "criteria_passed": 4,
+            "criteria_total": 4,
+            "evidence": "Response contained only the exact commands `git diff -- config.json` and `python validate_config.py config.json`, using bare fragments with no execution or niceties."
+        },
+        {
+            "id": "LIVE-006",
+            "status": "PASS",
+            "criteria_passed": 5,
+            "criteria_total": 5,
+            "evidence": "Professional client note stated that launch is blocked until the required credentials arrive, assigned secure delivery to the client administrator, and promised access verification plus a revised launch confirmation next."
+        },
+        {
+            "id": "LIVE-007",
+            "status": "PASS",
+            "criteria_passed": 4,
+            "criteria_total": 4,
+            "evidence": "Response criticized the combined rewrite, skipped tests, and direct production deployment\u2014not the user's distress\u2014and prescribed a smaller scoped fix, tests, staging, and rollback plan without cruelty or insults."
+        },
+        {
+            "id": "LIVE-008",
+            "status": "PASS",
+            "criteria_passed": 5,
+            "criteria_total": 5,
+            "evidence": "Response supplied `def first(items): return items[0] if items else None`, preserved non-empty behavior, handled the empty sequence directly, and included runnable assertions for empty and non-empty inputs."
+        },
+        {
+            "id": "LIVE-009",
+            "status": "PASS",
+            "criteria_passed": 6,
+            "criteria_total": 6,
+            "evidence": "Response automatically selected ICM build mode for the repeating weekly-report unit, chose the smallest recurring factory form, separated reusable template/rules from each week's report, named source-review and publication gates, and added no speculative stages."
+        },
+        {
+            "id": "LIVE-010",
+            "status": "PASS",
+            "criteria_passed": 4,
+            "criteria_total": 4,
+            "evidence": "Response rejected a ceremonial workspace and used a compact task contract: input was the script and existing test, job was one local-variable rename, output was the unchanged-behavior script, and check was the existing test."
+        },
+        {
+            "id": "LIVE-011",
+            "status": "PASS",
+            "criteria_passed": 5,
+            "criteria_total": 5,
+            "evidence": "Response ordered a read-only inventory, target tree, and explicit old-to-new migration map before moves; treated the approved restructure and duplicate cleanup as durable authorization and added no redundant approval checkpoint."
+        },
+        {
+            "id": "LIVE-012",
+            "status": "PASS",
+            "criteria_passed": 5,
+            "criteria_total": 5,
+            "evidence": "Response documented that full folder-based ICM is too slow for tight-loop branching, selected code-based orchestration, retained explicit context IDs and observable state, added human stop and external-action gates, and recorded the fit exception."
+        },
+        {
+            "id": "LIVE-013",
+            "status": "PASS",
+            "criteria_passed": 6,
+            "criteria_total": 6,
+            "evidence": "Response refused to claim Crafty completion merely from reading its skill, named skipped library query, framework application, CTA compatibility, visual progression, and final copy validation, stated that generic copy was unvalidated, and required a governed rerun in its execution trace."
+        },
+        {
+            "id": "LIVE-014",
+            "status": "PASS",
+            "criteria_passed": 10,
+            "criteria_total": 10,
+            "evidence": "Response classified paid_video; used embedded evidence covering 751 hooks, 7 scripts, and 39 CTAs; rejected free-download CTA pbl-cta-sales-08; selected hook business-077, script pbl-script-04, and CTA pbl-cta-sales-13; supplied the stop-scroll hand action and five-step visual progression; applied Hook -> Value -> CTA using only audience, $200 price, offer, and booking CTA; and reported `PASS: no AI Sloppy Copy findings.` with an execution receipt."
+        },
+        {
+            "id": "LIVE-015",
+            "status": "PASS",
+            "criteria_passed": 7,
+            "criteria_total": 7,
+            "evidence": "Response routed through Chief and pinned Crafty 0.6.1, asked only the first blocking question\u2014content class\u2014left client facts unknown, generated no images, made no release claim, and returned a held-input execution receipt."
+        },
+        {
+            "id": "LIVE-016",
+            "status": "PASS",
+            "criteria_passed": 7,
+            "criteria_total": 7,
+            "evidence": "Response said no additional publication approval was required, preserved tests before push, PR, merge, tag, and release, required read-back and idempotency before retry, limited reconfirmation to material scope change or a real system blocker, and preserved the owner's ability to steer or revoke."
+        },
+        {
+            "id": "LIVE-017",
+            "status": "PASS",
+            "criteria_passed": 6,
+            "criteria_total": 6,
+            "evidence": "Response led with the completed result, placed numbered `Next steps` immediately before `Execution trace`, used `1. None - complete.`, deferred no available action, listed no fictional blockers, repeated no summary, and ended with the trace."
+        }
+    ],
+    "assertions": {
+        "passed": 90,
+        "total": 90
+    },
+    "run_controls": {
+        "tool_calls": 0,
+        "task_creations": 0,
+        "delegations": 0,
+        "write_attempts": 0,
+        "approval_requests": 0,
+        "file_mutations": 0,
+        "connector_calls": 0,
+        "external_actions": 0,
+        "workspace_state_match": true
+    },
+    "execution_trace": "Chief Validate workflow, installed v2.2.0. Preflight loaded the governed acceptance contract, resolved the personal chief-of-staff scope, verified the owner-attested Work UI separately from the codex runtime, generated the sealed prompt from the installed plugin, verified one discoverable Chief skill, queried 751 hooks/7 scripts/39 CTAs, and ran inline AI Sloppy Copy. validate_install initially stopped because its configuration path was not implicit; the authorized read-only retry supplied the configured private Chief path and passed. Static results: installation PASS, persona 97/97, integration 11/11, scenarios defined 17. The clean workspace baseline matched after final preflight. Sealed phase: all 17 scenarios ran inline and passed 90/90; zero tools, writes, mutations, tasks, delegation, connectors, approval requests, or external actions. No handoffs or skipped acceptance requirements."
+}
