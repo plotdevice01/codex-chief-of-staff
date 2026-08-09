@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 from scripts.live_acceptance_harness import (  # noqa: E402
+    build_embedded_sources,
     build_prompt,
     example_host_evidence,
     expected_safety_controls,
@@ -24,12 +25,13 @@ def valid_receipt(host: str) -> dict:
     contract = load_contract()
     scenarios, total = expected_counts(contract)
     return {
-        "schema_version": 4,
+        "schema_version": 5,
         "status": "PASS",
         "host": example_host_evidence(host),
         "model": "gpt-5.6-sol",
         "reasoning_effort": "medium",
         "chief_version": VERSION,
+        "evidence_mode": "embedded_preflight",
         "safety_controls": expected_safety_controls(host),
         "discoverable_chief_skills": 1,
         "hook_or_skill_trust": "test",
@@ -50,6 +52,7 @@ def valid_receipt(host: str) -> dict:
         ],
         "assertions": {"passed": total, "total": total},
         "run_controls": {
+            "tool_calls": 0,
             "task_creations": 0,
             "delegations": 0,
             "write_attempts": 0,
@@ -68,25 +71,67 @@ def main() -> int:
     scenarios, total = expected_counts(contract)
     assert len(scenarios) == 17
     assert total == 90
+    embedded_sources = build_embedded_sources(ROOT)
     for host in ("codex", "chatgpt-work"):
-        prompt = build_prompt(host, owner_verified_ui=host == "chatgpt-work")
+        prompt = build_prompt(
+            host,
+            owner_verified_ui=host == "chatgpt-work",
+            embedded_sources=embedded_sources,
+            runtime_version="test",
+        )
         assert "response-only evaluation" in prompt
         assert "Do not create or delegate tasks" in prompt
+        assert "Do not call any tool" in prompt
+        assert '"hooks":751,"scripts":7,"ctas":39' in prompt
+        assert '"business-077"' in prompt
+        assert '"pbl-script-04"' in prompt
+        assert '"pbl-cta-sales-13"' in prompt
+        assert '"status":"pass","output":"PASS:' in prompt
+        for item in scenarios:
+            count = len(item["pass_criteria"])
+            exact_result = (
+                f'"id":"{item["id"]}","status":"PASS",'
+                f'"criteria_passed":{count},"criteria_total":{count}'
+            )
+            assert exact_result in prompt
         assert not validate_receipt(valid_receipt(host), host)
-    codex_prompt = build_prompt("codex").replace("\n", " ")
+    codex_prompt = build_prompt(
+        "codex", embedded_sources=embedded_sources, runtime_version="test"
+    ).replace("\n", " ")
     assert (
         "codex --ask-for-approval never exec --ephemeral --sandbox read-only"
         in codex_prompt
     )
     assert "Ask for approval" in build_prompt(
-        "chatgpt-work", owner_verified_ui=True
+        "chatgpt-work",
+        owner_verified_ui=True,
+        embedded_sources=embedded_sources,
+        runtime_version="test",
     )
     try:
-        build_prompt("chatgpt-work")
+        build_prompt(
+            "chatgpt-work",
+            embedded_sources=embedded_sources,
+            runtime_version="test",
+        )
     except ValueError as error:
         assert "owner-verified UI evidence" in str(error)
     else:
         raise AssertionError("Work prompt accepted without owner UI verification")
+
+    try:
+        build_prompt("codex", runtime_version="test")
+    except ValueError as error:
+        assert "embedded installed sources" in str(error)
+    else:
+        raise AssertionError("Codex prompt accepted without embedded evidence")
+
+    try:
+        build_prompt("codex", embedded_sources=embedded_sources)
+    except ValueError as error:
+        assert "observed runtime version" in str(error)
+    else:
+        raise AssertionError("Codex prompt accepted without runtime version")
 
     work_on_codex_runtime = valid_receipt("chatgpt-work")
     work_on_codex_runtime["host"]["runtime_surface"] = "codex"
@@ -120,6 +165,20 @@ def main() -> int:
     write_attempt["run_controls"]["write_attempts"] = 1
     assert "run control write_attempts must be zero" in validate_receipt(
         write_attempt, "codex"
+    )
+
+    tool_call = valid_receipt("codex")
+    tool_call["run_controls"]["tool_calls"] = 1
+    assert "run control tool_calls must be zero" in validate_receipt(
+        tool_call, "codex"
+    )
+
+    placeholder_evidence = valid_receipt("codex")
+    placeholder_evidence["scenario_results"][0]["evidence"] = (
+        "Generate scenario-specific evidence from the graded response."
+    )
+    assert "LIVE-001 evidence is required" in validate_receipt(
+        placeholder_evidence, "codex"
     )
 
     mutated = valid_receipt("chatgpt-work")

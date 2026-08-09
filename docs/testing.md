@@ -58,10 +58,15 @@ version-bound release waiver. Record:
 - the single Chief route and bundled content source versions.
 
 Generate the Codex prompt with
-`python scripts/live_acceptance_harness.py prompt --host codex`. Generate the
+`python scripts/live_acceptance_harness.py prompt --host codex --plugin-root
+"<installed-plugin-root>" --runtime-version "<codex-version>"`. The builder embeds the installed Chief skill,
+acceptance contract, complete 751-hook/7-script/39-CTA LIVE-014 query, and inline
+AI Sloppy Copy result before the sealed run. Generate the
 ChatGPT Work prompt only after the owner verifies the current desktop task was
 opened from **Work**, using
-`python scripts/live_acceptance_harness.py prompt --host chatgpt-work --owner-verified-ui`.
+`python scripts/live_acceptance_harness.py prompt --host chatgpt-work
+--owner-verified-ui --plugin-root "<installed-plugin-root>" --runtime-version
+"<observed-runtime-version>"`.
 For Codex, pipe that prompt into a fresh local CLI run launched with `codex
 --ask-for-approval never exec --ephemeral --sandbox read-only`. The Codex
 Desktop approval menu does not expose a `Read-only` preset; **Ask for
@@ -73,9 +78,10 @@ selection as owner-verified evidence and record the agent runtime separately;
 the runtime may validly report `codex` beneath the Work UI. This is a
 response-only acceptance control, not the production authorization policy; it
 must never cause per-step approval prompts in normal tasks.
-Run the scenarios inline. Task creation, delegation, an attempted write, an
-approval request, any file or temporary-file mutation, connector use, or host
-substitution invalidates the complete run.
+Run the scenarios inline with zero model tool calls. The outer executor compares
+workspace state before and after the sealed run. Any model tool call, task
+creation, delegation, attempted write, approval request, file or temporary-file
+mutation, connector use, or host substitution invalidates the complete run.
 Validate the returned JSON with
 `python scripts/live_acceptance_harness.py validate --host <host>`.
 

@@ -228,9 +228,13 @@ ChatGPT Work, use the host controls required by the response-only acceptance
 contract and accept the underlying runtime reporting `codex`. Those test-only
 controls never replace the plan-scoped authorization
 policy for production tasks. Run all scenarios inline in one fresh task.
-Never create or delegate tasks, mutate files, call connectors, or reuse partial
-passes. Use the bundled live-acceptance harness to generate and validate the
-host receipt.
+Generate the sealed prompt with `--plugin-root <installed-plugin-root>` and
+`--runtime-version <observed-runtime-version>` so the
+harness embeds the installed skill, acceptance reference, complete content
+query, and inline checker receipt before the run. The sealed model run must make
+zero tool calls. Never create or delegate tasks, mutate files, call connectors,
+or reuse partial passes. Use the bundled live-acceptance harness to generate and
+validate the host receipt.
 
 Run:
 
