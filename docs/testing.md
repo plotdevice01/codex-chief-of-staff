@@ -45,7 +45,7 @@ These checks cover:
 ## Live behavior checks
 
 Run every prompt in `persona/persona-contract.json` after candidate installation
-on GPT-5.6 Sol Medium in fresh Codex and ChatGPT Work tasks. v2.2.0 changes the
+on GPT-5.6 Sol Medium in a fresh Codex CLI run and ChatGPT Work task. v2.2.0 changes the
 model-facing authorization contract, so prior host evidence cannot be carried
 forward. Terra XHigh remains pending unless the owner explicitly approves a
 version-bound release waiver. Record:
@@ -62,14 +62,20 @@ Generate the Codex prompt with
 ChatGPT Work prompt only after the owner verifies the current desktop task was
 opened from **Work**, using
 `python scripts/live_acceptance_harness.py prompt --host chatgpt-work --owner-verified-ui`.
-For Codex, use the built-in `:read-only` permission profile. For ChatGPT Work,
+For Codex, pipe that prompt into a fresh local CLI run launched with `codex
+exec --ephemeral --sandbox read-only --ask-for-approval never`. The Codex
+Desktop approval menu does not expose a `Read-only` preset; **Ask for
+Approval**, **Approved by Me**, **Full access**, and **Custom** are not evidence
+of the CLI sandbox mode. Use a fresh Desktop task only to verify the installed
+version, trusted hook, and single discoverable Chief route. For ChatGPT Work,
 select **Work**, **Work locally**, and **Ask for approval**. Record that UI
 selection as owner-verified evidence and record the agent runtime separately;
 the runtime may validly report `codex` beneath the Work UI. This is a
 response-only acceptance control, not the production authorization policy; it
 must never cause per-step approval prompts in normal tasks.
-Run the scenarios inline. Task creation, delegation, any file or temporary-file
-mutation, connector use, or host substitution invalidates the complete run.
+Run the scenarios inline. Task creation, delegation, an attempted write, an
+approval request, any file or temporary-file mutation, connector use, or host
+substitution invalidates the complete run.
 Validate the returned JSON with
 `python scripts/live_acceptance_harness.py validate --host <host>`.
 

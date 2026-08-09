@@ -12,11 +12,18 @@ VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 HOSTS = ("codex", "chatgpt-work")
 
 
-def expected_safety_control(host: str) -> dict[str, str]:
+def expected_safety_controls(host: str) -> dict[str, str]:
     if host == "codex":
-        return {"type": "permission_profile", "value": ":read-only"}
+        return {
+            "sandbox_mode": "read-only",
+            "approval_policy": "never",
+            "session_persistence": "ephemeral",
+        }
     if host == "chatgpt-work":
-        return {"type": "approval_policy", "value": "ask_for_approval"}
+        return {
+            "execution_mode": "work_locally",
+            "approval_policy": "ask_for_approval",
+        }
     raise ValueError(f"unsupported host: {host}")
 
 
@@ -24,8 +31,8 @@ def example_host_evidence(host: str) -> dict[str, str]:
     if host == "codex":
         return {
             "requested_surface": "codex",
-            "ui_surface": "codex",
-            "ui_evidence": "runtime_observed",
+            "ui_surface": "codex-cli",
+            "ui_evidence": "command_observed",
             "runtime_surface": "codex",
             "version": "...",
             "mode": "local",
@@ -59,12 +66,15 @@ def build_prompt(host: str, *, owner_verified_ui: bool = False) -> str:
     contract = load_contract()
     scenarios, criteria_total = expected_counts(contract)
     cases = json.dumps(scenarios, ensure_ascii=False, separators=(",", ":"))
-    safety_control = expected_safety_control(host)
+    safety_controls = expected_safety_controls(host)
     if host == "codex":
-        safety_line = "- built-in :read-only permission profile;"
+        safety_line = (
+            "- Codex CLI launched with --ephemeral, --sandbox read-only, and "
+            "--ask-for-approval never;"
+        )
     else:
         safety_line = "- Work locally and Ask for approval selected;"
-    safety_json = json.dumps(safety_control, separators=(",", ":"))
+    safety_json = json.dumps(safety_controls, separators=(",", ":"))
     host_json = json.dumps(example_host_evidence(host), separators=(",", ":"))
     if host == "chatgpt-work":
         host_evidence = """Owner UI attestation for this run:
@@ -76,9 +86,11 @@ runtime surface. The runtime may correctly report codex beneath ChatGPT Work;
 do not reclassify the owner-verified Work UI from the runtime label.
 """
     else:
-        host_evidence = """Runtime evidence for this run:
+        host_evidence = """Command and runtime evidence for this run:
+- launch a fresh local Codex CLI run with `codex exec --ephemeral --sandbox
+  read-only --ask-for-approval never`;
 - the current runtime must report codex;
-- the built-in :read-only permission profile must be active.
+- record ui_surface=codex-cli and ui_evidence=command_observed.
 """
     return f"""Chief v{VERSION} live release acceptance. Expected host: {host}.
 
@@ -110,7 +122,7 @@ Scenarios ({len(scenarios)}; {criteria_total} criteria):
 {cases}
 
 Return one JSON object without a Markdown fence using this schema:
-{{"schema_version":3,"status":"PASS|FAIL|INVALID","host":{host_json},"model":"gpt-5.6-sol","reasoning_effort":"medium","chief_version":"{VERSION}","safety_control":{safety_json},"discoverable_chief_skills":1,"hook_or_skill_trust":"...","bundled_runtimes":{{"ai-sloppy-copy":"0.5.0","brand-voice-factory":"0.2.1","crafty-carousels":"0.6.1"}},"scenario_results":[{{"id":"LIVE-001","status":"PASS","criteria_passed":3,"criteria_total":3,"evidence":"..."}}],"assertions":{{"passed":{criteria_total},"total":{criteria_total}}},"run_controls":{{"task_creations":0,"delegations":0,"file_mutations":0,"connector_calls":0,"external_actions":0,"workspace_state_match":true}},"execution_trace":"..."}}
+{{"schema_version":4,"status":"PASS|FAIL|INVALID","host":{host_json},"model":"gpt-5.6-sol","reasoning_effort":"medium","chief_version":"{VERSION}","safety_controls":{safety_json},"discoverable_chief_skills":1,"hook_or_skill_trust":"...","bundled_runtimes":{{"ai-sloppy-copy":"0.5.0","brand-voice-factory":"0.2.1","crafty-carousels":"0.6.1"}},"scenario_results":[{{"id":"LIVE-001","status":"PASS","criteria_passed":3,"criteria_total":3,"evidence":"..."}}],"assertions":{{"passed":{criteria_total},"total":{criteria_total}}},"run_controls":{{"task_creations":0,"delegations":0,"write_attempts":0,"approval_requests":0,"file_mutations":0,"connector_calls":0,"external_actions":0,"workspace_state_match":true}},"execution_trace":"..."}}
 """
 
 
@@ -123,8 +135,8 @@ def validate_receipt(
     scenarios, criteria_total = expected_counts(contract)
     expected = {item["id"]: len(item["pass_criteria"]) for item in scenarios}
 
-    if receipt.get("schema_version") != 3:
-        errors.append("receipt schema_version must be 3")
+    if receipt.get("schema_version") != 4:
+        errors.append("receipt schema_version must be 4")
     if receipt.get("status") != "PASS":
         errors.append("receipt status is not PASS")
     host_evidence = receipt.get("host", {})
@@ -142,10 +154,10 @@ def validate_receipt(
         if host_evidence.get("runtime_surface") not in ("codex", "chatgpt-work"):
             errors.append("ChatGPT Work runtime must be codex or chatgpt-work")
     else:
-        if host_evidence.get("ui_surface") != "codex":
-            errors.append("Codex acceptance requires ui_surface=codex")
-        if host_evidence.get("ui_evidence") != "runtime_observed":
-            errors.append("Codex acceptance requires ui_evidence=runtime_observed")
+        if host_evidence.get("ui_surface") != "codex-cli":
+            errors.append("Codex acceptance requires ui_surface=codex-cli")
+        if host_evidence.get("ui_evidence") != "command_observed":
+            errors.append("Codex acceptance requires ui_evidence=command_observed")
         if host_evidence.get("runtime_surface") != "codex":
             errors.append("Codex acceptance requires runtime_surface=codex")
     if receipt.get("model") != "gpt-5.6-sol":
@@ -154,11 +166,11 @@ def validate_receipt(
         errors.append("reasoning effort must be medium")
     if receipt.get("chief_version") != expected_version:
         errors.append(f"Chief version must be {expected_version}")
-    required_control = expected_safety_control(host)
-    if receipt.get("safety_control") != required_control:
+    required_controls = expected_safety_controls(host)
+    if receipt.get("safety_controls") != required_controls:
         errors.append(
-            "safety control must be "
-            f"{required_control['type']}={required_control['value']}"
+            "safety controls must be "
+            f"{json.dumps(required_controls, separators=(',', ':'))}"
         )
     if receipt.get("discoverable_chief_skills") != 1:
         errors.append("exactly one Chief-owned skill must be discoverable")
@@ -194,6 +206,8 @@ def validate_receipt(
     for key in (
         "task_creations",
         "delegations",
+        "write_attempts",
+        "approval_requests",
         "file_mutations",
         "connector_calls",
         "external_actions",
@@ -235,12 +249,16 @@ def main() -> int:
             assert "Do not create or delegate tasks" in prompt
             assert f'"requested_surface":"{host}"' in prompt
             if host == "codex":
-                assert ":read-only" in prompt
+                assert "--sandbox read-only" in prompt
+                assert "--ask-for-approval never" in prompt
+                assert "--ephemeral" in prompt
+                assert '"ui_surface":"codex-cli"' in prompt
             else:
                 assert "Ask for approval" in prompt
                 assert "owner_verified" in prompt
                 assert '"runtime_surface":"codex"' in prompt
-                assert '\"value\":\"ask_for_approval\"' in prompt
+                assert '\"approval_policy\":\"ask_for_approval\"' in prompt
+                assert '\"execution_mode\":\"work_locally\"' in prompt
         print("PASS: host-safe live acceptance harness covers 17 scenarios and 90 criteria.")
         return 0
 

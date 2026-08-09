@@ -106,8 +106,9 @@ the same three-part semantic product version.
 - Changed inline AI Sloppy Copy validation to use `--text` so chat drafts are
   not written to temporary files solely for checking.
 - Corrected ChatGPT Work acceptance to use its visible **Work locally** and
-  **Ask for approval** controls. Codex alone requires the built-in
-  `:read-only` permission profile.
+  **Ask for approval** controls. Corrected Codex acceptance to use an
+  ephemeral CLI run with an enforced read-only sandbox; the Desktop approval
+  presets are no longer mislabeled as a `Read-only` UI option.
 - Separated owner-verified Work UI evidence from agent-observed runtime
   evidence. A `codex` runtime is valid beneath the Work UI and no longer causes
   a false host mismatch.
