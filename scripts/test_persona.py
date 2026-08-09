@@ -147,15 +147,19 @@ def validate(config_path: Path | None = None) -> tuple[list[str], dict]:
         "mode": "response_only",
         "contract_reference": "skills/chief-of-staff/references/live-acceptance.md",
         "host_safety_controls": {
-            "codex": {"type": "permission_profile", "value": ":read-only"},
+            "codex": {
+                "sandbox_mode": "read-only",
+                "approval_policy": "never",
+                "session_persistence": "ephemeral",
+            },
             "chatgpt-work": {
-                "type": "approval_policy",
-                "value": "ask_for_approval",
+                "execution_mode": "work_locally",
+                "approval_policy": "ask_for_approval",
             },
         },
         "host_evidence_rules": {
             "codex": {
-                "ui_evidence": "runtime_observed",
+                "ui_evidence": "command_observed",
                 "allowed_runtime_surfaces": ["codex"],
             },
             "chatgpt-work": {
@@ -303,7 +307,7 @@ def main() -> int:
     )
     print(f"PDF SHA-256: {metrics['source_pdf_sha256']}")
     print(f"Persona text SHA-256: {metrics['persona_text_sha256']}")
-    print("Live model responses still require a fresh Codex task.")
+    print("Live model responses still require a fresh Codex CLI run and ChatGPT Work task.")
     return 0
 
 

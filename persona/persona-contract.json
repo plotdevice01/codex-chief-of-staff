@@ -120,12 +120,12 @@
     "mode": "response_only",
     "contract_reference": "skills/chief-of-staff/references/live-acceptance.md",
     "host_safety_controls": {
-      "codex": {"type": "permission_profile", "value": ":read-only"},
-      "chatgpt-work": {"type": "approval_policy", "value": "ask_for_approval"}
+      "codex": {"sandbox_mode": "read-only", "approval_policy": "never", "session_persistence": "ephemeral"},
+      "chatgpt-work": {"execution_mode": "work_locally", "approval_policy": "ask_for_approval"}
     },
     "host_evidence_rules": {
       "codex": {
-        "ui_evidence": "runtime_observed",
+        "ui_evidence": "command_observed",
         "allowed_runtime_surfaces": ["codex"]
       },
       "chatgpt-work": {

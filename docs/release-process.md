@@ -23,12 +23,15 @@ and public verification after every required gate passes.
 
 1. Run the complete suite in `docs/testing.md`.
 2. Render the generated SOP to PNG and inspect every page.
-3. Install the candidate locally and run all live scenarios in fresh Codex and
-   ChatGPT Work tasks through `scripts/live_acceptance_harness.py`. Require the
-   host-specific safety control (`:read-only` for Codex; **Work locally** plus
-   **Ask for approval** for ChatGPT Work), separate UI and runtime evidence,
-   inline response-only execution, and zero task, file, connector, or external
-   mutations. ChatGPT Work requires owner-verified Work UI evidence; its agent
+3. Install the candidate locally and run all live scenarios in a fresh Codex
+   CLI run and ChatGPT Work task through `scripts/live_acceptance_harness.py`. Run the
+   Codex matrix in an ephemeral local CLI process with `--sandbox read-only`
+   and `--ask-for-approval never`; use Codex Desktop for a separate fresh-load
+   smoke check. Require the host-specific safety control (CLI read-only plus
+   no approvals and no persistence for Codex; **Work locally** plus **Ask for
+   approval** for ChatGPT Work), separate UI and runtime evidence, inline
+   response-only execution, and zero task, attempted-write, approval, file,
+   connector, or external mutations. ChatGPT Work requires owner-verified Work UI evidence; its agent
    runtime may report `codex`.
 4. Confirm a fresh Codex architecture prompt activates ICM enforcement and
    returns a conforming answer after no more than two correction cycles. Confirm

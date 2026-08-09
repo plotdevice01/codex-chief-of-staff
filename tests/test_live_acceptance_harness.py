@@ -13,7 +13,7 @@ VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 from scripts.live_acceptance_harness import (  # noqa: E402
     build_prompt,
     example_host_evidence,
-    expected_safety_control,
+    expected_safety_controls,
     expected_counts,
     load_contract,
     validate_receipt,
@@ -24,13 +24,13 @@ def valid_receipt(host: str) -> dict:
     contract = load_contract()
     scenarios, total = expected_counts(contract)
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "status": "PASS",
         "host": example_host_evidence(host),
         "model": "gpt-5.6-sol",
         "reasoning_effort": "medium",
         "chief_version": VERSION,
-        "safety_control": expected_safety_control(host),
+        "safety_controls": expected_safety_controls(host),
         "discoverable_chief_skills": 1,
         "hook_or_skill_trust": "test",
         "bundled_runtimes": {
@@ -52,6 +52,8 @@ def valid_receipt(host: str) -> dict:
         "run_controls": {
             "task_creations": 0,
             "delegations": 0,
+            "write_attempts": 0,
+            "approval_requests": 0,
             "file_mutations": 0,
             "connector_calls": 0,
             "external_actions": 0,
@@ -71,7 +73,9 @@ def main() -> int:
         assert "response-only evaluation" in prompt
         assert "Do not create or delegate tasks" in prompt
         assert not validate_receipt(valid_receipt(host), host)
-    assert ":read-only" in build_prompt("codex")
+    assert "--sandbox read-only" in build_prompt("codex")
+    assert "--ask-for-approval never" in build_prompt("codex")
+    assert "--ephemeral" in build_prompt("codex")
     assert "Ask for approval" in build_prompt(
         "chatgpt-work", owner_verified_ui=True
     )
@@ -94,13 +98,26 @@ def main() -> int:
     )
 
     wrong_safety_control = valid_receipt("chatgpt-work")
-    wrong_safety_control["safety_control"] = {
-        "type": "permission_profile",
-        "value": ":read-only",
+    wrong_safety_control["safety_controls"] = {
+        "sandbox_mode": "read-only",
+        "approval_policy": "never",
+        "session_persistence": "ephemeral",
     }
-    assert (
-        "safety control must be approval_policy=ask_for_approval"
-        in validate_receipt(wrong_safety_control, "chatgpt-work")
+    assert any(
+        "safety controls must be" in error
+        for error in validate_receipt(wrong_safety_control, "chatgpt-work")
+    )
+
+    desktop_substitution = valid_receipt("codex")
+    desktop_substitution["host"]["ui_surface"] = "codex"
+    assert "Codex acceptance requires ui_surface=codex-cli" in validate_receipt(
+        desktop_substitution, "codex"
+    )
+
+    write_attempt = valid_receipt("codex")
+    write_attempt["run_controls"]["write_attempts"] = 1
+    assert "run control write_attempts must be zero" in validate_receipt(
+        write_attempt, "codex"
     )
 
     mutated = valid_receipt("chatgpt-work")
