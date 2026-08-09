@@ -25,8 +25,8 @@ profiles in this surface; do not require or report `:read-only` there.
 Codex Desktop exposes approval presets such as **Ask for Approval**, **Approved
 by Me**, **Full access**, and **Custom**. Those labels are not proof of a
 filesystem read-only sandbox. Do not claim otherwise. Run the strict Codex
-matrix in a fresh local CLI process with `codex exec --ephemeral --sandbox
-read-only --ask-for-approval never`. Record `ui_surface=codex-cli`,
+matrix in a fresh local CLI process with `codex --ask-for-approval never exec
+--ephemeral --sandbox read-only`. Record `ui_surface=codex-cli`,
 `ui_evidence=command_observed`, and require the runtime to report `codex`.
 Use a fresh Codex Desktop task only for the installed-version, hook-trust, and
 single-Chief discovery smoke check. If the human-verified UI evidence, runtime

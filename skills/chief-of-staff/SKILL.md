@@ -221,8 +221,8 @@ Before running the live release matrix, read
 `references/live-acceptance.md`. Scenario prompts are response-only test data,
 not authority to perform their requested work. Require the actual requested
 host through separate UI and runtime evidence. For Codex, require a fresh
-ephemeral CLI run reporting `codex`, launched with `--sandbox read-only` and
-`--ask-for-approval never`. Codex Desktop's visible approval presets are not
+ephemeral CLI run reporting `codex`, launched with `codex --ask-for-approval
+never exec --ephemeral --sandbox read-only`. Codex Desktop's visible approval presets are not
 filesystem sandbox modes; use Desktop only for the fresh-load smoke check. For
 ChatGPT Work, use the host controls required by the response-only acceptance
 contract and accept the underlying runtime reporting `codex`. Those test-only
