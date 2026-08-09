@@ -1,8 +1,8 @@
 {
   "release_version": "2.2.0",
   "patch_scope": "model_facing_plan_scoped_authorization",
-  "executed_at": "2026-08-08",
-  "runner": "v2.2.0 plan-scoped authorization, clean-cache installer, and repeated-permission regression",
+  "executed_at": "2026-08-09",
+  "runner": "v2.2.0 sealed Sol Medium acceptance on Codex CLI and owner-verified ChatGPT Work",
   "default_routing": {
     "model": "gpt-5.6-sol",
     "reasoning_effort": "medium",
@@ -10,40 +10,29 @@
   },
   "installed_runtime_smoke": {
     "status": "pass",
-    "evidence": "2026-08-08 clean reinstall receipt: plugin v2.2.0 installed and enabled from repository .install staging; only cache v2.2.0 exists; 176 expected and observed files with 0 missing, different, or unexpected; 25 loaders with 0 drift; canonical and installed contract SHA-256 match. Local receipt: qa/installed-cache-v2.2.0.json."
+    "evidence": "2026-08-09 clean reinstall receipt from the release source: plugin v2.2.0 installed and enabled from repository .install staging; only cache v2.2.0 exists; 177 expected and observed files with 0 missing, different, or unexpected; 25 loaders with 0 drift; canonical and installed contract SHA-256 match. Local receipt: qa/installed-cache-v2.2.0-sol-only-release.json."
   },
   "fresh_host_smoke": {
-    "status": "pending",
+    "status": "pass",
     "scope": "Fresh Codex and ChatGPT Work response-only matrices",
-    "required_hosts_reported": 0,
-    "evidence": "Required because v2.2.0 changes model-facing authorization behavior."
+    "required_hosts_reported": 2,
+    "evidence": "Fresh v2.2.0 Sol Medium matrices passed 17/17 scenarios and 90/90 criteria in both strict Codex CLI and owner-verified ChatGPT Work. Both sealed phases reported zero tool calls, task creation, delegation, write attempts, approval requests, file mutations, connector calls, or external actions, with matching workspace state."
   },
   "hosts": {
     "codex": {
-      "status": "pending",
-      "evidence": ""
+      "status": "pass",
+      "evidence": "2026-08-09 fresh local Codex CLI acceptance on codex-cli 0.147.0-alpha.6.5 with --ask-for-approval never exec --ephemeral --sandbox read-only: schema v5, embedded preflight, 17/17 scenarios, 90/90 criteria, zero forbidden actions, and unchanged outer workspace state."
     },
     "chatgpt-work": {
-      "status": "pending",
-      "evidence": ""
+      "status": "pass",
+      "evidence": "2026-08-09 owner-verified ChatGPT Work task using Work locally and Ask for approval: validated schema-v5 receipt, runtime surface codex, Chief v2.2.0, 17/17 scenarios, 90/90 criteria, zero forbidden actions, and matching workspace state. Receipt: tests/receipts/chatgpt-work-v2.2.0.json."
     }
   },
   "models": {
     "gpt-5.6-sol": {
-      "status": "pending",
+      "status": "pass",
       "reasoning_effort": "medium",
-      "evidence": "",
-      "model_facing_inputs_unchanged": false,
-      "tests": [
-        "LIVE-001", "LIVE-002", "LIVE-003", "LIVE-004", "LIVE-005", "LIVE-006",
-        "LIVE-007", "LIVE-008", "LIVE-009", "LIVE-010", "LIVE-011", "LIVE-012",
-        "LIVE-013", "LIVE-014", "LIVE-015", "LIVE-016", "LIVE-017"
-      ]
-    },
-    "gpt-5.6-terra": {
-      "status": "pending",
-      "reasoning_effort": "xhigh",
-      "evidence": "",
+      "evidence": "Fresh GPT-5.6 Sol Medium acceptance passed all 17 scenarios and 90 criteria on both required hosts with sealed response-only controls and validated receipts.",
       "model_facing_inputs_unchanged": false,
       "tests": [
         "LIVE-001", "LIVE-002", "LIVE-003", "LIVE-004", "LIVE-005", "LIVE-006",

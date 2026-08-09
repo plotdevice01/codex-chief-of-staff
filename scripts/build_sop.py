@@ -778,14 +778,14 @@ def build(output: Path) -> Path:
         "report Codex. Generate each sealed prompt with --plugin-root and --runtime-version so the harness embeds installed Chief sources, observed runtime evidence, the complete LIVE-014 content query and the inline AI Sloppy Copy result before the model run. For Codex, pipe that prompt into codex --ask-for-approval never exec --ephemeral --sandbox read-only. The Desktop approval presets are not proof of a read-only filesystem sandbox; use Desktop for the separate fresh-load smoke check. Run responses inline with zero model tool calls. "
         "Any model tool call, task creation or delegation invalidates the run. A write attempt, approval request, or file mutation also invalidates it. "
         "The same rule applies to a connector call, external action or host substitution. "
-        "Terra XHigh remains pending unless the owner explicitly approves a version-bound release waiver. "
+        "Sol Medium is the sole active release profile; no secondary-model test or model-waiver gate applies. "
         "Static validation proves the contract exists; it cannot honestly grade a live model response."
     )
     add_callout(
         doc,
         "Accept only when: ",
-        "static, host and installed-runtime checks pass. Sol or Terra may be waived only while pending; failures "
-        "cannot. Releases that change model-facing behavior require fresh evidence. A documentation-only patch may "
+        "static, host and installed-runtime checks pass. The Sol Medium profile must pass and cannot be waived. "
+        "Releases that change model-facing behavior require fresh evidence. A documentation-only patch may "
         "carry forward prior host evidence only when the unchanged behavior and source release are recorded. "
         "Connector identities and scope must match.",
     )

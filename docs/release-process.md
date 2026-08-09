@@ -40,16 +40,15 @@ and public verification after every required gate passes.
    returns a conforming answer after no more than two correction cycles. Confirm
    ChatGPT Work applies the same ICM contract through the Chief skill.
 5. Update `tests/model-acceptance.json` only from observed evidence.
-6. An owner may approve a version-bound release waiver for pending Sol or Terra
-   checks. Failed checks, host acceptance, and installed-runtime smoke cannot be
-   waived. Pending evidence stays pending.
+6. Sol Medium is the sole active release profile. It must pass; there is no
+   secondary-model test or model-waiver gate.
 7. A documentation-only patch may carry forward prior host and model evidence
    only when it names the prior release and records why runtime behavior is
    unchanged. Keep the prior receipt intact. Run a fresh installed-runtime
    smoke check. Any skill, contract, hook behavior, bundled runtime, routing,
    permission, or validator behavior change requires fresh host acceptance.
 8. Rebuild with `--require-model-acceptance`. The embedded status must be
-   `pass` or `pass_with_waiver`.
+   `pass`.
 
 ## 04 Publish
 

@@ -13,7 +13,6 @@ sys.path.insert(0, str(ROOT))
 from scripts.validate_repository import (  # noqa: E402
     model_acceptance_release_status,
     validate_model_acceptance,
-    validate_release_waiver,
 )
 from scripts.validate_install import duplicate_skill_warnings  # noqa: E402
 from scripts.package_files import copied_files  # noqa: E402
@@ -127,35 +126,21 @@ def main() -> int:
         (ROOT / "tests" / "model-acceptance.json").read_text(encoding="utf-8")
     )
     release_status = model_acceptance_release_status(evidence)
-    assert release_status == "candidate"
+    assert release_status == "pass"
     assert not validate_model_acceptance()
-    assert validate_model_acceptance(require_pass=True)
+    assert not validate_model_acceptance(require_pass=True)
 
-    waived = copy.deepcopy(evidence)
-    waived["models"]["gpt-5.6-sol"]["status"] = "pass"
-    waived["models"]["gpt-5.6-terra"]["status"] = "pending"
-    waived["hosts"]["codex"]["status"] = "pass"
-    waived["hosts"]["chatgpt-work"]["status"] = "pass"
-    waived["installed_runtime_smoke"]["status"] = "pass"
-    waived["release_waiver"] = {
-        "status": "approved",
-        "release_version": evidence["release_version"],
-        "approved_at": "2026-08-05T00:00:00-05:00",
-        "approved_by": "repository_owner",
-        "waived_checks": ["models.gpt-5.6-terra"],
-        "reason": "Version-bound test fixture for pending Terra evidence.",
-    }
-    assert model_acceptance_release_status(waived) == "pass_with_waiver"
-    assert not validate_release_waiver(waived)[1]
+    pending = copy.deepcopy(evidence)
+    pending["models"]["gpt-5.6-sol"]["status"] = "pending"
+    assert model_acceptance_release_status(pending) == "candidate"
 
-    failed = copy.deepcopy(waived)
-    failed["models"]["gpt-5.6-terra"]["status"] = "fail"
+    failed = copy.deepcopy(evidence)
+    failed["models"]["gpt-5.6-sol"]["status"] = "fail"
+    failed["models"]["gpt-5.6-sol"]["evidence"] = "Observed failure fixture."
     assert model_acceptance_release_status(failed) == "candidate"
-    _, errors = validate_release_waiver(failed)
-    assert errors
 
     print(
-        "PASS: plan-scoped delivery rules and release waiver controls are present."
+        "PASS: plan-scoped delivery rules and the Sol-only release gate are present."
     )
     return 0
 

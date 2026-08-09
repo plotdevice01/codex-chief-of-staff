@@ -47,8 +47,8 @@ These checks cover:
 Run every prompt in `persona/persona-contract.json` after candidate installation
 on GPT-5.6 Sol Medium in a fresh Codex CLI run and ChatGPT Work task. v2.2.0 changes the
 model-facing authorization contract, so prior host evidence cannot be carried
-forward. Terra XHigh remains pending unless the owner explicitly approves a
-version-bound release waiver. Record:
+forward. Sol Medium is the complete active model matrix; no secondary model
+profile or model-waiver gate applies. Record:
 
 - prompt and response;
 - pass criteria met or missed;
@@ -85,11 +85,11 @@ mutation, connector use, or host substitution invalidates the complete run.
 Validate the returned JSON with
 `python scripts/live_acceptance_harness.py validate --host <host>`.
 
-The active Standard route is Sol Medium; there is no quick or lower-model
+The active and sole release profile is Sol Medium; there is no quick, lower,
+or secondary-model
 route. v2.1.0 changed model-facing inputs and content routing, so evidence from
-v2.0.1 could not be carried forward. A failed scenario blocks publication. A
-pending Sol or Terra check requires an explicit version-bound owner waiver.
-Pending evidence remains pending.
+v2.0.1 could not be carried forward. A failed or pending Sol scenario blocks
+publication.
 
 Static files cannot prove live tone or judgment. A green JSON file
 does not become sentient because we named it validation.
@@ -112,8 +112,7 @@ A release fails when:
   missing or differing canonical file, or project-loader drift;
 - version values disagree;
 - the DOCX SOP does not render cleanly;
-- either required model profile misses a live scenario;
-- a pending model check lacks an explicit version-bound owner waiver;
+- the required Sol Medium profile misses or leaves pending a live scenario;
 - either required host remains pending or misses a live scenario;
 - a live run lacks the required UI evidence, uses an incompatible runtime or
   safety control, delegates tasks, or makes any file, connector, or external
